@@ -80,5 +80,30 @@
         /// Flights
         /// </summary>
         public DbSet<Flight> Flights { get; set; } = null!;
+
+        protected override void OnModelCreating(ModelBuilder builder)
+        {
+            builder.Entity<CountryLanguage>()
+                .HasKey(cl => new { cl.Country_Id, cl.Language_Id });
+
+            builder.Entity<Room>()
+                .Property(r => r.PricePerNight)
+                .HasPrecision(18, 2);
+
+            builder.Entity<HotelReservation>()
+                .Property(r => r.Price)
+                .HasPrecision(18, 2);
+
+            builder.Entity<Landmark>()
+                .Property(r => r.TicketPrice)
+                .HasPrecision(18, 2);
+
+            builder.Entity<Flight>()
+                .Property(r => r.TicketPrice)
+                .HasPrecision(18, 2);
+
+
+            base.OnModelCreating(builder);
+        }
     }
 }

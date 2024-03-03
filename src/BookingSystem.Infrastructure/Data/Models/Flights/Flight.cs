@@ -101,7 +101,7 @@
         /// </summary>
         [Required]
         [Comment("Flight's User's Identifier")]
-        public int User_Id { get; set; }
+        public string User_Id { get; set; }
 
         /// <summary>
         /// Flight's User
