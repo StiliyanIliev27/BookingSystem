@@ -38,6 +38,7 @@
         /// <summary>
         /// Landmark's Details
         /// </summary>
+        [MaxLength(DetailsMaxLength)]
         [Comment("Landmark's Details")]
         public string? Details { get; set; }
 
