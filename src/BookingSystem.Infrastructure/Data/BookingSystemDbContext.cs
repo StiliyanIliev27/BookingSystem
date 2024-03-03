@@ -1,5 +1,6 @@
 ﻿namespace BookingSystem.Infrastructure.Data
 {
+    using BookingSystem.Infrastructure.Data.Models.Flights;
     using BookingSystem.Infrastructure.Data.Models.Hotels;
     using BookingSystem.Infrastructure.Data.Models.Landmarks;
     using BookingSystem.Infrastructure.Data.Models.Location;
@@ -64,5 +65,15 @@
         /// HotelsReservations
         /// </summary>
         public DbSet<HotelReservation> HotelsReservations { get; set; } = null!;
+        
+        /// <summary>
+        /// Airlines
+        /// </summary>
+        public DbSet<Airline> Airlines { get; set; } = null!;
+
+        /// <summary>
+        /// Aiports
+        /// </summary>
+        public DbSet<Airport> Airports { get; set; } = null!;  
     }
 }

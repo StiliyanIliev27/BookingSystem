@@ -65,5 +65,17 @@ namespace BookingSystem.Infrastructure.Constants
 
             public const string TimeFormat = "HH:mm";
         }
+
+        public static class Airline
+        {
+            public const int NameMinLength = 3;
+            public const int NameMaxLength = 50;
+        }
+
+        public static class Airport
+        {
+            public const int NameMinLength = 3;
+            public const int NameMaxLength = 50;
+        }
     }
 }
