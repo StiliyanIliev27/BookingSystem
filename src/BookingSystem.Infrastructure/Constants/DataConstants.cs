@@ -25,5 +25,16 @@ namespace BookingSystem.Infrastructure.Constants
             public const int NameMinLength = 2;
             public const int NameMaxLength = 30;
         }
+        public static class City
+        {
+            public const int NameMinLength = 3;
+            public const int NameMaxLength = 50;
+
+            public const int AreaMinLength = 3;
+            public const int AreaMaxLength = 50;
+
+            public const int DetailsMinLength = 10;
+            public const int DetailsMaxLength = 200;
+        }
     }
 }

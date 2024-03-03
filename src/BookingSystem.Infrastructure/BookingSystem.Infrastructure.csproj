@@ -11,4 +11,8 @@
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="6.0.25" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Data\Models\Landmarks\" />
+  </ItemGroup>
+
 </Project>

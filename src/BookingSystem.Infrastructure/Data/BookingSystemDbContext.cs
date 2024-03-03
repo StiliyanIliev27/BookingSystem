@@ -37,5 +37,10 @@
         /// CountriesLanguages
         /// </summary>
         public DbSet<CountryLanguage> CountriesLanguages { get; set; } = null!;
+       
+        /// <summary>
+        /// Cities
+        /// </summary>
+        public DbSet<City> Cities { get; set; } = null!;
     }
 }
