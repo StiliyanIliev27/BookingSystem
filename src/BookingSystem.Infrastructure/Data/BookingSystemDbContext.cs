@@ -53,6 +53,16 @@
         /// <summary>
         /// Hotels
         /// </summary>
-        public DbSet<Hotel> Hotels { get; set; } = null!; 
+        public DbSet<Hotel> Hotels { get; set; } = null!;
+
+        /// <summary>
+        /// Rooms
+        /// </summary>
+        public DbSet<Room> Rooms { get; set; } = null!;
+
+        /// <summary>
+        /// HotelsReservations
+        /// </summary>
+        public DbSet<HotelReservation> HotelsReservations { get; set; } = null!;
     }
 }

@@ -79,22 +79,22 @@
         public DateTime CheckOut { get; set; }
 
         /// <summary>
-        /// Hotel's Parking availability
+        /// Hotel's Parking Availability
         /// </summary>
-        [Comment("Hotel's Parking availability")]
+        [Comment("Hotel's Parking Availability")]
         public bool? Parking { get; set; }
 
         /// <summary>
-        /// Hotel's Pets allowable
+        /// Hotel's Pets Allowable
         /// </summary>
-        [Comment("Hotel's Pets allowable")]
+        [Comment("Hotel's Pets Allowable")]
         public bool? Pets { get; set; }
 
         /// <summary>
-        /// Hotel's active status
+        /// Hotel's Active Status
         /// </summary>
         [Required]
-        [Comment("Hotel's active status")]
+        [Comment("Hotel's Active Status")]
         public bool IsActive { get; set; } = false;
     }
 }
