@@ -74,6 +74,11 @@
         /// <summary>
         /// Aiports
         /// </summary>
-        public DbSet<Airport> Airports { get; set; } = null!;  
+        public DbSet<Airport> Airports { get; set; } = null!;
+
+        /// <summary>
+        /// Flights
+        /// </summary>
+        public DbSet<Flight> Flights { get; set; } = null!;
     }
 }
