@@ -1,7 +1,3 @@
-using BookingSystem.Data;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore;
-
 namespace BookingSystem
 {
     public class Program
