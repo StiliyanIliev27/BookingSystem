@@ -49,5 +49,21 @@ namespace BookingSystem.Infrastructure.Constants
 
             public const int DetailsMaxLength = 500;
         }
+
+        public static class Hotel
+        {
+            public const int NameMinLength = 3;
+            public const int NameMaxLength = 50;
+
+            public const int AddressMinLength = 5;
+            public const int AddressMaxLength = 80;
+
+            public const int StarRateMinValue = 1;
+            public const int StarRateMaxValue = 5;
+
+            public const int DetailsMaxLength = 500;
+
+            public const string TimeFormat = "HH:mm";
+        }
     }
 }

@@ -1,5 +1,6 @@
 ﻿namespace BookingSystem.Infrastructure.Data
 {
+    using BookingSystem.Infrastructure.Data.Models.Hotels;
     using BookingSystem.Infrastructure.Data.Models.Landmarks;
     using BookingSystem.Infrastructure.Data.Models.Location;
     using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
@@ -48,5 +49,10 @@
         /// Landmarks
         /// </summary>
         public DbSet<Landmark> Landmarks { get; set; } = null!;
+
+        /// <summary>
+        /// Hotels
+        /// </summary>
+        public DbSet<Hotel> Hotels { get; set; } = null!; 
     }
 }
