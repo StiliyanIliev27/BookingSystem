@@ -3,9 +3,6 @@
     using BookingSystem.Infrastructure.Data.Configurations.FlightConfigurations;
     using BookingSystem.Infrastructure.Data.Configurations.HotelConfigurations;
     using BookingSystem.Infrastructure.Data.Configurations.LandmarkConfigurations;
-    using BookingSystem.Infrastructure.Data.Configurations.LocationConfigurations;
-    using BookingSystem.Infrastructure.Data.Configurations.RolesConfigurations;
-    using BookingSystem.Infrastructure.Data.Configurations.UsersConfigurations;
     using BookingSystem.Infrastructure.Data.Models.Flights;
     using BookingSystem.Infrastructure.Data.Models.Hotels;
     using BookingSystem.Infrastructure.Data.Models.Landmarks;
@@ -42,11 +39,6 @@
         /// Languages
         /// </summary>
         public DbSet<Language> Languages { get; set; } = null!;
-
-        /// <summary>
-        /// CountriesLanguages
-        /// </summary>
-        public DbSet<CountryLanguage> CountriesLanguages { get; set; } = null!;
        
         /// <summary>
         /// Cities
@@ -101,32 +93,31 @@
         protected override void OnModelCreating(ModelBuilder builder)
         {
             //Locations configuration
-            builder.ApplyConfiguration(new ContinentConfiguration());
-            builder.ApplyConfiguration(new CountryConfiguration());
-            builder.ApplyConfiguration(new LanguageConfiguration());
-            builder.ApplyConfiguration(new CountryLanguageConfiguration());
-            builder.ApplyConfiguration(new CityConfiguration());
+            //builder.ApplyConfiguration(new ContinentConfiguration());
+            //builder.ApplyConfiguration(new CountryConfiguration());
+            //builder.ApplyConfiguration(new LanguageConfiguration());
+            //builder.ApplyConfiguration(new CityConfiguration());
 
             //Landmarks configuration
             builder.ApplyConfiguration(new LandmarkConfiguration());
 
             //Hotels configuration
-            builder.ApplyConfiguration(new HotelConfiguration());
+            //builder.ApplyConfiguration(new HotelConfiguration());
             builder.ApplyConfiguration(new RoomConfiguration());
             builder.ApplyConfiguration(new HotelReservationConfiguration());
 
 
             //Flights configuration
             builder.ApplyConfiguration(new FlightConfiguration());
-            builder.ApplyConfiguration(new AirlineConfiguration());
-            builder.ApplyConfiguration(new AirportConfiguration());
+            //builder.ApplyConfiguration(new AirlineConfiguration());
+            //builder.ApplyConfiguration(new AirportConfiguration());
             builder.ApplyConfiguration(new FlightReservationConfiguration());
 
-            //Roles configuration
-            builder.ApplyConfiguration(new AdministratorConfiguration());
+            ////Roles configuration
+            //builder.ApplyConfiguration(new AdministratorConfiguration());
 
-            //Users configuration
-            builder.ApplyConfiguration(new UserConfiguration());
+            ////Users configuration
+            //builder.ApplyConfiguration(new UserConfiguration());
 
             base.OnModelCreating(builder);
         }
