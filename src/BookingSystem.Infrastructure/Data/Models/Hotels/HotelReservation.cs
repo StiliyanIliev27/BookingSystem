@@ -12,12 +12,33 @@
     public class HotelReservation
     {
         /// <summary>
-        /// HotelReservation's Identifier
+        /// HotelReservation's Hotel's Identifier
         /// </summary>
-        [Key]
-        [Comment("HotelReservation's Identifier")]
-        public int Id { get; set; }
+        [Required]
+        [Comment("Room's Hotel's Identifier")]
+        public int Hotel_Id { get; set; }
 
+        /// <summary>
+        /// HotelReservation's Hotel
+        /// </summary>
+        [ForeignKey(nameof(Hotel_Id))]
+        [Comment("Room's Hotel")]
+        public Hotel Hotel { get; set; } = null!;
+
+        /// <summary>
+        /// HotelReservation's User's Identifier
+        /// </summary>
+        [Required]
+        [Comment("HotelReservation's User's Identifier")]
+        public string User_Id { get; set; } = null!;
+       
+        /// <summary>
+        /// HotelReservation's User
+        /// </summary>
+        [ForeignKey(nameof(User_Id))]
+        [Comment("HotelReservation's User")]
+        public IdentityUser User { get; set; } = null!;
+       
         /// <summary>
         /// HotelReservation's Total Price
         /// </summary>
@@ -38,33 +59,6 @@
         [Required]
         [Comment("HotelReservation's End Date")]
         public DateTime EndDate { get; set; }
-
-        /// <summary>
-        /// HotelReservation's Hotel's Identifier
-        /// </summary>
-        [Required]
-        [Comment("Room's Hotel's Identifier")]
-        public int Hotel_Id { get; set; }
-
-        /// <summary>
-        /// HotelReservation's Hotel
-        /// </summary>
-        [ForeignKey(nameof(Hotel_Id))]
-        [Comment("Room's Hotel")]
-        public Hotel Hotel { get; set; } = null!;
-
-        /// <summary>
-        /// HotelReservation's User's Identifier
-        /// </summary>
-        [Required]
-        [Comment("HotelReservation's User's Identifier")]
-        public string User_Id { get; set; } = null!;
-        /// <summary>
-        /// HotelReservation's User
-        /// </summary>
-        [ForeignKey(nameof(User_Id))]
-        [Comment("HotelReservation's User")]
-        public IdentityUser User { get; set; } = null!;
 
         /// <summary>
         /// HotelReservation's CreatedOn time
