@@ -4,10 +4,13 @@
     using BookingSystem.Infrastructure.Data.Configurations.HotelConfigurations;
     using BookingSystem.Infrastructure.Data.Configurations.LandmarkConfigurations;
     using BookingSystem.Infrastructure.Data.Configurations.LocationConfigurations;
+    using BookingSystem.Infrastructure.Data.Configurations.RolesConfigurations;
+    using BookingSystem.Infrastructure.Data.Configurations.UsersConfigurations;
     using BookingSystem.Infrastructure.Data.Models.Flights;
     using BookingSystem.Infrastructure.Data.Models.Hotels;
     using BookingSystem.Infrastructure.Data.Models.Landmarks;
     using BookingSystem.Infrastructure.Data.Models.Location;
+    using BookingSystem.Infrastructure.Data.Models.Roles;
     using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
     using Microsoft.EntityFrameworkCore;
 
@@ -90,6 +93,11 @@
         /// </summary>
         public DbSet<FlightReservation> FlightsReservations { get; set; } = null!;
 
+        /// <summary>
+        /// Administrators
+        /// </summary>
+        public DbSet<Administrator> Administrators { get; set; } = null!;
+
         protected override void OnModelCreating(ModelBuilder builder)
         {
             //Locations configuration
@@ -112,7 +120,13 @@
             builder.ApplyConfiguration(new FlightConfiguration());
             builder.ApplyConfiguration(new AirlineConfiguration());
             builder.ApplyConfiguration(new AirportConfiguration());
-            builder.ApplyConfiguration(new HotelReservationConfiguration());
+            builder.ApplyConfiguration(new FlightReservationConfiguration());
+
+            //Roles configuration
+            builder.ApplyConfiguration(new AdministratorConfiguration());
+
+            //Users configuration
+            builder.ApplyConfiguration(new UserConfiguration());
 
             base.OnModelCreating(builder);
         }
