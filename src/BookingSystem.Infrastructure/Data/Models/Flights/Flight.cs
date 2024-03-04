@@ -1,7 +1,6 @@
 ﻿namespace BookingSystem.Infrastructure.Data.Models.Flights
 {
     using BookingSystem.Infrastructure.Data.Enums;
-    using Microsoft.AspNetCore.Identity;
     using Microsoft.EntityFrameworkCore;
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
@@ -97,32 +96,11 @@
         public decimal TicketPrice { get; set; }
 
         /// <summary>
-        /// Flight's User's Identifier
-        /// </summary>
-        [Required]
-        [Comment("Flight's User's Identifier")]
-        public string User_Id { get; set; }
-
-        /// <summary>
-        /// Flight's User
-        /// </summary>
-        [ForeignKey(nameof(User_Id))]
-        [Comment("Flight's User")]
-        public IdentityUser User { get; set; } = null!;
-
-        /// <summary>
         /// Flight's Reservation Created Time
         /// </summary>
         [Required]
         [Comment("Flight's Reservation Created Time")]
         public DateTime CreatedOn { get; set; }
-
-        /// <summary>
-        /// Flight's Seat Number Place
-        /// </summary>
-        [Required]
-        [Comment("Flight's Seat Number Place")]
-        public int SeatNumber { get; set; }
 
         /// <summary>
         /// Flight's Active Status
