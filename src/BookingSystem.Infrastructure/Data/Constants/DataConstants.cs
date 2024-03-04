@@ -1,6 +1,4 @@
-﻿
-
-namespace BookingSystem.Infrastructure.Constants
+﻿namespace BookingSystem.Infrastructure.Data.Constants
 {
     public static class DataConstants
     {
@@ -9,7 +7,7 @@ namespace BookingSystem.Infrastructure.Constants
             public const int NameMinLength = 3;
             public const int NameMaxLength = 15;
         }
-     
+
         public static class Country
         {
             public const int NameMinLength = 3;
@@ -21,13 +19,13 @@ namespace BookingSystem.Infrastructure.Constants
             public const int DetailsMinLength = 10;
             public const int DetailsMaxLength = 500;
         }
-      
+
         public static class Language
         {
             public const int NameMinLength = 2;
             public const int NameMaxLength = 30;
         }
-        
+
         public static class City
         {
             public const int NameMinLength = 3;
@@ -38,9 +36,9 @@ namespace BookingSystem.Infrastructure.Constants
 
             public const int DetailsMaxLength = 200;
         }
-      
-        public static class Landmark 
-        { 
+
+        public static class Landmark
+        {
             public const int NameMinLength = 3;
             public const int NameMaxLength = 50;
 

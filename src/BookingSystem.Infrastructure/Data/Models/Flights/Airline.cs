@@ -2,7 +2,7 @@
 {
     using Microsoft.EntityFrameworkCore;
     using System.ComponentModel.DataAnnotations;
-    using static BookingSystem.Infrastructure.Constants.DataConstants.Airline;
+    using static BookingSystem.Infrastructure.Data.Constants.DataConstants.Airline;
 
     /// <summary>
     /// Airline

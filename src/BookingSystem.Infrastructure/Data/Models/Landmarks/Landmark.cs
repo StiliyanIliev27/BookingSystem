@@ -4,7 +4,7 @@
     using Microsoft.EntityFrameworkCore;
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
-    using static BookingSystem.Infrastructure.Constants.DataConstants.Landmark;
+    using static BookingSystem.Infrastructure.Data.Constants.DataConstants.Landmark;
 
     /// <summary>
     /// Landmark

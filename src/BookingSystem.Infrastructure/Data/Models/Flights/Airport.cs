@@ -4,7 +4,7 @@
     using Microsoft.EntityFrameworkCore;
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
-    using static BookingSystem.Infrastructure.Constants.DataConstants.Airport;
+    using static BookingSystem.Infrastructure.Data.Constants.DataConstants.Airport;
 
     /// <summary>
     /// Airport
