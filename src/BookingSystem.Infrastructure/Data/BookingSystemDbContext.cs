@@ -81,10 +81,21 @@
         /// </summary>
         public DbSet<Flight> Flights { get; set; } = null!;
 
+        /// <summary>
+        /// FlightsReservations
+        /// </summary>
+        public DbSet<FlightReservation> FlightsReservations { get; set; } = null!;
+
         protected override void OnModelCreating(ModelBuilder builder)
         {
             builder.Entity<CountryLanguage>()
                 .HasKey(cl => new { cl.Country_Id, cl.Language_Id });
+
+            builder.Entity<FlightReservation>()
+                .HasKey(fr => new { fr.Flight_Id, fr.User_Id });
+
+            builder.Entity<HotelReservation>()
+                .HasKey(hr => new { hr.Hotel_Id, hr.User_Id });
 
             builder.Entity<Room>()
                 .Property(r => r.PricePerNight)
