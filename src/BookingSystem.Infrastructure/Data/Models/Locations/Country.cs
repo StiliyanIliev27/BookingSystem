@@ -76,5 +76,19 @@
         [Required]
         [Comment("Country's Image Url")]
         public string FlagImageUrl { get; set; } = null!;
+
+        /// <summary>
+        /// Country's Official Language Identifier
+        /// </summary>
+        [Required]
+        [Comment("Country's Official Language Identifier")]
+        public int Language_Id { get; set; }
+
+        /// <summary>
+        /// Country's Official Language
+        /// </summary>
+        [ForeignKey(nameof(Language_Id))]
+        [Comment("Country's Official Language")]
+        public Language Language { get; set; } = null!;
     }
 }
