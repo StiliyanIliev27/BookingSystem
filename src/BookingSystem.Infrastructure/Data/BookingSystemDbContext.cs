@@ -3,6 +3,7 @@
     using BookingSystem.Infrastructure.Data.Configurations.FlightConfigurations;
     using BookingSystem.Infrastructure.Data.Configurations.HotelConfigurations;
     using BookingSystem.Infrastructure.Data.Configurations.LandmarkConfigurations;
+    using BookingSystem.Infrastructure.Data.Configurations.LocationConfigurations;
     using BookingSystem.Infrastructure.Data.Models.Flights;
     using BookingSystem.Infrastructure.Data.Models.Hotels;
     using BookingSystem.Infrastructure.Data.Models.Landmarks;
@@ -93,9 +94,9 @@
         protected override void OnModelCreating(ModelBuilder builder)
         {
             //Locations configuration
-            //builder.ApplyConfiguration(new ContinentConfiguration());
-            //builder.ApplyConfiguration(new CountryConfiguration());
-            //builder.ApplyConfiguration(new LanguageConfiguration());
+            builder.ApplyConfiguration(new ContinentConfiguration());
+            builder.ApplyConfiguration(new LanguageConfiguration());
+            builder.ApplyConfiguration(new CountryConfiguration());   
             //builder.ApplyConfiguration(new CityConfiguration());
 
             //Landmarks configuration

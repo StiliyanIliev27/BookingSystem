@@ -1,5 +1,6 @@
 ﻿namespace BookingSystem.Infrastructure.Data.Configurations.LocationConfigurations
 {
+    using BookingSystem.Infrastructure.Data.DataSeeding;
     using BookingSystem.Infrastructure.Data.Models.Location;
     using Microsoft.EntityFrameworkCore;
     using Microsoft.EntityFrameworkCore.Metadata.Builders;
@@ -7,7 +8,18 @@
     {
         public void Configure(EntityTypeBuilder<Continent> builder)
         {
-            throw new NotImplementedException();
+            var data = new Seeder();
+
+            builder.HasData(new Continent[]
+            {
+                data.Asia,
+                data.Africa,
+                data.NorthAmerica,
+                data.SouthAmerica,
+                data.Antarctica,
+                data.Europe,
+                data.Australia
+            });
         }
     }
 }
