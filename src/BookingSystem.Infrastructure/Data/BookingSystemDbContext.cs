@@ -1,5 +1,9 @@
 ﻿namespace BookingSystem.Infrastructure.Data
 {
+    using BookingSystem.Infrastructure.Data.Configurations.FlightConfigurations;
+    using BookingSystem.Infrastructure.Data.Configurations.HotelConfigurations;
+    using BookingSystem.Infrastructure.Data.Configurations.LandmarkConfigurations;
+    using BookingSystem.Infrastructure.Data.Configurations.LocationConfigurations;
     using BookingSystem.Infrastructure.Data.Models.Flights;
     using BookingSystem.Infrastructure.Data.Models.Hotels;
     using BookingSystem.Infrastructure.Data.Models.Landmarks;
@@ -88,31 +92,27 @@
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
-            builder.Entity<CountryLanguage>()
-                .HasKey(cl => new { cl.Country_Id, cl.Language_Id });
+            //Locations configuration
+            builder.ApplyConfiguration(new ContinentConfiguration());
+            builder.ApplyConfiguration(new CountryConfiguration());
+            builder.ApplyConfiguration(new LanguageConfiguration());
+            builder.ApplyConfiguration(new CountryLanguageConfiguration());
+            builder.ApplyConfiguration(new CityConfiguration());
 
-            builder.Entity<FlightReservation>()
-                .HasKey(fr => new { fr.Flight_Id, fr.User_Id });
+            //Landmarks configuration
+            builder.ApplyConfiguration(new LandmarkConfiguration());
 
-            builder.Entity<HotelReservation>()
-                .HasKey(hr => new { hr.Hotel_Id, hr.User_Id });
+            //Hotels configuration
+            builder.ApplyConfiguration(new HotelConfiguration());
+            builder.ApplyConfiguration(new RoomConfiguration());
+            builder.ApplyConfiguration(new HotelReservationConfiguration());
 
-            builder.Entity<Room>()
-                .Property(r => r.PricePerNight)
-                .HasPrecision(18, 2);
 
-            builder.Entity<HotelReservation>()
-                .Property(r => r.Price)
-                .HasPrecision(18, 2);
-
-            builder.Entity<Landmark>()
-                .Property(r => r.TicketPrice)
-                .HasPrecision(18, 2);
-
-            builder.Entity<Flight>()
-                .Property(r => r.TicketPrice)
-                .HasPrecision(18, 2);
-
+            //Flights configuration
+            builder.ApplyConfiguration(new FlightConfiguration());
+            builder.ApplyConfiguration(new AirlineConfiguration());
+            builder.ApplyConfiguration(new AirportConfiguration());
+            builder.ApplyConfiguration(new HotelReservationConfiguration());
 
             base.OnModelCreating(builder);
         }
