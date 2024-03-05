@@ -186,25 +186,47 @@
             Asia = new Continent()
             {
                 Id = 1,
-                Name = "Asia"
+                Name = "Asia",
+                Countries = new Country[]
+                {
+                    Turkey,
+                    Russia,
+                    China, 
+                    India,
+                    Japan,
+                    UnitedArabEmirates
+                }
             };
 
             Africa = new Continent()
             {
                 Id = 2,
-                Name = "Africa"
+                Name = "Africa",
+                Countries = new Country[]
+                {
+                    Egypt
+                }
             };
 
             NorthAmerica = new Continent()
             {
                 Id = 3,
-                Name = "NorthAmerica"
+                Name = "NorthAmerica",
+                Countries = new Country[]
+                {
+                    UnitedStates,
+                    Mexico,
+                }
             };
 
             SouthAmerica = new Continent()
             {
                 Id = 4,
-                Name = "SouthAmerica"
+                Name = "SouthAmerica",
+                Countries = new Country[]
+                {
+                    Brazil
+                }
             };
 
             Antarctica = new Continent()
@@ -216,7 +238,20 @@
             Europe = new Continent()
             {
                 Id = 6,
-                Name = "Europe"
+                Name = "Europe",
+                Countries = new Country[]
+                {
+                    France,
+                    Spain,
+                    Italy,
+                    England,
+                    Germany,
+                    Austria,
+                    Bulgaria,
+                    Serbia,
+                    Hungary, 
+                    Romania
+                }
             };
 
             Australia = new Continent()
