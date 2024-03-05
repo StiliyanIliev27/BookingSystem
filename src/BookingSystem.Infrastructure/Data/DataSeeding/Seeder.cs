@@ -15,6 +15,8 @@
         /// </summary>
         public Seeder()
         {
+            SeedUsers();
+            SeedAdministrator();
             SeedLanguages();
             SeedContinents();
             SeedCountries();
@@ -206,10 +208,45 @@
         public Room EurostarsSofiaRoomDouble { get; set; } = null!;
         public Room EurostarsSofiaRoomTriple { get; set; } = null!;
         public Room EurostarsSofiaRoomApartment { get; set; } = null!;
-        
+
         #endregion
 
         //Methods
+
+        private void SeedUsers()
+        {
+            var hasher = new PasswordHasher<IdentityUser>();
+
+            AdministratorUser = new IdentityUser()
+            {
+                Id = "c9019544-ec91-4248-bfc4-9d8a4f13430b",
+                UserName = "Administrator",
+                NormalizedUserName = "administrator",
+                Email = "admin@gmail.com",
+                NormalizedEmail = "admin@gmail.com"
+            };
+
+            AdministratorUser.PasswordHash = hasher.HashPassword(AdministratorUser, "admin777");
+
+            GuestUser = new IdentityUser()
+            {
+                Id = "8d1f0bdc-f9e5-4856-a127-fb84281d56ad",
+                UserName = "Guest",
+                NormalizedUserName = "guest",
+                Email = "guest@gmail.com",
+                NormalizedEmail = "guest@gmail.com"
+            };
+
+            GuestUser.PasswordHash = hasher.HashPassword(GuestUser, "guest777");
+        }
+        private void SeedAdministrator()
+        {
+            Administrator = new Administrator()
+            {
+                Id = 1,
+                UserId = AdministratorUser.Id
+            };
+        }
         private void SeedLanguages()
         {
             Chinese = new Language

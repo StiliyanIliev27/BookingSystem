@@ -4,6 +4,8 @@
     using BookingSystem.Infrastructure.Data.Configurations.HotelConfigurations;
     using BookingSystem.Infrastructure.Data.Configurations.LandmarkConfigurations;
     using BookingSystem.Infrastructure.Data.Configurations.LocationConfigurations;
+    using BookingSystem.Infrastructure.Data.Configurations.RolesConfigurations;
+    using BookingSystem.Infrastructure.Data.Configurations.UsersConfigurations;
     using BookingSystem.Infrastructure.Data.Models.Flights;
     using BookingSystem.Infrastructure.Data.Models.Hotels;
     using BookingSystem.Infrastructure.Data.Models.Landmarks;
@@ -114,11 +116,11 @@
             //builder.ApplyConfiguration(new AirportConfiguration());
             builder.ApplyConfiguration(new FlightReservationConfiguration());
 
-            ////Roles configuration
-            //builder.ApplyConfiguration(new AdministratorConfiguration());
+            //Roles configuration
+            builder.ApplyConfiguration(new AdministratorConfiguration());
 
-            ////Users configuration
-            //builder.ApplyConfiguration(new UserConfiguration());
+            //Users configuration
+            builder.ApplyConfiguration(new UserConfiguration());
 
             base.OnModelCreating(builder);
         }

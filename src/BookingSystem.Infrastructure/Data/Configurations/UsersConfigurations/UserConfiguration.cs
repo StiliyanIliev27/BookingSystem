@@ -1,5 +1,6 @@
 ﻿namespace BookingSystem.Infrastructure.Data.Configurations.UsersConfigurations
 {
+    using BookingSystem.Infrastructure.Data.DataSeeding;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.EntityFrameworkCore;
     using Microsoft.EntityFrameworkCore.Metadata.Builders;
@@ -7,7 +8,14 @@
     {
         public void Configure(EntityTypeBuilder<IdentityUser> builder)
         {
-            throw new NotImplementedException();
+            var data = new Seeder();
+
+            builder
+                .HasData(new IdentityUser[]
+                {
+                    data.GuestUser,
+                    data.AdministratorUser
+                });
         }
     }
 }

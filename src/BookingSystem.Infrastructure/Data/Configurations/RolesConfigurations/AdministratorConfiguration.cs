@@ -1,6 +1,6 @@
 ﻿namespace BookingSystem.Infrastructure.Data.Configurations.RolesConfigurations
 {
-
+    using BookingSystem.Infrastructure.Data.DataSeeding;
     using BookingSystem.Infrastructure.Data.Models.Roles;
     using Microsoft.EntityFrameworkCore;
     using Microsoft.EntityFrameworkCore.Metadata.Builders;
@@ -8,7 +8,10 @@
     {
         public void Configure(EntityTypeBuilder<Administrator> builder)
         {
-            throw new NotImplementedException();
+            var data = new Seeder();
+
+            builder
+                .HasData(new Administrator[] { data.Administrator });
         }
     }
 }
