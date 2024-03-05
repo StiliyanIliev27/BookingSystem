@@ -10,6 +10,9 @@
 
     internal class Seeder
     {
+        /// <summary>
+        ///Seeder Constructor
+        /// </summary>
         public Seeder()
         {
             SeedLanguages();
@@ -21,14 +24,22 @@
             SeedHotels();
         }
 
-        //Users
+        //Properties
+
+        #region Users
         public IdentityUser AdministratorUser { get; set; } = null!;
         public IdentityUser GuestUser { get; set; } = null!;
 
-        //Roles
+        #endregion
+
+
+        #region Roles
         public Administrator Administrator { get; set; } = null!;
 
-        //Continents 
+        #endregion
+
+
+        #region Continents
         public Continent Asia { get; set; } = null!;
         public Continent Africa { get; set; } = null!;
         public Continent NorthAmerica { get; set; } = null!;
@@ -37,7 +48,10 @@
         public Continent Europe { get; set; } = null!;
         public Continent Australia { get; set; } = null!;
 
-        //Languages
+        #endregion
+
+
+        #region Languages
         public Language Chinese { get; set; } = null!;
         public Language Spanish { get; set; } = null!;
         public Language English { get; set; } = null!;
@@ -57,7 +71,10 @@
         public Language Romanian { get; set; } = null!;
         public Language Hungarian { get; set; } = null!;
 
-        //Countries
+        #endregion
+
+
+        #region Countries
         public Country France { get; set; } = null!;
         public Country Spain { get; set; } = null!;
         public Country UnitedStates { get; set; } = null!;
@@ -80,7 +97,10 @@
         public Country Brazil { get; set; } = null!;
         public Country Japan { get; set; } = null!;
 
-        //Cities
+        #endregion
+
+
+        #region Cities
         public City Paris { get; set; } = null!;
         public City Madrid { get; set; } = null!;
         public City Barcelona { get; set; } = null!;
@@ -109,10 +129,10 @@
         public City RioDeJaneiro { get; set; } = null!;   
         public City Tokyo { get; set; } = null!;
 
-      
-        //Landmarks
+        #endregion
 
-        //Paris
+
+        #region Landmarks
         public Landmark EiffelTower { get; set; } = null!;
         public Landmark LouvreMuseum { get; set; } = null!;
 
@@ -123,8 +143,11 @@
         //New York
         public Landmark CentralPark { get; set; } = null!;
         public Landmark EmpireStateBuilding { get; set; } = null!;
+        
+        #endregion
 
-        //Hotels
+
+        #region Hotels
         public Hotel IbisParis { get; set; } = null!;
         public Hotel SaintMarcel { get; set; } = null!;
         public Hotel KraftHotel { get; set; } = null!;
@@ -139,8 +162,12 @@
         
         public Hotel HotelZOO { get; set; } = null!;
         public Hotel EurostarsSofia { get; set; } = null!;
+       
+        #endregion
 
-        //Rooms 
+
+        #region Rooms
+
         public Room IbisParisRoomSingle { get; set; } = null!;
         public Room IbisParisRoomDouble { get; set; } = null!;
         public Room IbisParisRoomTriple { get; set; } = null!;
@@ -179,7 +206,10 @@
         public Room EurostarsSofiaRoomDouble { get; set; } = null!;
         public Room EurostarsSofiaRoomTriple { get; set; } = null!;
         public Room EurostarsSofiaRoomApartment { get; set; } = null!;
+        
+        #endregion
 
+        //Methods
         private void SeedLanguages()
         {
             Chinese = new Language
@@ -1398,7 +1428,6 @@
                 IsReserved = false,
                 IsActive = true
             };
-        }
-        
+        }      
     }
 }
