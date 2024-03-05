@@ -10,6 +10,8 @@
             SeedLanguages();
             SeedContinents();
             SeedCountries();
+            SeedCities();
+                     
         }
 
         //Users
@@ -71,6 +73,35 @@
         public Country Brazil { get; set; } = null!;
         public Country Japan { get; set; } = null!;
 
+        //Cities
+        public City Paris { get; set; } = null!;
+        public City Madrid { get; set; } = null!;
+        public City Barcelona { get; set; } = null!;
+        public City NewYork { get; set; } = null!;
+        public City LosAngeles { get; set; } = null!;  
+        public City Washington { get; set; } = null!;
+        public City Istanbul { get; set; } = null!;
+        public City Rome { get; set; } = null!;
+        public City MexicoCity { get; set; } = null!;   
+        public City London { get; set; } = null!;   
+        public City Berlin { get; set; } = null!;
+        public City Athens { get; set; } = null!;
+        public City Vienna { get; set; } = null!;   
+        public City Sofia { get; set; } = null!;
+        public City Plovdiv { get; set; } = null!;
+        public City VelikoTarnovo { get; set; } = null!;
+        public City Moscow { get; set; } = null!;
+        public City Belgrade { get;  set; } = null!;
+        public City Budapest { get; set; } = null!;
+        public City Bucharest { get; set; } = null!;
+        public City Beijing { get; set; } = null!;
+        public City NewDelhi { get; set; } = null!;
+        public City AbuDhabi { get; set; } = null!; 
+        public City Dubai { get; set; } = null!;
+        public City Cairo { get; set; } = null!;
+        public City RioDeJaneiro { get; set; } = null!;   
+        public City Tokyo { get; set; } = null!;
+      
         private void SeedLanguages()
         {
             Chinese = new Language
@@ -272,7 +303,11 @@
                 Details = "France, located in Western Europe, is renowned for its rich history, culture, and culinary excellence. Its capital, Paris, is home to iconic landmarks such as the Eiffel Tower and the Louvre Museum. France is known for its contributions to art, literature, and philosophy, with figures like Voltaire, Rousseau, and Monet shaping its cultural landscape. The country boasts diverse landscapes, from the picturesque vineyards of Bordeaux to the stunning beaches of the French Riviera. Additionally, France is a founding member of the European Union and plays a significant role in global diplomacy and trade.",
                 CurrencyCode = "EUR",
                 FlagImageUrl = "https://upload.wikimedia.org/wikipedia/en/thumb/c/c3/Flag_of_France.svg/800px-Flag_of_France.svg.png",
-                Language_Id = 12
+                Language_Id = 12,
+                Cities = new City[]
+                {
+                    Paris
+                }
             };
 
             Spain = new Country()
@@ -285,7 +320,11 @@
                 Details = "Spain, situated in southwestern Europe, is celebrated for its vibrant culture, stunning architecture, and lively festivals. The capital, Madrid, is famous for its art museums like the Prado and Reina Sofía, while Barcelona captivates with its unique blend of Catalan identity, exemplified by architectural masterpieces like the Sagrada Família and Park Güell designed by Antoni Gaudí. Spain's rich history is evident in its numerous UNESCO World Heritage Sites, including the Alhambra in Granada and the historic city of Toledo. Its culinary scene is diverse and flavorful, with tapas and paella being among its most iconic dishes. Additionally, Spain is known for its passion for soccer, with clubs like FC Barcelona and Real Madrid enjoying worldwide recognition.",
                 CurrencyCode = "EUR",
                 FlagImageUrl = "https://cdn.britannica.com/36/4336-050-056AC114/Flag-Spain.jpg",
-                Language_Id = 2
+                Language_Id = 2,
+                Cities = new City[]
+                {
+                    Madrid
+                }
             };
 
             UnitedStates = new Country()
@@ -298,7 +337,11 @@
                 Details = "The United States, located in North America, is the world's third-largest country by land area and population. It is a diverse nation, known for its cultural melting pot and vast landscapes, ranging from the bustling metropolises of New York City and Los Angeles to the stunning natural wonders of the Grand Canyon and Yellowstone National Park. The U.S. is a global economic powerhouse, with a highly developed economy driven by innovation, technology, and entrepreneurship. It has a rich history shaped by diverse immigrant communities, pivotal events such as the American Revolution and Civil Rights Movement, and iconic figures like Abraham Lincoln and Martin Luther King Jr. The country's political system is characterized by a federal republic with a strong emphasis on individual freedoms and democratic principles.",
                 CurrencyCode = "USD",
                 FlagImageUrl = "https://cdn.britannica.com/33/4833-004-828A9A84/Flag-United-States-of-America.jpg",
-                Language_Id = 3
+                Language_Id = 3,
+                Cities = new City[]
+                {
+                    NewYork
+                }
             };
 
             Turkey = new Country()
@@ -311,7 +354,11 @@
                 Details = "Turkey, situated at the crossroads of Europe and Asia, boasts a rich historical and cultural heritage. Its largest city, Istanbul, straddles two continents and is famous for landmarks such as the Hagia Sophia and the Blue Mosque, reflecting its Byzantine and Ottoman influences. Turkey's diverse landscapes range from the Mediterranean coastline to the rugged mountains of Eastern Anatolia. The country is known for its cuisine, which includes dishes like kebabs, baklava, and Turkish delight. Modern Turkey is a secular republic with a parliamentary democracy, though its political landscape has experienced periods of turbulence. It plays a significant role in regional geopolitics, serving as a bridge between Europe and the Middle East.",
                 CurrencyCode = "TRL",
                 FlagImageUrl = "https://cdn.britannica.com/82/4782-004-4119489D/Flag-Turkey.jpg",
-                Language_Id = 13
+                Language_Id = 13,
+                Cities = new City[]
+                {
+                    Istanbul
+                }
             };
 
             Italy = new Country()
@@ -324,7 +371,11 @@
                 Details = "Italy, located in southern Europe, is renowned for its rich history, art, and culinary traditions. Its capital, Rome, is home to iconic landmarks such as the Colosseum, the Vatican City, and the Pantheon, reflecting its status as the center of the ancient Roman Empire and the Catholic Church. Italy is a treasure trove of art and architecture, with masterpieces by Michelangelo, Leonardo da Vinci, and Botticelli housed in museums and churches throughout the country. Its diverse regions offer a range of landscapes, from the picturesque hills of Tuscany to the stunning coastlines of the Amalfi Coast and Cinque Terre. Italian cuisine is celebrated worldwide, with dishes like pasta, pizza, gelato, and espresso representing just a fraction of its culinary delights. Additionally, Italy is known for its fashion industry, luxury car brands, and vibrant cultural festivals.",
                 CurrencyCode = "EUR",
                 FlagImageUrl = "https://img.goodfon.com/original/5000x3333/c/cf/italy-italia-flag-of-italy-italian-flag-flag.jpg",
-                Language_Id = 15
+                Language_Id = 15,
+                Cities = new City[]
+                {
+                    Rome
+                }
             };
 
             Mexico = new Country()
@@ -402,7 +453,11 @@
                 Details = "Bulgaria, located in southeastern Europe, is known for its diverse landscapes, rich history, and cultural heritage. Its capital, Sofia, is home to ancient landmarks such as the Alexander Nevsky Cathedral and the National Palace of Culture, reflecting its long history as a crossroads between East and West. Bulgaria's natural beauty includes the majestic peaks of the Balkan Mountains, the sandy beaches of the Black Sea coast, and picturesque countryside dotted with traditional villages. The country has a rich cultural heritage, with influences from Thracian, Greek, Roman, and Ottoman civilizations evident in its architecture, cuisine, and traditions. Bulgarian cuisine is hearty and flavorful, with dishes like banitsa (a pastry filled with cheese), kebapche (grilled minced meat), and shopska salad (a refreshing mix of tomatoes, cucumbers, peppers, and cheese). Despite economic challenges, Bulgaria is a country of resilience, offering visitors a blend of history, nature, and warm hospitality.",
                 CurrencyCode = "BGN",
                 FlagImageUrl = "https://t3.ftcdn.net/jpg/01/01/18/68/360_F_101186804_qHCSqaphnoDq21DiftORwwDrjEApaewH.jpg",
-                Language_Id = 9
+                Language_Id = 9,
+                Cities = new City[]
+                {
+                    Sofia
+                }
             };
 
             Russia = new Country()
@@ -532,7 +587,82 @@
                 Details = "Japan, an island nation located in East Asia, is known for its unique blend of ancient traditions and cutting-edge modernity. Its capital, Tokyo, is a bustling metropolis with towering skyscrapers, high-tech innovations, and vibrant street life. Japan's cultural heritage is rich and diverse, with landmarks such as Kyoto's temples and gardens, Hiroshima's Peace Memorial Park, and the iconic Mount Fuji symbolizing its spiritual and historical significance. Japanese cuisine, including sushi, tempura, and ramen, is celebrated worldwide for its freshness, quality, and meticulous preparation. The country is renowned for its contributions to technology, manufacturing, and pop culture, with brands like Sony, Toyota, and Nintendo shaping global trends. Japan's society is characterized by a strong sense of community, respect for tradition, and emphasis on harmony and order. Despite its densely populated cities, Japan boasts serene natural landscapes, including cherry blossom forests, hot springs, and scenic coastal regions. Overall, Japan offers visitors a captivating blend of tradition and innovation, making it a fascinating destination for exploration and discovery.",
                 CurrencyCode = "JPY",
                 FlagImageUrl = "https://upload.wikimedia.org/wikipedia/en/thumb/9/9e/Flag_of_Japan.svg/1200px-Flag_of_Japan.svg.png",
-                Language_Id = 11
+                Language_Id = 11,
+                Cities = new City[]
+                {
+                    Tokyo
+                }
+            };
+        }
+        private void SeedCities()
+        {
+            Paris = new City()
+            {
+                Id = 1,
+                Name = "Paris",
+                Population = 11_277_000,
+                Area = "105,4 km²",
+                Details = "Paris, the capital of France, is renowned for its romantic ambiance, iconic landmarks, and vibrant culture. Visitors flock to marvel at the Eiffel Tower, explore the world-class museums like the Louvre and Musée d'Orsay, and stroll along the charming streets of Montmartre or the picturesque banks of the Seine River. With its rich history, exquisite cuisine, and fashionable boutiques, Paris captivates travelers from around the world.",
+                Country_Id = 1
+            };
+
+            Madrid = new City()
+            {
+                Id = 2,
+                Name = "Madrid",
+                Area = "8,028 km²",
+                Details = "Madrid, the capital of Spain, is a vibrant metropolis known for its lively atmosphere, rich history, and cultural treasures. Visitors can explore world-class art museums such as the Prado and Reina Sofía, wander through historic neighborhoods like the Barrio de las Letras, and indulge in delicious tapas at bustling markets like Mercado de San Miguel. With its beautiful parks, grand boulevards, and dynamic nightlife, Madrid offers a captivating blend of tradition and modernity for travelers to enjoy.",
+                Country_Id = 2
+            };
+
+            NewYork = new City()
+            {
+                Id = 3,
+                Name = "New York",
+                Population = 19_034_000,
+                Area = "783,8 km²",
+                Details = "New York City, often referred to as the \"Big Apple,\" is a bustling metropolis known for its iconic skyline, diverse culture, and vibrant energy. Visitors can explore world-famous landmarks such as the Statue of Liberty, Times Square, and Central Park, or immerse themselves in the city's rich cultural scene by visiting museums like the Metropolitan Museum of Art or catching a Broadway show. With its endless array of dining options, shopping districts, and neighborhoods to explore, New York City offers an unforgettable experience for travelers from around the world.",
+                Country_Id = 3
+            };
+
+            Istanbul = new City()
+            {
+                Id = 4,
+                Name = "Istanbul",
+                Population = 16_047_000,
+                Area = "5 461 km²",
+                Details = "Istanbul, the largest city in Turkey, is a mesmerizing blend of cultures, history, and modernity. It straddles two continents, Europe and Asia, and is known for its stunning architectural wonders such as the Hagia Sophia, Blue Mosque, and Topkapi Palace. Visitors can wander through the bustling streets of the Grand Bazaar, cruise along the Bosphorus, or savor delicious Turkish cuisine in traditional meyhanes (taverns). With its rich history as the former capital of the Byzantine and Ottoman Empires, Istanbul offers a unique and unforgettable experience for travelers.",
+                Country_Id = 4
+            };
+
+            Rome = new City()
+            {
+                Id = 5,
+                Name = "Rome",
+                Population = 4_332_000,
+                Area = "1,285 km²",
+                Details = "Rome, the capital city of Italy, is a timeless destination steeped in history, art, and culture. Known as the \"Eternal City,\" Rome is home to iconic landmarks such as the Colosseum, Roman Forum, and Vatican City, which houses St. Peter's Basilica and the Sistine Chapel. Visitors can wander through cobblestone streets lined with ancient ruins, marvel at Renaissance masterpieces in museums and churches, and indulge in authentic Italian cuisine at trattorias and gelaterias. With its blend of ancient wonders and modern delights, Rome offers an unforgettable experience for travelers seeking to immerse themselves in the heart of Italy's rich heritage.",
+                Country_Id = 5
+            };
+
+            Sofia = new City()
+            {
+                Id = 6,
+                Name = "Sofia",
+                Population = 1_288_000,
+                Area = "492 km²",
+                Details = "Sofia, the capital city of Bulgaria, is a dynamic metropolis with a rich history and vibrant culture. Visitors can explore its diverse architectural heritage, including ancient Roman ruins, Byzantine churches, and Ottoman mosques, alongside modern landmarks like the National Palace of Culture and the Alexander Nevsky Cathedral. The city also offers charming parks, bustling markets, and a burgeoning culinary scene, making it a fascinating destination for travelers looking to discover the unique blend of influences that shape Bulgaria's capital.",
+                Country_Id = 11
+            };
+
+            Tokyo = new City()
+            {
+                Id = 7,
+                Name = "Tokyo",
+                Population = 37_115_035,
+                Area = "2 194 km²",
+                Details = "Tokyo, the capital of Japan, is a bustling metropolis where tradition meets innovation. Visitors can explore the city's iconic landmarks such as the historic Senso-ji Temple in Asakusa, the futuristic skyscrapers of Shinjuku, and the serene gardens of the Imperial Palace. With its vibrant neighborhoods, bustling street markets, and world-renowned cuisine ranging from sushi to ramen, Tokyo offers a captivating blend of old-world charm and modern excitement for travelers to experience and enjoy.",
+                Country_Id = 21
             };
         }
         
