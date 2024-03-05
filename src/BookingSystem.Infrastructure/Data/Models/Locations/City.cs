@@ -61,6 +61,7 @@
         /// City's Country
         /// </summary>
         [Comment("City's Country")]
+        [ForeignKey(nameof(Country_Id))]
         public Country Country { get; set; } = null!;
 
         [NotMapped]
