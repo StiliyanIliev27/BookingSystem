@@ -69,5 +69,7 @@
         [Required]
         [Comment("Landmark's active status")]
         public bool IsActive { get; set; } = false;
+
+        public IEnumerable<string> ImagesUrls { get; set; } = new string[3];
     }
 }

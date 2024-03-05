@@ -1,8 +1,10 @@
 ﻿namespace BookingSystem.Infrastructure.Data.DataSeeding
 {
+    using BookingSystem.Infrastructure.Data.Models.Landmarks;
     using BookingSystem.Infrastructure.Data.Models.Location;
     using BookingSystem.Infrastructure.Data.Models.Roles;
     using Microsoft.AspNetCore.Identity;
+
     internal class Seeder
     {
         public Seeder()
@@ -101,7 +103,21 @@
         public City Cairo { get; set; } = null!;
         public City RioDeJaneiro { get; set; } = null!;   
         public City Tokyo { get; set; } = null!;
+
       
+        //Landmarks
+
+        //Paris
+        public Landmark EiffelTower { get; set; } = null!;
+        public Landmark LouvreMuseum { get; set; } = null!;
+
+        //Madrid
+        public Landmark RoyalPalaceOfMadrid { get; set; } = null!;
+        public Landmark PlazaMayor { get; set; } = null!;
+
+        //New York
+        public Landmark CentralPark { get; set; } = null!;
+        public Landmark EmpireStateBuilding { get; set; } = null!;
         private void SeedLanguages()
         {
             Chinese = new Language
@@ -663,6 +679,108 @@
                 Area = "2 194 km²",
                 Details = "Tokyo, the capital of Japan, is a bustling metropolis where tradition meets innovation. Visitors can explore the city's iconic landmarks such as the historic Senso-ji Temple in Asakusa, the futuristic skyscrapers of Shinjuku, and the serene gardens of the Imperial Palace. With its vibrant neighborhoods, bustling street markets, and world-renowned cuisine ranging from sushi to ramen, Tokyo offers a captivating blend of old-world charm and modern excitement for travelers to experience and enjoy.",
                 Country_Id = 21
+            };
+        }
+        private void SeedLandmarks()
+        {
+            EiffelTower = new Landmark()
+            {
+                Id = 1,
+                Name = "Eiffel Tower",
+                Address = "Champ de Mars, 5 Av. Anatole France, 75007 Paris",
+                Details = "Completed in 1889, this colossal landmark, although initially hated by many Parisians, is now a famous symbol of French civic pride.",
+                City_Id = 1,
+                TicketPrice = 40m,
+                IsActive = true,
+                ImagesUrls = new string[]
+                {
+                    "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/1a/9e/7f/9d/eiffeltoren.jpg?w=1100&h=-1&s=1",
+                    "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/1a/d0/77/ea/tour-eiffel.jpg?w=1200&h=-1&s=1",
+                    "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/1b/15/a3/d8/c-sete.jpg?w=400&h=-1&s=1"
+                }
+            };
+
+            LouvreMuseum = new Landmark()
+            {
+                Id = 2,
+                Name = "Louvre Museum",
+                Address = "99 Rue de Rivoli, 75001 Paris France",
+                Details = "The Louvre Museum, located in Paris, is the world's largest art museum and a historic monument in France. It houses thousands of works of art, including the renowned Mona Lisa and the Venus de Milo, spanning from ancient civilizations to the 19th century.",
+                City_Id = 1,
+                TicketPrice = 46.46m,
+                IsActive = true,
+                ImagesUrls = new string[]
+                {
+                    "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/22/4f/70/dc/cour-napoleon-et-pyramide.jpg?w=1200&h=-1&s=1",
+                    "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/22/5b/ba/f1/grande-galerie-c-musee.jpg?w=1400&h=-1&s=1",
+                    "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/22/5b/ba/f5/portrait-de-lisa-gherardini.jpg?w=1400&h=-1&s=1"
+                }
+            };
+
+            RoyalPalaceOfMadrid = new Landmark()
+            {
+                Id = 3,
+                Name = "Royal Palace Of Madrid",
+                Address = "Calle de Bailen s/n, 28071 Madrid Spain",
+                Details = "Luxurious, over-the-top rococo palace with over 2,000 opulently gilded rooms.",
+                City_Id = 2,
+                TicketPrice = 43.14m,
+                IsActive = true,
+                ImagesUrls = new string[]
+                {
+                    "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/09/af/ca/4f/caption.jpg?w=1100&h=-1&s=1",
+                    "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/06/a8/65/be/cambio-de-guardia.jpg?w=2400&h=-1&s=1",
+                    "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/07/ba/87/3a/photo2jpg.jpg?w=2200&h=-1&s=1"
+                }
+            };
+
+            PlazaMayor = new Landmark()
+            {
+                Id = 4,
+                Name = "Plaza Mayor",
+                Address = "Calle Gerona 4, 28012 Madrid Spain",
+                Details = "Huge plaza packed with cafes, bars and tourists.",
+                City_Id = 2,
+                IsActive = true,
+                ImagesUrls = new string[]
+                {
+                    "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/1b/f7/4a/c6/plaza-mayor.jpg?w=1400&h=-1&s=1",
+                    "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/2b/8e/bd/0c/caption.jpg?w=1400&h=-1&s=1",
+                    "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/2b/8d/62/2a/caption.jpg?w=1400&h=-1&s=1"
+                }
+            };
+
+            CentralPark = new Landmark()
+            {
+                Id = 5,
+                Name = "Central Park",
+                Address = "59th to 110th Street Manhattan Borough, from Central Park West to 5th Avenue, New York City, NY 10022",
+                Details = "For more than 150 years, visitors have flocked to Central Park's 843 green acres in the heart of Manhattan. Since 1980, the Park has been managed by the Central Park Conservancy, in partnership with the public. Central Park is open 6 am to 1 am daily. Visit the official website of Central Park to learn more about Park happenings and activities and to learn how you to help Central Park!",
+                City_Id = 4,
+                IsActive = true,
+                ImagesUrls = new string[]
+                {
+                    "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/1c/90/ab/88/central-park-manhattan.jpg?w=1400&h=-1&s=1",
+                    "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/17/03/08/00/our-wedding-in-nyc-central.jpg?w=1400&h=-1&s=1",
+                    "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/2b/8c/e7/9e/caption.jpg?w=1100&h=-1&s=1"
+                }
+            };
+
+            EmpireStateBuilding = new Landmark()
+            {
+                Id = 6,
+                Name = "Empire State Building",
+                Address = "59th to 110th Street Manhattan Borough, from Central Park West to 5th Avenue, New York City, NY 10022",
+                Details = "The Empire State Building is the World's Most Famous Building. It rises 1,454 ft from ground to antenna & features the only 360 degree open-air vantage point of Midtown. The 86th & 102nd Fl Observatories are open daily, see esbnyc.com for hours.",
+                City_Id = 4,
+                TicketPrice = 47.91m,
+                IsActive = true,
+                ImagesUrls = new string[]
+                {
+                    "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/0e/9d/74/9f/photo0jpg.jpg?w=2200&h=-1&s=1",
+                    "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/1b/16/4b/d1/for-those-looking-for.jpg?w=1400&h=-1&s=1",
+                    "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/19/f3/82/90/the-new-exhibits-at-esb.jpg?w=1200&h=-1&s=1"
+                }
             };
         }
         
