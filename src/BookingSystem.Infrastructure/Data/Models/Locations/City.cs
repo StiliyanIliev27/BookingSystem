@@ -1,7 +1,10 @@
 ﻿namespace BookingSystem.Infrastructure.Data.Models.Location
 {
+    using BookingSystem.Infrastructure.Data.Models.Flights;
+    using BookingSystem.Infrastructure.Data.Models.Landmarks;
     using Microsoft.EntityFrameworkCore;
     using System.ComponentModel.DataAnnotations;
+    using System.ComponentModel.DataAnnotations.Schema;
     using static BookingSystem.Infrastructure.Data.Constants.DataConstants.City;
 
     /// <summary>
@@ -59,5 +62,11 @@
         /// </summary>
         [Comment("City's Country")]
         public Country Country { get; set; } = null!;
+
+        [NotMapped]
+        public ICollection<Landmark> Landmarks { get; set; } = new HashSet<Landmark>();
+
+        [NotMapped]
+        public ICollection<Airport> Airports { get; set; } = new HashSet<Airport>();
     }
 }

@@ -90,5 +90,8 @@
         [ForeignKey(nameof(Language_Id))]
         [Comment("Country's Official Language")]
         public Language Language { get; set; } = null!;
+
+        [NotMapped]
+        public ICollection<City> Cities { get; set; } = new HashSet<City>();
     }
 }

@@ -2,6 +2,7 @@
 {
     using Microsoft.EntityFrameworkCore;
     using System.ComponentModel.DataAnnotations;
+    using System.ComponentModel.DataAnnotations.Schema;
     using static BookingSystem.Infrastructure.Data.Constants.DataConstants.Continent;
 
     /// <summary>
@@ -24,5 +25,8 @@
         [MaxLength(NameMaxLength)]
         [Comment("Continent's Name")]
         public string Name { get; set; } = null!;
+
+        [NotMapped]
+        public ICollection<Country> Countries { get; set; } = new HashSet<Country>();
     }
 }

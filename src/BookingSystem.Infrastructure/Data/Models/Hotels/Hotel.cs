@@ -96,5 +96,11 @@
         [Required]
         [Comment("Hotel's Active Status")]
         public bool IsActive { get; set; } = false;
+
+        [NotMapped]
+        public IDictionary<Room, int> Rooms { get; set; } = new Dictionary<Room, int>();
+
+        [NotMapped]
+        public ICollection<HotelReservation> Reservations { get; set; } = new HashSet<HotelReservation>();
     }
 }

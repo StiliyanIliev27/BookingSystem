@@ -48,7 +48,7 @@ namespace BookingSystem.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Airlines");
+                    b.ToTable("Airlines", (string)null);
 
                     b.HasComment("Airline");
                 });
@@ -76,7 +76,7 @@ namespace BookingSystem.Infrastructure.Migrations
 
                     b.HasIndex("City_Id");
 
-                    b.ToTable("Airports");
+                    b.ToTable("Airports", (string)null);
 
                     b.HasComment("Airport");
                 });
@@ -139,7 +139,7 @@ namespace BookingSystem.Infrastructure.Migrations
 
                     b.HasIndex("DepartureAirport_Id");
 
-                    b.ToTable("Flights");
+                    b.ToTable("Flights", (string)null);
 
                     b.HasComment("Flight");
                 });
@@ -170,7 +170,7 @@ namespace BookingSystem.Infrastructure.Migrations
 
                     b.HasIndex("User_Id");
 
-                    b.ToTable("FlightsReservations");
+                    b.ToTable("FlightsReservations", (string)null);
 
                     b.HasComment("FlightReservations");
                 });
@@ -234,7 +234,7 @@ namespace BookingSystem.Infrastructure.Migrations
 
                     b.HasIndex("City_Id");
 
-                    b.ToTable("Hotels");
+                    b.ToTable("Hotels", (string)null);
 
                     b.HasComment("Hotel");
                 });
@@ -274,7 +274,7 @@ namespace BookingSystem.Infrastructure.Migrations
 
                     b.HasIndex("User_Id");
 
-                    b.ToTable("HotelsReservations");
+                    b.ToTable("HotelsReservations", (string)null);
 
                     b.HasComment("Hotel Reservation");
                 });
@@ -317,7 +317,7 @@ namespace BookingSystem.Infrastructure.Migrations
 
                     b.HasIndex("Hotel_Id");
 
-                    b.ToTable("Rooms");
+                    b.ToTable("Rooms", (string)null);
 
                     b.HasComment("Room");
                 });
@@ -365,7 +365,7 @@ namespace BookingSystem.Infrastructure.Migrations
 
                     b.HasIndex("City_Id");
 
-                    b.ToTable("Landmarks");
+                    b.ToTable("Landmarks", (string)null);
 
                     b.HasComment("Landmark");
                 });
@@ -411,7 +411,7 @@ namespace BookingSystem.Infrastructure.Migrations
 
                     b.HasIndex("CountryId");
 
-                    b.ToTable("Cities");
+                    b.ToTable("Cities", (string)null);
 
                     b.HasComment("City");
                 });
@@ -433,7 +433,7 @@ namespace BookingSystem.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Continents");
+                    b.ToTable("Continents", (string)null);
 
                     b.HasComment("Continent");
 
@@ -530,7 +530,7 @@ namespace BookingSystem.Infrastructure.Migrations
 
                     b.HasIndex("Language_Id");
 
-                    b.ToTable("Countries");
+                    b.ToTable("Countries", (string)null);
 
                     b.HasComment("Country");
 
@@ -806,7 +806,7 @@ namespace BookingSystem.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Languages");
+                    b.ToTable("Languages", (string)null);
 
                     b.HasComment("Language");
 
@@ -921,7 +921,7 @@ namespace BookingSystem.Infrastructure.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Administrators");
+                    b.ToTable("Administrators", (string)null);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
