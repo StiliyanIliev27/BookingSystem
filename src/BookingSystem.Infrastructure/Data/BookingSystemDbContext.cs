@@ -103,7 +103,7 @@
             builder.ApplyConfiguration(new LandmarkConfiguration());
 
             //Hotels configuration
-            //builder.ApplyConfiguration(new HotelConfiguration());
+            builder.ApplyConfiguration(new HotelConfiguration());
             builder.ApplyConfiguration(new RoomConfiguration());
             builder.ApplyConfiguration(new HotelReservationConfiguration());
 

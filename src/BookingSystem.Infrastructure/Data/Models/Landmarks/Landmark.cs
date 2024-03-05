@@ -70,6 +70,7 @@
         [Comment("Landmark's active status")]
         public bool IsActive { get; set; } = false;
 
+        [NotMapped]
         public IEnumerable<string> ImagesUrls { get; set; } = new string[3];
     }
 }

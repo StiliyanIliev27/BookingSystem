@@ -1,9 +1,12 @@
 ﻿namespace BookingSystem.Infrastructure.Data.DataSeeding
 {
+    using BookingSystem.Infrastructure.Data.Models.Hotels;
     using BookingSystem.Infrastructure.Data.Models.Landmarks;
     using BookingSystem.Infrastructure.Data.Models.Location;
     using BookingSystem.Infrastructure.Data.Models.Roles;
     using Microsoft.AspNetCore.Identity;
+    using System.Globalization;
+    using static BookingSystem.Infrastructure.Data.Constants.DataConstants.Hotel;
 
     internal class Seeder
     {
@@ -13,7 +16,9 @@
             SeedContinents();
             SeedCountries();
             SeedCities();
-                     
+            SeedLandmarks();
+            SeedRooms();
+            SeedHotels();
         }
 
         //Users
@@ -118,6 +123,63 @@
         //New York
         public Landmark CentralPark { get; set; } = null!;
         public Landmark EmpireStateBuilding { get; set; } = null!;
+
+        //Hotels
+        public Hotel IbisParis { get; set; } = null!;
+        public Hotel SaintMarcel { get; set; } = null!;
+        public Hotel KraftHotel { get; set; } = null!;
+
+        public Hotel PestanaPlaza { get; set; } = null!;
+        public Hotel CataloniaPuerta { get; set; } = null!;
+        public Hotel HostalCentralPalace { get; set; } = null!;
+
+        public Hotel PrinceKitano { get; set; } = null!;
+        public Hotel HiltonGarden { get; set; } = null!;
+        public Hotel TimesSquareHotel { get; set; } = null!;
+        
+        public Hotel HotelZOO { get; set; } = null!;
+        public Hotel EurostarsSofia { get; set; } = null!;
+
+        //Rooms 
+        public Room IbisParisRoomSingle { get; set; } = null!;
+        public Room IbisParisRoomDouble { get; set; } = null!;
+        public Room IbisParisRoomTriple { get; set; } = null!;
+        public Room IbisParisRoomApartment { get; set; } = null!;
+
+        public Room KraftHotelRoomSingle { get; set; } = null!;
+        public Room KraftHotelRoomDouble { get; set; } = null!;
+      
+        public Room SaintMarcelRoomSingle { get; set; } = null!;
+        public Room SaintMarcelRoomDouble { get; set; } = null!;
+
+        public Room PestanaPlazaRoomSingle { get; set; } = null!;
+        public Room PestanaPlazaRoomDouble { get; set; } = null!;
+        public Room PestanaPlazaRoomTriple { get; set; } = null!;
+
+        public Room CataloniaPuertaRoomSingle { get; set; } = null!;
+        public Room CataloniaPuertaRoomDouble { get; set; } = null!;
+
+        public Room HostalCentralPalaceRoomDouble { get; set; } = null!;
+
+        public Room TimesSquareHotelRoomDouble { get; set; } = null!;
+        public Room TimesSquareHotelRoomTriple { get; set; } = null!;
+
+        public Room HiltonGardenRoomDouble { get; set; } = null!;
+        public Room HiltonGardenRoomTriple { get; set; } = null!;
+        public Room HiltonGardenRoomApartment { get; set; } = null!;
+
+        public Room PrinceKitanoRoomDouble { get; set; } = null!;
+        public Room PrinceKitanoRoomApartment { get; set; } = null!;
+
+        public Room HotelZOORoomSingle { get; set; } = null!;
+        public Room HotelZOORoomDouble { get; set; } = null!;
+        public Room HotelZOORoomTriple { get; set; } = null!;
+
+        public Room EurostarsSofiaRoomSingle { get; set; } = null!;
+        public Room EurostarsSofiaRoomDouble { get; set; } = null!;
+        public Room EurostarsSofiaRoomTriple { get; set; } = null!;
+        public Room EurostarsSofiaRoomApartment { get; set; } = null!;
+
         private void SeedLanguages()
         {
             Chinese = new Language
@@ -754,7 +816,7 @@
             {
                 Id = 5,
                 Name = "Central Park",
-                Address = "59th to 110th Street Manhattan Borough, from Central Park West to 5th Avenue, New York City, NY 10022",
+                Address = "59th to 110th Street Manhattan Borough, NY 10022",
                 Details = "For more than 150 years, visitors have flocked to Central Park's 843 green acres in the heart of Manhattan. Since 1980, the Park has been managed by the Central Park Conservancy, in partnership with the public. Central Park is open 6 am to 1 am daily. Visit the official website of Central Park to learn more about Park happenings and activities and to learn how you to help Central Park!",
                 City_Id = 4,
                 IsActive = true,
@@ -770,7 +832,7 @@
             {
                 Id = 6,
                 Name = "Empire State Building",
-                Address = "59th to 110th Street Manhattan Borough, from Central Park West to 5th Avenue, New York City, NY 10022",
+                Address = "20 W 34th St., New York, NY 10001",
                 Details = "The Empire State Building is the World's Most Famous Building. It rises 1,454 ft from ground to antenna & features the only 360 degree open-air vantage point of Midtown. The 86th & 102nd Fl Observatories are open daily, see esbnyc.com for hours.",
                 City_Id = 4,
                 TicketPrice = 47.91m,
@@ -781,6 +843,560 @@
                     "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/1b/16/4b/d1/for-those-looking-for.jpg?w=1400&h=-1&s=1",
                     "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/19/f3/82/90/the-new-exhibits-at-esb.jpg?w=1200&h=-1&s=1"
                 }
+            };
+        } //TODO...
+        private void SeedHotels()
+        {
+            //Paris
+            
+            IbisParis = new Hotel()
+            {
+                Id = 1,
+                Name = "Ibis Paris Gare Montparnasse Catalogne",
+                Address = "11 Rue Du Texel, 14th arr., 75014",
+                City_Id = 1,
+                StarRate = 3,
+                Details = "Ideally set in the 14th arr. District of Paris, Ibis Paris Gare Montparnasse Catalogne is located 1.6 miles from Rodin Museum, 1.6 miles from Luxembourg Gardens and 2 miles from Orsay Museum. With a bar, the 3-star hotel has air-conditioned rooms with free WiFi, each with a private bathroom. Private parking is available on site.\r\n\r\nAt the hotel, rooms have a closet. The rooms include a desk and a flat-screen TV, and some accommodations at Ibis Paris Gare Montparnasse Catalogne have a balcony.\r\n\r\nA buffet, continental or American breakfast is available each morning at the property.\r\n\r\nSpeaking English, Spanish, French and Ukrainian at the 24-hour front desk, staff are ready to help around the clock.\r\n\r\nSainte Chapelle is 2 miles from the accommodation, while Paris Expo – Porte de Versailles is 2.1 miles from the property. The nearest airport is Paris - Orly Airport, 8.1 miles from Ibis Paris Gare Montparnasse Catalogne.",
+                CheckIn = DateTime.ParseExact("16:00", TimeFormat, CultureInfo.CurrentCulture, DateTimeStyles.None),
+                CheckOut = DateTime.ParseExact("12:00", TimeFormat, CultureInfo.CurrentCulture, DateTimeStyles.None),
+                Parking = true,
+                Pets = true,
+                IsActive = true,
+                Rooms = new Dictionary<Room, int>()
+                {
+                    [IbisParisRoomSingle] = 5,
+                    [IbisParisRoomDouble] = 5,
+                    [IbisParisRoomTriple] = 5,
+                    [IbisParisRoomApartment] = 5,
+                }
+            };
+
+            SaintMarcel = new Hotel()
+            {
+                Id = 2,
+                Name = "Hôtel Saint Marcel",
+                Address = "43 Boulevard Saint-Marcel, 13th arr., 75013",
+                City_Id = 1,
+                StarRate = 3,
+                Details = "You're eligible for a Genius discount at Hôtel Saint Marcel! To save at this property, all you have to do is sign in.\r\n\r\nFeaturing free Wi-Fi, Hôtel Saint Marcel offers accommodations in Paris, 1.2 mi from AccorHotels Arena. Guests can make use of the fitness area in the gym\r\n\r\nRooms feature a flat-screen TV with satellite channels. Certain rooms have a seating area where you can relax. For your comfort, you will find free toiletries and a hairdryer in the bathroom.\r\n\r\nYou will find a 24-hour front desk at the property.\r\n\r\nNoter Dame Cathedral is 1.2 mi from Hôtel Saint Marcel, while Opéra Bastille is 1.2 mi away. The nearest airport is Orly Airport, 7.5 mi from the property.",
+                CheckIn = DateTime.ParseExact("15:00", TimeFormat, CultureInfo.CurrentCulture, DateTimeStyles.None),
+                CheckOut = DateTime.ParseExact("12:00", TimeFormat, CultureInfo.CurrentCulture, DateTimeStyles.None),
+                Parking = false,
+                Pets = false,
+                IsActive = true,
+                Rooms = new Dictionary<Room, int>()
+                {
+                    [SaintMarcelRoomSingle] = 5,
+                    [SaintMarcelRoomDouble] = 5,
+                }
+            };
+
+            KraftHotel = new Hotel()
+            {
+                Id = 3,
+                Name = "Kraft Hotel",
+                Address = "37, rue du Hameau, 15th arr., 75015",
+                City_Id = 1,
+                StarRate = 4,
+                Details = "You're eligible for a Genius discount at Kraft Hotel! To save at this property, all you have to do is sign in.\r\n\r\nThis hotel is located opposite the main entrance of Dôme de Paris - Palais des Sports, near the lively Vaugirard area with its boutiques, cafés and lovely restaurants.\r\n\r\nThe ambiance of the Kraft Hotel suits perfectly the diversity of guests who come to stay: those who come to discover the treasures of Paris and those who come to attend a show, symposium, fair or exposition.\r\n\r\nGuestrooms are stylishly decorated and furnished to offer you high-quality comfort. They offer a private bathroom and a TV.\r\n\r\nThe Kraft Hotel is an ideal location for business or leisure. It is located near the local metro station which offers direct access into the heart of the capital.",
+                CheckIn = DateTime.ParseExact("15:00", TimeFormat, CultureInfo.CurrentCulture, DateTimeStyles.None),
+                CheckOut = DateTime.ParseExact("11:00", TimeFormat, CultureInfo.CurrentCulture, DateTimeStyles.None),
+                Parking = false,
+                Pets = false,
+                IsActive = true,
+                Rooms = new Dictionary<Room, int>()
+                {
+                    [KraftHotelRoomSingle] = 5,
+                    [KraftHotelRoomDouble] = 5,
+                }
+            };
+
+            //Madrid
+
+            PestanaPlaza = new Hotel()
+            {
+                Id = 4,
+                Name = "Pestana Plaza Mayor Madrid",
+                Address = "Calle Imperial 8, Centro, 28012",
+                City_Id = 2,
+                StarRate = 4,
+                Details = "Less than 1 km from Mercado San Miguel and a 13-minute walk from Puerta de Toledo, the property offers a terrace and a bar. The accommodation provides a 24-hour front desk, spa and free WiFi is available.\r\n\r\nAt the hotel, every room comes with a desk and a flat-screen TV. The private bathroom is equipped with a shower, free toiletries and a hair dryer. The units at Pestana Plaza Mayor Madrid have air conditioning and a wardrobe.\r\n\r\nA buffet breakfast is available daily at the property.\r\n\r\nPestana Plaza Mayor Madrid is located in Plaza Mayor, while Thyssen-Bornemisza Museum is 1.1 km from the property. Adolfo Suarez Madrid-Barajas Airport is 13.8 km away.",
+                CheckIn = DateTime.ParseExact("15:00", TimeFormat, CultureInfo.CurrentCulture, DateTimeStyles.None),
+                CheckOut = DateTime.ParseExact("12:00", TimeFormat, CultureInfo.CurrentCulture, DateTimeStyles.None),
+                Parking = true,
+                Pets = false,
+                IsActive = true,
+                Rooms = new Dictionary<Room, int>()
+                {
+                    [PestanaPlazaRoomSingle] = 5,
+                    [PestanaPlazaRoomDouble] = 5,
+                    [PestanaPlazaRoomTriple] = 5,
+                }
+            };
+
+            CataloniaPuerta = new Hotel()
+            {
+                Id = 5,
+                Name = "Catalonia Puerta del Sol",
+                Address = "Atocha, 23, Centro, 28012",
+                City_Id = 2,
+                StarRate = 4,
+                Details = "Catalonia Puerta del Sol is set in a magnificent 18th-century building in the historic centre of Madrid, a few minutes from Puerta del Sol. It offers free Wi-Fi throughout the hotel.\r\n\r\nThe hotel is just 50 metres from Puerta del Sol, Madrid's main square and from main tapas restaurants. You can walk to Madrid's famous Art Triangle in 15 minutes. Atocha Train Station is 1 km away.\r\n\r\nThe air-conditioned rooms feature parquet floors and smart décor. ach one has flat-screen satellite smart TV with Chromecast app, a private bathroom and a minibar.\r\n\r\nThe Puerta del Sol's restaurant serves a buffet breakfast each morning, and available until 12:00 at weekends. There is also a bar with a roofed terrace, El Patio, where you can get a snack or a drink. There is also a patio with crystal domes.\r\n\r\nAll hotel rooms have smart TVs, which are equipped with Chromecast app.",
+                CheckIn = DateTime.ParseExact("15:00", TimeFormat, CultureInfo.CurrentCulture, DateTimeStyles.None),
+                CheckOut = DateTime.ParseExact("12:00", TimeFormat, CultureInfo.CurrentCulture, DateTimeStyles.None),
+                Parking = true,
+                Pets = true,
+                IsActive = true,
+                Rooms = new Dictionary<Room, int>()
+                {
+                    [CataloniaPuertaRoomSingle] = 5,
+                    [CataloniaPuertaRoomDouble] = 5,
+                }
+            };
+
+            HostalCentralPalace = new Hotel()
+            {
+                Id = 6,
+                Name = "Hostal Central Palace Madrid",
+                Address = "Plaza de Oriente 2, 3º izquierda, Centro, 28013",
+                City_Id = 2,
+                StarRate = 1,
+                Details = "Centrally located overlooking the Royal Palace and Sabatini Gardens in Madrid’s Plaza de Oriente, this elegant guest house offers 24-hour reception and free WiFi.\r\n\r\nThe spacious rooms at Hostal Central Palace Madrid feature wooden floors and classic décor. They all feature a private bathroom with shower and a hairdryer and toiletries. Some rooms offer views of the Royal Palace, Almudena Cathedral and the Sabatini Gardens.\r\n\r\nThere are many shops, bars and restaurants are within a short walk.\r\n\r\nLuggage storage is offered. Staff at reception can provide information about what to see and do in Madrid. There are also various car parks within a short walk.\r\n\r\nHostal Central Palace Madrid is the only guest house located in the Plaza de Oriente square, opposite the Royal Palace. It is 200 metres from Opera Metro Station and 10 minutes’ walk from Puerta del Sol.",
+                CheckIn = DateTime.ParseExact("14:00", TimeFormat, CultureInfo.CurrentCulture, DateTimeStyles.None),
+                CheckOut = DateTime.ParseExact("12:00", TimeFormat, CultureInfo.CurrentCulture, DateTimeStyles.None),
+                Parking = false,
+                Pets = false,
+                IsActive = true,
+                Rooms = new Dictionary<Room, int>()
+                {
+                    [HostalCentralPalaceRoomDouble] = 5,
+                }
+            };
+
+            //New York
+
+            PrinceKitano = new Hotel()
+            {
+                Id = 7,
+                Name = "The Prince Kitano New York",
+                Address = "66 Park Avenue, Murray Hill, New York, NY 10016",
+                City_Id = 4,
+                StarRate = 4,
+                Details = "This Japanese-style hotel is located 500 metres from Grand Central Station and features a rotating repertoire of gallery pieces in the lobby. There are 2 on-site restaurants.\r\n\r\nKitano New York features rooms with flat-screen TVs, iPod docking stations and a work desk. Free Japanese green tea and dressing gowns and slippers are provided.\r\n\r\nHakubai Restaurant at the New York Kitano serves gourmet Japanese cuisine for lunch and dinner. Guests can also have American and European dishes at Jazz at The Kitano Restaurant. In the evening, the Bar Lounge serves a full selection of cocktails.\r\n\r\nAvailable services at the Kitano include car rental, a tour desk, foreign currency exchange and a gift shop. The hotel also features a fitness centre, laundry facilities and dry cleaning.\r\n\r\nThe Empire State Building is 645 metres from the Kitano Manhattan.",
+                CheckIn = DateTime.ParseExact("15:00", TimeFormat, CultureInfo.CurrentCulture, DateTimeStyles.None),
+                CheckOut = DateTime.ParseExact("11:00", TimeFormat, CultureInfo.CurrentCulture, DateTimeStyles.None),
+                Parking = true,
+                Pets = false,
+                IsActive = true,
+                Rooms = new Dictionary<Room, int>()
+                {
+                    [PrinceKitanoRoomDouble] = 5,
+                    [PrinceKitanoRoomApartment] = 5,
+                }
+            };
+
+            HiltonGarden = new Hotel()
+            {
+                Id = 8,
+                Name = "Hilton Garden Inn New York Times Square South",
+                Address = "326 West 37th Street , Hell's Kitchen, New York, NY 10018",
+                City_Id = 4,
+                StarRate = 3,
+                Details = "The Hilton Garden Inn New York Times Square South is located less than 1 km away from Jacob K. Javits Convention Centre and 1.3 km from Times Square. Complimentary WiFi is provided.\r\n\r\nAll rooms at this property are fitted with a flat-screen TV, coffee maker, microwave and mini-refrigerator. A desk with an ergonomic chair are also provided.\r\n\r\nGuests will have access to free coffee in the morning and a fitness centre. The 24-hour Garden Market will carry snacks and sundry items.\r\n\r\nLaGuardia Airport is 18.3 km from the property while JFK Airport is 27 km from Hilton Garden Inn New York Times Square South. The Empire State Building is 1.6 km away.",
+                CheckIn = DateTime.ParseExact("15:00", TimeFormat, CultureInfo.CurrentCulture, DateTimeStyles.None),
+                CheckOut = DateTime.ParseExact("12:00", TimeFormat, CultureInfo.CurrentCulture, DateTimeStyles.None),
+                Parking = true,
+                Pets = true,
+                IsActive = true,
+                Rooms = new Dictionary<Room, int>()
+                {
+                    [HiltonGardenRoomDouble] = 5,
+                    [HiltonGardenRoomTriple] = 5,
+                    [HiltonGardenRoomApartment] = 5
+                }
+            };
+
+            TimesSquareHotel = new Hotel()
+            {
+                Id = 9,
+                Name = "45 Times Square Hotel",
+                Address = "125 West 45th Street, New York, NY 10036",
+                City_Id = 4,
+                StarRate = 3,
+                Details = "Featuring 3-star accommodation, 45 Times Square Hotel is located in New York, 200 metres from Times Square and 500 metres from Radio City Music Hall. With free WiFi, this 3-star hotel offers a 24-hour front desk and a tour desk. The property is 600 metres from Bryant Park, and within 300 metres of the city centre.\r\n\r\nPopular points of interest near the hotel include Broadway Theatre, Rockefeller Center and New York Public Library. The nearest airport is LaGuardia Airport, 12 km from 45 Times Square Hotel.",
+                CheckIn = DateTime.ParseExact("15:00", TimeFormat, CultureInfo.CurrentCulture, DateTimeStyles.None),
+                CheckOut = DateTime.ParseExact("12:00", TimeFormat, CultureInfo.CurrentCulture, DateTimeStyles.None),
+                Parking = false,
+                Pets = false,
+                IsActive = true,
+                Rooms = new Dictionary<Room, int>()
+                {
+                    [TimesSquareHotelRoomDouble] = 5,
+                    [TimesSquareHotelRoomTriple] = 5
+                }
+            };
+
+            //Sofia
+
+            HotelZOO = new Hotel()
+            {
+                Id = 10,
+                Name = "Hotel ZOO Sofia - Secured Paid Parking",
+                Address = "6 Simeonovsko Shausse Blvd., Lozenets, 1700",
+                City_Id = 6,
+                StarRate = 4,
+                Details = "Hotel ZOO Sofia is located In Sofia and next to a large green park, perfect for relaxation. Sopharma Business Towers are a 7-minute drive away, Inter Expo Center is a 10-minute drive away and the Grand Sports Hall Arena Armeec is 0.9 mi away.\r\n\r\nEnjoy a drink in the stylish bar and sample an assortment of cuisine in the elegant Bijou restaurant. The tastefully decorated, fully-equipped accommodations provide you with the air of tranquility.\r\n\r\nMake use of the free gym and free WiFi throughout the hotel. A secure parking is available against a surcharge.\r\n\r\nSofia City Zoo is only 656 feet from Hotel ZOO Sofia. Paradise Center, a vast shopping and entertainment center, is 1.6 mi away. Interpred business area is a 12-minute drive away.\r\n\r\nSofia Airport is a 15 minute drive away. Pickup from the Airport or Central Train Station pickup can be organized against a surcharge.",
+                CheckIn = DateTime.ParseExact("14:00", TimeFormat, CultureInfo.CurrentCulture, DateTimeStyles.None),
+                CheckOut = DateTime.ParseExact("12:00", TimeFormat, CultureInfo.CurrentCulture, DateTimeStyles.None),
+                Parking = true,
+                Pets = false,
+                IsActive = true,
+                Rooms = new Dictionary<Room, int>()
+                {
+                    [HotelZOORoomSingle] = 5,
+                    [HotelZOORoomDouble] = 5,
+                    [HotelZOORoomTriple] = 5
+                }
+            };
+
+            EurostarsSofia = new Hotel()
+            {
+                Id = 11,
+                Name = "Eurostars Sofia City",
+                Address = "6 Stara Planina Str., 1000",
+                City_Id = 6,
+                StarRate = 4,
+                Details = "Conveniently located in the center of Sofia, Eurostars Sofia City provides air-conditioned rooms with free WiFi and private parking. This 4-star hotel offers a 24-hour front desk and a business center. The property is non-smoking throughout and is located a 4-minute walk from Cathedral Saint Alexandar Nevski.\r\n\r\nRooms are complete with a private bathroom equipped with free toiletries, while certain rooms at the hotel also offer a balcony.\r\n\r\nEurostars Sofia City offers a buffet or continental breakfast.\r\n\r\nPopular points of interest near the accommodation include Banya Bashi Mosque, Sofia University St. Kliment Ohridski and Council of Ministers Building. The nearest airport is Sofia, 3.1 miles from Eurostars Sofia City, and the property offers a paid airport shuttle service.",
+                CheckIn = DateTime.ParseExact("14:00", TimeFormat, CultureInfo.CurrentCulture, DateTimeStyles.None),
+                CheckOut = DateTime.ParseExact("12:00", TimeFormat, CultureInfo.CurrentCulture, DateTimeStyles.None),
+                Parking = true,
+                Pets = false,
+                IsActive = true,
+                Rooms = new Dictionary<Room, int>()
+                {
+                    [EurostarsSofiaRoomSingle] = 5,
+                    [EurostarsSofiaRoomDouble] = 5,
+                    [EurostarsSofiaRoomTriple] = 5,
+                    [EurostarsSofiaRoomApartment] = 5
+                }
+            };
+        }
+        private void SeedRooms()
+        {
+            //Paris
+
+            IbisParisRoomSingle = new Room()
+            {
+                Id = 1,
+                Type = Enums.RoomType.Single,
+                Hotel_Id = 1,
+                PricePerNight = 165m,
+                WiFi = true,
+                IsReserved = false,
+                IsActive = true
+            };
+
+            IbisParisRoomDouble = new Room()
+            {
+                Id = 2,
+                Type = Enums.RoomType.Double,
+                Hotel_Id = 1,
+                PricePerNight = 302m,
+                WiFi = true,
+                IsReserved = false,
+                IsActive = true
+            };
+
+            IbisParisRoomTriple = new Room()
+            {
+                Id = 3,
+                Type = Enums.RoomType.Triple,
+                Hotel_Id = 1,
+                PricePerNight = 578m,
+                WiFi = true,
+                IsReserved = false,
+                IsActive = true
+            };
+
+            IbisParisRoomApartment = new Room()
+            {
+                Id = 4,
+                Type = Enums.RoomType.Apartment,
+                Hotel_Id = 1,
+                PricePerNight = 630m,
+                WiFi = true,
+                IsReserved = false,
+                IsActive = true
+            };
+
+            KraftHotelRoomSingle = new Room()
+            {
+                Id = 5,
+                Type = Enums.RoomType.Single,
+                Hotel_Id = 3,
+                PricePerNight = 630m,
+                WiFi = true,
+                IsReserved = false,
+                IsActive = true
+            };
+
+            KraftHotelRoomDouble = new Room()
+            {
+                Id = 6,
+                Type = Enums.RoomType.Double,
+                Hotel_Id = 3,
+                PricePerNight = 470m,
+                WiFi = true,
+                IsReserved = false,
+                IsActive = true
+            };
+
+            SaintMarcelRoomSingle = new Room()
+            {
+                Id = 7,
+                Type = Enums.RoomType.Single,
+                Hotel_Id = 3,
+                PricePerNight = 216m,
+                WiFi = true,
+                IsReserved = false,
+                IsActive = true
+            };
+
+            SaintMarcelRoomDouble = new Room()
+            {
+                Id = 8,
+                Type = Enums.RoomType.Double,
+                Hotel_Id = 3,
+                PricePerNight = 157m,
+                WiFi = true,
+                IsReserved = false,
+                IsActive = true
+            };
+
+            //Madrid
+
+            PestanaPlazaRoomSingle = new Room()
+            {
+                Id = 9,
+                Type = Enums.RoomType.Single,
+                Hotel_Id = 4,
+                PricePerNight = 433m,
+                WiFi = true,
+                IsReserved = false,
+                IsActive = true
+            };
+
+            PestanaPlazaRoomDouble = new Room()
+            {
+                Id = 10,
+                Type = Enums.RoomType.Double,
+                Hotel_Id = 4,
+                PricePerNight = 488m,
+                WiFi = true,
+                IsReserved = false,
+                IsActive = true
+            };
+
+            PestanaPlazaRoomTriple = new Room()
+            {
+                Id = 11,
+                Type = Enums.RoomType.Triple,
+                Hotel_Id = 4,
+                PricePerNight = 644m,
+                WiFi = true,
+                IsReserved = false,
+                IsActive = true
+            };
+
+            CataloniaPuertaRoomSingle = new Room()
+            {
+                Id = 12,
+                Type = Enums.RoomType.Single,
+                Hotel_Id = 5,
+                PricePerNight = 201m,
+                WiFi = true,
+                IsReserved = false,
+                IsActive = true
+            };
+
+            CataloniaPuertaRoomDouble = new Room()
+            {
+                Id = 13,
+                Type = Enums.RoomType.Double,
+                Hotel_Id = 5,
+                PricePerNight = 201m,
+                WiFi = true,
+                IsReserved = false,
+                IsActive = true
+            };
+
+            HostalCentralPalaceRoomDouble = new Room()
+            {
+                Id = 14,
+                Type = Enums.RoomType.Double,
+                Hotel_Id = 6,
+                PricePerNight = 197m,
+                WiFi = true,
+                IsReserved = false,
+                IsActive = true
+            };
+
+            //New York
+
+            TimesSquareHotelRoomDouble = new Room()
+            {
+                Id = 15,
+                Type = Enums.RoomType.Double,
+                Hotel_Id = 9,
+                PricePerNight = 193m,
+                WiFi = true,
+                IsReserved = false,
+                IsActive = true
+            };
+
+            TimesSquareHotelRoomTriple = new Room()
+            {
+                Id = 16,
+                Type = Enums.RoomType.Triple,
+                Hotel_Id = 9,
+                PricePerNight = 244m,
+                WiFi = true,
+                IsReserved = false,
+                IsActive = true
+            };
+
+            HiltonGardenRoomDouble = new Room()
+            {
+                Id = 17,
+                Type = Enums.RoomType.Double,
+                Hotel_Id = 8,
+                PricePerNight = 195m,
+                WiFi = true,
+                IsReserved = false,
+                IsActive = true
+            };
+
+            HiltonGardenRoomTriple = new Room()
+            {
+                Id = 18,
+                Type = Enums.RoomType.Triple,
+                Hotel_Id = 8,
+                PricePerNight = 238m,
+                WiFi = true,
+                IsReserved = false,
+                IsActive = true
+            };
+
+            HiltonGardenRoomApartment = new Room()
+            {
+                Id = 19,
+                Type = Enums.RoomType.Apartment,
+                Hotel_Id = 8,
+                PricePerNight = 248m,
+                WiFi = true,
+                IsReserved = false,
+                IsActive = true
+            };
+
+            PrinceKitanoRoomDouble = new Room()
+            {
+                Id = 20,
+                Type = Enums.RoomType.Double,
+                Hotel_Id = 7,
+                PricePerNight = 314m,
+                WiFi = true,
+                IsReserved = false,
+                IsActive = true
+            };
+
+            PrinceKitanoRoomApartment = new Room()
+            {
+                Id = 21,
+                Type = Enums.RoomType.Apartment,
+                Hotel_Id = 7,
+                PricePerNight = 351m,
+                WiFi = true,
+                IsReserved = false,
+                IsActive = true
+            };
+
+            //Sofia
+
+            HotelZOORoomSingle = new Room()
+            {
+                Id = 22,
+                Type = Enums.RoomType.Single,
+                Hotel_Id = 10,
+                PricePerNight = 70m,
+                WiFi = true,
+                IsReserved = false,
+                IsActive = true
+            };
+
+            HotelZOORoomDouble = new Room()
+            {
+                Id = 23,
+                Type = Enums.RoomType.Double,
+                Hotel_Id = 10,
+                PricePerNight = 78m,
+                WiFi = true,
+                IsReserved = false,
+                IsActive = true
+            };
+
+            HotelZOORoomTriple = new Room()
+            {
+                Id = 24,
+                Type = Enums.RoomType.Triple,
+                Hotel_Id = 10,
+                PricePerNight = 104m,
+                WiFi = true,
+                IsReserved = false,
+                IsActive = true
+            };
+
+            EurostarsSofiaRoomSingle = new Room()
+            {
+                Id = 25,
+                Type = Enums.RoomType.Single,
+                Hotel_Id = 11,
+                PricePerNight = 71m,
+                WiFi = true,
+                IsReserved = false,
+                IsActive = true
+            };
+
+            EurostarsSofiaRoomDouble = new Room()
+            {
+                Id = 26,
+                Type = Enums.RoomType.Double,
+                Hotel_Id = 11,
+                PricePerNight = 80m,
+                WiFi = true,
+                IsReserved = false,
+                IsActive = true
+            };
+
+            EurostarsSofiaRoomTriple = new Room()
+            {
+                Id = 27,
+                Type = Enums.RoomType.Triple,
+                Hotel_Id = 11,
+                PricePerNight = 161m,
+                WiFi = true,
+                IsReserved = false,
+                IsActive = true
+            };
+
+            EurostarsSofiaRoomApartment = new Room()
+            {
+                Id = 28,
+                Type = Enums.RoomType.Apartment,
+                Hotel_Id = 11,
+                PricePerNight = 173m,
+                WiFi = true,
+                IsReserved = false,
+                IsActive = true
             };
         }
         
