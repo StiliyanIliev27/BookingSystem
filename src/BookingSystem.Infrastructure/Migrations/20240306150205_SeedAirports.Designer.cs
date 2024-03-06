@@ -4,6 +4,7 @@ using BookingSystem.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BookingSystem.Infrastructure.Migrations
 {
     [DbContext(typeof(BookingSystemDbContext))]
-    partial class BookingSystemDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240306150205_SeedAirports")]
+    partial class SeedAirports
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -153,12 +155,6 @@ namespace BookingSystem.Infrastructure.Migrations
                             Id = 7,
                             City_Id = 7,
                             Name = "Haneda Airport"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            City_Id = 2,
-                            Name = "Madrid–Barajas Airport"
                         });
                 });
 
@@ -1695,15 +1691,15 @@ namespace BookingSystem.Infrastructure.Migrations
                         {
                             Id = "8d1f0bdc-f9e5-4856-a127-fb84281d56ad",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "2a9c0f00-bd65-4b6c-b8f2-1f72b327d10b",
+                            ConcurrencyStamp = "ca624f94-5426-475c-8ec7-eebe8b0a6de2",
                             Email = "guest@gmail.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             NormalizedEmail = "guest@gmail.com",
                             NormalizedUserName = "guest",
-                            PasswordHash = "AQAAAAEAACcQAAAAENiErA9BfS3ozCKLiIGtGMCkWVfx8/8hMEg3YpgC+tO3FNKW3YmpfNY7HRbdMlKjzA==",
+                            PasswordHash = "AQAAAAEAACcQAAAAECrqqvGJscL9m04TQkOzNs723ws0d5VsEICP2t4iVZGE0LfWvIhh7C3vRxDTrmcfPQ==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "eec2d664-6239-4759-87b5-195b55da672e",
+                            SecurityStamp = "46e756e9-63f0-4b5d-b65f-06ed863c571e",
                             TwoFactorEnabled = false,
                             UserName = "Guest"
                         },
@@ -1711,15 +1707,15 @@ namespace BookingSystem.Infrastructure.Migrations
                         {
                             Id = "c9019544-ec91-4248-bfc4-9d8a4f13430b",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "6379a8bc-0687-43b0-a734-527ff937a759",
+                            ConcurrencyStamp = "31d00b9b-f374-4e31-abbb-5d0e00b06b2e",
                             Email = "admin@gmail.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             NormalizedEmail = "admin@gmail.com",
                             NormalizedUserName = "administrator",
-                            PasswordHash = "AQAAAAEAACcQAAAAEPlqOXs/rx9w82aFGuh1Jp16kN7HoGGVisxnPuuhyZy61qTaeO1uk2AyqiysIwIaeg==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEAVd2IzQfnAr4avzfDQvjlH6j3i4SNtn7K6vrL/3WkBMLrFquvczeE4g2HCNseo0nw==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "5903ceff-9361-46a8-9ebc-92a9012211f7",
+                            SecurityStamp = "ce836b4f-71fb-4a4f-b0cd-d5281fad4362",
                             TwoFactorEnabled = false,
                             UserName = "Administrator"
                         });

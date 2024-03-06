@@ -113,7 +113,7 @@
             //Flights configuration
             builder.ApplyConfiguration(new FlightConfiguration());
             builder.ApplyConfiguration(new AirlineConfiguration());
-            //builder.ApplyConfiguration(new AirportConfiguration());
+            builder.ApplyConfiguration(new AirportConfiguration());
             builder.ApplyConfiguration(new FlightReservationConfiguration());
 
             //Roles configuration

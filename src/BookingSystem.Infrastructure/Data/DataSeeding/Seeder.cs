@@ -26,6 +26,7 @@
             SeedRooms();
             SeedHotels();
             SeedAirlines();
+            SeedAirports();
         }
 
         //Properties
@@ -223,8 +224,20 @@
 
         #endregion
 
-        //Methods
 
+        #region Airports
+        public Airport ParisAirport { get; set; } = null!;
+        public Airport MadridAirport { get; set; } = null!;
+        public Airport NewYorkAirport { get; set; } = null!;
+        public Airport IstanbulAirport { get; set; } = null!;
+        public Airport RomeAirport { get; set; } = null!;
+        public Airport SofiaAirport { get; set; } = null!;
+        public Airport TokyoAirport { get; set; } = null!;
+
+        #endregion
+
+       
+        //Methods
         private void SeedUsers()
         {
             var hasher = new PasswordHasher<IdentityUser>();
@@ -1518,6 +1531,57 @@
                 Name = "Ryanair",
                 ImageUrl = "https://logos-world.net/wp-content/uploads/2020/03/Ryanair-Logo-2013-present.jpg",
                 WebSiteUrl = "https://www.ryanair.com/"
+            };
+        }
+        private void SeedAirports()
+        {
+            ParisAirport = new Airport()
+            {
+                Id = 1,
+                Name = "Paris Charles de Gaulle Airport",
+                City_Id = 1
+            };
+
+            MadridAirport = new Airport()
+            {
+                Id = 2,
+                Name = "Madrid–Barajas Airport",
+                City_Id = 2
+            };
+
+            NewYorkAirport = new Airport()
+            {
+                Id = 3,
+                Name = "John F. Kennedy International Airport",
+                City_Id = 3
+            };
+
+            IstanbulAirport = new Airport()
+            {
+                Id = 4,
+                Name = "Istanbul International Airport",
+                City_Id = 4
+            };
+
+            RomeAirport = new Airport()
+            {
+                Id = 5,
+                Name = "Leonardo da Vinci–Fiumicino Airport",
+                City_Id = 5
+            };
+
+            SofiaAirport = new Airport()
+            {
+                Id = 6,
+                Name = "Sofia International Airport",
+                City_Id = 6
+            };
+
+            TokyoAirport = new Airport()
+            {
+                Id = 7,
+                Name = "Haneda Airport",
+                City_Id = 7
             };
         }
     }
