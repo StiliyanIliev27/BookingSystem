@@ -4,6 +4,7 @@ using BookingSystem.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BookingSystem.Infrastructure.Migrations
 {
     [DbContext(typeof(BookingSystemDbContext))]
-    partial class BookingSystemDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240306211258_SeededEightMoreLandmarks")]
+    partial class SeededEightMoreLandmarks
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -48,7 +50,7 @@ namespace BookingSystem.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Airlines", (string)null);
+                    b.ToTable("Airlines");
 
                     b.HasComment("Airline");
 
@@ -113,7 +115,7 @@ namespace BookingSystem.Infrastructure.Migrations
 
                     b.HasIndex("City_Id");
 
-                    b.ToTable("Airports", (string)null);
+                    b.ToTable("Airports");
 
                     b.HasComment("Airport");
 
@@ -220,7 +222,7 @@ namespace BookingSystem.Infrastructure.Migrations
 
                     b.HasIndex("DepartureAirport_Id");
 
-                    b.ToTable("Flights", (string)null);
+                    b.ToTable("Flights");
 
                     b.HasComment("Flight");
 
@@ -505,7 +507,7 @@ namespace BookingSystem.Infrastructure.Migrations
 
                     b.HasIndex("User_Id");
 
-                    b.ToTable("FlightsReservations", (string)null);
+                    b.ToTable("FlightsReservations");
 
                     b.HasComment("FlightReservations");
                 });
@@ -569,7 +571,7 @@ namespace BookingSystem.Infrastructure.Migrations
 
                     b.HasIndex("City_Id");
 
-                    b.ToTable("Hotels", (string)null);
+                    b.ToTable("Hotels");
 
                     b.HasComment("Hotel");
 
@@ -765,7 +767,7 @@ namespace BookingSystem.Infrastructure.Migrations
 
                     b.HasIndex("User_Id");
 
-                    b.ToTable("HotelsReservations", (string)null);
+                    b.ToTable("HotelsReservations");
 
                     b.HasComment("Hotel Reservation");
                 });
@@ -808,7 +810,7 @@ namespace BookingSystem.Infrastructure.Migrations
 
                     b.HasIndex("Hotel_Id");
 
-                    b.ToTable("Rooms", (string)null);
+                    b.ToTable("Rooms");
 
                     b.HasComment("Room");
 
@@ -1138,7 +1140,7 @@ namespace BookingSystem.Infrastructure.Migrations
 
                     b.HasIndex("City_Id");
 
-                    b.ToTable("Landmarks", (string)null);
+                    b.ToTable("Landmarks");
 
                     b.HasComment("Landmark");
 
@@ -1323,7 +1325,7 @@ namespace BookingSystem.Infrastructure.Migrations
 
                     b.HasIndex("Country_Id");
 
-                    b.ToTable("Cities", (string)null);
+                    b.ToTable("Cities");
 
                     b.HasComment("City");
 
@@ -1410,7 +1412,7 @@ namespace BookingSystem.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Continents", (string)null);
+                    b.ToTable("Continents");
 
                     b.HasComment("Continent");
 
@@ -1507,7 +1509,7 @@ namespace BookingSystem.Infrastructure.Migrations
 
                     b.HasIndex("Language_Id");
 
-                    b.ToTable("Countries", (string)null);
+                    b.ToTable("Countries");
 
                     b.HasComment("Country");
 
@@ -1783,7 +1785,7 @@ namespace BookingSystem.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Languages", (string)null);
+                    b.ToTable("Languages");
 
                     b.HasComment("Language");
 
@@ -1898,7 +1900,7 @@ namespace BookingSystem.Infrastructure.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Administrators", (string)null);
+                    b.ToTable("Administrators");
 
                     b.HasData(
                         new

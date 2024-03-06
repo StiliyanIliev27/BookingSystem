@@ -156,6 +156,18 @@
         public Landmark HagiaSophia { get; set; } = null!;
         public Landmark BasilicaCistern { get; set; } = null!;
 
+        //Rome
+        public Landmark Colosseum { get; set; } = null!;
+        public Landmark Pantheon { get; set; } = null!;
+
+        //Sofia
+        public Landmark StAlexanderNevskiCathedral { get; set; } = null!;
+        public Landmark CatedralDeSvetaNedelya { get; set; } = null!;
+
+        //Tokyo
+        public Landmark TokyoTower { get; set; } = null!;
+        public Landmark SensoJiTemple { get; set; } = null!;
+
         #endregion
 
 
@@ -272,6 +284,7 @@
 
         #endregion
 
+        
         //Methods
         private void SeedUsers()
         {
@@ -808,7 +821,16 @@
                 Population = 11_277_000,
                 Area = "105,4 km²",
                 Details = "Paris, the capital of France, is renowned for its romantic ambiance, iconic landmarks, and vibrant culture. Visitors flock to marvel at the Eiffel Tower, explore the world-class museums like the Louvre and Musée d'Orsay, and stroll along the charming streets of Montmartre or the picturesque banks of the Seine River. With its rich history, exquisite cuisine, and fashionable boutiques, Paris captivates travelers from around the world.",
-                Country_Id = 1
+                Country_Id = 1,
+                Landmarks = new HashSet<Landmark>()
+                {
+                    EiffelTower,
+                    LouvreMuseum
+                },
+                Airports = new HashSet<Airport>()
+                {
+                    ParisAirport
+                }
             };
 
             Madrid = new City()
@@ -817,7 +839,16 @@
                 Name = "Madrid",
                 Area = "8,028 km²",
                 Details = "Madrid, the capital of Spain, is a vibrant metropolis known for its lively atmosphere, rich history, and cultural treasures. Visitors can explore world-class art museums such as the Prado and Reina Sofía, wander through historic neighborhoods like the Barrio de las Letras, and indulge in delicious tapas at bustling markets like Mercado de San Miguel. With its beautiful parks, grand boulevards, and dynamic nightlife, Madrid offers a captivating blend of tradition and modernity for travelers to enjoy.",
-                Country_Id = 2
+                Country_Id = 2,
+                Landmarks = new HashSet<Landmark>()
+                {
+                    RoyalPalaceOfMadrid,
+                    PlazaMayor
+                },
+                Airports = new HashSet<Airport>() 
+                {
+                    MadridAirport
+                }
             };
 
             NewYork = new City()
@@ -827,7 +858,16 @@
                 Population = 19_034_000,
                 Area = "783,8 km²",
                 Details = "New York City, often referred to as the \"Big Apple,\" is a bustling metropolis known for its iconic skyline, diverse culture, and vibrant energy. Visitors can explore world-famous landmarks such as the Statue of Liberty, Times Square, and Central Park, or immerse themselves in the city's rich cultural scene by visiting museums like the Metropolitan Museum of Art or catching a Broadway show. With its endless array of dining options, shopping districts, and neighborhoods to explore, New York City offers an unforgettable experience for travelers from around the world.",
-                Country_Id = 3
+                Country_Id = 3,
+                Landmarks = new HashSet<Landmark>()
+                {
+                    CentralPark,
+                    EmpireStateBuilding
+                },
+                Airports = new HashSet<Airport>()
+                {
+                    NewYorkAirport
+                }
             };
 
             Istanbul = new City()
@@ -837,7 +877,16 @@
                 Population = 16_047_000,
                 Area = "5 461 km²",
                 Details = "Istanbul, the largest city in Turkey, is a mesmerizing blend of cultures, history, and modernity. It straddles two continents, Europe and Asia, and is known for its stunning architectural wonders such as the Hagia Sophia, Blue Mosque, and Topkapi Palace. Visitors can wander through the bustling streets of the Grand Bazaar, cruise along the Bosphorus, or savor delicious Turkish cuisine in traditional meyhanes (taverns). With its rich history as the former capital of the Byzantine and Ottoman Empires, Istanbul offers a unique and unforgettable experience for travelers.",
-                Country_Id = 4
+                Country_Id = 4,
+                Landmarks = new HashSet<Landmark>()
+                {
+                    HagiaSophia,
+                    BasilicaCistern
+                },
+                Airports = new HashSet<Airport>()
+                {
+                    IstanbulAirport
+                }
             };
 
             Rome = new City()
@@ -847,7 +896,16 @@
                 Population = 4_332_000,
                 Area = "1,285 km²",
                 Details = "Rome, the capital city of Italy, is a timeless destination steeped in history, art, and culture. Known as the \"Eternal City,\" Rome is home to iconic landmarks such as the Colosseum, Roman Forum, and Vatican City, which houses St. Peter's Basilica and the Sistine Chapel. Visitors can wander through cobblestone streets lined with ancient ruins, marvel at Renaissance masterpieces in museums and churches, and indulge in authentic Italian cuisine at trattorias and gelaterias. With its blend of ancient wonders and modern delights, Rome offers an unforgettable experience for travelers seeking to immerse themselves in the heart of Italy's rich heritage.",
-                Country_Id = 5
+                Country_Id = 5,
+                Landmarks = new HashSet<Landmark>()
+                {
+                    Colosseum,
+                    Pantheon
+                },
+                Airports = new HashSet<Airport>()
+                {
+                    RomeAirport
+                }
             };
 
             Sofia = new City()
@@ -857,7 +915,16 @@
                 Population = 1_288_000,
                 Area = "492 km²",
                 Details = "Sofia, the capital city of Bulgaria, is a dynamic metropolis with a rich history and vibrant culture. Visitors can explore its diverse architectural heritage, including ancient Roman ruins, Byzantine churches, and Ottoman mosques, alongside modern landmarks like the National Palace of Culture and the Alexander Nevsky Cathedral. The city also offers charming parks, bustling markets, and a burgeoning culinary scene, making it a fascinating destination for travelers looking to discover the unique blend of influences that shape Bulgaria's capital.",
-                Country_Id = 11
+                Country_Id = 11,
+                Landmarks = new HashSet<Landmark>()
+                {
+                    StAlexanderNevskiCathedral,
+                    CatedralDeSvetaNedelya
+                },
+                Airports = new HashSet<Airport>()
+                {
+                    SofiaAirport
+                }
             };
 
             Tokyo = new City()
@@ -867,7 +934,16 @@
                 Population = 37_115_035,
                 Area = "2 194 km²",
                 Details = "Tokyo, the capital of Japan, is a bustling metropolis where tradition meets innovation. Visitors can explore the city's iconic landmarks such as the historic Senso-ji Temple in Asakusa, the futuristic skyscrapers of Shinjuku, and the serene gardens of the Imperial Palace. With its vibrant neighborhoods, bustling street markets, and world-renowned cuisine ranging from sushi to ramen, Tokyo offers a captivating blend of old-world charm and modern excitement for travelers to experience and enjoy.",
-                Country_Id = 21
+                Country_Id = 21,
+                Landmarks = new HashSet<Landmark>()
+                {
+                    TokyoTower,
+                    SensoJiTemple
+                },
+                Airports = new HashSet<Airport>()
+                {
+                    TokyoAirport
+                }
             };
         }
         private void SeedLandmarks()
@@ -987,8 +1063,121 @@
                     "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/1b/54/bd/e5/hagia-sophia-museum-by.jpg?w=1400&h=-1&s=1"
                 }
             };
-
-        } //TODO...
+           
+            BasilicaCistern = new Landmark()
+            {
+                Id = 8,
+                Name = "Basilica Cistern",
+                Address = "Alemdar Mahallesi, Yerebatan Caddesi, No:1/3, Istanbul 34410 TÃ¼rkiye",
+                Details = "The Basilica Cistern, or Sunken Palace, in Istanbul's Sultanahmet district dates back to the 6th century. It's the largest surviving cistern from the Byzantine era, featuring over 330 marble and granite columns, including two famous Medusa heads. Recognizable from \"From Russia with Love,\" it's a must-visit spot along with Hagia Sophia and Topkapi Palace. Joining a tour can streamline your visit to these iconic Istanbul landmarks.",
+                City_Id = 4,
+                IsActive = true,
+                ImagesUrls = new string[]
+                {
+                    "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/0c/3a/2c/dd/istanbul-36h-basilica.jpg?w=1200&h=-1&s=1",
+                    "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/2b/8e/f2/93/caption.jpg?w=1200&h=-1&s=1",
+                    "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/2b/90/af/68/caption.jpg?w=1100&h=-1&s=1"
+                }
+            };
+           
+            Colosseum = new Landmark()
+            {
+                Id = 9,
+                Name = "Colosseum",
+                Address = "Piazza del Colosseo, 00184 Rome Italy",
+                Details = "The ancient Flavian Amphitheater was built by the Flavian emperors in 70 C.E. as a gift to the Roman people. As the largest Roman theater ever built, it was designed to house over 50,000 people, and had played host to gladiator games, plays and even public executions.",
+                City_Id = 5,
+                IsActive = true,
+                TicketPrice = 38.86m,
+                ImagesUrls = new string[]
+                {
+                    "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/15/f0/6b/18/gita-fuori-porta-avevo.jpg?w=1100&h=-1&s=1",
+                    "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/2b/8c/6f/3c/caption.jpg?w=1200&h=-1&s=1",
+                    "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/2b/89/a3/0a/caption.jpg?w=1200&h=-1&s=1"
+                }
+            };
+           
+            Pantheon = new Landmark()
+            {
+                Id = 10,
+                Name = "Pantheon",
+                Address = "Piazza della Rotonda, 00186 Rome Italy",
+                Details = "Dedicated to the seven planetary divinities and featuring an interior of gorgeous marble, the Pantheon is one of the most impressive monuments of Augustan Rome.",
+                City_Id = 5,
+                IsActive = true,
+                ImagesUrls = new string[]
+                {
+                    "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/1a/d3/d1/03/img-20200206-wa0082-largejpg.jpg?w=1200&h=-1&s=1",
+                    "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/1a/68/5f/59/panteon.jpg?w=1200&h=-1&s=1",
+                    "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/2b/87/e5/a6/caption.jpg?w=1200&h=-1&s=1"
+                }
+            };
+            
+            StAlexanderNevskiCathedral = new Landmark()
+            {
+                Id = 11,
+                Name = "St. Alexander Nevski Cathedral",
+                Address = "Sofia Center, pl.Sveti Aleksandar Nevski, 1000 Sofia",
+                Details = "Completed in 1912, St. Alexander Nevsky Patriarchal Cathedral Stauropigial Memorial-Church is an impressive landmark in Sofia. The church was built as a memorial to the 200,000 Russian soldiers who died in the Russo-Turkish Liberation War (1877-1878).",
+                City_Id = 6,
+                IsActive = true,
+                ImagesUrls = new string[]
+               {
+                    "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/15/cc/b5/f6/sofia-bei-nacht.jpg?w=1200&h=-1&s=1",
+                    "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/01/34/dc/06/alexander-nevski-church.jpg?w=600&h=-1&s=1",
+                    "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/2a/fd/08/f7/caption.jpg?w=1100&h=-1&s=1"
+               }
+            };
+           
+            CatedralDeSvetaNedelya = new Landmark()
+            {
+                Id = 12,
+                Name = "Catedral de Sveta-Nedelya",
+                Address = "pl.Sveta Nedelya, Sofia 1000 Bulgaria",
+                Details = "The Cathedral of Sveta-Nedelya, also known as the Cathedral of the Holy Virgin, is an Orthodox church located in the center of Sofia, the capital of Bulgaria. It was completed in 1867 in a neo-Byzantine style. The cathedral has witnessed significant historical events, including a bomb attack in 1925 by a communist group that resulted in numerous casualties. Today, it remains an important religious and tourist destination, showcasing impressive architecture and a rich cultural heritage.",
+                City_Id = 6,
+                IsActive = true,
+                ImagesUrls = new string[]
+               {
+                    "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/2a/fd/06/8f/caption.jpg?w=1100&h=-1&s=1",
+                    "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/2a/e3/68/be/catedral-de-sveta-nedelya.jpg?w=1200&h=-1&s=1",
+                    "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/2a/f2/56/32/caption.jpg?w=1100&h=-1&s=1"
+               }
+            };
+           
+            TokyoTower = new Landmark()
+            {
+                Id = 13,
+                Name = "Tokyo Tower",
+                Address = "4-chome 2-8, Shibakoen, Minato 105-0011 Tokyo Prefecture",
+                Details = "Tokyo Tower, built in 1958, is a communications and observation tower located in the Shiba-koen district of Minato, Tokyo, Japan. Standing at a height of 332.9 meters, it held the title of Japan's tallest tower until the construction of the Tokyo Sky Tree, which now surpasses it in height.",
+                City_Id = 7,
+                IsActive = true,
+                TicketPrice = 15.00m,
+                ImagesUrls = new string[]
+               {
+                    "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/0a/2a/41/27/photo0jpg.jpg?w=1200&h=-1&s=1",
+                    "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/2b/68/f8/1c/caption.jpg?w=1100&h=-1&s=1",
+                    "https://dynamic-media-cdn.tripadvisor.com/media/photo-s/00/1c/62/c7/the-harbor-from-tokyo.jpg?w=600&h=-1&s=1"
+               }
+            };
+           
+            SensoJiTemple = new Landmark()
+            {
+                Id = 14,
+                Name = "Senso-ji Temple",
+                Address = "2-3-1, Asakusa, Taito 111-0032 Tokyo Prefecture",
+                Details = "According to legend, two brothers kept trying to return a statue of Kannon, the goddess of mercy, to the Sumida River only to have it returned to them the next day. This temple located in Tokyo's Asakusa district was built to honor her.",
+                City_Id = 7,
+                IsActive = true,
+                ImagesUrls = new string[]
+               {
+                    "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/1a/3d/a5/07/caption.jpg?w=1200&h=-1&s=1",
+                    "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/2b/78/17/57/caption.jpg?w=1200&h=-1&s=1",
+                    "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/2b/78/17/56/caption.jpg?w=1200&h=-1&s=1"
+               }
+            };
+        } 
         private void SeedHotels()
         {
             //Paris

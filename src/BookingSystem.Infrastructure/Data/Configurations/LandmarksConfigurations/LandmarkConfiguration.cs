@@ -23,6 +23,14 @@
                     data.PlazaMayor,
                     data.CentralPark,
                     data.EmpireStateBuilding,
+                    data.HagiaSophia,
+                    data.BasilicaCistern,
+                    data.Colosseum,
+                    data.Pantheon,
+                    data.StAlexanderNevskiCathedral,
+                    data.CatedralDeSvetaNedelya,
+                    data.TokyoTower,
+                    data.SensoJiTemple
                 });
         }
     }
