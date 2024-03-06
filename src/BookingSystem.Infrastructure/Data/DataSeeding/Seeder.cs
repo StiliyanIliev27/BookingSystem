@@ -27,6 +27,7 @@
             SeedHotels();
             SeedAirlines();
             SeedAirports();
+            SeedFlights();
         }
 
         //Properties
@@ -242,7 +243,35 @@
 
         #endregion
 
-       
+
+        #region Flights
+        public Flight SofiaParis { get; set; } = null!;
+        public Flight SofiaIstanbul { get; set; } = null!;
+        public Flight SofiaMadrid { get; set; } = null!;
+        public Flight SofiaRome { get; set; } = null!;
+
+        public Flight ParisSofia { get; set; } = null!;
+        public Flight IstanbulSofia { get; set; } = null!;
+        public Flight MadridSofia { get; set; } = null!;
+        public Flight RomeSofia { get; set; } = null!;
+        
+        public Flight ParisIstanbul { get; set; } = null!;
+        public Flight ParisMadrid { get; set; } = null!;
+        public Flight ParisRome { get; set; } = null!;
+              
+        public Flight IstanbulParis { get; set; } = null!;
+        public Flight MadridParis { get; set; } = null!;
+        public Flight RomeParis { get; set; } = null!;
+
+
+        public Flight IstanbulMadrid { get; set; } = null!;
+        public Flight IstanbulRome { get; set; } = null!;
+
+        public Flight MadridIstanbul { get; set; } = null!;
+        public Flight RomeIstanbul { get; set; } = null!;
+
+        #endregion
+
         //Methods
         private void SeedUsers()
         {
@@ -1606,6 +1635,263 @@
                 Name = "Haneda Airport",
                 City_Id = 7
             };
+        }
+        private void SeedFlights()
+        {
+            SofiaParis = new Flight()
+            {
+                Id = 1,
+                Airline_Id = 4,
+                DepartureAirport_Id = 6,
+                ArrivalAirport_Id = 1,
+                DepartureTime = DateTime.ParseExact("18:15", "HH:mm", CultureInfo.CurrentCulture, DateTimeStyles.None),
+                ArrivalTime = DateTime.ParseExact("20:25", "HH:mm", CultureInfo.CurrentCulture, DateTimeStyles.None),
+                FlightDuration = 190,
+                CabinClass = Enums.CabinClass.Economy,
+                TicketPrice = 75m,
+                IsActive = true
+            };
+
+            SofiaIstanbul = new Flight()
+            {
+                Id = 2,
+                Airline_Id = 3,
+                DepartureAirport_Id = 6,
+                ArrivalAirport_Id = 4,
+                DepartureTime = DateTime.ParseExact("15:55", "HH:mm", CultureInfo.CurrentCulture, DateTimeStyles.None),
+                ArrivalTime = DateTime.ParseExact("18:25", "HH:mm", CultureInfo.CurrentCulture, DateTimeStyles.None),
+                FlightDuration = 90,
+                CabinClass = Enums.CabinClass.Economy,
+                TicketPrice = 131m,
+                IsActive = true
+            };
+
+            SofiaMadrid = new Flight()
+            {
+                Id = 3,
+                Airline_Id = 4,
+                DepartureAirport_Id = 6,
+                ArrivalAirport_Id = 2,
+                DepartureTime = DateTime.ParseExact("06:40", "HH:mm", CultureInfo.CurrentCulture, DateTimeStyles.None),
+                ArrivalTime = DateTime.ParseExact("09:35", "HH:mm", CultureInfo.CurrentCulture, DateTimeStyles.None),
+                FlightDuration = 235,
+                CabinClass = Enums.CabinClass.Economy,
+                TicketPrice = 91m,
+                IsActive = true
+            };
+
+            SofiaRome = new Flight()
+            {
+                Id = 4,
+                Airline_Id = 2,
+                DepartureAirport_Id = 6,
+                ArrivalAirport_Id = 5,
+                DepartureTime = DateTime.ParseExact("10:15", "HH:mm", CultureInfo.CurrentCulture, DateTimeStyles.None),
+                ArrivalTime = DateTime.ParseExact("11:05", "HH:mm", CultureInfo.CurrentCulture, DateTimeStyles.None),
+                FlightDuration = 110,
+                CabinClass = Enums.CabinClass.Economy,
+                TicketPrice = 99m,
+                IsActive = true
+            };
+
+            ParisSofia = new Flight()
+            {
+                Id = 5,
+                Airline_Id = 4,
+                DepartureAirport_Id = 1,
+                ArrivalAirport_Id = 6,
+                DepartureTime = DateTime.ParseExact("21:00", "HH:mm", CultureInfo.CurrentCulture, DateTimeStyles.None),
+                ArrivalTime = DateTime.ParseExact("00:50", "HH:mm", CultureInfo.CurrentCulture, DateTimeStyles.None),
+                FlightDuration = 170,
+                CabinClass = Enums.CabinClass.Economy,
+                TicketPrice = 75m,
+                IsActive = true
+            };
+
+            IstanbulSofia = new Flight()
+            {
+                Id = 6,
+                Airline_Id = 3,
+                DepartureAirport_Id = 4,
+                ArrivalAirport_Id = 6,
+                DepartureTime = DateTime.ParseExact("08:45", "HH:mm", CultureInfo.CurrentCulture, DateTimeStyles.None),
+                ArrivalTime = DateTime.ParseExact("09:00", "HH:mm", CultureInfo.CurrentCulture, DateTimeStyles.None),
+                FlightDuration = 75,
+                CabinClass = Enums.CabinClass.Economy,
+                TicketPrice = 131m,
+                IsActive = true
+            };
+
+            MadridSofia = new Flight()
+            {
+                Id = 7,
+                Airline_Id = 4,
+                DepartureAirport_Id = 2,
+                ArrivalAirport_Id = 6,
+                DepartureTime = DateTime.ParseExact("13:45", "HH:mm", CultureInfo.CurrentCulture, DateTimeStyles.None),
+                ArrivalTime = DateTime.ParseExact("18:10", "HH:mm", CultureInfo.CurrentCulture, DateTimeStyles.None),
+                FlightDuration = 205,
+                CabinClass = Enums.CabinClass.Economy,
+                TicketPrice = 91m,
+                IsActive = true
+            };
+
+            RomeSofia = new Flight()
+             {
+                 Id = 8,
+                 Airline_Id = 2,
+                 DepartureAirport_Id = 5,
+                 ArrivalAirport_Id = 6,
+                 DepartureTime = DateTime.ParseExact("14:45", "HH:mm", CultureInfo.CurrentCulture, DateTimeStyles.None),
+                 ArrivalTime = DateTime.ParseExact("17:40", "HH:mm", CultureInfo.CurrentCulture, DateTimeStyles.None),
+                 FlightDuration = 120,
+                 CabinClass = Enums.CabinClass.Economy,
+                 TicketPrice = 99m,
+                 IsActive = true
+             };
+
+
+            ParisIstanbul = new Flight()
+            {
+                Id = 9,
+                Airline_Id = 3,
+                DepartureAirport_Id = 1,
+                ArrivalAirport_Id = 4,
+                DepartureTime = DateTime.ParseExact("11:20", "HH:mm", CultureInfo.CurrentCulture, DateTimeStyles.None),
+                ArrivalTime = DateTime.ParseExact("16:55", "HH:mm", CultureInfo.CurrentCulture, DateTimeStyles.None),
+                FlightDuration = 210,
+                CabinClass = Enums.CabinClass.Economy,
+                TicketPrice = 116m,
+                IsActive = true
+            };
+
+            IstanbulParis = new Flight()
+            {
+                Id = 10,
+                Airline_Id = 3,
+                DepartureAirport_Id = 4,
+                ArrivalAirport_Id = 1,
+                DepartureTime = DateTime.ParseExact("15:35", "HH:mm", CultureInfo.CurrentCulture, DateTimeStyles.None),
+                ArrivalTime = DateTime.ParseExact("17:20", "HH:mm", CultureInfo.CurrentCulture, DateTimeStyles.None),
+                FlightDuration = 225,
+                CabinClass = Enums.CabinClass.Economy,
+                TicketPrice = 116m,
+                IsActive = true
+            };
+
+            ParisMadrid = new Flight()
+            {
+                Id = 11,
+                Airline_Id = 5,
+                DepartureAirport_Id = 1,
+                ArrivalAirport_Id = 2,
+                DepartureTime = DateTime.ParseExact("09:05", "HH:mm", CultureInfo.CurrentCulture, DateTimeStyles.None),
+                ArrivalTime = DateTime.ParseExact("11:15", "HH:mm", CultureInfo.CurrentCulture, DateTimeStyles.None),
+                FlightDuration = 130,
+                CabinClass = Enums.CabinClass.Economy,
+                TicketPrice = 65m,
+                IsActive = true
+            };
+
+            MadridParis = new Flight()
+            {
+                Id = 12,
+                Airline_Id = 5,
+                DepartureAirport_Id = 2,
+                ArrivalAirport_Id = 1,
+                DepartureTime = DateTime.ParseExact("14:55", "HH:mm", CultureInfo.CurrentCulture, DateTimeStyles.None),
+                ArrivalTime = DateTime.ParseExact("17:05", "HH:mm", CultureInfo.CurrentCulture, DateTimeStyles.None),
+                FlightDuration = 130,
+                CabinClass = Enums.CabinClass.Economy,
+                TicketPrice = 65m,
+                IsActive = true
+            };
+
+            ParisRome = new Flight()
+            {
+                Id = 13,
+                Airline_Id = 5,
+                DepartureAirport_Id = 1,
+                ArrivalAirport_Id = 5,
+                DepartureTime = DateTime.ParseExact("19:00", "HH:mm", CultureInfo.CurrentCulture, DateTimeStyles.None),
+                ArrivalTime = DateTime.ParseExact("21:00", "HH:mm", CultureInfo.CurrentCulture, DateTimeStyles.None),
+                FlightDuration = 120,
+                CabinClass = Enums.CabinClass.Economy,
+                TicketPrice = 45m,
+                IsActive = true
+            };
+
+            RomeParis = new Flight()
+            {
+                Id = 14,
+                Airline_Id = 5,
+                DepartureAirport_Id = 5,
+                ArrivalAirport_Id = 1,
+                DepartureTime = DateTime.ParseExact("06:30", "HH:mm", CultureInfo.CurrentCulture, DateTimeStyles.None),
+                ArrivalTime = DateTime.ParseExact("08:45", "HH:mm", CultureInfo.CurrentCulture, DateTimeStyles.None),
+                FlightDuration = 135,
+                CabinClass = Enums.CabinClass.Economy,
+                TicketPrice = 45m,
+                IsActive = true
+            };
+
+
+            IstanbulMadrid = new Flight()
+            {
+                Id = 15,
+                Airline_Id = 3,
+                DepartureAirport_Id = 4,
+                ArrivalAirport_Id = 2,
+                DepartureTime = DateTime.ParseExact("07:55", "HH:mm", CultureInfo.CurrentCulture, DateTimeStyles.None),
+                ArrivalTime = DateTime.ParseExact("10:20", "HH:mm", CultureInfo.CurrentCulture, DateTimeStyles.None),
+                FlightDuration = 265,
+                CabinClass = Enums.CabinClass.Economy,
+                TicketPrice = 250m,
+                IsActive = true
+            };
+
+            MadridIstanbul = new Flight()
+            {
+                Id = 16,
+                Airline_Id = 3,
+                DepartureAirport_Id = 2,
+                ArrivalAirport_Id = 4,
+                DepartureTime = DateTime.ParseExact("14:55", "HH:mm", CultureInfo.CurrentCulture, DateTimeStyles.None),
+                ArrivalTime = DateTime.ParseExact("21:10", "HH:mm", CultureInfo.CurrentCulture, DateTimeStyles.None),
+                FlightDuration = 255,
+                CabinClass = Enums.CabinClass.Economy,
+                TicketPrice = 250m,
+                IsActive = true
+            };
+           
+            IstanbulRome = new Flight()
+            {
+                Id = 17,
+                Airline_Id = 3,
+                DepartureAirport_Id = 4,
+                ArrivalAirport_Id = 5,
+                DepartureTime = DateTime.ParseExact("09:15", "HH:mm", CultureInfo.CurrentCulture, DateTimeStyles.None),
+                ArrivalTime = DateTime.ParseExact("09:55", "HH:mm", CultureInfo.CurrentCulture, DateTimeStyles.None),
+                FlightDuration = 140,
+                CabinClass = Enums.CabinClass.Economy,
+                TicketPrice = 150m,
+                IsActive = true
+            };
+           
+            RomeIstanbul = new Flight()
+            {
+                Id = 18,
+                Airline_Id = 3,
+                DepartureAirport_Id = 5,
+                ArrivalAirport_Id = 4,
+                DepartureTime = DateTime.ParseExact("20:00", "HH:mm", CultureInfo.CurrentCulture, DateTimeStyles.None),
+                ArrivalTime = DateTime.ParseExact("00:30", "HH:mm", CultureInfo.CurrentCulture, DateTimeStyles.None),
+                FlightDuration = 130,
+                CabinClass = Enums.CabinClass.Economy,
+                TicketPrice = 150m,
+                IsActive = true
+            };
+
         }
     }
 }
