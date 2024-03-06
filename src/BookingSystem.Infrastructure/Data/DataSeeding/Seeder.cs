@@ -138,6 +138,8 @@
 
 
         #region Landmarks
+
+        //Paris
         public Landmark EiffelTower { get; set; } = null!;
         public Landmark LouvreMuseum { get; set; } = null!;
 
@@ -148,7 +150,11 @@
         //New York
         public Landmark CentralPark { get; set; } = null!;
         public Landmark EmpireStateBuilding { get; set; } = null!;
-        
+
+        //Istanbul
+        public Landmark HagiaSophia { get; set; } = null!;
+        public Landmark BasilicaCistern { get; set; } = null!;
+
         #endregion
 
 
@@ -926,7 +932,7 @@
                 Name = "Empire State Building",
                 Address = "20 W 34th St., New York, NY 10001",
                 Details = "The Empire State Building is the World's Most Famous Building. It rises 1,454 ft from ground to antenna & features the only 360 degree open-air vantage point of Midtown. The 86th & 102nd Fl Observatories are open daily, see esbnyc.com for hours.",
-                City_Id = 4,
+                City_Id = 3,
                 TicketPrice = 47.91m,
                 IsActive = true,
                 ImagesUrls = new string[]
@@ -936,6 +942,23 @@
                     "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/19/f3/82/90/the-new-exhibits-at-esb.jpg?w=1200&h=-1&s=1"
                 }
             };
+
+            HagiaSophia = new Landmark()
+            {
+                Id = 7,
+                Name = "Hagia Sophia Mosque",
+                Address = "Sultan Ahmet, Ayasofya Meydanı No:1, Istanbul 34122 Türkiye",
+                Details = "This architectural marvel displays 30 million gold tiles throughout its interior, and a wide, flat dome which was a bold engineering feat at the time it was constructed in the 6th century.",
+                City_Id = 4,
+                IsActive = true,
+                ImagesUrls = new string[]
+                {
+                    "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/1b/54/be/42/hagia-sophia-museum-by.jpg?w=1400&h=-1&s=1",
+                    "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/07/09/79/25/church-ayasofya.jpg?w=900&h=-1&s=1",
+                    "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/1b/54/bd/e5/hagia-sophia-museum-by.jpg?w=1400&h=-1&s=1"
+                }
+            };
+
         } //TODO...
         private void SeedHotels()
         {
