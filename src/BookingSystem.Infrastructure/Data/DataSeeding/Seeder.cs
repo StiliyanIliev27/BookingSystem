@@ -1,5 +1,6 @@
 ﻿namespace BookingSystem.Infrastructure.Data.DataSeeding
 {
+    using BookingSystem.Infrastructure.Data.Models.Flights;
     using BookingSystem.Infrastructure.Data.Models.Hotels;
     using BookingSystem.Infrastructure.Data.Models.Landmarks;
     using BookingSystem.Infrastructure.Data.Models.Location;
@@ -24,6 +25,7 @@
             SeedLandmarks();
             SeedRooms();
             SeedHotels();
+            SeedAirlines();
         }
 
         //Properties
@@ -208,6 +210,16 @@
         public Room EurostarsSofiaRoomDouble { get; set; } = null!;
         public Room EurostarsSofiaRoomTriple { get; set; } = null!;
         public Room EurostarsSofiaRoomApartment { get; set; } = null!;
+
+        #endregion
+
+
+        #region Airlines
+        public Airline Lufthansa { get; set; } = null!;
+        public Airline BulgariaAir { get; set; } = null!;
+        public Airline TurkishAirlines { get; set; } = null!;
+        public Airline WizzAir { get; set; } = null!;
+        public Airline Ryanair { get; set; } = null!;
 
         #endregion
 
@@ -1466,5 +1478,47 @@
                 IsActive = true
             };
         }      
+        private void SeedAirlines()
+        {
+            Lufthansa = new Airline()
+            {
+                Id = 1,
+                Name = "Lufthansa",
+                ImageUrl = "https://upload.wikimedia.org/wikipedia/commons/thumb/8/82/Lufthansa_Logo_%28Crane%29.svg/2052px-Lufthansa_Logo_%28Crane%29.svg.png",
+                WebSiteUrl = "https://www.lufthansa.com/"
+            };
+
+            BulgariaAir = new Airline()
+            {
+                Id = 2,
+                Name = "Bulgaria Air",
+                ImageUrl = "https://upload.wikimedia.org/wikipedia/commons/thumb/1/18/Bulgaria_Air_logo.svg/1280px-Bulgaria_Air_logo.svg.png",
+                WebSiteUrl = "https://www.air.bg/bg"
+            };
+
+            TurkishAirlines = new Airline()
+            {
+                Id = 3,
+                Name = "Turkish Airlines",
+                ImageUrl = "https://upload.wikimedia.org/wikipedia/commons/thumb/0/00/Turkish_Airlines_logo_2019_compact.svg/2560px-Turkish_Airlines_logo_2019_compact.svg.png",
+                WebSiteUrl = "https://www.turkishairlines.com/"
+            };
+
+            WizzAir = new Airline()
+            {
+                Id = 4,
+                Name = "Wizz Air",
+                ImageUrl = "https://1000logos.net/wp-content/uploads/2020/04/Wizz-Air-logo.jpg",
+                WebSiteUrl = "https://wizzair.com/"
+            };
+
+            Ryanair = new Airline()
+            {
+                Id = 5,
+                Name = "Ryanair",
+                ImageUrl = "https://logos-world.net/wp-content/uploads/2020/03/Ryanair-Logo-2013-present.jpg",
+                WebSiteUrl = "https://www.ryanair.com/"
+            };
+        }
     }
 }
