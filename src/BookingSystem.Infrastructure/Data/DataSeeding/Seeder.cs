@@ -830,6 +830,12 @@
                 Airports = new HashSet<Airport>()
                 {
                     ParisAirport
+                },
+                Hotels = new HashSet<Hotel>()
+                {
+                    IbisParis,
+                    SaintMarcel,
+                    KraftHotel
                 }
             };
 
@@ -848,6 +854,12 @@
                 Airports = new HashSet<Airport>() 
                 {
                     MadridAirport
+                },
+                Hotels = new HashSet<Hotel>()
+                {
+                    PestanaPlaza,
+                    CataloniaPuerta,
+                    HostalCentralPalace
                 }
             };
 
@@ -867,6 +879,12 @@
                 Airports = new HashSet<Airport>()
                 {
                     NewYorkAirport
+                },
+                Hotels = new HashSet<Hotel>()
+                {
+                    PrinceKitano,
+                    HiltonGarden,
+                    TimesSquareHotel
                 }
             };
 
@@ -924,6 +942,11 @@
                 Airports = new HashSet<Airport>()
                 {
                     SofiaAirport
+                },
+                Hotels = new HashSet<Hotel>()
+                {
+                    HotelZOO,
+                    EurostarsSofia
                 }
             };
 

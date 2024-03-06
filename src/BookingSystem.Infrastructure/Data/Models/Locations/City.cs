@@ -1,6 +1,7 @@
 ﻿namespace BookingSystem.Infrastructure.Data.Models.Location
 {
     using BookingSystem.Infrastructure.Data.Models.Flights;
+    using BookingSystem.Infrastructure.Data.Models.Hotels;
     using BookingSystem.Infrastructure.Data.Models.Landmarks;
     using Microsoft.EntityFrameworkCore;
     using System.ComponentModel.DataAnnotations;
@@ -69,5 +70,8 @@
 
         [NotMapped]
         public ICollection<Airport> Airports { get; set; } = new HashSet<Airport>();
+       
+        [NotMapped]
+        public ICollection<Hotel> Hotels { get; set; } = new HashSet<Hotel>();
     }
 }
