@@ -4,6 +4,7 @@ using BookingSystem.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BookingSystem.Infrastructure.Migrations
 {
     [DbContext(typeof(BookingSystemDbContext))]
-    partial class BookingSystemDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240307145059_SeedPremierHotelRooms")]
+    partial class SeedPremierHotelRooms
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -793,10 +795,6 @@ namespace BookingSystem.Infrastructure.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<int>("Count")
-                        .HasColumnType("int")
-                        .HasComment("Room's Count");
-
                     b.Property<int>("Hotel_Id")
                         .HasColumnType("int")
                         .HasComment("Room's Hotel's Identifier");
@@ -834,7 +832,6 @@ namespace BookingSystem.Infrastructure.Migrations
                         new
                         {
                             Id = 1,
-                            Count = 0,
                             Hotel_Id = 1,
                             IsActive = true,
                             IsReserved = false,
@@ -845,7 +842,6 @@ namespace BookingSystem.Infrastructure.Migrations
                         new
                         {
                             Id = 2,
-                            Count = 0,
                             Hotel_Id = 1,
                             IsActive = true,
                             IsReserved = false,
@@ -856,7 +852,6 @@ namespace BookingSystem.Infrastructure.Migrations
                         new
                         {
                             Id = 3,
-                            Count = 0,
                             Hotel_Id = 1,
                             IsActive = true,
                             IsReserved = false,
@@ -867,7 +862,6 @@ namespace BookingSystem.Infrastructure.Migrations
                         new
                         {
                             Id = 4,
-                            Count = 0,
                             Hotel_Id = 1,
                             IsActive = true,
                             IsReserved = false,
@@ -878,7 +872,6 @@ namespace BookingSystem.Infrastructure.Migrations
                         new
                         {
                             Id = 5,
-                            Count = 0,
                             Hotel_Id = 3,
                             IsActive = true,
                             IsReserved = false,
@@ -889,7 +882,6 @@ namespace BookingSystem.Infrastructure.Migrations
                         new
                         {
                             Id = 6,
-                            Count = 0,
                             Hotel_Id = 3,
                             IsActive = true,
                             IsReserved = false,
@@ -900,7 +892,6 @@ namespace BookingSystem.Infrastructure.Migrations
                         new
                         {
                             Id = 7,
-                            Count = 0,
                             Hotel_Id = 3,
                             IsActive = true,
                             IsReserved = false,
@@ -911,7 +902,6 @@ namespace BookingSystem.Infrastructure.Migrations
                         new
                         {
                             Id = 8,
-                            Count = 0,
                             Hotel_Id = 3,
                             IsActive = true,
                             IsReserved = false,
@@ -922,7 +912,6 @@ namespace BookingSystem.Infrastructure.Migrations
                         new
                         {
                             Id = 9,
-                            Count = 0,
                             Hotel_Id = 4,
                             IsActive = true,
                             IsReserved = false,
@@ -933,7 +922,6 @@ namespace BookingSystem.Infrastructure.Migrations
                         new
                         {
                             Id = 10,
-                            Count = 0,
                             Hotel_Id = 4,
                             IsActive = true,
                             IsReserved = false,
@@ -944,7 +932,6 @@ namespace BookingSystem.Infrastructure.Migrations
                         new
                         {
                             Id = 11,
-                            Count = 0,
                             Hotel_Id = 4,
                             IsActive = true,
                             IsReserved = false,
@@ -955,7 +942,6 @@ namespace BookingSystem.Infrastructure.Migrations
                         new
                         {
                             Id = 12,
-                            Count = 0,
                             Hotel_Id = 5,
                             IsActive = true,
                             IsReserved = false,
@@ -966,7 +952,6 @@ namespace BookingSystem.Infrastructure.Migrations
                         new
                         {
                             Id = 13,
-                            Count = 0,
                             Hotel_Id = 5,
                             IsActive = true,
                             IsReserved = false,
@@ -977,7 +962,6 @@ namespace BookingSystem.Infrastructure.Migrations
                         new
                         {
                             Id = 14,
-                            Count = 0,
                             Hotel_Id = 6,
                             IsActive = true,
                             IsReserved = false,
@@ -988,7 +972,6 @@ namespace BookingSystem.Infrastructure.Migrations
                         new
                         {
                             Id = 15,
-                            Count = 0,
                             Hotel_Id = 9,
                             IsActive = true,
                             IsReserved = false,
@@ -999,7 +982,6 @@ namespace BookingSystem.Infrastructure.Migrations
                         new
                         {
                             Id = 16,
-                            Count = 0,
                             Hotel_Id = 9,
                             IsActive = true,
                             IsReserved = false,
@@ -1010,7 +992,6 @@ namespace BookingSystem.Infrastructure.Migrations
                         new
                         {
                             Id = 17,
-                            Count = 0,
                             Hotel_Id = 8,
                             IsActive = true,
                             IsReserved = false,
@@ -1021,7 +1002,6 @@ namespace BookingSystem.Infrastructure.Migrations
                         new
                         {
                             Id = 18,
-                            Count = 0,
                             Hotel_Id = 8,
                             IsActive = true,
                             IsReserved = false,
@@ -1032,7 +1012,6 @@ namespace BookingSystem.Infrastructure.Migrations
                         new
                         {
                             Id = 19,
-                            Count = 0,
                             Hotel_Id = 8,
                             IsActive = true,
                             IsReserved = false,
@@ -1043,7 +1022,6 @@ namespace BookingSystem.Infrastructure.Migrations
                         new
                         {
                             Id = 20,
-                            Count = 0,
                             Hotel_Id = 7,
                             IsActive = true,
                             IsReserved = false,
@@ -1054,7 +1032,6 @@ namespace BookingSystem.Infrastructure.Migrations
                         new
                         {
                             Id = 21,
-                            Count = 0,
                             Hotel_Id = 7,
                             IsActive = true,
                             IsReserved = false,
@@ -1065,7 +1042,6 @@ namespace BookingSystem.Infrastructure.Migrations
                         new
                         {
                             Id = 22,
-                            Count = 0,
                             Hotel_Id = 10,
                             IsActive = true,
                             IsReserved = false,
@@ -1076,7 +1052,6 @@ namespace BookingSystem.Infrastructure.Migrations
                         new
                         {
                             Id = 23,
-                            Count = 0,
                             Hotel_Id = 10,
                             IsActive = true,
                             IsReserved = false,
@@ -1087,7 +1062,6 @@ namespace BookingSystem.Infrastructure.Migrations
                         new
                         {
                             Id = 24,
-                            Count = 0,
                             Hotel_Id = 10,
                             IsActive = true,
                             IsReserved = false,
@@ -1098,7 +1072,6 @@ namespace BookingSystem.Infrastructure.Migrations
                         new
                         {
                             Id = 25,
-                            Count = 0,
                             Hotel_Id = 11,
                             IsActive = true,
                             IsReserved = false,
@@ -1109,7 +1082,6 @@ namespace BookingSystem.Infrastructure.Migrations
                         new
                         {
                             Id = 26,
-                            Count = 0,
                             Hotel_Id = 11,
                             IsActive = true,
                             IsReserved = false,
@@ -1120,7 +1092,6 @@ namespace BookingSystem.Infrastructure.Migrations
                         new
                         {
                             Id = 27,
-                            Count = 0,
                             Hotel_Id = 11,
                             IsActive = true,
                             IsReserved = false,
@@ -1131,7 +1102,6 @@ namespace BookingSystem.Infrastructure.Migrations
                         new
                         {
                             Id = 28,
-                            Count = 0,
                             Hotel_Id = 11,
                             IsActive = true,
                             IsReserved = false,
@@ -1142,7 +1112,6 @@ namespace BookingSystem.Infrastructure.Migrations
                         new
                         {
                             Id = 29,
-                            Count = 0,
                             Hotel_Id = 12,
                             IsActive = true,
                             IsReserved = false,
@@ -1153,7 +1122,6 @@ namespace BookingSystem.Infrastructure.Migrations
                         new
                         {
                             Id = 30,
-                            Count = 0,
                             Hotel_Id = 12,
                             IsActive = true,
                             IsReserved = false,
@@ -1164,7 +1132,6 @@ namespace BookingSystem.Infrastructure.Migrations
                         new
                         {
                             Id = 31,
-                            Count = 0,
                             Hotel_Id = 12,
                             IsActive = true,
                             IsReserved = false,
@@ -2108,15 +2075,15 @@ namespace BookingSystem.Infrastructure.Migrations
                         {
                             Id = "8d1f0bdc-f9e5-4856-a127-fb84281d56ad",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "7f3a396c-e878-4094-b4be-4dc1494a7431",
+                            ConcurrencyStamp = "b51362bd-12ad-4a4a-912d-d5dbac7f71b5",
                             Email = "guest@gmail.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             NormalizedEmail = "guest@gmail.com",
                             NormalizedUserName = "guest",
-                            PasswordHash = "AQAAAAEAACcQAAAAECtabNFgEt0k0vNOEoWjTUGGo6EhSwrmx8/3EQM+R5JWTUrIcE08B3qrwOS3sjOTeA==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEOpEO4cRZ5g0NPdfcYeEl+6/PjfkAECc+cHERgp/9U98GCIQ5tS90TwtxIR+KW7eKw==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "3dceb0fd-95ca-405d-bfa8-ca702dedd891",
+                            SecurityStamp = "268b44f4-6b5b-4b36-a52e-59f3062f3960",
                             TwoFactorEnabled = false,
                             UserName = "Guest"
                         },
@@ -2124,15 +2091,15 @@ namespace BookingSystem.Infrastructure.Migrations
                         {
                             Id = "c9019544-ec91-4248-bfc4-9d8a4f13430b",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "1ea23174-2662-43ff-8832-fcb7fc942bd7",
+                            ConcurrencyStamp = "36dcd6b3-dff2-433f-b72e-9e2191b0c5a3",
                             Email = "admin@gmail.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             NormalizedEmail = "admin@gmail.com",
                             NormalizedUserName = "administrator",
-                            PasswordHash = "AQAAAAEAACcQAAAAEIaj0azliW//mszpdrGwnBDPomDsrKO3gPcRSxCe73EUpr9ApAulHirPXc8h4n0xTw==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEHYg4SJzqty2pwk/EeRv0yj8HdmKkONhp4Bcc7kNPi49FMZbTkeP1IJ//85OcFvlJQ==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "8cbd94e4-1d45-4a7b-879b-107ada252ebc",
+                            SecurityStamp = "f61204d6-4519-407f-a1dc-72dd44c0c348",
                             TwoFactorEnabled = false,
                             UserName = "Administrator"
                         });

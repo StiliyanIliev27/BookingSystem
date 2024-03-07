@@ -25,8 +25,5 @@
         [MaxLength(NameMaxLength)]
         [Comment("Continent's Name")]
         public string Name { get; set; } = null!;
-
-        [NotMapped]
-        public ICollection<Country> Countries { get; set; } = new HashSet<Country>();
     }
 }

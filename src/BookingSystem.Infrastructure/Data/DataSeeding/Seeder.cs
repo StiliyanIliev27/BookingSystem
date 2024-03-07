@@ -8,7 +8,6 @@
     using Microsoft.AspNetCore.Identity;
     using System.Globalization;
     using static BookingSystem.Infrastructure.Data.Constants.DataConstants.Hotel;
-
     internal class Seeder
     {
         /// <summary>
@@ -172,25 +171,36 @@
 
 
         #region Hotels
+
+        //Paris
         public Hotel IbisParis { get; set; } = null!;
         public Hotel SaintMarcel { get; set; } = null!;
         public Hotel KraftHotel { get; set; } = null!;
 
+        //Madrid
         public Hotel PestanaPlaza { get; set; } = null!;
         public Hotel CataloniaPuerta { get; set; } = null!;
         public Hotel HostalCentralPalace { get; set; } = null!;
 
+        //New York
         public Hotel PrinceKitano { get; set; } = null!;
         public Hotel HiltonGarden { get; set; } = null!;
         public Hotel TimesSquareHotel { get; set; } = null!;
         
+        //Sofia
         public Hotel HotelZOO { get; set; } = null!;
-        public Hotel EurostarsSofia { get; set; } = null!;
-       
+        public Hotel EurostarsSofia { get; set; } = null!;      
+        public Hotel PremierSofia { get; set; } = null!;
+
+        //Istanbul
+
+        //Tokyo
+
         #endregion
 
 
         #region Rooms
+
 
         public Room IbisParisRoomSingle { get; set; } = null!;
         public Room IbisParisRoomDouble { get; set; } = null!;
@@ -230,6 +240,10 @@
         public Room EurostarsSofiaRoomDouble { get; set; } = null!;
         public Room EurostarsSofiaRoomTriple { get; set; } = null!;
         public Room EurostarsSofiaRoomApartment { get; set; } = null!;
+
+        public Room PremierSofiaRoomSingle { get; set; } = null!;
+        public Room PremierSofiaRoomDouble { get; set; } = null!;
+        public Room PremierSofiaRoomTriple { get; set; } = null!;
 
         #endregion
 
@@ -435,47 +449,25 @@
             Asia = new Continent()
             {
                 Id = 1,
-                Name = "Asia",
-                Countries = new Country[]
-                {
-                    Turkey,
-                    Russia,
-                    China, 
-                    India,
-                    Japan,
-                    UnitedArabEmirates
-                }
+                Name = "Asia",                
             };
 
             Africa = new Continent()
             {
                 Id = 2,
                 Name = "Africa",
-                Countries = new Country[]
-                {
-                    Egypt
-                }
             };
 
             NorthAmerica = new Continent()
             {
                 Id = 3,
                 Name = "NorthAmerica",
-                Countries = new Country[]
-                {
-                    UnitedStates,
-                    Mexico,
-                }
             };
 
             SouthAmerica = new Continent()
             {
                 Id = 4,
                 Name = "SouthAmerica",
-                Countries = new Country[]
-                {
-                    Brazil
-                }
             };
 
             Antarctica = new Continent()
@@ -487,20 +479,7 @@
             Europe = new Continent()
             {
                 Id = 6,
-                Name = "Europe",
-                Countries = new Country[]
-                {
-                    France,
-                    Spain,
-                    Italy,
-                    England,
-                    Germany,
-                    Austria,
-                    Bulgaria,
-                    Serbia,
-                    Hungary, 
-                    Romania
-                }
+                Name = "Europe",                
             };
 
             Australia = new Continent()
@@ -522,10 +501,6 @@
                 CurrencyCode = "EUR",
                 FlagImageUrl = "https://upload.wikimedia.org/wikipedia/en/thumb/c/c3/Flag_of_France.svg/800px-Flag_of_France.svg.png",
                 Language_Id = 12,
-                Cities = new City[]
-                {
-                    Paris
-                }
             };
 
             Spain = new Country()
@@ -538,11 +513,7 @@
                 Details = "Spain, situated in southwestern Europe, is celebrated for its vibrant culture, stunning architecture, and lively festivals. The capital, Madrid, is famous for its art museums like the Prado and Reina Sofía, while Barcelona captivates with its unique blend of Catalan identity, exemplified by architectural masterpieces like the Sagrada Família and Park Güell designed by Antoni Gaudí. Spain's rich history is evident in its numerous UNESCO World Heritage Sites, including the Alhambra in Granada and the historic city of Toledo. Its culinary scene is diverse and flavorful, with tapas and paella being among its most iconic dishes. Additionally, Spain is known for its passion for soccer, with clubs like FC Barcelona and Real Madrid enjoying worldwide recognition.",
                 CurrencyCode = "EUR",
                 FlagImageUrl = "https://cdn.britannica.com/36/4336-050-056AC114/Flag-Spain.jpg",
-                Language_Id = 2,
-                Cities = new City[]
-                {
-                    Madrid
-                }
+                Language_Id = 2
             };
 
             UnitedStates = new Country()
@@ -555,11 +526,7 @@
                 Details = "The United States, located in North America, is the world's third-largest country by land area and population. It is a diverse nation, known for its cultural melting pot and vast landscapes, ranging from the bustling metropolises of New York City and Los Angeles to the stunning natural wonders of the Grand Canyon and Yellowstone National Park. The U.S. is a global economic powerhouse, with a highly developed economy driven by innovation, technology, and entrepreneurship. It has a rich history shaped by diverse immigrant communities, pivotal events such as the American Revolution and Civil Rights Movement, and iconic figures like Abraham Lincoln and Martin Luther King Jr. The country's political system is characterized by a federal republic with a strong emphasis on individual freedoms and democratic principles.",
                 CurrencyCode = "USD",
                 FlagImageUrl = "https://cdn.britannica.com/33/4833-004-828A9A84/Flag-United-States-of-America.jpg",
-                Language_Id = 3,
-                Cities = new City[]
-                {
-                    NewYork
-                }
+                Language_Id = 3
             };
 
             Turkey = new Country()
@@ -572,11 +539,7 @@
                 Details = "Turkey, situated at the crossroads of Europe and Asia, boasts a rich historical and cultural heritage. Its largest city, Istanbul, straddles two continents and is famous for landmarks such as the Hagia Sophia and the Blue Mosque, reflecting its Byzantine and Ottoman influences. Turkey's diverse landscapes range from the Mediterranean coastline to the rugged mountains of Eastern Anatolia. The country is known for its cuisine, which includes dishes like kebabs, baklava, and Turkish delight. Modern Turkey is a secular republic with a parliamentary democracy, though its political landscape has experienced periods of turbulence. It plays a significant role in regional geopolitics, serving as a bridge between Europe and the Middle East.",
                 CurrencyCode = "TRL",
                 FlagImageUrl = "https://cdn.britannica.com/82/4782-004-4119489D/Flag-Turkey.jpg",
-                Language_Id = 13,
-                Cities = new City[]
-                {
-                    Istanbul
-                }
+                Language_Id = 13
             };
 
             Italy = new Country()
@@ -805,11 +768,7 @@
                 Details = "Japan, an island nation located in East Asia, is known for its unique blend of ancient traditions and cutting-edge modernity. Its capital, Tokyo, is a bustling metropolis with towering skyscrapers, high-tech innovations, and vibrant street life. Japan's cultural heritage is rich and diverse, with landmarks such as Kyoto's temples and gardens, Hiroshima's Peace Memorial Park, and the iconic Mount Fuji symbolizing its spiritual and historical significance. Japanese cuisine, including sushi, tempura, and ramen, is celebrated worldwide for its freshness, quality, and meticulous preparation. The country is renowned for its contributions to technology, manufacturing, and pop culture, with brands like Sony, Toyota, and Nintendo shaping global trends. Japan's society is characterized by a strong sense of community, respect for tradition, and emphasis on harmony and order. Despite its densely populated cities, Japan boasts serene natural landscapes, including cherry blossom forests, hot springs, and scenic coastal regions. Overall, Japan offers visitors a captivating blend of tradition and innovation, making it a fascinating destination for exploration and discovery.",
                 CurrencyCode = "JPY",
                 FlagImageUrl = "https://upload.wikimedia.org/wikipedia/en/thumb/9/9e/Flag_of_Japan.svg/1200px-Flag_of_Japan.svg.png",
-                Language_Id = 11,
-                Cities = new City[]
-                {
-                    Tokyo
-                }
+                Language_Id = 11
             };
         }
         private void SeedCities()
@@ -821,22 +780,7 @@
                 Population = 11_277_000,
                 Area = "105,4 km²",
                 Details = "Paris, the capital of France, is renowned for its romantic ambiance, iconic landmarks, and vibrant culture. Visitors flock to marvel at the Eiffel Tower, explore the world-class museums like the Louvre and Musée d'Orsay, and stroll along the charming streets of Montmartre or the picturesque banks of the Seine River. With its rich history, exquisite cuisine, and fashionable boutiques, Paris captivates travelers from around the world.",
-                Country_Id = 1,
-                Landmarks = new HashSet<Landmark>()
-                {
-                    EiffelTower,
-                    LouvreMuseum
-                },
-                Airports = new HashSet<Airport>()
-                {
-                    ParisAirport
-                },
-                Hotels = new HashSet<Hotel>()
-                {
-                    IbisParis,
-                    SaintMarcel,
-                    KraftHotel
-                }
+                Country_Id = 1
             };
 
             Madrid = new City()
@@ -845,22 +789,7 @@
                 Name = "Madrid",
                 Area = "8,028 km²",
                 Details = "Madrid, the capital of Spain, is a vibrant metropolis known for its lively atmosphere, rich history, and cultural treasures. Visitors can explore world-class art museums such as the Prado and Reina Sofía, wander through historic neighborhoods like the Barrio de las Letras, and indulge in delicious tapas at bustling markets like Mercado de San Miguel. With its beautiful parks, grand boulevards, and dynamic nightlife, Madrid offers a captivating blend of tradition and modernity for travelers to enjoy.",
-                Country_Id = 2,
-                Landmarks = new HashSet<Landmark>()
-                {
-                    RoyalPalaceOfMadrid,
-                    PlazaMayor
-                },
-                Airports = new HashSet<Airport>() 
-                {
-                    MadridAirport
-                },
-                Hotels = new HashSet<Hotel>()
-                {
-                    PestanaPlaza,
-                    CataloniaPuerta,
-                    HostalCentralPalace
-                }
+                Country_Id = 2          
             };
 
             NewYork = new City()
@@ -870,22 +799,7 @@
                 Population = 19_034_000,
                 Area = "783,8 km²",
                 Details = "New York City, often referred to as the \"Big Apple,\" is a bustling metropolis known for its iconic skyline, diverse culture, and vibrant energy. Visitors can explore world-famous landmarks such as the Statue of Liberty, Times Square, and Central Park, or immerse themselves in the city's rich cultural scene by visiting museums like the Metropolitan Museum of Art or catching a Broadway show. With its endless array of dining options, shopping districts, and neighborhoods to explore, New York City offers an unforgettable experience for travelers from around the world.",
-                Country_Id = 3,
-                Landmarks = new HashSet<Landmark>()
-                {
-                    CentralPark,
-                    EmpireStateBuilding
-                },
-                Airports = new HashSet<Airport>()
-                {
-                    NewYorkAirport
-                },
-                Hotels = new HashSet<Hotel>()
-                {
-                    PrinceKitano,
-                    HiltonGarden,
-                    TimesSquareHotel
-                }
+                Country_Id = 3
             };
 
             Istanbul = new City()
@@ -895,16 +809,7 @@
                 Population = 16_047_000,
                 Area = "5 461 km²",
                 Details = "Istanbul, the largest city in Turkey, is a mesmerizing blend of cultures, history, and modernity. It straddles two continents, Europe and Asia, and is known for its stunning architectural wonders such as the Hagia Sophia, Blue Mosque, and Topkapi Palace. Visitors can wander through the bustling streets of the Grand Bazaar, cruise along the Bosphorus, or savor delicious Turkish cuisine in traditional meyhanes (taverns). With its rich history as the former capital of the Byzantine and Ottoman Empires, Istanbul offers a unique and unforgettable experience for travelers.",
-                Country_Id = 4,
-                Landmarks = new HashSet<Landmark>()
-                {
-                    HagiaSophia,
-                    BasilicaCistern
-                },
-                Airports = new HashSet<Airport>()
-                {
-                    IstanbulAirport
-                }
+                Country_Id = 4
             };
 
             Rome = new City()
@@ -914,16 +819,7 @@
                 Population = 4_332_000,
                 Area = "1,285 km²",
                 Details = "Rome, the capital city of Italy, is a timeless destination steeped in history, art, and culture. Known as the \"Eternal City,\" Rome is home to iconic landmarks such as the Colosseum, Roman Forum, and Vatican City, which houses St. Peter's Basilica and the Sistine Chapel. Visitors can wander through cobblestone streets lined with ancient ruins, marvel at Renaissance masterpieces in museums and churches, and indulge in authentic Italian cuisine at trattorias and gelaterias. With its blend of ancient wonders and modern delights, Rome offers an unforgettable experience for travelers seeking to immerse themselves in the heart of Italy's rich heritage.",
-                Country_Id = 5,
-                Landmarks = new HashSet<Landmark>()
-                {
-                    Colosseum,
-                    Pantheon
-                },
-                Airports = new HashSet<Airport>()
-                {
-                    RomeAirport
-                }
+                Country_Id = 5
             };
 
             Sofia = new City()
@@ -933,21 +829,7 @@
                 Population = 1_288_000,
                 Area = "492 km²",
                 Details = "Sofia, the capital city of Bulgaria, is a dynamic metropolis with a rich history and vibrant culture. Visitors can explore its diverse architectural heritage, including ancient Roman ruins, Byzantine churches, and Ottoman mosques, alongside modern landmarks like the National Palace of Culture and the Alexander Nevsky Cathedral. The city also offers charming parks, bustling markets, and a burgeoning culinary scene, making it a fascinating destination for travelers looking to discover the unique blend of influences that shape Bulgaria's capital.",
-                Country_Id = 11,
-                Landmarks = new HashSet<Landmark>()
-                {
-                    StAlexanderNevskiCathedral,
-                    CatedralDeSvetaNedelya
-                },
-                Airports = new HashSet<Airport>()
-                {
-                    SofiaAirport
-                },
-                Hotels = new HashSet<Hotel>()
-                {
-                    HotelZOO,
-                    EurostarsSofia
-                }
+                Country_Id = 11
             };
 
             Tokyo = new City()
@@ -957,16 +839,7 @@
                 Population = 37_115_035,
                 Area = "2 194 km²",
                 Details = "Tokyo, the capital of Japan, is a bustling metropolis where tradition meets innovation. Visitors can explore the city's iconic landmarks such as the historic Senso-ji Temple in Asakusa, the futuristic skyscrapers of Shinjuku, and the serene gardens of the Imperial Palace. With its vibrant neighborhoods, bustling street markets, and world-renowned cuisine ranging from sushi to ramen, Tokyo offers a captivating blend of old-world charm and modern excitement for travelers to experience and enjoy.",
-                Country_Id = 21,
-                Landmarks = new HashSet<Landmark>()
-                {
-                    TokyoTower,
-                    SensoJiTemple
-                },
-                Airports = new HashSet<Airport>()
-                {
-                    TokyoAirport
-                }
+                Country_Id = 21
             };
         }
         private void SeedLandmarks()
@@ -979,13 +852,7 @@
                 Details = "Completed in 1889, this colossal landmark, although initially hated by many Parisians, is now a famous symbol of French civic pride.",
                 City_Id = 1,
                 TicketPrice = 40m,
-                IsActive = true,
-                ImagesUrls = new string[]
-                {
-                    "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/1a/9e/7f/9d/eiffeltoren.jpg?w=1100&h=-1&s=1",
-                    "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/1a/d0/77/ea/tour-eiffel.jpg?w=1200&h=-1&s=1",
-                    "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/1b/15/a3/d8/c-sete.jpg?w=400&h=-1&s=1"
-                }
+                IsActive = true
             };
 
             LouvreMuseum = new Landmark()
@@ -996,13 +863,7 @@
                 Details = "The Louvre Museum, located in Paris, is the world's largest art museum and a historic monument in France. It houses thousands of works of art, including the renowned Mona Lisa and the Venus de Milo, spanning from ancient civilizations to the 19th century.",
                 City_Id = 1,
                 TicketPrice = 46.46m,
-                IsActive = true,
-                ImagesUrls = new string[]
-                {
-                    "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/22/4f/70/dc/cour-napoleon-et-pyramide.jpg?w=1200&h=-1&s=1",
-                    "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/22/5b/ba/f1/grande-galerie-c-musee.jpg?w=1400&h=-1&s=1",
-                    "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/22/5b/ba/f5/portrait-de-lisa-gherardini.jpg?w=1400&h=-1&s=1"
-                }
+                IsActive = true
             };
 
             RoyalPalaceOfMadrid = new Landmark()
@@ -1013,13 +874,7 @@
                 Details = "Luxurious, over-the-top rococo palace with over 2,000 opulently gilded rooms.",
                 City_Id = 2,
                 TicketPrice = 43.14m,
-                IsActive = true,
-                ImagesUrls = new string[]
-                {
-                    "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/09/af/ca/4f/caption.jpg?w=1100&h=-1&s=1",
-                    "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/06/a8/65/be/cambio-de-guardia.jpg?w=2400&h=-1&s=1",
-                    "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/07/ba/87/3a/photo2jpg.jpg?w=2200&h=-1&s=1"
-                }
+                IsActive = true
             };
 
             PlazaMayor = new Landmark()
@@ -1029,13 +884,7 @@
                 Address = "Calle Gerona 4, 28012 Madrid Spain",
                 Details = "Huge plaza packed with cafes, bars and tourists.",
                 City_Id = 2,
-                IsActive = true,
-                ImagesUrls = new string[]
-                {
-                    "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/1b/f7/4a/c6/plaza-mayor.jpg?w=1400&h=-1&s=1",
-                    "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/2b/8e/bd/0c/caption.jpg?w=1400&h=-1&s=1",
-                    "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/2b/8d/62/2a/caption.jpg?w=1400&h=-1&s=1"
-                }
+                IsActive = true
             };
 
             CentralPark = new Landmark()
@@ -1045,13 +894,7 @@
                 Address = "59th to 110th Street Manhattan Borough, NY 10022",
                 Details = "For more than 150 years, visitors have flocked to Central Park's 843 green acres in the heart of Manhattan. Since 1980, the Park has been managed by the Central Park Conservancy, in partnership with the public. Central Park is open 6 am to 1 am daily. Visit the official website of Central Park to learn more about Park happenings and activities and to learn how you to help Central Park!",
                 City_Id = 4,
-                IsActive = true,
-                ImagesUrls = new string[]
-                {
-                    "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/1c/90/ab/88/central-park-manhattan.jpg?w=1400&h=-1&s=1",
-                    "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/17/03/08/00/our-wedding-in-nyc-central.jpg?w=1400&h=-1&s=1",
-                    "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/2b/8c/e7/9e/caption.jpg?w=1100&h=-1&s=1"
-                }
+                IsActive = true
             };
 
             EmpireStateBuilding = new Landmark()
@@ -1062,13 +905,7 @@
                 Details = "The Empire State Building is the World's Most Famous Building. It rises 1,454 ft from ground to antenna & features the only 360 degree open-air vantage point of Midtown. The 86th & 102nd Fl Observatories are open daily, see esbnyc.com for hours.",
                 City_Id = 3,
                 TicketPrice = 47.91m,
-                IsActive = true,
-                ImagesUrls = new string[]
-                {
-                    "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/0e/9d/74/9f/photo0jpg.jpg?w=2200&h=-1&s=1",
-                    "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/1b/16/4b/d1/for-those-looking-for.jpg?w=1400&h=-1&s=1",
-                    "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/19/f3/82/90/the-new-exhibits-at-esb.jpg?w=1200&h=-1&s=1"
-                }
+                IsActive = true
             };
 
             HagiaSophia = new Landmark()
@@ -1078,13 +915,7 @@
                 Address = "Sultan Ahmet, Ayasofya Meydanı No:1, Istanbul 34122 Türkiye",
                 Details = "This architectural marvel displays 30 million gold tiles throughout its interior, and a wide, flat dome which was a bold engineering feat at the time it was constructed in the 6th century.",
                 City_Id = 4,
-                IsActive = true,
-                ImagesUrls = new string[]
-                {
-                    "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/1b/54/be/42/hagia-sophia-museum-by.jpg?w=1400&h=-1&s=1",
-                    "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/07/09/79/25/church-ayasofya.jpg?w=900&h=-1&s=1",
-                    "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/1b/54/bd/e5/hagia-sophia-museum-by.jpg?w=1400&h=-1&s=1"
-                }
+                IsActive = true
             };
            
             BasilicaCistern = new Landmark()
@@ -1094,13 +925,7 @@
                 Address = "Alemdar Mahallesi, Yerebatan Caddesi, No:1/3, Istanbul 34410 TÃ¼rkiye",
                 Details = "The Basilica Cistern, or Sunken Palace, in Istanbul's Sultanahmet district dates back to the 6th century. It's the largest surviving cistern from the Byzantine era, featuring over 330 marble and granite columns, including two famous Medusa heads. Recognizable from \"From Russia with Love,\" it's a must-visit spot along with Hagia Sophia and Topkapi Palace. Joining a tour can streamline your visit to these iconic Istanbul landmarks.",
                 City_Id = 4,
-                IsActive = true,
-                ImagesUrls = new string[]
-                {
-                    "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/0c/3a/2c/dd/istanbul-36h-basilica.jpg?w=1200&h=-1&s=1",
-                    "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/2b/8e/f2/93/caption.jpg?w=1200&h=-1&s=1",
-                    "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/2b/90/af/68/caption.jpg?w=1100&h=-1&s=1"
-                }
+                IsActive = true
             };
            
             Colosseum = new Landmark()
@@ -1111,13 +936,7 @@
                 Details = "The ancient Flavian Amphitheater was built by the Flavian emperors in 70 C.E. as a gift to the Roman people. As the largest Roman theater ever built, it was designed to house over 50,000 people, and had played host to gladiator games, plays and even public executions.",
                 City_Id = 5,
                 IsActive = true,
-                TicketPrice = 38.86m,
-                ImagesUrls = new string[]
-                {
-                    "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/15/f0/6b/18/gita-fuori-porta-avevo.jpg?w=1100&h=-1&s=1",
-                    "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/2b/8c/6f/3c/caption.jpg?w=1200&h=-1&s=1",
-                    "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/2b/89/a3/0a/caption.jpg?w=1200&h=-1&s=1"
-                }
+                TicketPrice = 38.86m
             };
            
             Pantheon = new Landmark()
@@ -1127,13 +946,7 @@
                 Address = "Piazza della Rotonda, 00186 Rome Italy",
                 Details = "Dedicated to the seven planetary divinities and featuring an interior of gorgeous marble, the Pantheon is one of the most impressive monuments of Augustan Rome.",
                 City_Id = 5,
-                IsActive = true,
-                ImagesUrls = new string[]
-                {
-                    "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/1a/d3/d1/03/img-20200206-wa0082-largejpg.jpg?w=1200&h=-1&s=1",
-                    "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/1a/68/5f/59/panteon.jpg?w=1200&h=-1&s=1",
-                    "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/2b/87/e5/a6/caption.jpg?w=1200&h=-1&s=1"
-                }
+                IsActive = true
             };
             
             StAlexanderNevskiCathedral = new Landmark()
@@ -1143,13 +956,7 @@
                 Address = "Sofia Center, pl.Sveti Aleksandar Nevski, 1000 Sofia",
                 Details = "Completed in 1912, St. Alexander Nevsky Patriarchal Cathedral Stauropigial Memorial-Church is an impressive landmark in Sofia. The church was built as a memorial to the 200,000 Russian soldiers who died in the Russo-Turkish Liberation War (1877-1878).",
                 City_Id = 6,
-                IsActive = true,
-                ImagesUrls = new string[]
-               {
-                    "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/15/cc/b5/f6/sofia-bei-nacht.jpg?w=1200&h=-1&s=1",
-                    "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/01/34/dc/06/alexander-nevski-church.jpg?w=600&h=-1&s=1",
-                    "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/2a/fd/08/f7/caption.jpg?w=1100&h=-1&s=1"
-               }
+                IsActive = true
             };
            
             CatedralDeSvetaNedelya = new Landmark()
@@ -1159,13 +966,7 @@
                 Address = "pl.Sveta Nedelya, Sofia 1000 Bulgaria",
                 Details = "The Cathedral of Sveta-Nedelya, also known as the Cathedral of the Holy Virgin, is an Orthodox church located in the center of Sofia, the capital of Bulgaria. It was completed in 1867 in a neo-Byzantine style. The cathedral has witnessed significant historical events, including a bomb attack in 1925 by a communist group that resulted in numerous casualties. Today, it remains an important religious and tourist destination, showcasing impressive architecture and a rich cultural heritage.",
                 City_Id = 6,
-                IsActive = true,
-                ImagesUrls = new string[]
-               {
-                    "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/2a/fd/06/8f/caption.jpg?w=1100&h=-1&s=1",
-                    "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/2a/e3/68/be/catedral-de-sveta-nedelya.jpg?w=1200&h=-1&s=1",
-                    "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/2a/f2/56/32/caption.jpg?w=1100&h=-1&s=1"
-               }
+                IsActive = true
             };
            
             TokyoTower = new Landmark()
@@ -1176,13 +977,7 @@
                 Details = "Tokyo Tower, built in 1958, is a communications and observation tower located in the Shiba-koen district of Minato, Tokyo, Japan. Standing at a height of 332.9 meters, it held the title of Japan's tallest tower until the construction of the Tokyo Sky Tree, which now surpasses it in height.",
                 City_Id = 7,
                 IsActive = true,
-                TicketPrice = 15.00m,
-                ImagesUrls = new string[]
-               {
-                    "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/0a/2a/41/27/photo0jpg.jpg?w=1200&h=-1&s=1",
-                    "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/2b/68/f8/1c/caption.jpg?w=1100&h=-1&s=1",
-                    "https://dynamic-media-cdn.tripadvisor.com/media/photo-s/00/1c/62/c7/the-harbor-from-tokyo.jpg?w=600&h=-1&s=1"
-               }
+                TicketPrice = 15.00m
             };
            
             SensoJiTemple = new Landmark()
@@ -1192,13 +987,7 @@
                 Address = "2-3-1, Asakusa, Taito 111-0032 Tokyo Prefecture",
                 Details = "According to legend, two brothers kept trying to return a statue of Kannon, the goddess of mercy, to the Sumida River only to have it returned to them the next day. This temple located in Tokyo's Asakusa district was built to honor her.",
                 City_Id = 7,
-                IsActive = true,
-                ImagesUrls = new string[]
-               {
-                    "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/1a/3d/a5/07/caption.jpg?w=1200&h=-1&s=1",
-                    "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/2b/78/17/57/caption.jpg?w=1200&h=-1&s=1",
-                    "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/2b/78/17/56/caption.jpg?w=1200&h=-1&s=1"
-               }
+                IsActive = true
             };
         } 
         private void SeedHotels()
@@ -1217,14 +1006,7 @@
                 CheckOut = DateTime.ParseExact("12:00", TimeFormat, CultureInfo.CurrentCulture, DateTimeStyles.None),
                 Parking = true,
                 Pets = true,
-                IsActive = true,
-                Rooms = new Dictionary<Room, int>()
-                {
-                    [IbisParisRoomSingle] = 5,
-                    [IbisParisRoomDouble] = 5,
-                    [IbisParisRoomTriple] = 5,
-                    [IbisParisRoomApartment] = 5,
-                }
+                IsActive = true
             };
 
             SaintMarcel = new Hotel()
@@ -1239,12 +1021,7 @@
                 CheckOut = DateTime.ParseExact("12:00", TimeFormat, CultureInfo.CurrentCulture, DateTimeStyles.None),
                 Parking = false,
                 Pets = false,
-                IsActive = true,
-                Rooms = new Dictionary<Room, int>()
-                {
-                    [SaintMarcelRoomSingle] = 5,
-                    [SaintMarcelRoomDouble] = 5,
-                }
+                IsActive = true
             };
 
             KraftHotel = new Hotel()
@@ -1259,12 +1036,7 @@
                 CheckOut = DateTime.ParseExact("11:00", TimeFormat, CultureInfo.CurrentCulture, DateTimeStyles.None),
                 Parking = false,
                 Pets = false,
-                IsActive = true,
-                Rooms = new Dictionary<Room, int>()
-                {
-                    [KraftHotelRoomSingle] = 5,
-                    [KraftHotelRoomDouble] = 5,
-                }
+                IsActive = true
             };
 
             //Madrid
@@ -1281,13 +1053,7 @@
                 CheckOut = DateTime.ParseExact("12:00", TimeFormat, CultureInfo.CurrentCulture, DateTimeStyles.None),
                 Parking = true,
                 Pets = false,
-                IsActive = true,
-                Rooms = new Dictionary<Room, int>()
-                {
-                    [PestanaPlazaRoomSingle] = 5,
-                    [PestanaPlazaRoomDouble] = 5,
-                    [PestanaPlazaRoomTriple] = 5,
-                }
+                IsActive = true
             };
 
             CataloniaPuerta = new Hotel()
@@ -1302,12 +1068,7 @@
                 CheckOut = DateTime.ParseExact("12:00", TimeFormat, CultureInfo.CurrentCulture, DateTimeStyles.None),
                 Parking = true,
                 Pets = true,
-                IsActive = true,
-                Rooms = new Dictionary<Room, int>()
-                {
-                    [CataloniaPuertaRoomSingle] = 5,
-                    [CataloniaPuertaRoomDouble] = 5,
-                }
+                IsActive = true
             };
 
             HostalCentralPalace = new Hotel()
@@ -1322,11 +1083,7 @@
                 CheckOut = DateTime.ParseExact("12:00", TimeFormat, CultureInfo.CurrentCulture, DateTimeStyles.None),
                 Parking = false,
                 Pets = false,
-                IsActive = true,
-                Rooms = new Dictionary<Room, int>()
-                {
-                    [HostalCentralPalaceRoomDouble] = 5,
-                }
+                IsActive = true
             };
 
             //New York
@@ -1343,12 +1100,7 @@
                 CheckOut = DateTime.ParseExact("11:00", TimeFormat, CultureInfo.CurrentCulture, DateTimeStyles.None),
                 Parking = true,
                 Pets = false,
-                IsActive = true,
-                Rooms = new Dictionary<Room, int>()
-                {
-                    [PrinceKitanoRoomDouble] = 5,
-                    [PrinceKitanoRoomApartment] = 5,
-                }
+                IsActive = true
             };
 
             HiltonGarden = new Hotel()
@@ -1363,13 +1115,7 @@
                 CheckOut = DateTime.ParseExact("12:00", TimeFormat, CultureInfo.CurrentCulture, DateTimeStyles.None),
                 Parking = true,
                 Pets = true,
-                IsActive = true,
-                Rooms = new Dictionary<Room, int>()
-                {
-                    [HiltonGardenRoomDouble] = 5,
-                    [HiltonGardenRoomTriple] = 5,
-                    [HiltonGardenRoomApartment] = 5
-                }
+                IsActive = true
             };
 
             TimesSquareHotel = new Hotel()
@@ -1384,12 +1130,7 @@
                 CheckOut = DateTime.ParseExact("12:00", TimeFormat, CultureInfo.CurrentCulture, DateTimeStyles.None),
                 Parking = false,
                 Pets = false,
-                IsActive = true,
-                Rooms = new Dictionary<Room, int>()
-                {
-                    [TimesSquareHotelRoomDouble] = 5,
-                    [TimesSquareHotelRoomTriple] = 5
-                }
+                IsActive = true
             };
 
             //Sofia
@@ -1407,12 +1148,6 @@
                 Parking = true,
                 Pets = false,
                 IsActive = true,
-                Rooms = new Dictionary<Room, int>()
-                {
-                    [HotelZOORoomSingle] = 5,
-                    [HotelZOORoomDouble] = 5,
-                    [HotelZOORoomTriple] = 5
-                }
             };
 
             EurostarsSofia = new Hotel()
@@ -1427,15 +1162,27 @@
                 CheckOut = DateTime.ParseExact("12:00", TimeFormat, CultureInfo.CurrentCulture, DateTimeStyles.None),
                 Parking = true,
                 Pets = false,
-                IsActive = true,
-                Rooms = new Dictionary<Room, int>()
-                {
-                    [EurostarsSofiaRoomSingle] = 5,
-                    [EurostarsSofiaRoomDouble] = 5,
-                    [EurostarsSofiaRoomTriple] = 5,
-                    [EurostarsSofiaRoomApartment] = 5
-                }
+                IsActive = true
             };
+
+            PremierSofia = new Hotel()
+            {
+                Id = 12,
+                Name = "Best Western Premier Sofia Airport Hotel",
+                Address = "11 Briuksel Blvd., 1592",
+                City_Id = 6,
+                StarRate = 4,
+                Details = "The modern 4-star Best Western Premier Sofia Airport Hotel is located in a new business district, only 2461 feet away by car from Sofia International Airport Terminal 1 and 0.6 mi from Sofia International Airport Terminal 2. It is 2953 feet away from Sofia Airport Center and 1.4 mi away from Trade Center Europe.",
+                CheckIn = DateTime.ParseExact("14:00", TimeFormat, CultureInfo.CurrentCulture, DateTimeStyles.None),
+                CheckOut = DateTime.ParseExact("12:00", TimeFormat, CultureInfo.CurrentCulture, DateTimeStyles.None),
+                Parking = true,
+                Pets = true,
+                IsActive = true
+            };
+
+            //Istanbul
+
+
         }
         private void SeedRooms()
         {
@@ -1754,6 +1501,41 @@
                 IsReserved = false,
                 IsActive = true
             };
+
+            PremierSofiaRoomSingle = new Room()
+            {
+                Id = 29,
+                Type = Enums.RoomType.Single,
+                Hotel_Id = 12,
+                PricePerNight = 112m,
+                WiFi = true,
+                IsReserved = false,
+                IsActive = true,
+            };
+
+            PremierSofiaRoomDouble = new Room()
+            {
+                Id = 30,
+                Type = Enums.RoomType.Double,
+                Hotel_Id = 12,
+                PricePerNight = 125m,
+                WiFi = true,
+                IsReserved = false,
+                IsActive = true
+            };
+
+            PremierSofiaRoomTriple = new Room()
+            {
+                Id = 31,
+                Type = Enums.RoomType.Triple,
+                Hotel_Id = 12,
+                PricePerNight = 190m,
+                WiFi = true,
+                IsReserved = false,
+                IsActive = true
+            };
+
+            //Istanbul
         }      
         private void SeedAirlines()
         {

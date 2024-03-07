@@ -44,7 +44,10 @@
                     data.EurostarsSofiaRoomSingle,
                     data.EurostarsSofiaRoomDouble,
                     data.EurostarsSofiaRoomTriple,
-                    data.EurostarsSofiaRoomApartment
+                    data.EurostarsSofiaRoomApartment,
+                    data.PremierSofiaRoomSingle,
+                    data.PremierSofiaRoomDouble,
+                    data.PremierSofiaRoomTriple
                 });
         }
     }

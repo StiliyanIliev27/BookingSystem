@@ -23,7 +23,8 @@
                     data.HiltonGarden,
                     data.TimesSquareHotel,
                     data.HotelZOO,
-                    data.EurostarsSofia
+                    data.EurostarsSofia,
+                    data.PremierSofia
                 });
         }
     }

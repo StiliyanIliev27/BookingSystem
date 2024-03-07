@@ -64,14 +64,5 @@
         [Comment("City's Country")]
         [ForeignKey(nameof(Country_Id))]
         public Country Country { get; set; } = null!;
-
-        [NotMapped]
-        public ICollection<Landmark> Landmarks { get; set; } = new HashSet<Landmark>();
-
-        [NotMapped]
-        public ICollection<Airport> Airports { get; set; } = new HashSet<Airport>();
-       
-        [NotMapped]
-        public ICollection<Hotel> Hotels { get; set; } = new HashSet<Hotel>();
     }
 }
