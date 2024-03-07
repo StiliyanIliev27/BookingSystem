@@ -3,6 +3,7 @@
     using BookingSystem.Infrastructure.Data.Configurations.FlightConfigurations;
     using BookingSystem.Infrastructure.Data.Configurations.HotelConfigurations;
     using BookingSystem.Infrastructure.Data.Configurations.LandmarkConfigurations;
+    using BookingSystem.Infrastructure.Data.Configurations.LandmarksConfigurations;
     using BookingSystem.Infrastructure.Data.Configurations.LocationConfigurations;
     using BookingSystem.Infrastructure.Data.Configurations.RolesConfigurations;
     using BookingSystem.Infrastructure.Data.Configurations.UsersConfigurations;
@@ -54,6 +55,11 @@
         public DbSet<Landmark> Landmarks { get; set; } = null!;
 
         /// <summary>
+        /// LandmarksReservations
+        /// </summary>
+        public DbSet<LandmarkReservation> LandmarksReservations { get; set; } = null!;
+
+        /// <summary>
         /// Hotels
         /// </summary>
         public DbSet<Hotel> Hotels { get; set; } = null!;
@@ -103,6 +109,7 @@
 
             //Landmarks configuration
             builder.ApplyConfiguration(new LandmarkConfiguration());
+            builder.ApplyConfiguration(new LandmarkReservationConfiguration());
 
             //Hotels configuration
             builder.ApplyConfiguration(new HotelConfiguration());
