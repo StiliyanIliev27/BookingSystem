@@ -553,10 +553,6 @@
                 CurrencyCode = "EUR",
                 FlagImageUrl = "https://img.goodfon.com/original/5000x3333/c/cf/italy-italia-flag-of-italy-italian-flag-flag.jpg",
                 Language_Id = 15,
-                Cities = new City[]
-                {
-                    Rome
-                }
             };
 
             Mexico = new Country()
@@ -635,10 +631,6 @@
                 CurrencyCode = "BGN",
                 FlagImageUrl = "https://t3.ftcdn.net/jpg/01/01/18/68/360_F_101186804_qHCSqaphnoDq21DiftORwwDrjEApaewH.jpg",
                 Language_Id = 9,
-                Cities = new City[]
-                {
-                    Sofia
-                }
             };
 
             Russia = new Country()
