@@ -47,7 +47,23 @@
                     data.EurostarsSofiaRoomApartment,
                     data.PremierSofiaRoomSingle,
                     data.PremierSofiaRoomDouble,
-                    data.PremierSofiaRoomTriple
+                    data.PremierSofiaRoomTriple,
+                    data.EminPalaceRoomSingle,
+                    data.EminPalaceRoomDouble, 
+                    data.EminPalaceRoomTriple,
+                    data.HotelZurichRoomSingle,
+                    data.HotelZurichRoomDouble,
+                    data.HotelZurichRoomTriple,
+                    data.HotelZurichRoomApartment,
+                    data.FlorinaHotelRoomSingle,
+                    data.FlorinaHotelRoomDouble,
+                    data.FlorinaHotelRoomTriple,
+                    data.FlorinaHotelRoomApartment,
+                    data.LoisirHotelRoomSingle,
+                    data.LoisirHotelRoomDouble,
+                    data.OakwoodPremierRoomSingle,
+                    data.OakwoodPremierRoomDouble,
+                    data.OakwoodPremierRoomApartment
                 });
         }
     }

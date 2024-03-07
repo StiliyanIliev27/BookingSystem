@@ -24,7 +24,13 @@
                     data.TimesSquareHotel,
                     data.HotelZOO,
                     data.EurostarsSofia,
-                    data.PremierSofia
+                    data.PremierSofia,
+                    data.EminPalace,
+                    data.HotelZurich,
+                    data.FlorinaHotel,
+                    data.LoisirHotel,
+                    data.SotetsuFresa,
+                    data.OakwoodPremier
                 });
         }
     }

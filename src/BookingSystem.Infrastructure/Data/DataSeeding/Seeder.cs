@@ -193,15 +193,21 @@
         public Hotel PremierSofia { get; set; } = null!;
 
         //Istanbul
+        public Hotel EminPalace { get; set; } = null!;
+        public Hotel HotelZurich { get; set; } = null!;
+        public Hotel FlorinaHotel { get; set; } = null!;
 
         //Tokyo
+        public Hotel LoisirHotel { get; set; } = null!;
+        public Hotel SotetsuFresa { get; set; } = null!;
+        public Hotel OakwoodPremier { get; set; } = null!;
 
         #endregion
 
 
         #region Rooms
 
-
+        // Paris
         public Room IbisParisRoomSingle { get; set; } = null!;
         public Room IbisParisRoomDouble { get; set; } = null!;
         public Room IbisParisRoomTriple { get; set; } = null!;
@@ -213,6 +219,7 @@
         public Room SaintMarcelRoomSingle { get; set; } = null!;
         public Room SaintMarcelRoomDouble { get; set; } = null!;
 
+        // Madrid
         public Room PestanaPlazaRoomSingle { get; set; } = null!;
         public Room PestanaPlazaRoomDouble { get; set; } = null!;
         public Room PestanaPlazaRoomTriple { get; set; } = null!;
@@ -222,6 +229,7 @@
 
         public Room HostalCentralPalaceRoomDouble { get; set; } = null!;
 
+        // New York
         public Room TimesSquareHotelRoomDouble { get; set; } = null!;
         public Room TimesSquareHotelRoomTriple { get; set; } = null!;
 
@@ -232,6 +240,7 @@
         public Room PrinceKitanoRoomDouble { get; set; } = null!;
         public Room PrinceKitanoRoomApartment { get; set; } = null!;
 
+        // Sofia
         public Room HotelZOORoomSingle { get; set; } = null!;
         public Room HotelZOORoomDouble { get; set; } = null!;
         public Room HotelZOORoomTriple { get; set; } = null!;
@@ -244,6 +253,33 @@
         public Room PremierSofiaRoomSingle { get; set; } = null!;
         public Room PremierSofiaRoomDouble { get; set; } = null!;
         public Room PremierSofiaRoomTriple { get; set; } = null!;
+
+        // Istanbul
+        public Room EminPalaceRoomSingle { get; set; } = null!;
+        public Room EminPalaceRoomDouble { get; set; } = null!;
+        public Room EminPalaceRoomTriple { get; set; } = null!;
+
+        public Room HotelZurichRoomSingle { get; set; } = null!;
+        public Room HotelZurichRoomDouble { get; set; } = null!;
+        public Room HotelZurichRoomTriple { get; set; } = null!;
+        public Room HotelZurichRoomApartment { get; set; } = null!;
+
+        public Room FlorinaHotelRoomSingle { get; set; } = null!;
+        public Room FlorinaHotelRoomDouble { get; set; } = null!;
+        public Room FlorinaHotelRoomTriple { get; set; } = null!;
+        public Room FlorinaHotelRoomApartment { get; set; } = null!;
+
+        // Tokyo
+        public Room LoisirHotelRoomSingle { get; set; } = null!;
+        public Room LoisirHotelRoomDouble { get; set; } = null!;
+
+        public Room SotetsuFresaRoomSingle { get; set; } = null!;
+        public Room SotetsuFresaRoomDouble { get; set; } = null!;
+
+        public Room OakwoodPremierRoomSingle { get; set; } = null!;
+        public Room OakwoodPremierRoomDouble { get; set; } = null!;
+        public Room OakwoodPremierRoomApartment { get; set; } = null!;
+
 
         #endregion
 
@@ -1174,7 +1210,97 @@
 
             //Istanbul
 
-
+            EminPalace = new Hotel()
+            {
+                Id = 13,
+                Name = "Emin Palace",
+                Address = "Güvenlik Caddesi, Fatih, 34130",
+                City_Id = 4,
+                StarRate = 3,
+                Details = "Located in Istanbul, Emin Palace offers 3-star accommodations with a terrace and a restaurant. The property is around 1.1 miles from Suleymaniye Mosque, 1.5 miles from Blue Mosque and 1.7 miles from Basilica Cistern. The property has a 24-hour front desk, airport transportation, room service and free WiFi throughout the property.",
+                CheckIn = DateTime.ParseExact("14:00", TimeFormat, CultureInfo.CurrentCulture, DateTimeStyles.None),
+                CheckOut = DateTime.ParseExact("12:00", TimeFormat, CultureInfo.CurrentCulture, DateTimeStyles.None),
+                Parking = false,
+                Pets = false,
+                IsActive = true,
+            };
+           
+            HotelZurich = new Hotel()
+            {
+                Id = 14,
+                Name = "Hotel Zurich Istanbul Old Citye",
+                Address = "Güvenlik Caddesi, Fatih, 34130",
+                City_Id = 4,
+                StarRate = 4,
+                Details = "Featuring a welcoming terrace, Hotel Zurich Istanbul Old City is close to Istanbul’s vibrant shopping district and 15 minutes’ walk from Grand Bazaar. It also offers a health center. Hagia Sophia, Blue Mosque and other major attractions are in 30 minutes' walk distance.",
+                CheckIn = DateTime.ParseExact("14:00", TimeFormat, CultureInfo.CurrentCulture, DateTimeStyles.None),
+                CheckOut = DateTime.ParseExact("12:00", TimeFormat, CultureInfo.CurrentCulture, DateTimeStyles.None),
+                Parking = false,
+                Pets = false,
+                IsActive = true,
+            };
+            
+            FlorinaHotel = new Hotel()
+            {
+                Id = 15,
+                Name = "Florina Hotel",
+                Address = "Alemdar, Marmara Region, Prof. Kazım İsmail Gürkan Cd. NO: 3, 34110",
+                City_Id = 4,
+                StarRate = 4,
+                Details = "Popular points of interest near Florina Hotel include Basilica Cistern, Column of Constantine and Blue Mosque. The nearest airport is Istanbul, 28 miles from the hotel, and the property offers a paid airport shuttle service.",
+                CheckIn = DateTime.ParseExact("14:00", TimeFormat, CultureInfo.CurrentCulture, DateTimeStyles.None),
+                CheckOut = DateTime.ParseExact("12:00", TimeFormat, CultureInfo.CurrentCulture, DateTimeStyles.None),
+                Parking = false,
+                Pets = false,
+                IsActive = true,
+            };
+            
+            //Tokyo
+           
+            LoisirHotel = new Hotel()
+            {
+                Id = 16,
+                Name = "Loisir Hotel Shinagawa Seaside",
+                Address = "140-0002 Tokyo-to, 4-12-8, higashishinagawa",
+                City_Id = 7,
+                StarRate = 4,
+                Details = "In a prime location in the Shinagawa Ward district of Tokyo, Loisir Hotel Shinagawa Seaside is located a few steps from Shinagawa Seaside Forest Oval Garden, a 9-minute walk from Sinagawa Sentaikoujin Temple and half a mile from Seiun Inari Shrine. This 4-star hotel offers a 24-hour front desk. Free WiFi is available and private parking can be arranged at an extra charge.",
+                CheckIn = DateTime.ParseExact("15:00", TimeFormat, CultureInfo.CurrentCulture, DateTimeStyles.None),
+                CheckOut = DateTime.ParseExact("11:00", TimeFormat, CultureInfo.CurrentCulture, DateTimeStyles.None),
+                Parking = true,
+                Pets = false,
+                IsActive = true,
+            };
+           
+            SotetsuFresa = new Hotel()
+            {
+                Id = 17,
+                Name = "Sotetsu Fresa Inn Tokyo Tamachi",
+                Address = "108-0023 Tokyo-to, Minato-ku Shibaura 3-14-21",
+                City_Id = 7,
+                StarRate = 3,
+                Details = "A 5-minute walk from JR Tamachi Train Station and Mita Subway Station, Sotetsu Fresa Inn Tokyo Tamachi offers simple modern accommodations with free wired internet access. Guests can request relaxing massages for an extra cost and store luggage for free at the 24-hour front desk. Tokyo Tamachi Sotetsu Fresa Inn is a 20-minute walk from Shiba Park and a 10-minute train ride from JR Shinagawa Train Station. The Imperial Palace is a 15-minute drive away.",
+                CheckIn = DateTime.ParseExact("15:00", TimeFormat, CultureInfo.CurrentCulture, DateTimeStyles.None),
+                CheckOut = DateTime.ParseExact("11:00", TimeFormat, CultureInfo.CurrentCulture, DateTimeStyles.None),
+                Parking = false,
+                Pets = false,
+                IsActive = true,
+            };
+            
+            OakwoodPremier = new Hotel()
+            {
+                Id = 18,
+                Name = "Oakwood Premier Tokyo",
+                Address = "100-0005 Tokyo-to, Chiyoda-ku, Marunouchi 1-8-2",
+                City_Id = 7,
+                StarRate = 5,
+                Details = "Oakwood Premier Tokyo is a luxury serviced apartment with hotel-like services, located at just a 2-minute walk from JR Tokyo Station’s Yaesu North Exit. Located on the 6-19th floors of a 19-story building, this property is designed to offer a getaway in the center of Tokyo. There is a 24-hour front desk on site.",
+                CheckIn = DateTime.ParseExact("15:00", TimeFormat, CultureInfo.CurrentCulture, DateTimeStyles.None),
+                CheckOut = DateTime.ParseExact("11:00", TimeFormat, CultureInfo.CurrentCulture, DateTimeStyles.None),
+                Parking = true,
+                Pets = false,
+                IsActive = true,
+            };
         }
         private void SeedRooms()
         {
@@ -1528,6 +1654,224 @@
             };
 
             //Istanbul
+           
+            EminPalaceRoomSingle = new Room()
+            {
+                Id = 32,
+                Type = Enums.RoomType.Single,
+                Hotel_Id = 13,
+                PricePerNight = 95m,
+                WiFi = true,
+                IsReserved = false,
+                IsActive = true,
+                Count = 5
+            };
+           
+            EminPalaceRoomDouble = new Room()
+            {
+                Id = 33,
+                Type = Enums.RoomType.Double,
+                Hotel_Id = 13,
+                PricePerNight = 108m,
+                WiFi = true,
+                IsReserved = false,
+                IsActive = true,
+                Count = 5
+            };
+          
+            EminPalaceRoomTriple = new Room()
+            {
+                Id = 34,
+                Type = Enums.RoomType.Triple,
+                Hotel_Id = 13,
+                PricePerNight = 209m,
+                WiFi = true,
+                IsReserved = false,
+                IsActive = true,
+                Count = 5
+            };
+
+            HotelZurichRoomSingle = new Room()
+            {
+                Id = 35,
+                Type = Enums.RoomType.Single,
+                Hotel_Id = 14,
+                PricePerNight = 260m,
+                WiFi = true,
+                IsReserved = false,
+                IsActive = true,
+                Count = 5
+            };
+           
+            HotelZurichRoomDouble = new Room()
+            {
+                Id = 36,
+                Type = Enums.RoomType.Double,
+                Hotel_Id = 14,
+                PricePerNight = 207m,
+                WiFi = true,
+                IsReserved = false,
+                IsActive = true,
+                Count = 5
+            };
+           
+            HotelZurichRoomTriple = new Room()
+            {
+                Id = 37,
+                Type = Enums.RoomType.Triple,
+                Hotel_Id = 14,
+                PricePerNight = 327m,
+                WiFi = true,
+                IsReserved = false,
+                IsActive = true,
+                Count = 5
+            };
+           
+            HotelZurichRoomApartment = new Room()
+            {
+                Id = 38,
+                Type = Enums.RoomType.Apartment,
+                Hotel_Id = 14,
+                PricePerNight = 350m,
+                WiFi = true,
+                IsReserved = false,
+                IsActive = true,
+                Count = 5
+            };
+
+            FlorinaHotelRoomSingle = new Room()
+            {
+                Id = 39,
+                Type = Enums.RoomType.Single,
+                Hotel_Id = 15,
+                PricePerNight = 133m,
+                WiFi = true,
+                IsReserved = false,
+                IsActive = true,
+                Count = 5
+            };
+           
+            FlorinaHotelRoomDouble = new Room()
+            {
+                Id = 40,
+                Type = Enums.RoomType.Double,
+                Hotel_Id = 15,
+                PricePerNight = 155m,
+                WiFi = true,
+                IsReserved = false,
+                IsActive = true,
+                Count = 5
+            };
+           
+            FlorinaHotelRoomTriple = new Room()
+            {
+                Id = 41,
+                Type = Enums.RoomType.Triple,
+                Hotel_Id = 15,
+                PricePerNight = 200m,
+                WiFi = true,
+                IsReserved = false,
+                IsActive = true,
+                Count = 5
+            };
+         
+            FlorinaHotelRoomApartment = new Room()
+            {
+                Id = 42,
+                Type = Enums.RoomType.Apartment,
+                Hotel_Id = 15,
+                PricePerNight = 329m,
+                WiFi = true,
+                IsReserved = false,
+                IsActive = true,
+                Count = 5
+            };
+
+            //Tokyo
+          
+            LoisirHotelRoomSingle = new Room()
+            {
+                Id = 43,
+                Type = Enums.RoomType.Single,
+                Hotel_Id = 16,
+                PricePerNight = 135m,
+                WiFi = true,
+                IsReserved = false,
+                IsActive = true,
+                Count = 5
+            };
+          
+            LoisirHotelRoomDouble = new Room()
+            {
+                Id = 44,
+                Type = Enums.RoomType.Double,
+                Hotel_Id = 16,
+                PricePerNight = 198m,
+                WiFi = true,
+                IsReserved = false,
+                IsActive = true,
+                Count = 5
+            };
+
+            SotetsuFresaRoomSingle = new Room()
+            {
+                Id = 45,
+                Type = Enums.RoomType.Single,
+                Hotel_Id = 17,
+                PricePerNight = 223m,
+                WiFi = true,
+                IsReserved = false,
+                IsActive = true,
+                Count = 5
+            };
+            
+            SotetsuFresaRoomDouble = new Room()
+            {
+                Id = 46,
+                Type = Enums.RoomType.Double,
+                Hotel_Id = 17,
+                PricePerNight = 289m,
+                WiFi = true,
+                IsReserved = false,
+                IsActive = true,
+                Count = 5
+            };
+
+            OakwoodPremierRoomSingle = new Room()
+            {
+                Id = 47,
+                Type = Enums.RoomType.Single,
+                Hotel_Id = 18,
+                PricePerNight = 378m,
+                WiFi = true,
+                IsReserved = false,
+                IsActive = true,
+                Count = 5
+            };
+            
+            OakwoodPremierRoomDouble = new Room()
+            {
+                Id = 48,
+                Type = Enums.RoomType.Double,
+                Hotel_Id = 18,
+                PricePerNight = 460m,
+                WiFi = true,
+                IsReserved = false,
+                IsActive = true,
+                Count = 5
+            };
+           
+            OakwoodPremierRoomApartment = new Room()
+            {
+                Id = 49,
+                Type = Enums.RoomType.Double,
+                Hotel_Id = 18,
+                PricePerNight = 853m,
+                WiFi = true,
+                IsReserved = false,
+                IsActive = true,
+                Count = 5
+            };
         }      
         private void SeedAirlines()
         {
