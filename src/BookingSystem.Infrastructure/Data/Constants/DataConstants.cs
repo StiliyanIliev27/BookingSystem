@@ -64,6 +64,12 @@
             public const string TimeFormat = "HH:mm";
         }
 
+        public static class Room
+        {
+            public const int CountMaxValue = 5;
+            public const int CountMinValue = 0;
+        }
+
         public static class Airline
         {
             public const int NameMinLength = 3;

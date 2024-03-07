@@ -66,5 +66,11 @@
         [Comment("Room's Active Status")]
         public bool IsActive { get; set; } = false;
 
+        /// <summary>
+        /// Room's Count
+        /// </summary>
+        [Required]
+        [Comment("Room's Count")]
+        public int Count { get; set; }
     }
 }
