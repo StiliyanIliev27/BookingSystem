@@ -104,7 +104,7 @@
             //Locations configuration
             builder.ApplyConfiguration(new ContinentConfiguration());
             builder.ApplyConfiguration(new LanguageConfiguration());
-            builder.ApplyConfiguration(new CountryConfiguration());   
+            builder.ApplyConfiguration(new CountryConfiguration());
             builder.ApplyConfiguration(new CityConfiguration());
 
             //Landmarks configuration

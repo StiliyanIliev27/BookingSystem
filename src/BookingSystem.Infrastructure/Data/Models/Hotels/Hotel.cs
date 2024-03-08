@@ -65,6 +65,13 @@
         public string? Details { get; set; }
 
         /// <summary>
+        /// Hotel's Image Url
+        /// </summary>
+        [Required]
+        [Comment("Hotel's Image Url")]
+        public string ImageUrl { get; set; } = null!;
+
+        /// <summary>
         /// Hotel's Check In
         /// </summary>
         [Required]
