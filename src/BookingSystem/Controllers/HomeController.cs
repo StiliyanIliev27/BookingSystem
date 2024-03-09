@@ -1,4 +1,5 @@
-﻿using BookingSystem.Models;
+﻿using BookingSystem.Core.Contracts;
+using BookingSystem.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 

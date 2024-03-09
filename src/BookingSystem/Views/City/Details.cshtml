@@ -1,0 +1,23 @@
+﻿
+@model CityDetailsViewlModel
+
+@{
+    ViewData["Title"] = "City Details";
+}
+
+<h2 class="text-center">@ViewData["Title"]</h2>
+<hr />
+
+<div style="width: 500px; height: 500px; margin-left: auto; margin-right: auto;" class="card-group">
+    <div class="card">
+        <img class="card-img-top" src="@Model.ImageUrl" alt="City image">
+        <div class="card-body">
+            <h5 style="font-style: italic;" class="card-title">@Model.Name, <small style="font-style: italic;">@Model.CountryName</small></h5>
+            <p style="text-align:justify;" class="card-text">@Model.Details</p>
+            <small>Population: @Model.Population</small>
+            <br />
+            <small>Area: @Model.Area</small>
+        </div>
+        <div class="card-footer"></div>
+    </div>
+</div>

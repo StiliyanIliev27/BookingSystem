@@ -1,13 +1,18 @@
-﻿using BookingSystem.Infrastructure.Data;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore;
-
-namespace Microsoft.Extensions.DependencyInjection
+﻿namespace Microsoft.Extensions.DependencyInjection
 {
+    using BookingSystem.Core.Contracts;
+    using BookingSystem.Core.Services;
+    using BookingSystem.Infrastructure.Common;
+    using BookingSystem.Infrastructure.Data;
+    using Microsoft.AspNetCore.Identity;
+    using Microsoft.EntityFrameworkCore;
     public static class ServiceCollectionExtension
     {
         public static IServiceCollection AddApplicationServices(this IServiceCollection services)
         {
+            services.AddScoped<IHotelService, HotelService>();
+            services.AddScoped<ICityService, CityService>();    
+
             return services;
         }
 
@@ -19,6 +24,8 @@ namespace Microsoft.Extensions.DependencyInjection
                 options.UseSqlServer(connectionString));
 
             services.AddDatabaseDeveloperPageExceptionFilter();
+
+            services.AddScoped<IRepository, Repository>();
 
             return services;
         }

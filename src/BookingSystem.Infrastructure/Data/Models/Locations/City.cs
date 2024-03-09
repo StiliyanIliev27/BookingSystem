@@ -1,8 +1,5 @@
 ﻿namespace BookingSystem.Infrastructure.Data.Models.Location
 {
-    using BookingSystem.Infrastructure.Data.Models.Flights;
-    using BookingSystem.Infrastructure.Data.Models.Hotels;
-    using BookingSystem.Infrastructure.Data.Models.Landmarks;
     using Microsoft.EntityFrameworkCore;
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
@@ -64,5 +61,12 @@
         [Comment("City's Country")]
         [ForeignKey(nameof(Country_Id))]
         public Country Country { get; set; } = null!;
+
+        /// <summary>
+        /// City's Image Url
+        /// </summary>
+        [Required]
+        [Comment("City's Image Url")]
+        public string ImageUrl { get; set; } = null!;
     }
 }

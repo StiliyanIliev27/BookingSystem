@@ -808,16 +808,19 @@
                 Population = 11_277_000,
                 Area = "105,4 km²",
                 Details = "Paris, the capital of France, is renowned for its romantic ambiance, iconic landmarks, and vibrant culture. Visitors flock to marvel at the Eiffel Tower, explore the world-class museums like the Louvre and Musée d'Orsay, and stroll along the charming streets of Montmartre or the picturesque banks of the Seine River. With its rich history, exquisite cuisine, and fashionable boutiques, Paris captivates travelers from around the world.",
-                Country_Id = 1
+                Country_Id = 1,
+                ImageUrl = "https://images.adsttc.com/media/images/5d44/14fa/284d/d1fd/3a00/003d/large_jpg/eiffel-tower-in-paris-151-medium.jpg?1564742900"
             };
 
             Madrid = new City()
             {
                 Id = 2,
                 Name = "Madrid",
+                Population = 6_783_000,
                 Area = "8,028 km²",
                 Details = "Madrid, the capital of Spain, is a vibrant metropolis known for its lively atmosphere, rich history, and cultural treasures. Visitors can explore world-class art museums such as the Prado and Reina Sofía, wander through historic neighborhoods like the Barrio de las Letras, and indulge in delicious tapas at bustling markets like Mercado de San Miguel. With its beautiful parks, grand boulevards, and dynamic nightlife, Madrid offers a captivating blend of tradition and modernity for travelers to enjoy.",
-                Country_Id = 2          
+                Country_Id = 2,
+                ImageUrl = "https://media.istockphoto.com/id/514769480/photo/madrid-spain-on-gran-via.webp?b=1&s=170667a&w=0&k=20&c=Jrb6V9FM8FkAMjbYHX9p3fArXcAetyn0BfdDeUje8ug="
             };
 
             NewYork = new City()
@@ -827,7 +830,8 @@
                 Population = 19_034_000,
                 Area = "783,8 km²",
                 Details = "New York City, often referred to as the \"Big Apple,\" is a bustling metropolis known for its iconic skyline, diverse culture, and vibrant energy. Visitors can explore world-famous landmarks such as the Statue of Liberty, Times Square, and Central Park, or immerse themselves in the city's rich cultural scene by visiting museums like the Metropolitan Museum of Art or catching a Broadway show. With its endless array of dining options, shopping districts, and neighborhoods to explore, New York City offers an unforgettable experience for travelers from around the world.",
-                Country_Id = 3
+                Country_Id = 3,
+                ImageUrl = "https://cdn.britannica.com/61/93061-050-99147DCE/Statue-of-Liberty-Island-New-York-Bay.jpg"
             };
 
             Istanbul = new City()
@@ -837,7 +841,8 @@
                 Population = 16_047_000,
                 Area = "5 461 km²",
                 Details = "Istanbul, the largest city in Turkey, is a mesmerizing blend of cultures, history, and modernity. It straddles two continents, Europe and Asia, and is known for its stunning architectural wonders such as the Hagia Sophia, Blue Mosque, and Topkapi Palace. Visitors can wander through the bustling streets of the Grand Bazaar, cruise along the Bosphorus, or savor delicious Turkish cuisine in traditional meyhanes (taverns). With its rich history as the former capital of the Byzantine and Ottoman Empires, Istanbul offers a unique and unforgettable experience for travelers.",
-                Country_Id = 4
+                Country_Id = 4,
+                ImageUrl = "https://emerald.bg/web/files/excursions/Excursion/50/images/thumb_920x616_Istanbul%20Emerald.jpg"
             };
 
             Rome = new City()
@@ -847,7 +852,8 @@
                 Population = 4_332_000,
                 Area = "1,285 km²",
                 Details = "Rome, the capital city of Italy, is a timeless destination steeped in history, art, and culture. Known as the \"Eternal City,\" Rome is home to iconic landmarks such as the Colosseum, Roman Forum, and Vatican City, which houses St. Peter's Basilica and the Sistine Chapel. Visitors can wander through cobblestone streets lined with ancient ruins, marvel at Renaissance masterpieces in museums and churches, and indulge in authentic Italian cuisine at trattorias and gelaterias. With its blend of ancient wonders and modern delights, Rome offers an unforgettable experience for travelers seeking to immerse themselves in the heart of Italy's rich heritage.",
-                Country_Id = 5
+                Country_Id = 5,
+                ImageUrl = "https://media.timeout.com/images/105211701/750/422/image.jpg"
             };
 
             Sofia = new City()
@@ -857,7 +863,8 @@
                 Population = 1_288_000,
                 Area = "492 km²",
                 Details = "Sofia, the capital city of Bulgaria, is a dynamic metropolis with a rich history and vibrant culture. Visitors can explore its diverse architectural heritage, including ancient Roman ruins, Byzantine churches, and Ottoman mosques, alongside modern landmarks like the National Palace of Culture and the Alexander Nevsky Cathedral. The city also offers charming parks, bustling markets, and a burgeoning culinary scene, making it a fascinating destination for travelers looking to discover the unique blend of influences that shape Bulgaria's capital.",
-                Country_Id = 11
+                Country_Id = 11,
+                ImageUrl = "https://media.tacdn.com/media/attractions-content--1x-1/10/7d/eb/99.jpg"
             };
 
             Tokyo = new City()
@@ -867,7 +874,8 @@
                 Population = 37_115_035,
                 Area = "2 194 km²",
                 Details = "Tokyo, the capital of Japan, is a bustling metropolis where tradition meets innovation. Visitors can explore the city's iconic landmarks such as the historic Senso-ji Temple in Asakusa, the futuristic skyscrapers of Shinjuku, and the serene gardens of the Imperial Palace. With its vibrant neighborhoods, bustling street markets, and world-renowned cuisine ranging from sushi to ramen, Tokyo offers a captivating blend of old-world charm and modern excitement for travelers to experience and enjoy.",
-                Country_Id = 21
+                Country_Id = 21,
+                ImageUrl = "https://facts.net/wp-content/uploads/2023/06/45-facts-about-tokyo-1688094762.jpeg"
             };
         }
         private void SeedLandmarks()
@@ -1394,7 +1402,7 @@
             {
                 Id = 7,
                 Type = Enums.RoomType.Single,
-                Hotel_Id = 3,
+                Hotel_Id = 2,
                 PricePerNight = 216m,
                 WiFi = true,
                 IsReserved = false,
@@ -1405,7 +1413,7 @@
             {
                 Id = 8,
                 Type = Enums.RoomType.Double,
-                Hotel_Id = 3,
+                Hotel_Id = 2,
                 PricePerNight = 157m,
                 WiFi = true,
                 IsReserved = false,

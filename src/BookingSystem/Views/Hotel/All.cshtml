@@ -1,0 +1,56 @@
+﻿
+@model IEnumerable<HotelAllViewModel>
+@{
+    ViewData["Title"] = "All available hotels";    
+}
+
+
+<h2 class="text-center">@ViewData["Title"]</h2>
+<hr />
+
+<div class="text-center row">
+    @foreach (var a in Model)
+    {
+        List<string> roomTypes = new List<string>();
+
+        <div class="card mb-3" style="max-width: 600px; margin-right: 30px;">
+            <div class="row g-0">
+                <div style="padding-top: 30px; padding-bottom: 30px; padding-left: 15px;" class="col-md-4">
+                    <img style="width: 190px; height: 160px;
+                        border: none;
+                        border-radius: 6px;" src="@a.ImageUrl" class="img-fluid rounded-start" alt="hotel image">
+                </div>
+                <div class="col-md-8">
+                    <div class="card-body">
+                        <h5 style="margin-bottom: 10px;" class="card-title">@a.Name</h5>
+                        <span>
+                            @for(int i = 1; i <= a.StarRate; i++)
+                            {
+                                @* <i class="fa-sharp fa-solid fa-star"></i> *@
+                                <img style="height: 12px; width: 12px;" src="~/icon/star.png"/>
+                            }
+                        </span>
+
+                        <br />
+
+                        <a asp-controller="City" asp-action="Details" asp-route-id="@a.CityId">@a.CityName</a>
+                        
+                        @foreach(var room in a.Rooms)
+                        {
+                            roomTypes.Add(room.Type.ToString());
+                        }
+
+                        <p><small>@string.Join(", ", roomTypes)</small></p>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
+
+

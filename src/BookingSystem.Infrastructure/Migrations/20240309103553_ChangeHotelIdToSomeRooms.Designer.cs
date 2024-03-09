@@ -4,6 +4,7 @@ using BookingSystem.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BookingSystem.Infrastructure.Migrations
 {
     [DbContext(typeof(BookingSystemDbContext))]
-    partial class BookingSystemDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240309103553_ChangeHotelIdToSomeRooms")]
+    partial class ChangeHotelIdToSomeRooms
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -1698,11 +1700,6 @@ namespace BookingSystem.Infrastructure.Migrations
                         .HasColumnType("nvarchar(700)")
                         .HasComment("City's Details");
 
-                    b.Property<string>("ImageUrl")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)")
-                        .HasComment("City's Image Url");
-
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(50)
@@ -1728,7 +1725,6 @@ namespace BookingSystem.Infrastructure.Migrations
                             Area = "105,4 km²",
                             Country_Id = 1,
                             Details = "Paris, the capital of France, is renowned for its romantic ambiance, iconic landmarks, and vibrant culture. Visitors flock to marvel at the Eiffel Tower, explore the world-class museums like the Louvre and Musée d'Orsay, and stroll along the charming streets of Montmartre or the picturesque banks of the Seine River. With its rich history, exquisite cuisine, and fashionable boutiques, Paris captivates travelers from around the world.",
-                            ImageUrl = "https://images.adsttc.com/media/images/5d44/14fa/284d/d1fd/3a00/003d/large_jpg/eiffel-tower-in-paris-151-medium.jpg?1564742900",
                             Name = "Paris",
                             Population = 11277000L
                         },
@@ -1738,9 +1734,8 @@ namespace BookingSystem.Infrastructure.Migrations
                             Area = "8,028 km²",
                             Country_Id = 2,
                             Details = "Madrid, the capital of Spain, is a vibrant metropolis known for its lively atmosphere, rich history, and cultural treasures. Visitors can explore world-class art museums such as the Prado and Reina Sofía, wander through historic neighborhoods like the Barrio de las Letras, and indulge in delicious tapas at bustling markets like Mercado de San Miguel. With its beautiful parks, grand boulevards, and dynamic nightlife, Madrid offers a captivating blend of tradition and modernity for travelers to enjoy.",
-                            ImageUrl = "https://media.istockphoto.com/id/514769480/photo/madrid-spain-on-gran-via.webp?b=1&s=170667a&w=0&k=20&c=Jrb6V9FM8FkAMjbYHX9p3fArXcAetyn0BfdDeUje8ug=",
                             Name = "Madrid",
-                            Population = 6783000L
+                            Population = 0L
                         },
                         new
                         {
@@ -1748,7 +1743,6 @@ namespace BookingSystem.Infrastructure.Migrations
                             Area = "783,8 km²",
                             Country_Id = 3,
                             Details = "New York City, often referred to as the \"Big Apple,\" is a bustling metropolis known for its iconic skyline, diverse culture, and vibrant energy. Visitors can explore world-famous landmarks such as the Statue of Liberty, Times Square, and Central Park, or immerse themselves in the city's rich cultural scene by visiting museums like the Metropolitan Museum of Art or catching a Broadway show. With its endless array of dining options, shopping districts, and neighborhoods to explore, New York City offers an unforgettable experience for travelers from around the world.",
-                            ImageUrl = "https://cdn.britannica.com/61/93061-050-99147DCE/Statue-of-Liberty-Island-New-York-Bay.jpg",
                             Name = "New York",
                             Population = 19034000L
                         },
@@ -1758,7 +1752,6 @@ namespace BookingSystem.Infrastructure.Migrations
                             Area = "5 461 km²",
                             Country_Id = 4,
                             Details = "Istanbul, the largest city in Turkey, is a mesmerizing blend of cultures, history, and modernity. It straddles two continents, Europe and Asia, and is known for its stunning architectural wonders such as the Hagia Sophia, Blue Mosque, and Topkapi Palace. Visitors can wander through the bustling streets of the Grand Bazaar, cruise along the Bosphorus, or savor delicious Turkish cuisine in traditional meyhanes (taverns). With its rich history as the former capital of the Byzantine and Ottoman Empires, Istanbul offers a unique and unforgettable experience for travelers.",
-                            ImageUrl = "https://emerald.bg/web/files/excursions/Excursion/50/images/thumb_920x616_Istanbul%20Emerald.jpg",
                             Name = "Istanbul",
                             Population = 16047000L
                         },
@@ -1768,7 +1761,6 @@ namespace BookingSystem.Infrastructure.Migrations
                             Area = "1,285 km²",
                             Country_Id = 5,
                             Details = "Rome, the capital city of Italy, is a timeless destination steeped in history, art, and culture. Known as the \"Eternal City,\" Rome is home to iconic landmarks such as the Colosseum, Roman Forum, and Vatican City, which houses St. Peter's Basilica and the Sistine Chapel. Visitors can wander through cobblestone streets lined with ancient ruins, marvel at Renaissance masterpieces in museums and churches, and indulge in authentic Italian cuisine at trattorias and gelaterias. With its blend of ancient wonders and modern delights, Rome offers an unforgettable experience for travelers seeking to immerse themselves in the heart of Italy's rich heritage.",
-                            ImageUrl = "https://media.timeout.com/images/105211701/750/422/image.jpg",
                             Name = "Rome",
                             Population = 4332000L
                         },
@@ -1778,7 +1770,6 @@ namespace BookingSystem.Infrastructure.Migrations
                             Area = "492 km²",
                             Country_Id = 11,
                             Details = "Sofia, the capital city of Bulgaria, is a dynamic metropolis with a rich history and vibrant culture. Visitors can explore its diverse architectural heritage, including ancient Roman ruins, Byzantine churches, and Ottoman mosques, alongside modern landmarks like the National Palace of Culture and the Alexander Nevsky Cathedral. The city also offers charming parks, bustling markets, and a burgeoning culinary scene, making it a fascinating destination for travelers looking to discover the unique blend of influences that shape Bulgaria's capital.",
-                            ImageUrl = "https://media.tacdn.com/media/attractions-content--1x-1/10/7d/eb/99.jpg",
                             Name = "Sofia",
                             Population = 1288000L
                         },
@@ -1788,7 +1779,6 @@ namespace BookingSystem.Infrastructure.Migrations
                             Area = "2 194 km²",
                             Country_Id = 21,
                             Details = "Tokyo, the capital of Japan, is a bustling metropolis where tradition meets innovation. Visitors can explore the city's iconic landmarks such as the historic Senso-ji Temple in Asakusa, the futuristic skyscrapers of Shinjuku, and the serene gardens of the Imperial Palace. With its vibrant neighborhoods, bustling street markets, and world-renowned cuisine ranging from sushi to ramen, Tokyo offers a captivating blend of old-world charm and modern excitement for travelers to experience and enjoy.",
-                            ImageUrl = "https://facts.net/wp-content/uploads/2023/06/45-facts-about-tokyo-1688094762.jpeg",
                             Name = "Tokyo",
                             Population = 37115035L
                         });
@@ -2430,15 +2420,15 @@ namespace BookingSystem.Infrastructure.Migrations
                         {
                             Id = "8d1f0bdc-f9e5-4856-a127-fb84281d56ad",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "666ca546-aeb3-4805-bc90-f65b6ff62871",
+                            ConcurrencyStamp = "43dca6cd-3fcc-4f27-83d4-5d30ab490b94",
                             Email = "guest@gmail.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             NormalizedEmail = "guest@gmail.com",
                             NormalizedUserName = "guest",
-                            PasswordHash = "AQAAAAEAACcQAAAAEMPGQ/ib2+1WR7FxuMrUeb1SFH08xgOk+4Nd4+Ng7yW6CldLIqPp4ed1mCL7zEkqMQ==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEFfvsQ4D527dhVDILyBopIk2yiNRzNS9hGq/MHrwNmqoQ60FWaw8wLwEagDb+H4sCQ==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "357e7034-bdcb-49be-baec-8bbbd050aa2e",
+                            SecurityStamp = "fcf9ac42-f38b-414a-8371-35b35ccac238",
                             TwoFactorEnabled = false,
                             UserName = "Guest"
                         },
@@ -2446,15 +2436,15 @@ namespace BookingSystem.Infrastructure.Migrations
                         {
                             Id = "c9019544-ec91-4248-bfc4-9d8a4f13430b",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "36e8fdd7-a361-4431-94f5-fe0053b37e29",
+                            ConcurrencyStamp = "497770e0-b2da-4d70-a686-03304a50c916",
                             Email = "admin@gmail.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             NormalizedEmail = "admin@gmail.com",
                             NormalizedUserName = "administrator",
-                            PasswordHash = "AQAAAAEAACcQAAAAEGKX4zvN1h4SCwOCHdDe1TfH5hcQ8C9I+ylaB1taxS3uGRjdNalVpNDUaef51qFNmQ==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEGbkLfAQ3ps8uolrJHILl8LyAHkXw2DXVJNpngoh5SXZE7YZZHB8iHqaWX1dyxV3ag==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "506c11af-e9cb-4738-8023-c1cf75eb6f65",
+                            SecurityStamp = "10a58117-2de4-45f4-afe3-d7b18e2fa86d",
                             TwoFactorEnabled = false,
                             UserName = "Administrator"
                         });
