@@ -1,0 +1,42 @@
+﻿@model CountryDetailsViewModel
+
+@{
+    ViewData["Title"] = "Country Details";
+}
+
+<h2 class="text-center">@ViewData["Title"]</h2>
+<hr />
+
+<div style="width: 500px; margin-left: auto; margin-right: auto;">
+    <img style="width: 500px; height: 300px; object-fit: cover;" class="card-img-top" src="@Model.FlagImageUrl" alt="Country image">
+</div>
+
+
+<div style="width: 500px; height: 500px; margin-left: auto; margin-right: auto;" class="card-group">
+    <div class="card">     
+        <div class="card-body">
+            <h5 style="font-style: italic;" class="card-title">
+                @Model.Name, <small style="font-style: italic;">@Model.ContinentName</small>
+            </h5>
+            <p style="text-align:justify; margin-bottom: 5px;" class="card-text">@Model.Details</p>
+            <hr style="width: 465px;" />
+            <div style="display: flex; flex-direction: row; justify-content: space-between;">
+                <p style="margin-bottom: 5px; font-size: 14.5px; font-style: italic;">
+                    Capital: @Model.Capital
+                </p>
+                <p style="margin-bottom: 5px; font-size: 14.5px; font-style: italic;">
+                    Currency code: @Model.CurrencyCode
+                </p>
+            </div>           
+            <div style="display: flex; flex-direction: row; justify-content: space-between;">
+                <p style="margin-bottom: 5px; font-size: 14.5px; font-style: italic;">
+                    Population: @Model.Population                    
+                </p>
+                <p style="margin-bottom: 5px; font-size: 14.5px; font-style: italic;">
+                    Native language: @Model.Language
+                </p>
+            </div>
+                       
+        </div>
+    </div>
+</div>

@@ -35,6 +35,7 @@
                 Area = city.Area,
                 Details = city.Details,
                 CountryName = city.Country.Name,
+                CountryId = city.Country.Id,
                 ImageUrl = city.ImageUrl
             };
         }

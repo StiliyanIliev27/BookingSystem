@@ -12,8 +12,12 @@
     <div class="card">
         <img class="card-img-top" src="@Model.ImageUrl" alt="City image">
         <div class="card-body">
-            <h5 style="font-style: italic;" class="card-title">@Model.Name, <small style="font-style: italic;">@Model.CountryName</small></h5>
+            <h5 style="font-style: italic;" class="card-title">
+                @Model.Name, 
+                <a asp-controller="Country" asp-action="Details" asp-area="" asp-route-id="@Model.CountryId"><small style="font-style: italic;">@Model.CountryName</small></a>
+            </h5>
             <p style="text-align:justify;" class="card-text">@Model.Details</p>
+            <hr style="width: 465px;"/>
             <small>Population: @Model.Population</small>
             <br />
             <small>Area: @Model.Area</small>
