@@ -33,14 +33,14 @@
 
                         <br />
 
-                        <a asp-controller="City" asp-action="Details" asp-route-id="@a.CityId">@a.CityName</a>
+                        <a asp-controller="City" asp-action="Details" asp-route-id="@a.CityId" style="text-decoration: underline;">@a.CityName</a>
                         
                         @foreach(var room in a.Rooms)
                         {
                             roomTypes.Add(room.Type.ToString());
                         }
 
-                        <p><small>@string.Join(", ", roomTypes)</small></p>
+                        <p style="font-size: 17px;">Rooms: <span style="font-style: italic; font-size: 15px;">@string.Join(", ", roomTypes)</span></p>
 
                     </div>
                 </div>
