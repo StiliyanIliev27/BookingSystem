@@ -61,6 +61,8 @@
                     data.FlorinaHotelRoomApartment,
                     data.LoisirHotelRoomSingle,
                     data.LoisirHotelRoomDouble,
+                    data.SotetsuFresaRoomSingle,
+                    data.SotetsuFresaRoomDouble,
                     data.OakwoodPremierRoomSingle,
                     data.OakwoodPremierRoomDouble,
                     data.OakwoodPremierRoomApartment
