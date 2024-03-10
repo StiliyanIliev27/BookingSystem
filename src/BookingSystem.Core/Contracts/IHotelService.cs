@@ -4,5 +4,6 @@
     public interface IHotelService
     {
         Task<IEnumerable<HotelAllViewModel>> AllAsync();
+        Task<HotelDetailsViewModel> DetailsAsync(int hotelId);
     }
 }

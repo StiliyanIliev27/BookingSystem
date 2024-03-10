@@ -42,6 +42,8 @@
 
                         <p style="font-size: 17px;">Rooms: <span style="font-style: italic; font-size: 15px;">@string.Join(", ", roomTypes)</span></p>
 
+                        <a asp-controller="Hotel" asp-action="Details" asp-route-id="@a.Id" class="btn btn-primary">See availability ></a>
+
                     </div>
                 </div>
             </div>

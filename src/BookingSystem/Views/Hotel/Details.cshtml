@@ -1,0 +1,160 @@
+﻿@model HotelDetailsViewModel
+@{
+    ViewData["Title"] = "Hotel Details";
+    int nextHotelId = Model.Id + 1;
+    int previousHotelId = Model.Id - 1;
+    int firstHotelId = 1;
+    int lastHotelId = Model.HotelsCount;
+}
+
+<h2 class="text-center">@ViewData["Title"]</h2>
+<hr />
+
+<div style="display: flex; flex-direction: row;">
+    <div class="card w-50">
+        <div class="card-body">
+            @for(int i = 1; i <= Model.StarRate; i++)
+            {
+                <img style="height: 12px; width: 12px;" src="~/icon/star.png" />
+            }
+            <h5 style="font-weight: bold; margin-top: 5px;" class="card-title text-left">@Model.Name</h5>
+            <span>
+              <i class="fa-solid fa-location-dot"></i>
+              <small>@Model.Address, @Model.CityName, @Model.CountryName</small> 
+            </span>
+            <img style="width: 500px; height: 300px; object-fit: cover; margin-top: 10px;" src="@Model.ImageUrl" class="card-img"/>
+            
+            <p style="margin-top: 20px; margin-bottom: 0px; text-align: justify;">@Model.Details</p>
+        </div>
+       
+        <div style="display: flex; flex-direction: row; margin-top: 5px; justify-content: space-between;">
+            @if (Model.Id == 1)//First hotel case
+            {
+                <a asp-controller="Hotel" asp-action="Details" asp-route-id="@lastHotelId" style="margin-left: 10px;" class="btn btn-primary fw-bold">&#8592 Previous hotel</a>                
+                <a asp-controller="Hotel" asp-action="Details" asp-route-id="@nextHotelId" style="margin-right: 10px;" class="btn btn-primary fw-bold">Next hotel &#8594</a>
+            }
+            else if (Model.Id == lastHotelId)//Last hotel case
+            {
+                <a asp-controller="Hotel" asp-action="Details" asp-route-id="@previousHotelId" style="margin-left: 10px;" class="btn btn-primary fw-bold">&#8592 Previous hotel</a>
+                <a asp-controller="Hotel" asp-action="Details" asp-route-id="@firstHotelId" style="margin-right: 10px;" class="btn btn-primary fw-bold">Next hotel &#8594</a>
+            }
+            else
+            {
+                <a asp-controller="Hotel" asp-action="Details" asp-route-id="@previousHotelId" style="margin-left: 10px;" class="btn btn-primary fw-bold">&#8592 Previous hotel</a>
+                <a asp-controller="Hotel" asp-action="Details" asp-route-id="@nextHotelId" style="margin-right: 10px;" class="btn btn-primary fw-bold">Next hotel &#8594</a>
+            }
+        </div>       
+
+        <a asp-controller="Hotel" asp-action="All" style="margin-top: 15px; margin-left: 10px;" class="btn btn-warning mb-2 p-3 fw-bold">Back to All Hotels</a>
+
+    </div>
+    <div class="table-responsive" style="margin-left: 50px; width: 600px;">
+        <h4 style="text-align: center; margin-bottom: 10px;">Availability</h4>
+        <table style="height: 300px;" class="table table-bordered">
+            <tr class="table-primary">
+                <th>
+                    Room type
+                </th>
+                <th>
+                    Number of guests
+                </th>
+                <th>
+                    Price per night
+                </th>
+            </tr>
+            @foreach(var room in Model.Rooms)
+            {
+                <tr class="table-light">
+                    <th>
+                        @room.Type.ToString()
+                        <br />
+                        <small style="font-size: 11px; color: red;">
+                            <span><i class="fa-solid fa-hourglass-end"></i></span>
+                            Only @room.Count rooms left on our site
+                        </small>
+                    </th>
+                    <td>
+                        @for(int i = 1; i <= (int) room.Type; i++)
+                        {
+                            <i class="fa-solid fa-person"></i>
+                        }                        
+                    </td>
+                    <td>
+                        @room.PricePerNight
+                    </td>
+                </tr>
+            }
+        </table>
+        <div style="margin-top: 20px;">
+            <h4 style="text-align: center;">Hotel rules</h4>
+            <small style="font-style: italic;">@Model.Name takes special requests – add in the next step!</small>
+            <div style="margin-top: 20px;" class="table-responsive">
+                <table class="table">
+                    <tr style ="padding-top: 15px;">
+                        <td style="padding-left: 13px;">
+                            <div style="display: flex; flex-direction: row;">
+                                <img style="width: 30px; height: 30px; object-fit: cover;" src="~/images/check-in.png" />
+                                <p style="margin-left: 10px; margin-top: 2px;">Check-in</p>
+                            </div>                                            
+                        </td>
+                        <td style="padding-top: 10px; padding-bottom: 10px;">
+                            From @Model.CheckIn
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="padding-top: 15px;">
+                            <div style="display: flex; flex-direction: row;">
+                                <img style="width: 30px; height: 30px; object-fit: cover;" src="~/images/check-out.png" />
+                                <p style="margin-left: 16px; margin-top: 2px;">Check-out</p>
+                            </div>         
+                        </td>
+                        <td style="padding-top: 10px; padding-bottom: 10px;">
+                            Until @Model.CheckOut
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div style="display: flex; flex-direction: row;">
+                                <img style="width: 30px; height: 30px; object-fit: cover;" src="~/images/pawprint.png" />
+                                <p style="margin-left: 16px; margin-top: 2px;">Pets</p>
+                            </div>                            
+                        </td>
+                        <td>
+                            @if (Model.Pets == true)
+                            {
+                                <p>Pets are allowed on request. Charges may apply.</p>
+                            }
+                            else
+                            {
+                                <p>Pets are not allowed!</p>
+                            }
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div style="display: flex; flex-direction: row;">
+                                <img style="width: 30px; height: 30px; object-fit: cover;" src="~/images/parking-area.png" />
+                                <p style="margin-left: 16px; margin-top: 2px;">Parking</p>
+                            </div>
+                        </td>
+                        <td>
+                            @if (Model.Parking == true)
+                            {
+                                <p>Free public parking is available.</p>
+                            }
+                            else
+                            {
+                                <p>No parking is available!</p>
+                            }
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
+

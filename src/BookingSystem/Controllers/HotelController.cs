@@ -19,5 +19,13 @@ namespace BookingSystem.Controllers
 
             return View(model);
         }
+
+        [HttpGet]
+        public async Task<IActionResult> Details(int id)
+        {
+            var model = await hotelService.DetailsAsync(id);
+
+            return View(model);
+        }
     }
 }
