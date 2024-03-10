@@ -1340,7 +1340,8 @@
                 PricePerNight = 165m,
                 WiFi = true,
                 IsReserved = false,
-                IsActive = true
+                IsActive = true,
+                Count = 5
             };
 
             IbisParisRoomDouble = new Room()
@@ -1351,7 +1352,8 @@
                 PricePerNight = 302m,
                 WiFi = true,
                 IsReserved = false,
-                IsActive = true
+                IsActive = true,
+                Count = 5
             };
 
             IbisParisRoomTriple = new Room()
@@ -1362,7 +1364,8 @@
                 PricePerNight = 578m,
                 WiFi = true,
                 IsReserved = false,
-                IsActive = true
+                IsActive = true,
+                Count = 5
             };
 
             IbisParisRoomApartment = new Room()
@@ -1373,7 +1376,8 @@
                 PricePerNight = 630m,
                 WiFi = true,
                 IsReserved = false,
-                IsActive = true
+                IsActive = true,
+                Count = 5
             };
 
             KraftHotelRoomSingle = new Room()
@@ -1384,7 +1388,8 @@
                 PricePerNight = 630m,
                 WiFi = true,
                 IsReserved = false,
-                IsActive = true
+                IsActive = true,
+                Count = 5
             };
 
             KraftHotelRoomDouble = new Room()
@@ -1395,7 +1400,8 @@
                 PricePerNight = 470m,
                 WiFi = true,
                 IsReserved = false,
-                IsActive = true
+                IsActive = true,
+                Count = 5
             };
 
             SaintMarcelRoomSingle = new Room()
@@ -1406,7 +1412,8 @@
                 PricePerNight = 216m,
                 WiFi = true,
                 IsReserved = false,
-                IsActive = true
+                IsActive = true,
+                Count = 5
             };
 
             SaintMarcelRoomDouble = new Room()
@@ -1417,7 +1424,8 @@
                 PricePerNight = 157m,
                 WiFi = true,
                 IsReserved = false,
-                IsActive = true
+                IsActive = true,
+                Count = 5
             };
 
             //Madrid
@@ -1430,7 +1438,8 @@
                 PricePerNight = 433m,
                 WiFi = true,
                 IsReserved = false,
-                IsActive = true
+                IsActive = true,
+                Count = 5
             };
 
             PestanaPlazaRoomDouble = new Room()
@@ -1441,7 +1450,8 @@
                 PricePerNight = 488m,
                 WiFi = true,
                 IsReserved = false,
-                IsActive = true
+                IsActive = true,
+                Count = 5
             };
 
             PestanaPlazaRoomTriple = new Room()
@@ -1452,7 +1462,8 @@
                 PricePerNight = 644m,
                 WiFi = true,
                 IsReserved = false,
-                IsActive = true
+                IsActive = true,
+                Count = 5
             };
 
             CataloniaPuertaRoomSingle = new Room()
@@ -1463,7 +1474,8 @@
                 PricePerNight = 201m,
                 WiFi = true,
                 IsReserved = false,
-                IsActive = true
+                IsActive = true,
+                Count = 5
             };
 
             CataloniaPuertaRoomDouble = new Room()
@@ -1474,7 +1486,8 @@
                 PricePerNight = 201m,
                 WiFi = true,
                 IsReserved = false,
-                IsActive = true
+                IsActive = true,
+                Count = 5
             };
 
             HostalCentralPalaceRoomDouble = new Room()
@@ -1485,7 +1498,8 @@
                 PricePerNight = 197m,
                 WiFi = true,
                 IsReserved = false,
-                IsActive = true
+                IsActive = true,
+                Count = 5
             };
 
             //New York
@@ -1498,7 +1512,8 @@
                 PricePerNight = 193m,
                 WiFi = true,
                 IsReserved = false,
-                IsActive = true
+                IsActive = true,
+                Count = 5
             };
 
             TimesSquareHotelRoomTriple = new Room()
@@ -1509,7 +1524,8 @@
                 PricePerNight = 244m,
                 WiFi = true,
                 IsReserved = false,
-                IsActive = true
+                IsActive = true,
+                Count = 5
             };
 
             HiltonGardenRoomDouble = new Room()
@@ -1520,7 +1536,8 @@
                 PricePerNight = 195m,
                 WiFi = true,
                 IsReserved = false,
-                IsActive = true
+                IsActive = true,
+                Count = 5
             };
 
             HiltonGardenRoomTriple = new Room()
@@ -1531,7 +1548,8 @@
                 PricePerNight = 238m,
                 WiFi = true,
                 IsReserved = false,
-                IsActive = true
+                IsActive = true,
+                Count = 5
             };
 
             HiltonGardenRoomApartment = new Room()
@@ -1542,7 +1560,8 @@
                 PricePerNight = 248m,
                 WiFi = true,
                 IsReserved = false,
-                IsActive = true
+                IsActive = true,
+                Count = 5
             };
 
             PrinceKitanoRoomDouble = new Room()
@@ -1553,7 +1572,8 @@
                 PricePerNight = 314m,
                 WiFi = true,
                 IsReserved = false,
-                IsActive = true
+                IsActive = true,
+                Count = 5
             };
 
             PrinceKitanoRoomApartment = new Room()
@@ -1564,7 +1584,8 @@
                 PricePerNight = 351m,
                 WiFi = true,
                 IsReserved = false,
-                IsActive = true
+                IsActive = true,
+                Count = 5
             };
 
             //Sofia
@@ -1577,7 +1598,8 @@
                 PricePerNight = 70m,
                 WiFi = true,
                 IsReserved = false,
-                IsActive = true
+                IsActive = true,
+                Count = 5
             };
 
             HotelZOORoomDouble = new Room()
@@ -1588,7 +1610,8 @@
                 PricePerNight = 78m,
                 WiFi = true,
                 IsReserved = false,
-                IsActive = true
+                IsActive = true,
+                Count = 5
             };
 
             HotelZOORoomTriple = new Room()
@@ -1599,7 +1622,8 @@
                 PricePerNight = 104m,
                 WiFi = true,
                 IsReserved = false,
-                IsActive = true
+                IsActive = true,
+                Count = 5
             };
 
             EurostarsSofiaRoomSingle = new Room()
@@ -1610,7 +1634,8 @@
                 PricePerNight = 71m,
                 WiFi = true,
                 IsReserved = false,
-                IsActive = true
+                IsActive = true,
+                Count = 5
             };
 
             EurostarsSofiaRoomDouble = new Room()
@@ -1621,7 +1646,8 @@
                 PricePerNight = 80m,
                 WiFi = true,
                 IsReserved = false,
-                IsActive = true
+                IsActive = true,
+                Count = 5
             };
 
             EurostarsSofiaRoomTriple = new Room()
@@ -1632,7 +1658,8 @@
                 PricePerNight = 161m,
                 WiFi = true,
                 IsReserved = false,
-                IsActive = true
+                IsActive = true,
+                Count = 5
             };
 
             EurostarsSofiaRoomApartment = new Room()
@@ -1643,7 +1670,8 @@
                 PricePerNight = 173m,
                 WiFi = true,
                 IsReserved = false,
-                IsActive = true
+                IsActive = true,
+                Count = 5
             };
 
             PremierSofiaRoomSingle = new Room()
@@ -1655,6 +1683,7 @@
                 WiFi = true,
                 IsReserved = false,
                 IsActive = true,
+                Count = 5
             };
 
             PremierSofiaRoomDouble = new Room()
@@ -1665,7 +1694,8 @@
                 PricePerNight = 125m,
                 WiFi = true,
                 IsReserved = false,
-                IsActive = true
+                IsActive = true,
+                Count = 5
             };
 
             PremierSofiaRoomTriple = new Room()
@@ -1676,7 +1706,8 @@
                 PricePerNight = 190m,
                 WiFi = true,
                 IsReserved = false,
-                IsActive = true
+                IsActive = true,
+                Count = 5
             };
 
             //Istanbul
