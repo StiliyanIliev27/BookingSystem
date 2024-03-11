@@ -6,6 +6,7 @@
     using BookingSystem.Infrastructure.Data.Models.Hotels;
     using Microsoft.EntityFrameworkCore;
     using static BookingSystem.Infrastructure.Data.Constants.DataConstants.Hotel;
+    using static BookingSystem.Infrastructure.Data.Constants.DataConstants.HotelReservation;
 
     public class HotelService : IHotelService
     {
@@ -60,6 +61,32 @@
                 Pets = hotel.Pets,
                 Rooms = await GetRoomsAsync(hotelId),
                 HotelsCount = await GetHotelsCountAsync()
+            };
+        }
+        public async Task<HotelReservationInputModel> GetForReserveAsync(int hotelId)
+        {
+            var hotel = await repository.AllReadOnly<Hotel>()
+                .Where(h => h.Id == hotelId).FirstOrDefaultAsync();
+
+            if(hotel == null)
+            {
+                throw new ArgumentException("Hotel does not exist!");
+            }
+
+            var rooms = await GetRoomsAsync(hotel.Id);
+
+            if(rooms == null)
+            {
+                throw new ArgumentException("Hotel does not have any rooms available!");
+            }
+
+            return new HotelReservationInputModel()
+            {
+                Hotel_Id = hotel.Id,
+                Rooms = rooms,
+                StartDate = DateTime.UtcNow.Date.ToString(DateTimeFormat),
+                EndDate = DateTime.UtcNow.Date.ToString(DateTimeFormat),
+                CreatedOn = DateTime.UtcNow.ToString()
             };
         }
         private async Task<IEnumerable<Room>> GetRoomsAsync(int hotelId)

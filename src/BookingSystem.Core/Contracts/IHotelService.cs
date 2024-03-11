@@ -5,5 +5,6 @@
     {
         Task<IEnumerable<HotelAllViewModel>> AllAsync();
         Task<HotelDetailsViewModel> DetailsAsync(int hotelId);
+        Task<HotelReservationInputModel> GetForReserveAsync(int hotelId);
     }
 }

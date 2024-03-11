@@ -27,5 +27,13 @@ namespace BookingSystem.Controllers
 
             return View(model);
         }
+
+        [HttpGet]
+        public async Task<IActionResult> FirstStepReserve(int id)
+        {
+            var model = await hotelService.GetForReserveAsync(id);
+
+            return View(model);
+        }
     }
 }
