@@ -2,6 +2,7 @@
 {
     using BookingSystem.Infrastructure.Data.Configurations.FlightConfigurations;
     using BookingSystem.Infrastructure.Data.Configurations.HotelConfigurations;
+    using BookingSystem.Infrastructure.Data.Configurations.HotelsConfigurations;
     using BookingSystem.Infrastructure.Data.Configurations.LandmarkConfigurations;
     using BookingSystem.Infrastructure.Data.Configurations.LandmarksConfigurations;
     using BookingSystem.Infrastructure.Data.Configurations.LocationConfigurations;
@@ -99,6 +100,11 @@
         /// </summary>
         public DbSet<Administrator> Administrators { get; set; } = null!;
 
+        /// <summary>
+        /// Hotels Reservations Verifies
+        /// </summary>
+        public DbSet<HotelReservationVerify> HotelsReservationsVerifies { get; set; } = null!;  
+
         protected override void OnModelCreating(ModelBuilder builder)
         {
             //Locations configuration
@@ -115,6 +121,8 @@
             builder.ApplyConfiguration(new HotelConfiguration());
             builder.ApplyConfiguration(new RoomConfiguration());
             builder.ApplyConfiguration(new HotelReservationConfiguration());
+
+            builder.ApplyConfiguration(new HotelReservationVerifyConfiguration());
 
 
             //Flights configuration
