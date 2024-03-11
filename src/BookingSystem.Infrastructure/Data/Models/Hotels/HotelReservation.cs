@@ -12,6 +12,34 @@
     public class HotelReservation
     {
         /// <summary>
+        /// Hotel's Reserver's First Name
+        /// </summary>
+        [Required]
+        [Comment("Hotel's Reserver's First Name")]
+        public string FirstName { get; set; } = null!;
+
+        /// <summary>
+        /// Hotel's Reserver's Last Name
+        /// </summary>
+        [Required]
+        [Comment("Hotel's Reserver's Last Name")]
+        public string LastName { get; set; } = null!;
+
+        /// <summary>
+        /// HotelReservation's Room Identifier
+        /// </summary>
+        [Required]
+        [Comment("HotelReservation's Room Identifier")]
+        public int Room_Id { get; set; }
+
+        /// <summary>
+        /// HotelReservation's Room"
+        /// </summary>
+        [ForeignKey(nameof(Room_Id))]
+        [Comment("Hotel Reservation's Room")]
+        public Room Room { get; set; } = null!;
+
+        /// <summary>
         /// HotelReservation's Hotel's Identifier
         /// </summary>
         [Required]

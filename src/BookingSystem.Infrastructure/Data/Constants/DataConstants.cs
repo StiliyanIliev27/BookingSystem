@@ -81,5 +81,18 @@
             public const int NameMinLength = 3;
             public const int NameMaxLength = 50;
         }
+
+        public static class HotelReservation
+        {
+            public const int FirstNameMinLength = 3;
+            public const int FirstNameMaxLength = 50;
+
+            public const int LastNameMinLength = 3;
+            public const int LastNameMaxLength = 50;
+
+            public const string DateTimeFormat = "dd/MM/yyyy";
+
+            public const string RequiredMessage = "{0} field is required!";
+        }
     }
 }
