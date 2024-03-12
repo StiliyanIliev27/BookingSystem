@@ -11,6 +11,17 @@
     [Comment("Hotel Reservation")]
     public class HotelReservation
     {
+        public HotelReservation()
+        {
+            Id = Guid.NewGuid().ToString();
+        }
+
+        /// <summary>
+        /// Hotel Reservation Identifier
+        /// </summary>
+        [Key]
+        [Comment("Hotel Reservation Identifier")]
+        public string Id { get; set; }
         /// <summary>
         /// Hotel's Reserver's First Name
         /// </summary>

@@ -27,26 +27,13 @@
         public int Hotel_Id { get; set; }
 
         [Required]
-        public string User_Id { get; set; } = null!;
-
-        [Required]
-        public decimal Price { get; set; }
-
-        [Required]
         [Display(Name = "Start Date")]
         public string StartDate { get; set; } = null!;
 
         [Required]
         [Display(Name = "End Date")]
         public string EndDate { get; set; } = null!;
-
-        [Required]
-        public int DurationDays { get; set; }
-
-        [Required]
-        public string CreatedOn { get; set; } = null!;
-
-        [Required]
+        
         public IEnumerable<Room>? Rooms { get; set; }
     }
 }

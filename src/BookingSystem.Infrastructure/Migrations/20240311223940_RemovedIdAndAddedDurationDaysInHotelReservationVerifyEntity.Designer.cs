@@ -4,6 +4,7 @@ using BookingSystem.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BookingSystem.Infrastructure.Migrations
 {
     [DbContext(typeof(BookingSystemDbContext))]
-    partial class BookingSystemDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240311223940_RemovedIdAndAddedDurationDaysInHotelReservationVerifyEntity")]
+    partial class RemovedIdAndAddedDurationDaysInHotelReservationVerifyEntity
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -874,10 +876,6 @@ namespace BookingSystem.Infrastructure.Migrations
                         .HasColumnType("nvarchar(max)")
                         .HasComment("Hotel's Reserver's First Name");
 
-                    b.Property<string>("Id")
-                        .HasColumnType("nvarchar(max)")
-                        .HasComment("Hotel Reservation Identifier");
-
                     b.Property<bool>("IsActive")
                         .HasColumnType("bit")
                         .HasComment("HotelReservation's Active Status");
@@ -909,6 +907,66 @@ namespace BookingSystem.Infrastructure.Migrations
                     b.ToTable("HotelsReservations");
 
                     b.HasComment("Hotel Reservation");
+                });
+
+            modelBuilder.Entity("BookingSystem.Infrastructure.Data.Models.Hotels.HotelReservationVerify", b =>
+                {
+                    b.Property<int>("Hotel_Id")
+                        .HasColumnType("int")
+                        .HasComment("Room's Hotel's Identifier");
+
+                    b.Property<string>("User_Id")
+                        .HasColumnType("nvarchar(450)")
+                        .HasComment("HotelReservation's User's Identifier");
+
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime2")
+                        .HasComment("HotelReservation's CreatedOn Time");
+
+                    b.Property<int>("DurationDays")
+                        .HasColumnType("int")
+                        .HasComment("Reservation duration days");
+
+                    b.Property<DateTime>("EndDate")
+                        .HasColumnType("datetime2")
+                        .HasComment("HotelReservation's End Date");
+
+                    b.Property<string>("FirstName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)")
+                        .HasComment("Hotel's Reserver's First Name");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("bit")
+                        .HasComment("HotelReservation's Active Status");
+
+                    b.Property<string>("LastName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)")
+                        .HasComment("Hotel's Reserver's Last Name");
+
+                    b.Property<decimal>("Price")
+                        .HasPrecision(18, 2)
+                        .HasColumnType("decimal(18,2)")
+                        .HasComment("HotelReservation's Total Price");
+
+                    b.Property<int>("Room_Id")
+                        .HasColumnType("int")
+                        .HasComment("HotelReservation's Room Identifier");
+
+                    b.Property<DateTime>("StartDate")
+                        .HasColumnType("datetime2")
+                        .HasComment("HotelReservation's Start Date");
+
+                    b.HasKey("Hotel_Id", "User_Id");
+
+                    b.HasIndex("Room_Id");
+
+                    b.HasIndex("User_Id");
+
+                    b.ToTable("HotelsReservationsVerifies");
+
+                    b.HasComment("Hotel Reservation Verify");
                 });
 
             modelBuilder.Entity("BookingSystem.Infrastructure.Data.Models.Hotels.Room", b =>
@@ -2472,15 +2530,15 @@ namespace BookingSystem.Infrastructure.Migrations
                         {
                             Id = "8d1f0bdc-f9e5-4856-a127-fb84281d56ad",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "57a40bef-ff17-4ee2-9f35-d9b48e3886b5",
+                            ConcurrencyStamp = "2d990a81-2b9d-4254-bb1e-a8e86c9c97fc",
                             Email = "guest@gmail.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             NormalizedEmail = "guest@gmail.com",
                             NormalizedUserName = "guest",
-                            PasswordHash = "AQAAAAEAACcQAAAAEIXd7vulUzacyGfNGPAGcLNB6dItkHwp7kKEW7y82DOerOeF2pfZzsL94FHp8tbHWQ==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEGJLr/3F1MPWtLdIN9uueyiC9ciOimfqPdyDzrwd5sTK3cjm784oepc54+aczxdfZQ==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "217ea223-7562-4b11-a822-690c9e4f0d62",
+                            SecurityStamp = "82256b8e-ea0d-43f6-b822-6192da02aaec",
                             TwoFactorEnabled = false,
                             UserName = "Guest"
                         },
@@ -2488,15 +2546,15 @@ namespace BookingSystem.Infrastructure.Migrations
                         {
                             Id = "c9019544-ec91-4248-bfc4-9d8a4f13430b",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "6b23325e-557a-4b3b-b6c7-afbb833d9803",
+                            ConcurrencyStamp = "0c8bf81e-5efa-4c66-8f30-c989301e18d1",
                             Email = "admin@gmail.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             NormalizedEmail = "admin@gmail.com",
                             NormalizedUserName = "administrator",
-                            PasswordHash = "AQAAAAEAACcQAAAAEKAiyJVACjnJTlxnUJs5DS+C0XjI9u6Dau7UIgWfo3rdGMffN0dNLOptfSn1Utmk+Q==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEF5kmW/b67L7kRhp8VlvAUtrx+1ruGWh65yFmymdNaiL65u/5IjDK40yOxHgAsPddA==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "5a3a3275-0016-4ed8-b931-719d56fff3e0",
+                            SecurityStamp = "22b31655-feb9-4902-8d22-279712e2f2ab",
                             TwoFactorEnabled = false,
                             UserName = "Administrator"
                         });
@@ -2656,6 +2714,33 @@ namespace BookingSystem.Infrastructure.Migrations
                 });
 
             modelBuilder.Entity("BookingSystem.Infrastructure.Data.Models.Hotels.HotelReservation", b =>
+                {
+                    b.HasOne("BookingSystem.Infrastructure.Data.Models.Hotels.Hotel", "Hotel")
+                        .WithMany()
+                        .HasForeignKey("Hotel_Id")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("BookingSystem.Infrastructure.Data.Models.Hotels.Room", "Room")
+                        .WithMany()
+                        .HasForeignKey("Room_Id")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", "User")
+                        .WithMany()
+                        .HasForeignKey("User_Id")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Hotel");
+
+                    b.Navigation("Room");
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("BookingSystem.Infrastructure.Data.Models.Hotels.HotelReservationVerify", b =>
                 {
                     b.HasOne("BookingSystem.Infrastructure.Data.Models.Hotels.Hotel", "Hotel")
                         .WithMany()

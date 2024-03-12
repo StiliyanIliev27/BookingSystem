@@ -1,5 +1,7 @@
 ﻿using BookingSystem.Core.Contracts;
+using BookingSystem.Core.Models.Hotel;
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
 
 namespace BookingSystem.Controllers
 {
@@ -29,9 +31,38 @@ namespace BookingSystem.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> FirstStepReserve(int id)
+        public async Task<IActionResult> Reserve(int id)
         {
             var model = await hotelService.GetForReserveAsync(id);
+
+            return View(model);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Reserve(HotelReservationInputModel model)
+        {
+            if (await hotelService.RoomExistsAsync(model.Room_Id) == false)
+            {
+                ModelState.AddModelError(nameof(model.Room_Id), "Room does not exist!");
+            }
+
+            if(!ModelState.IsValid)
+            {
+                model.Rooms = await hotelService.GetRoomsAsync(model.Hotel_Id);
+                return View(model);               
+            }
+
+            string userId = User.GetUserId();
+
+            await hotelService.ReserveAsync(model, userId);
+
+            return RedirectToAction(nameof(All));
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Verify(string id)
+        {
+            var model = await hotelService.VerifyReservationAsync(id);
 
             return View(model);
         }

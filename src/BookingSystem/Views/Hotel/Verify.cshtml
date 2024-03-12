@@ -1,0 +1,44 @@
+﻿
+@model IEnumerable<HotelReservationVerifyViewModel>
+@{
+    ViewData["Title"] = "Hotel reservations confirmation in process...";
+}
+
+<h2>@ViewData["Title"]</h2>
+<hr />
+
+<div class="card-deck">
+    @foreach(var reservation in Model)
+    {
+        <div style="width: 400px; height: 700px" class="card">
+            <img style="width: 400px; height: 300px;" class="card-img-top" src="@reservation.HotelImageUrl" alt="Hotel image">
+            <div class="card-body">
+                <h5 style="font-weight: bold;" class="card-title">
+                    <span style="font-style: italic; font-weight: normal;">@reservation.HotelName</span>
+                    <span>
+                        @for (int i = 1; i <= reservation.HotelStarRate; i++)
+                        {
+                            <img style="height: 12px; width: 12px;" src="~/icon/star.png" />
+                        }
+                    </span>
+                </h5>
+                <p style="font-weight: bold;" class="card-text">Reservation Holder's First Name: <span style="font-style: italic; font-weight: normal;">@reservation.FirstName</span></p>
+                <p style="font-weight: bold;" class="card-text">Reservation Holder's Last Name: <span style="font-style: italic; font-weight: normal;">@reservation.LastName</span></p>
+                <p style="font-weight: bold;" class="card-text">Room type: <span style="font-style: italic; font-weight: normal;">@reservation.RoomType</span></p>
+                <p style="font-weight: bold;" class="card-text">Price: &#8364<span style="font-style: italic; font-weight: normal;">@reservation.Price</span></p>
+                <p style="font-weight: bold;" class="card-text">Start Date: <span style="font-style: italic; font-weight: normal;">@reservation.StartDate</span></p>
+                <p style="font-weight: bold;" class="card-text">End Date: <span style="font-style: italic; font-weight: normal;">@reservation.EndDate</span></p>
+                <p style="font-weight: bold;" class="card-text">
+                    Total length of stay:
+                    @if (@reservation.Nights == 1)
+                    {
+                        <span style ="font-style: italic; font-weight: normal;">@reservation.Nights night</span>
+                    }
+                    else
+                    {
+                        <span style="font-style: italic; font-weight: normal;">@reservation.Nights nights</span>
+                    }</p>
+            </div>
+        </div>
+    }  
+</div>

@@ -60,7 +60,7 @@
             </div>
 
             <div class="mb-3">
-                <input class="btn btn-warning mb-2 w-100 p-3 fw-bold" type="submit" value="Next: Final Details ->" />
+                <input class="btn btn-warning mb-2 w-100 p-3 fw-bold" type="submit" value="Reserve" />
             </div>
             <div class="mb-3">
                 <a asp-controller="Hotel" asp-action="Details" asp-route-id="@Model.Hotel_Id" class="btn btn-primary mb-2 w-100 p-3 fw-bold">Back to the hotel</a>
@@ -79,7 +79,7 @@
     <script>
         $(document).ready(function () {
             $('#startDatePicker, #endDatePicker').datepicker({
-                format: 'mm/dd/yyyy',
+                format: 'dd/mm/yyyy',
                 autoclose: true,
                 todayHighlight: true,
                 startDate: new Date()
