@@ -2,6 +2,7 @@
 {
     using BookingSystem.Infrastructure.Data;
     using Microsoft.EntityFrameworkCore;
+    using System.Threading.Tasks;
 
     public class Repository : IRepository
     {
@@ -17,5 +18,9 @@
         public IQueryable<T> All<T>() where T : class => DbSet<T>();
 
         public IQueryable<T> AllReadOnly<T>() where T : class => DbSet<T>().AsNoTracking();
+
+        public async Task AddAsync<T>(T entity) where T : class => await context.AddAsync(entity);
+
+        public async Task<int> SaveChangesAsync() => await context.SaveChangesAsync();
     }
 }
