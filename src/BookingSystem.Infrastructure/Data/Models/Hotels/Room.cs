@@ -53,13 +53,6 @@
         public bool? WiFi { get; set; }
 
         /// <summary>
-        /// Room's Reservation Status
-        /// </summary>
-        [Required]
-        [Comment("Room's Reservation Status")]
-        public bool IsReserved { get; set; } = false;
-
-        /// <summary>
         /// Room's Active Status
         /// </summary>
         [Required]

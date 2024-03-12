@@ -1339,7 +1339,6 @@
                 Hotel_Id = 1,
                 PricePerNight = 165m,
                 WiFi = true,
-                IsReserved = false,
                 IsActive = true,
                 Count = 5
             };
@@ -1351,7 +1350,6 @@
                 Hotel_Id = 1,
                 PricePerNight = 302m,
                 WiFi = true,
-                IsReserved = false,
                 IsActive = true,
                 Count = 5
             };
@@ -1363,7 +1361,6 @@
                 Hotel_Id = 1,
                 PricePerNight = 578m,
                 WiFi = true,
-                IsReserved = false,
                 IsActive = true,
                 Count = 5
             };
@@ -1375,7 +1372,6 @@
                 Hotel_Id = 1,
                 PricePerNight = 630m,
                 WiFi = true,
-                IsReserved = false,
                 IsActive = true,
                 Count = 5
             };
@@ -1387,7 +1383,6 @@
                 Hotel_Id = 3,
                 PricePerNight = 630m,
                 WiFi = true,
-                IsReserved = false,
                 IsActive = true,
                 Count = 5
             };
@@ -1399,7 +1394,6 @@
                 Hotel_Id = 3,
                 PricePerNight = 470m,
                 WiFi = true,
-                IsReserved = false,
                 IsActive = true,
                 Count = 5
             };
@@ -1411,7 +1405,6 @@
                 Hotel_Id = 2,
                 PricePerNight = 216m,
                 WiFi = true,
-                IsReserved = false,
                 IsActive = true,
                 Count = 5
             };
@@ -1423,7 +1416,6 @@
                 Hotel_Id = 2,
                 PricePerNight = 157m,
                 WiFi = true,
-                IsReserved = false,
                 IsActive = true,
                 Count = 5
             };
@@ -1437,7 +1429,6 @@
                 Hotel_Id = 4,
                 PricePerNight = 433m,
                 WiFi = true,
-                IsReserved = false,
                 IsActive = true,
                 Count = 5
             };
@@ -1449,7 +1440,6 @@
                 Hotel_Id = 4,
                 PricePerNight = 488m,
                 WiFi = true,
-                IsReserved = false,
                 IsActive = true,
                 Count = 5
             };
@@ -1461,7 +1451,6 @@
                 Hotel_Id = 4,
                 PricePerNight = 644m,
                 WiFi = true,
-                IsReserved = false,
                 IsActive = true,
                 Count = 5
             };
@@ -1473,7 +1462,6 @@
                 Hotel_Id = 5,
                 PricePerNight = 201m,
                 WiFi = true,
-                IsReserved = false,
                 IsActive = true,
                 Count = 5
             };
@@ -1485,7 +1473,6 @@
                 Hotel_Id = 5,
                 PricePerNight = 201m,
                 WiFi = true,
-                IsReserved = false,
                 IsActive = true,
                 Count = 5
             };
@@ -1497,7 +1484,6 @@
                 Hotel_Id = 6,
                 PricePerNight = 197m,
                 WiFi = true,
-                IsReserved = false,
                 IsActive = true,
                 Count = 5
             };
@@ -1511,7 +1497,6 @@
                 Hotel_Id = 9,
                 PricePerNight = 193m,
                 WiFi = true,
-                IsReserved = false,
                 IsActive = true,
                 Count = 5
             };
@@ -1523,7 +1508,6 @@
                 Hotel_Id = 9,
                 PricePerNight = 244m,
                 WiFi = true,
-                IsReserved = false,
                 IsActive = true,
                 Count = 5
             };
@@ -1535,7 +1519,6 @@
                 Hotel_Id = 8,
                 PricePerNight = 195m,
                 WiFi = true,
-                IsReserved = false,
                 IsActive = true,
                 Count = 5
             };
@@ -1547,7 +1530,6 @@
                 Hotel_Id = 8,
                 PricePerNight = 238m,
                 WiFi = true,
-                IsReserved = false,
                 IsActive = true,
                 Count = 5
             };
@@ -1559,7 +1541,6 @@
                 Hotel_Id = 8,
                 PricePerNight = 248m,
                 WiFi = true,
-                IsReserved = false,
                 IsActive = true,
                 Count = 5
             };
@@ -1571,7 +1552,6 @@
                 Hotel_Id = 7,
                 PricePerNight = 314m,
                 WiFi = true,
-                IsReserved = false,
                 IsActive = true,
                 Count = 5
             };
@@ -1583,7 +1563,6 @@
                 Hotel_Id = 7,
                 PricePerNight = 351m,
                 WiFi = true,
-                IsReserved = false,
                 IsActive = true,
                 Count = 5
             };
@@ -1597,7 +1576,6 @@
                 Hotel_Id = 10,
                 PricePerNight = 70m,
                 WiFi = true,
-                IsReserved = false,
                 IsActive = true,
                 Count = 5
             };
@@ -1609,7 +1587,6 @@
                 Hotel_Id = 10,
                 PricePerNight = 78m,
                 WiFi = true,
-                IsReserved = false,
                 IsActive = true,
                 Count = 5
             };
@@ -1621,7 +1598,6 @@
                 Hotel_Id = 10,
                 PricePerNight = 104m,
                 WiFi = true,
-                IsReserved = false,
                 IsActive = true,
                 Count = 5
             };
@@ -1633,7 +1609,6 @@
                 Hotel_Id = 11,
                 PricePerNight = 71m,
                 WiFi = true,
-                IsReserved = false,
                 IsActive = true,
                 Count = 5
             };
@@ -1645,7 +1620,6 @@
                 Hotel_Id = 11,
                 PricePerNight = 80m,
                 WiFi = true,
-                IsReserved = false,
                 IsActive = true,
                 Count = 5
             };
@@ -1657,7 +1631,6 @@
                 Hotel_Id = 11,
                 PricePerNight = 161m,
                 WiFi = true,
-                IsReserved = false,
                 IsActive = true,
                 Count = 5
             };
@@ -1669,7 +1642,6 @@
                 Hotel_Id = 11,
                 PricePerNight = 173m,
                 WiFi = true,
-                IsReserved = false,
                 IsActive = true,
                 Count = 5
             };
@@ -1681,7 +1653,6 @@
                 Hotel_Id = 12,
                 PricePerNight = 112m,
                 WiFi = true,
-                IsReserved = false,
                 IsActive = true,
                 Count = 5
             };
@@ -1693,7 +1664,6 @@
                 Hotel_Id = 12,
                 PricePerNight = 125m,
                 WiFi = true,
-                IsReserved = false,
                 IsActive = true,
                 Count = 5
             };
@@ -1705,7 +1675,6 @@
                 Hotel_Id = 12,
                 PricePerNight = 190m,
                 WiFi = true,
-                IsReserved = false,
                 IsActive = true,
                 Count = 5
             };
@@ -1719,7 +1688,6 @@
                 Hotel_Id = 13,
                 PricePerNight = 95m,
                 WiFi = true,
-                IsReserved = false,
                 IsActive = true,
                 Count = 5
             };
@@ -1731,7 +1699,6 @@
                 Hotel_Id = 13,
                 PricePerNight = 108m,
                 WiFi = true,
-                IsReserved = false,
                 IsActive = true,
                 Count = 5
             };
@@ -1743,7 +1710,6 @@
                 Hotel_Id = 13,
                 PricePerNight = 209m,
                 WiFi = true,
-                IsReserved = false,
                 IsActive = true,
                 Count = 5
             };
@@ -1755,7 +1721,6 @@
                 Hotel_Id = 14,
                 PricePerNight = 260m,
                 WiFi = true,
-                IsReserved = false,
                 IsActive = true,
                 Count = 5
             };
@@ -1767,7 +1732,6 @@
                 Hotel_Id = 14,
                 PricePerNight = 207m,
                 WiFi = true,
-                IsReserved = false,
                 IsActive = true,
                 Count = 5
             };
@@ -1779,7 +1743,6 @@
                 Hotel_Id = 14,
                 PricePerNight = 327m,
                 WiFi = true,
-                IsReserved = false,
                 IsActive = true,
                 Count = 5
             };
@@ -1791,7 +1754,6 @@
                 Hotel_Id = 14,
                 PricePerNight = 350m,
                 WiFi = true,
-                IsReserved = false,
                 IsActive = true,
                 Count = 5
             };
@@ -1803,7 +1765,6 @@
                 Hotel_Id = 15,
                 PricePerNight = 133m,
                 WiFi = true,
-                IsReserved = false,
                 IsActive = true,
                 Count = 5
             };
@@ -1815,7 +1776,6 @@
                 Hotel_Id = 15,
                 PricePerNight = 155m,
                 WiFi = true,
-                IsReserved = false,
                 IsActive = true,
                 Count = 5
             };
@@ -1827,7 +1787,6 @@
                 Hotel_Id = 15,
                 PricePerNight = 200m,
                 WiFi = true,
-                IsReserved = false,
                 IsActive = true,
                 Count = 5
             };
@@ -1839,7 +1798,6 @@
                 Hotel_Id = 15,
                 PricePerNight = 329m,
                 WiFi = true,
-                IsReserved = false,
                 IsActive = true,
                 Count = 5
             };
@@ -1853,7 +1811,6 @@
                 Hotel_Id = 16,
                 PricePerNight = 135m,
                 WiFi = true,
-                IsReserved = false,
                 IsActive = true,
                 Count = 5
             };
@@ -1865,7 +1822,6 @@
                 Hotel_Id = 16,
                 PricePerNight = 198m,
                 WiFi = true,
-                IsReserved = false,
                 IsActive = true,
                 Count = 5
             };
@@ -1877,7 +1833,6 @@
                 Hotel_Id = 17,
                 PricePerNight = 223m,
                 WiFi = true,
-                IsReserved = false,
                 IsActive = true,
                 Count = 5
             };
@@ -1889,7 +1844,6 @@
                 Hotel_Id = 17,
                 PricePerNight = 289m,
                 WiFi = true,
-                IsReserved = false,
                 IsActive = true,
                 Count = 5
             };
@@ -1901,7 +1855,6 @@
                 Hotel_Id = 18,
                 PricePerNight = 378m,
                 WiFi = true,
-                IsReserved = false,
                 IsActive = true,
                 Count = 5
             };
@@ -1913,7 +1866,6 @@
                 Hotel_Id = 18,
                 PricePerNight = 460m,
                 WiFi = true,
-                IsReserved = false,
                 IsActive = true,
                 Count = 5
             };
@@ -1925,7 +1877,6 @@
                 Hotel_Id = 18,
                 PricePerNight = 853m,
                 WiFi = true,
-                IsReserved = false,
                 IsActive = true,
                 Count = 5
             };
