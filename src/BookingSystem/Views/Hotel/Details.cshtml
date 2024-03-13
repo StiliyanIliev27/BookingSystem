@@ -25,9 +25,11 @@
             <i class="fa-solid fa-location-dot"></i>
             <small>@Model.Address, @Model.CityName, @Model.CountryName</small>                               
             
-            <img style="width: 500px; height: 300px; object-fit: cover; margin-top: 10px;" src="@Model.ImageUrl" class="card-img"/>
+            <div style="width: 613px;">
+                <img style="width: 613px; height: 300px; object-fit: cover; margin-top: 15px;" src="@Model.ImageUrl" class="card-img" />
+            </div>    
             
-            <p style="margin-top: 20px; margin-bottom: 0px; text-align: justify;">@Model.Details</p>
+            <p style="margin-top: 15px; margin-bottom: 0px; text-align: justify;">@Model.Details</p>
         </div>
        
         <div style="display: flex; flex-direction: row; margin-top: 5px; justify-content: space-between;">
@@ -93,7 +95,7 @@
                         }                        
                     </td>
                     <td>
-                        @room.PricePerNight
+                        &#8364 @room.PricePerNight
                     </td>
                 </tr>
             }
