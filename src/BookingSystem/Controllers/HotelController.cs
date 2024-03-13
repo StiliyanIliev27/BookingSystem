@@ -46,25 +46,33 @@ namespace BookingSystem.Controllers
                 ModelState.AddModelError(nameof(model.Room_Id), "Room does not exist!");
             }
 
-            if(!ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
-                model.Rooms = await hotelService.GetRoomsAsync(model.Hotel_Id);
-                return View(model);               
+                model.Rooms = await hotelService.GetRoomsAsync(model.Hotel_Id); 
+                return View(model);
             }
 
             string userId = User.GetUserId();
 
             await hotelService.ReserveAsync(model, userId);
 
-            return RedirectToAction(nameof(All));
+            return RedirectToAction(nameof(Verify));
         }
 
         [HttpGet]
-        public async Task<IActionResult> Verify(string id)
+        public async Task<IActionResult> Verify()
         {
-            var model = await hotelService.VerifyReservationAsync(id);
+            var model = await hotelService.GetForVerifyReservationAsync(User.GetUserId());
 
             return View(model);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Verify(string id)
+        {
+            await hotelService.VerifyReservationAsync(id);
+
+            return RedirectToAction(nameof(All));
         }
     }
 }

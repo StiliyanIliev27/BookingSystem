@@ -71,10 +71,20 @@
                     <th>
                         @room.Type.ToString()
                         <br />
-                        <small style="font-size: 11px; color: red;">
-                            <span><i class="fa-solid fa-hourglass-end"></i></span>
-                            Only @room.Count rooms left on our site
-                        </small>
+                        @if(room.Count == 0)
+                        {
+                            <small style="font-size: 11px; color: red;">
+                                <span><i class="fa-solid fa-hourglass-end"></i></span>
+                                @room.Count @room.Type rooms left on our site
+                            </small>
+                        }
+                        else
+                        {
+                            <small style="font-size: 11px; color: red;">
+                                <span><i class="fa-solid fa-hourglass-end"></i></span>
+                                Only @room.Count rooms left on our site
+                            </small>
+                        }
                     </th>
                     <td>
                         @for(int i = 1; i <= (int) room.Type; i++)

@@ -9,11 +9,10 @@
         Task<HotelDetailsViewModel> DetailsAsync(int hotelId);
         Task<HotelReservationInputModel> GetForReserveAsync(int hotelId);
         Task ReserveAsync(HotelReservationInputModel model, string userId);
-        Task<IEnumerable<HotelReservationVerifyViewModel>> VerifyReservationAsync(string reservationId);
+        Task<IEnumerable<HotelReservationVerifyViewModel>> GetForVerifyReservationAsync(string userId);
+        Task VerifyReservationAsync(string reservationId);
         Task<bool> RoomExistsAsync(int roomId);
         Task<IEnumerable<Room>> GetRoomsAsync(int hotelId);
         Task<int> GetHotelsCountAsync();
-        int GetDurationDays(string reservationId);
-        decimal GetTotalPrice(string reservationId);
     }
 }

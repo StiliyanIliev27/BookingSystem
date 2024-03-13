@@ -37,15 +37,26 @@
             return (int)(hr.EndDate - hr.StartDate).TotalDays;
         }
 
-        public decimal GetTotalPrice(string reservationId)
+        public decimal GetTotalPrice(int roomId)
         {
             var hr = repository.AllReadOnly<HotelReservation>()
-                .Where(hr => hr.Id == reservationId).First();
+                .Where(hr => hr.Room_Id == roomId).First();
 
             var room = repository.AllReadOnly<Room>()
-                .Where(r => r.Id == hr.Room_Id).First();
+                .Where(r => r.Id == roomId).First();
 
             return room.PricePerNight * (int)(hr.EndDate - hr.StartDate).TotalDays;
+        }
+
+        public string GetHotelImageUrl(int hotelId)
+        {
+            var hr = repository.AllReadOnly<HotelReservation>()
+                .Where(hr => hr.Hotel_Id == hotelId).First();
+
+            var hotel = repository.AllReadOnly<Hotel>()
+                .Where(h => h.Id == hotelId).First();
+
+            return hotel.ImageUrl;
         }
 
         public async Task<bool> RoomExistsAsync(int roomId)
@@ -151,12 +162,13 @@
             };
         }
 
-        public async Task<IEnumerable<HotelReservationVerifyViewModel>> VerifyReservationAsync(string reservationId)
+        public async Task<IEnumerable<HotelReservationVerifyViewModel>> GetForVerifyReservationAsync(string userId)
         {
             return await repository.AllReadOnly<HotelReservation>()
-                .Where(hr => hr.Id == reservationId)
+                .Where(hr => hr.User_Id == userId && hr.IsActive == false)
                 .Select(hr => new HotelReservationVerifyViewModel()
                 {
+                    Id = hr.Id,
                     FirstName = hr.FirstName,
                     LastName = hr.LastName,
                     RoomType = repository.AllReadOnly<Room>()
@@ -165,13 +177,48 @@
                          .Where(h => h.Id == hr.Hotel_Id).First().Name,
                     HotelStarRate = repository.AllReadOnly<Hotel>()
                          .Where(h => h.Id == hr.Hotel_Id).First().StarRate,
-                    HotelImageUrl = repository.AllReadOnly<Hotel>().First().ImageUrl,
-                    Price = GetTotalPrice(reservationId),
-                    Nights = GetDurationDays(reservationId),
+                    HotelImageUrl = repository.AllReadOnly<Hotel>()
+                         .Where(h => h.Id == hr.Hotel_Id).First().ImageUrl,
+                    Price = (repository.AllReadOnly<Room>()
+                         .Where(r => r.Id == hr.Room_Id).First().PricePerNight) * ((int)(hr.EndDate - hr.StartDate).TotalDays),
+                    Nights = ((int)(hr.EndDate - hr.StartDate).TotalDays),
                     StartDate = hr.StartDate.ToString(DateTimeFormat),
                     EndDate = hr.EndDate.ToString(DateTimeFormat),
                 })
                 .ToListAsync();            
+        }
+
+        public async Task VerifyReservationAsync(string reservationId)
+        {
+            var res = await repository.All<HotelReservation>()
+                .FirstOrDefaultAsync(hr => hr.Id == reservationId);         
+
+            if(res == null)
+            {
+                throw new ArgumentException("The current hotel reservation does not exist!");
+            }
+
+            var room = await repository.All<Room>()
+                .FirstOrDefaultAsync(r => r.Id == res.Room_Id);
+
+            if(room == null)
+            {
+                throw new ArgumentException("The current room does not exist!");
+            }            
+
+            if(room.Count > 0)
+            {
+                room.Count -= 1;
+            }
+            else
+            {
+                throw new ArgumentException("No more rooms are available for the current time!");
+            }
+
+            res.Price = room.PricePerNight * (int)(res.EndDate - res.StartDate).TotalDays;
+            res.IsActive = true;
+
+            await repository.SaveChangesAsync();
         }
     }
 }

@@ -4,41 +4,61 @@
     ViewData["Title"] = "Hotel reservations confirmation in process...";
 }
 
-<h2>@ViewData["Title"]</h2>
+<h2 style="text-align: center;">@ViewData["Title"]</h2>
 <hr />
 
-<div class="card-deck">
-    @foreach(var reservation in Model)
-    {
-        <div style="width: 400px; height: 700px" class="card">
-            <img style="width: 400px; height: 300px;" class="card-img-top" src="@reservation.HotelImageUrl" alt="Hotel image">
-            <div class="card-body">
-                <h5 style="font-weight: bold;" class="card-title">
-                    <span style="font-style: italic; font-weight: normal;">@reservation.HotelName</span>
-                    <span>
-                        @for (int i = 1; i <= reservation.HotelStarRate; i++)
+@if(Model.Any())
+{
+    <div style="display: flex; flex-direction: row;" class="card-deck">
+        @foreach (var reservation in Model)
+        {
+            <div style="width: 400px; height: 815px; margin-right: 10px;" class="card">
+                <img style="width: 400px; height: 260px;" class="card-img-top" src="@reservation.HotelImageUrl" alt="Hotel image">
+                <div style="padding-bottom: 0px;" class="card-body">
+                    <h5 style="text-align: center; height: 72px;" class="card-title">
+                        Hotel: <span>@reservation.HotelName</span>
+                        <br />
+                        <span>
+                            @for (int i = 1; i <= reservation.HotelStarRate; i++)
+                            {
+                                <img style="height: 12px; width: 12px;" src="~/icon/star.png" />
+                            }
+                        </span>
+                    </h5>
+                    <hr />
+                    <p style="font-weight: bold;" class="card-text">Reservation Holder's First Name: <span style="font-style: italic; font-weight: normal;">@reservation.FirstName</span></p>
+                    <p style="font-weight: bold;" class="card-text">Reservation Holder's Last Name: <span style="font-style: italic; font-weight: normal;">@reservation.LastName</span></p>
+                    <p style="font-weight: bold;" class="card-text">Room type: <span style="font-style: italic; font-weight: normal;">@reservation.RoomType</span></p>
+                    <p style="font-weight: bold;" class="card-text">Price: &#8364<span style="font-style: italic; font-weight: normal;">@reservation.Price</span></p>
+                    <p style="font-weight: bold;" class="card-text">Start Date: <span style="font-style: italic; font-weight: normal;">@reservation.StartDate</span></p>
+                    <p style="font-weight: bold;" class="card-text">End Date: <span style="font-style: italic; font-weight: normal;">@reservation.EndDate</span></p>
+                    <p style="font-weight: bold;" class="card-text">
+                        Total length of stay:
+                        @if (@reservation.Nights == 1)
                         {
-                            <img style="height: 12px; width: 12px;" src="~/icon/star.png" />
+                            <span style="font-style: italic; font-weight: normal;">@reservation.Nights night</span>
                         }
-                    </span>
-                </h5>
-                <p style="font-weight: bold;" class="card-text">Reservation Holder's First Name: <span style="font-style: italic; font-weight: normal;">@reservation.FirstName</span></p>
-                <p style="font-weight: bold;" class="card-text">Reservation Holder's Last Name: <span style="font-style: italic; font-weight: normal;">@reservation.LastName</span></p>
-                <p style="font-weight: bold;" class="card-text">Room type: <span style="font-style: italic; font-weight: normal;">@reservation.RoomType</span></p>
-                <p style="font-weight: bold;" class="card-text">Price: &#8364<span style="font-style: italic; font-weight: normal;">@reservation.Price</span></p>
-                <p style="font-weight: bold;" class="card-text">Start Date: <span style="font-style: italic; font-weight: normal;">@reservation.StartDate</span></p>
-                <p style="font-weight: bold;" class="card-text">End Date: <span style="font-style: italic; font-weight: normal;">@reservation.EndDate</span></p>
-                <p style="font-weight: bold;" class="card-text">
-                    Total length of stay:
-                    @if (@reservation.Nights == 1)
-                    {
-                        <span style ="font-style: italic; font-weight: normal;">@reservation.Nights night</span>
-                    }
-                    else
-                    {
-                        <span style="font-style: italic; font-weight: normal;">@reservation.Nights nights</span>
-                    }</p>
+                        else
+                        {
+                            <span style="font-style: italic; font-weight: normal;">@reservation.Nights nights</span>
+                        }
+                    </p>
+
+                    <div style="display: flex; flex-direction: row; justify-content: space-between;">
+                        <a asp-controller="Hotel" asp-action="All" style="margin-right: 10px; margin-top: 10px;" class="btn btn-danger mb-2 fw-bold">Remove the reservation</a>
+
+                        <form method="post" asp-controller="Hotel" asp-action="Verify" asp-route-id="@reservation.Id">
+                            <button type="submit" style="margin-top: 10px;" class="btn btn-success mb-2 fw-bold">Confirm the reservation</button>
+                        </form>
+                    </div>
+                    <a asp-controller="Hotel" asp-action="All" style="width: 366px; margin-top: 0px;" class="btn btn-warning mb-2 p-3 fw-bold">Back to All Hotels</a>
+                </div>
             </div>
-        </div>
-    }  
-</div>
+        }
+    </div>
+}
+else
+{
+    <h3 style="text-align: center; margin-top: 300px;">No verifications in process!</h3>
+}
+
