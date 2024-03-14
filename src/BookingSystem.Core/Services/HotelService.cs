@@ -231,9 +231,45 @@
                 throw new ArgumentException("The hotel reservation does not exist!");
             }
 
+            var room = await repository.All<Room>()
+                .Where(r => r.Id == hr.Room_Id).FirstOrDefaultAsync();
+
+            if(room == null)
+            {
+                throw new ArgumentException("The room does not exist!");
+            }
+
+            if(room.IsActive == true)
+            {
+                room.Count += 1;
+            }
+
             repository.Delete(hr);
            
             await repository.SaveChangesAsync();
+        }
+
+        public async Task<IEnumerable<HotelReservationViewModel>> AllReservationsAsync(string userId)
+        {
+            return await repository.AllReadOnly<HotelReservation>()
+                .Where(hr => hr.User_Id == userId && hr.IsActive == true)
+                .Include(hr => hr.Hotel)
+                .Include(hr => hr.Room)
+                .Select(hr => new HotelReservationViewModel()
+                {
+                    Id = hr.Id,
+                    FirstName = hr.FirstName,
+                    LastName = hr.LastName,
+                    Hotel_Id = hr.Hotel_Id,
+                    HotelName = hr.Hotel.Name,
+                    HotelImageUrl = hr.Hotel.ImageUrl,
+                    Price = hr.Price,
+                    RoomType = hr.Room.Type.ToString(),
+                    StartDate = hr.StartDate.ToString(DateTimeFormat),
+                    EndDate = hr.EndDate.ToString(DateTimeFormat),
+                    CreatedOn = hr.CreatedOn.ToString(CreatedOnFormat),
+                })
+                .ToListAsync();
         }
     }
 }

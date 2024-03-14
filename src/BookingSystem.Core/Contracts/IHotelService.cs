@@ -12,6 +12,7 @@
         Task<IEnumerable<HotelReservationVerifyViewModel>> GetForVerifyReservationAsync(string userId);
         Task VerifyReservationAsync(string reservationId);
         Task CancellVerificationAsync(string reservationId);
+        Task<IEnumerable<HotelReservationViewModel>> AllReservationsAsync(string userId); 
         Task<bool> RoomExistsAsync(int roomId);
         Task<IEnumerable<Room>> GetRoomsAsync(int hotelId);
         Task<int> GetHotelsCountAsync();

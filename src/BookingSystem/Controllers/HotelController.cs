@@ -62,7 +62,8 @@ namespace BookingSystem.Controllers
         [HttpGet]
         public async Task<IActionResult> Verify()
         {
-            var model = await hotelService.GetForVerifyReservationAsync(User.GetUserId());
+            string userId = User.GetUserId();
+            var model = await hotelService.GetForVerifyReservationAsync(userId);
 
             return View(model);
         }
@@ -81,6 +82,15 @@ namespace BookingSystem.Controllers
             await hotelService.CancellVerificationAsync(id);
 
             return RedirectToAction(nameof(Verify));
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> AllReservations()
+        {
+            string userId = User.GetUserId();
+            var model = await hotelService.AllReservationsAsync(userId);
+
+            return View(model);
         }
     }
 }

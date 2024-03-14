@@ -93,6 +93,8 @@
             public const string DateTimeFormat = "dd/MM/yyyy";
 
             public const string RequiredMessage = "{0} field is required!";
+
+            public const string CreatedOnFormat = "dd/MM/yyyy HH:mm";
         }
     }
 }

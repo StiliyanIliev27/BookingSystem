@@ -1,0 +1,75 @@
+﻿@model IEnumerable<HotelReservationViewModel>
+@{
+    ViewData["Title"] = "Hotel reservations";
+}
+
+<h2 class="text-center">@ViewData["Title"]</h2>
+<hr />
+
+@if (Model.Any())
+{
+    <div class="container">
+        <div class="row">
+            @foreach (var reservation in Model)
+            {
+                <div class="col-lg-3 col-md-4 col-sm-6 mb-4">
+                    <div class="card">
+                        <img class="card-img-top" src="@reservation.HotelImageUrl" alt="Card image cap">
+                        <div class="card-body pb-0">
+                            <a asp-controller="Hotel" asp-action="Details" asp-route-id="@reservation.Hotel_Id">
+                                <h5 style="height: 50px;" class="card-title text-center">@reservation.HotelName</h5>
+                            </a>
+                            <p class="card-text"><strong>Reservation Holder's First Name:</strong> <span style="font-style: italic;">@reservation.FirstName</span></p>
+                            <p class="card-text"><strong>Reservation Holder's Last Name:</strong> <span style="font-style: italic;">@reservation.LastName</span></p>
+                            <p class="card-text"><strong>Room type:</strong> <span style="font-style: italic;">@reservation.RoomType</span></p>
+                            <p class="card-text"><strong>Price:</strong> &#8364;<span style="font-style: italic;">@reservation.Price</span></p>
+                            <p class="card-text"><strong>Start Date:</strong> <span style="font-style: italic;">@reservation.StartDate</span></p>
+                            <p class="card-text"><strong>End Date:</strong> <span style="font-style: italic;">@reservation.EndDate</span></p>
+
+                            <div class="d-flex justify-content-between align-items-center mb-3">
+                                <form method="post" asp-controller="Hotel" asp-action="CancellVerification" asp-route-id="@reservation.Id">
+                                    <button type="submit" style="width: 120px;" class="btn btn-danger fw-bold">Cancell the reservation</button>
+                                </form>
+                                <form method="post" asp-controller="Hotel" asp-action="Edit" asp-route-id="@reservation.Id">
+                                    <button type="submit" style="width: 120px; height: 61px;" class="btn btn-warning fw-bold">Edit</button>
+                                </form>
+                            </div>
+                        </div>
+                        <div class="card-footer">
+                            <small class="text-muted">Created on: @reservation.CreatedOn</small>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+}
+else
+{
+    <h3 class="text-center mt-5">You have no hotel reservations at the moment...</h3>
+}
+
+<style>
+    .card-img-top {
+        width: 100%;
+        height: 200px;
+        object-fit: cover;
+    }
+</style>
+
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            $('.row').each(function () {
+                var maxHeight = 0;
+                $(this).find('.card').each(function () {
+                    var cardHeight = $(this).outerHeight();
+                    if (cardHeight > maxHeight) {
+                        maxHeight = cardHeight;
+                    }
+                });
+                $(this).find('.card').css('min-height', maxHeight + 'px');
+            });
+        });
+    </script>
+}
