@@ -53,7 +53,10 @@
                     <option disabled selected value="">Select Room...</option>
                     @foreach (var room in Model.Rooms!)
                     {
-                        <option value="@room.Id">@room.Type.ToString()</option>
+                        if(room.Count > 0)
+                        {
+                            <option value="@room.Id">@room.Type.ToString()</option>
+                        }                     
                     }
                 </select>
                 <span asp-validation-for="@Model.Room_Id" class="text-danger"></span>
