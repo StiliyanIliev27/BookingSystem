@@ -220,5 +220,20 @@
 
             await repository.SaveChangesAsync();
         }
+
+        public async Task CancellVerificationAsync(string reservationId)
+        {
+            var hr = await repository.All<HotelReservation>()
+                .Where(hr => hr.Id == reservationId).FirstOrDefaultAsync();
+
+            if(hr == null)
+            {
+                throw new ArgumentException("The hotel reservation does not exist!");
+            }
+
+            repository.Delete(hr);
+           
+            await repository.SaveChangesAsync();
+        }
     }
 }

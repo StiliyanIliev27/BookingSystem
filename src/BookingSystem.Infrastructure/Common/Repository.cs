@@ -2,6 +2,7 @@
 {
     using BookingSystem.Infrastructure.Data;
     using Microsoft.EntityFrameworkCore;
+    using Microsoft.EntityFrameworkCore.ChangeTracking;
     using System.Threading.Tasks;
 
     public class Repository : IRepository
@@ -21,6 +22,8 @@
 
         public async Task AddAsync<T>(T entity) where T : class => await context.AddAsync(entity);
 
-        public async Task<int> SaveChangesAsync() => await context.SaveChangesAsync();
+        public EntityEntry Delete<T>(T entity) where T : class => context.Remove(entity);
+       
+        public async Task<int> SaveChangesAsync() => await context.SaveChangesAsync();        
     }
 }

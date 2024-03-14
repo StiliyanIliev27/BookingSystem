@@ -74,5 +74,13 @@ namespace BookingSystem.Controllers
 
             return RedirectToAction(nameof(All));
         }
+
+        [HttpPost]
+        public async Task<IActionResult> CancellVerification(string id)
+        {
+            await hotelService.CancellVerificationAsync(id);
+
+            return RedirectToAction(nameof(Verify));
+        }
     }
 }

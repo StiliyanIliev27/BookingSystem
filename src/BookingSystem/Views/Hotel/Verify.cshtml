@@ -45,7 +45,9 @@
                     </p>
 
                     <div style="display: flex; flex-direction: row; justify-content: space-between;">
-                        <a asp-controller="Hotel" asp-action="All" style="margin-right: 10px; margin-top: 10px;" class="btn btn-danger mb-2 fw-bold">Remove the reservation</a>
+                        <form method="post" asp-controller="Hotel" asp-action="CancellVerification" asp-route-id="@reservation.Id">
+                            <button type="submit" style="margin-right: 10px; margin-top: 10px;" class="btn btn-danger mb-2 fw-bold">Remove the reservation</button>
+                        </form>
 
                         <form method="post" asp-controller="Hotel" asp-action="Verify" asp-route-id="@reservation.Id">
                             <button type="submit" style="margin-top: 10px;" class="btn btn-success mb-2 fw-bold">Confirm the reservation</button>
