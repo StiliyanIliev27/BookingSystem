@@ -1,8 +1,10 @@
 ﻿using BookingSystem.Core.Contracts;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BookingSystem.Controllers
 {
+    [AllowAnonymous]
     public class CityController : Controller
     {
         private readonly ICityService cityService;

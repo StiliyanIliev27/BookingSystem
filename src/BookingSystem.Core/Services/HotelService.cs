@@ -23,6 +23,12 @@
                 .Where(r => r.Hotel_Id == hotelId)
                 .ToListAsync();
         }
+
+        public async Task<Room> GetRoomAsync(int roomId)
+        {
+            return await repository.AllReadOnly<Room>()
+                .FirstAsync(r => r.Id == roomId);
+        }
         public async Task<int> GetHotelsCountAsync()
         {
             return await repository.AllReadOnly<Hotel>()
@@ -139,11 +145,9 @@
                 CreatedOn = DateTime.Now
             };
 
-            await repository.AddAsync<HotelReservation>(hrf);
+            await repository.AddAsync(hrf);
             await repository.SaveChangesAsync();
         }
-
-
 
         public async Task<HotelReservationInputModel> GetForReserveAsync(int hotelId)
         {
@@ -188,10 +192,10 @@
                 .ToListAsync();            
         }
 
-        public async Task VerifyReservationAsync(string reservationId)
+        public async Task VerifyReservationAsync(string reservationId, string userId)
         {
             var res = await repository.All<HotelReservation>()
-                .FirstOrDefaultAsync(hr => hr.Id == reservationId);         
+                .FirstOrDefaultAsync(hr => hr.Id == reservationId && hr.User_Id == userId);         
 
             if(res == null)
             {
@@ -221,10 +225,10 @@
             await repository.SaveChangesAsync();
         }
 
-        public async Task CancellVerificationAsync(string reservationId)
+        public async Task CancellVerificationAsync(string reservationId, string userId)
         {
             var hr = await repository.All<HotelReservation>()
-                .Where(hr => hr.Id == reservationId).FirstOrDefaultAsync();
+                .FirstOrDefaultAsync( hr => hr.Id == reservationId && hr.User_Id == userId);
 
             if(hr == null)
             {
@@ -252,7 +256,7 @@
         public async Task<IEnumerable<HotelReservationViewModel>> AllReservationsAsync(string userId)
         {
             return await repository.AllReadOnly<HotelReservation>()
-                .Where(hr => hr.User_Id == userId && hr.IsActive == true)
+                .Where(hr => hr.User_Id == userId && hr.IsActive == true && hr.EndDate > DateTime.Now)
                 .Include(hr => hr.Hotel)
                 .Include(hr => hr.Room)
                 .Select(hr => new HotelReservationViewModel()
@@ -270,6 +274,40 @@
                     CreatedOn = hr.CreatedOn.ToString(CreatedOnFormat),
                 })
                 .ToListAsync();
+        }
+
+        public async Task<HotelReservationEditInputModel> GetForEditAsync(string reservationId, string userId)
+        {
+            var hr = await repository.All<HotelReservation>()
+                .FirstOrDefaultAsync(hr => hr.Id == reservationId && hr.User_Id == userId);
+
+            if(hr == null)
+            {
+                throw new ArgumentException("The hotel reservation does not exist!");
+            }
+
+            return new HotelReservationEditInputModel()
+            {
+                Id = hr.Id,
+                FirstName = hr.FirstName,
+                LastName = hr.LastName
+            };
+        }
+
+        public async Task EditAsync(HotelReservationEditInputModel model, string userId)
+        {
+            var hr = await repository.All<HotelReservation>()
+                .FirstOrDefaultAsync(hr => hr.Id == model.Id && hr.User_Id == userId);
+
+            if (hr == null)
+            {
+                throw new ArgumentException("The hotel reservation does not exist!");
+            }
+
+            hr.FirstName = model.FirstName;
+            hr.LastName = model.LastName;
+
+            await repository.SaveChangesAsync();
         }
     }
 }

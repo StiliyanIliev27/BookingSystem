@@ -27,10 +27,10 @@
                             <p class="card-text"><strong>End Date:</strong> <span style="font-style: italic;">@reservation.EndDate</span></p>
 
                             <div class="d-flex justify-content-between align-items-center mb-3">
-                                <form method="post" asp-controller="Hotel" asp-action="CancellVerification" asp-route-id="@reservation.Id">
+                                <form method="post" asp-controller="Hotel" asp-action="CancellReservation" asp-route-id="@reservation.Id">
                                     <button type="submit" style="width: 120px;" class="btn btn-danger fw-bold">Cancell the reservation</button>
                                 </form>
-                                <form method="post" asp-controller="Hotel" asp-action="Edit" asp-route-id="@reservation.Id">
+                                <form method="get" asp-controller="Hotel" asp-action="EditReservation" asp-route-id="@reservation.Id">
                                     <button type="submit" style="width: 120px; height: 61px;" class="btn btn-warning fw-bold">Edit</button>
                                 </form>
                             </div>

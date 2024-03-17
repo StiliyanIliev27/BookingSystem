@@ -1,7 +1,10 @@
 ﻿namespace BookingSystem.Controllers
 {
     using BookingSystem.Core.Contracts;
+    using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
+
+    [AllowAnonymous]
     public class CountryController : Controller
     {
         private readonly ICountryService countryService;

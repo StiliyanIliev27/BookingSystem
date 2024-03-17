@@ -1,0 +1,39 @@
+﻿@model HotelReservationEditInputModel
+@{
+    ViewData["Title"] = "Edit Hotel Reservation Personal Details";
+}
+
+<h2 class="text-center">@ViewData["Title"]</h2>
+<hr />
+
+<div class="row">
+    <div class="col-sm-12 offset-lg-2 col-lg-8 offset-xl-3 col-xl-6">
+        <form method="post" asp-controller="Hotel" asp-action="EditReservation">
+            <div class="mb-3">
+                <label asp-for="@Model.FirstName" class="form-label-add-edit">
+                    First Name:<span style="color: red"> *</span>
+                </label>
+                <input asp-for="@Model.FirstName" class="form-control" aria-required="true" placeholder="First name..." />
+                <span asp-validation-for="@Model.FirstName" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <label asp-for="@Model.LastName" class="form-label-add-edit">
+                    Last Name:<span style="color: red"> *</span>
+                </label>
+                <input asp-for="@Model.LastName" class="form-control" aria-required="true" placeholder="Last name..." />
+                <span asp-validation-for="@Model.LastName" class="text-danger"></span>
+            </div>
+
+            <div class="d-flex justify-content-between align-items-center mb-3">
+                <a asp-controller="Hotel" asp-action="AllReservations" style="margin-right: 15px;" class="btn btn-primary mb-2 w-100 p-3 fw-bold">Back to the reservations</a>
+                
+                <button type="submit" class="btn btn-warning mb-2 w-100 p-3 fw-bold">Edit the reservation</button>
+            </div>
+
+          </form>  
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
