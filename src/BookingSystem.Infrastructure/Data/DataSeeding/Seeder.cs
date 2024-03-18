@@ -201,6 +201,11 @@
         public Hotel LoisirHotel { get; set; } = null!;
         public Hotel SotetsuFresa { get; set; } = null!;
         public Hotel OakwoodPremier { get; set; } = null!;
+        
+        //Rome
+        public Hotel FlaminioHolidays { get; set; } = null!;
+        public Hotel AliusAndFreerome { get; set; } = null!;
+        public Hotel AdMaioraSuite { get; set; } = null!;
 
         #endregion
 
@@ -279,6 +284,20 @@
         public Room OakwoodPremierRoomSingle { get; set; } = null!;
         public Room OakwoodPremierRoomDouble { get; set; } = null!;
         public Room OakwoodPremierRoomApartment { get; set; } = null!;
+
+        //Rome
+        public Room FlaminioHolidaysRoomSingle { get; set; } = null!;
+        public Room FlaminioHolidaysRoomDouble { get; set; } = null!;
+        public Room FlaminioHolidaysRoomTriple { get; set; } = null!;
+        public Room FlaminioHolidaysRoomApartment { get; set; } = null!;
+
+        public Room AliusAndFreeromeDouble { get; set; } = null!;
+        public Room AliusAndFreeromeTriple { get; set; } = null!;
+        public Room AliusAndFreeromeApartment { get; set; } = null!;
+
+        public Room AdMaioraSuiteDouble { get; set; } = null!;
+        public Room AdMaioraSuiteTriple { get; set; } = null!;
+        public Room AdMaioraSuiteApartment { get; set; } = null!;
 
 
         #endregion
@@ -1327,6 +1346,56 @@
                 Pets = false,
                 IsActive = true,
             };
+
+            //Rome
+          
+            FlaminioHolidays = new Hotel()
+            {
+                Id = 19,
+                Name = "Flaminio Holidays",
+                Address = "Viale Pinturicchio 19, Villa Borghese Parioli, 00196",
+                City_Id = 5,
+                StarRate = 3,
+                Details = "Featuring air conditioning, Flaminio Holidays offers en suite rooms and an apartment in Rome. Ponte Milvio is 300 metres from the property. Free WiFi is provided throughout the property.There is a tram stop linking to Piazza del Popolo right in front of the property. Foro Italico - Rome is 700 metres from Flaminio Holidays.",
+                ImageUrl = "https://cf.bstatic.com/xdata/images/hotel/max1280x900/466841541.jpg?k=cb07cb3e10ddcbc2b29fdf20f30cb7f3e756e9cffa6bd9e5c8854a57e6c8984d&o=&hp=1",
+                CheckIn = DateTime.ParseExact("13:00", TimeFormat, CultureInfo.CurrentCulture, DateTimeStyles.None),
+                CheckOut = DateTime.ParseExact("10:00", TimeFormat, CultureInfo.CurrentCulture, DateTimeStyles.None),
+                Parking = false,
+                Pets = false,
+                IsActive = true,
+            };
+            
+            AliusAndFreerome = new Hotel()
+            {
+                Id = 20,
+                Name = "Alius and Freerome Hotel",
+                Address = "243 Via Nazionale, Central Station, 00184",
+                City_Id = 5,
+                StarRate = 2,
+                Details = "Ideally situated in the Central Station district of Rome, Alius and Freerome Hotel is situated 800 metres from Santa Maria Maggiore, 1 km from Cavour Metro Station and 700 metres from Quirinal Hill. With free WiFi, this 2-star hotel offers a tour desk. The property is 1.1 km from the city centre and 200 metres from Repubblica - Teatro dell'Opera Metro Station.",
+                ImageUrl = "https://cf.bstatic.com/xdata/images/hotel/max1280x900/355779789.jpg?k=e854ebae86fae75b72fff8469f9783cac0428f94ff76313dffe0dc6018cc64b1&o=&hp=1",
+                CheckIn = DateTime.ParseExact("14:00", TimeFormat, CultureInfo.CurrentCulture, DateTimeStyles.None),
+                CheckOut = DateTime.ParseExact("06:00", TimeFormat, CultureInfo.CurrentCulture, DateTimeStyles.None),
+                Parking = true,
+                Pets = false,
+                IsActive = true,
+            };
+           
+            AdMaioraSuite = new Hotel()
+            {
+                Id = 21,
+                Name = "Ad maiora suite",
+                Address = "102 Via Principe Amedeo, Central Station, 00185",
+                City_Id = 5,
+                StarRate = 4,
+                Details = "Right in the heart of Rome, situated within a short distance of Vittorio Emanuele Metro Station and Santa Maria Maggiore, AD MAIORA SUITE offers free WiFi, air conditioning and household amenities such as a fridge and coffee machine. This recently renovated apartment is located 1.1 km from Cavour Metro Station and 500 metres from Rome Termini Metro Station. The property is non-smoking and is located 400 metres from Rome Termini Train Station.",
+                ImageUrl = "https://cf.bstatic.com/xdata/images/hotel/max1280x900/472491611.jpg?k=d6136cf78533b12276bd7ff21f0a59f5a0d83dcda6b0d2e6d163986f39104f19&o=&hp=1",
+                CheckIn = DateTime.ParseExact("12:00", TimeFormat, CultureInfo.CurrentCulture, DateTimeStyles.None),
+                CheckOut = DateTime.ParseExact("09:00", TimeFormat, CultureInfo.CurrentCulture, DateTimeStyles.None),
+                Parking = false,
+                Pets = true,
+                IsActive = true,
+            };
         }
         private void SeedRooms()
         {
@@ -1376,6 +1445,7 @@
                 Count = 5
             };
 
+           
             KraftHotelRoomSingle = new Room()
             {
                 Id = 5,
@@ -1398,6 +1468,7 @@
                 Count = 5
             };
 
+           
             SaintMarcelRoomSingle = new Room()
             {
                 Id = 7,
@@ -1455,6 +1526,7 @@
                 Count = 5
             };
 
+            
             CataloniaPuertaRoomSingle = new Room()
             {
                 Id = 12,
@@ -1477,6 +1549,7 @@
                 Count = 5
             };
 
+           
             HostalCentralPalaceRoomDouble = new Room()
             {
                 Id = 14,
@@ -1512,6 +1585,7 @@
                 Count = 5
             };
 
+           
             HiltonGardenRoomDouble = new Room()
             {
                 Id = 17,
@@ -1545,6 +1619,7 @@
                 Count = 5
             };
 
+           
             PrinceKitanoRoomDouble = new Room()
             {
                 Id = 20,
@@ -1602,6 +1677,7 @@
                 Count = 5
             };
 
+            
             EurostarsSofiaRoomSingle = new Room()
             {
                 Id = 25,
@@ -1646,6 +1722,7 @@
                 Count = 5
             };
 
+            
             PremierSofiaRoomSingle = new Room()
             {
                 Id = 29,
@@ -1714,6 +1791,7 @@
                 Count = 5
             };
 
+            
             HotelZurichRoomSingle = new Room()
             {
                 Id = 35,
@@ -1758,6 +1836,7 @@
                 Count = 5
             };
 
+            
             FlorinaHotelRoomSingle = new Room()
             {
                 Id = 39,
@@ -1826,6 +1905,7 @@
                 Count = 5
             };
 
+            
             SotetsuFresaRoomSingle = new Room()
             {
                 Id = 45,
@@ -1848,6 +1928,7 @@
                 Count = 5
             };
 
+            
             OakwoodPremierRoomSingle = new Room()
             {
                 Id = 47,
@@ -1876,6 +1957,120 @@
                 Type = Enums.RoomType.Double,
                 Hotel_Id = 18,
                 PricePerNight = 853m,
+                WiFi = true,
+                IsActive = true,
+                Count = 5
+            };
+
+            //Rome
+            
+            FlaminioHolidaysRoomSingle = new Room()
+            {
+                Id = 50,
+                Type = Enums.RoomType.Single,
+                Hotel_Id = 19,
+                PricePerNight = 123m,
+                WiFi = true,
+                IsActive = true,
+                Count = 5
+            };
+            
+            FlaminioHolidaysRoomDouble = new Room()
+            {
+                Id = 51,
+                Type = Enums.RoomType.Double,
+                Hotel_Id = 19,
+                PricePerNight = 163m,
+                WiFi = true,
+                IsActive = true,
+                Count = 5
+            };
+           
+            FlaminioHolidaysRoomTriple = new Room()
+            {
+                Id = 52,
+                Type = Enums.RoomType.Triple,
+                Hotel_Id = 19,
+                PricePerNight = 182m,
+                WiFi = true,
+                IsActive = true,
+                Count = 5
+            };
+           
+            FlaminioHolidaysRoomApartment = new Room()
+            {
+                Id = 53,
+                Type = Enums.RoomType.Apartment,
+                Hotel_Id = 19,
+                PricePerNight = 198m,
+                WiFi = true,
+                IsActive = true,
+                Count = 5
+            };
+
+           
+            AliusAndFreeromeDouble = new Room()
+            {
+                Id = 54,
+                Type = Enums.RoomType.Double,
+                Hotel_Id = 20,
+                PricePerNight = 178m,
+                WiFi = true,
+                IsActive = true,
+                Count = 5
+            };
+           
+            AliusAndFreeromeTriple = new Room()
+            {
+                Id = 55,
+                Type = Enums.RoomType.Triple,
+                Hotel_Id = 20,
+                PricePerNight = 217m,
+                WiFi = true,
+                IsActive = true,
+                Count = 5
+            };
+           
+            AliusAndFreeromeApartment = new Room()
+            {
+                Id = 56,
+                Type = Enums.RoomType.Apartment,
+                Hotel_Id = 20,
+                PricePerNight = 218m,
+                WiFi = true,
+                IsActive = true,
+                Count = 5
+            };
+
+            
+            AdMaioraSuiteDouble = new Room()
+            {
+                Id = 57,
+                Type = Enums.RoomType.Double,
+                Hotel_Id = 21,
+                PricePerNight = 128m,
+                WiFi = true,
+                IsActive = true,
+                Count = 5
+            };
+            
+            AdMaioraSuiteTriple = new Room()
+            {
+                Id = 58,
+                Type = Enums.RoomType.Triple,
+                Hotel_Id = 21,
+                PricePerNight = 140m,
+                WiFi = true,
+                IsActive = true,
+                Count = 5
+            };
+           
+            AdMaioraSuiteApartment = new Room()
+            {
+                Id = 59,
+                Type = Enums.RoomType.Apartment,
+                Hotel_Id = 21,
+                PricePerNight = 153m,
                 WiFi = true,
                 IsActive = true,
                 Count = 5

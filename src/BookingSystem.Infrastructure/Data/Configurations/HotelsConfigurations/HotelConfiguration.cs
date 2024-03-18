@@ -30,7 +30,10 @@
                     data.FlorinaHotel,
                     data.LoisirHotel,
                     data.SotetsuFresa,
-                    data.OakwoodPremier
+                    data.OakwoodPremier,
+                    data.FlaminioHolidays,
+                    data.AliusAndFreerome,
+                    data.AdMaioraSuite
                 });
         }
     }

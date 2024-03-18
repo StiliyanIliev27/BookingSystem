@@ -4,6 +4,7 @@ using BookingSystem.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BookingSystem.Infrastructure.Migrations
 {
     [DbContext(typeof(BookingSystemDbContext))]
-    partial class BookingSystemDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240318213654_AddedThreeHotelWithTheirRoomsInRome")]
+    partial class AddedThreeHotelWithTheirRoomsInRome
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -1497,7 +1499,7 @@ namespace BookingSystem.Infrastructure.Migrations
                             Count = 5,
                             Hotel_Id = 19,
                             IsActive = true,
-                            PricePerNight = 123m,
+                            PricePerNight = 282m,
                             Type = 1,
                             WiFi = true
                         },
@@ -1507,7 +1509,7 @@ namespace BookingSystem.Infrastructure.Migrations
                             Count = 5,
                             Hotel_Id = 19,
                             IsActive = true,
-                            PricePerNight = 163m,
+                            PricePerNight = 319m,
                             Type = 2,
                             WiFi = true
                         },
@@ -1517,7 +1519,7 @@ namespace BookingSystem.Infrastructure.Migrations
                             Count = 5,
                             Hotel_Id = 19,
                             IsActive = true,
-                            PricePerNight = 182m,
+                            PricePerNight = 356m,
                             Type = 3,
                             WiFi = true
                         },
@@ -1527,7 +1529,7 @@ namespace BookingSystem.Infrastructure.Migrations
                             Count = 5,
                             Hotel_Id = 19,
                             IsActive = true,
-                            PricePerNight = 198m,
+                            PricePerNight = 388m,
                             Type = 4,
                             WiFi = true
                         },
@@ -1537,7 +1539,7 @@ namespace BookingSystem.Infrastructure.Migrations
                             Count = 5,
                             Hotel_Id = 20,
                             IsActive = true,
-                            PricePerNight = 178m,
+                            PricePerNight = 349m,
                             Type = 2,
                             WiFi = true
                         },
@@ -1547,7 +1549,7 @@ namespace BookingSystem.Infrastructure.Migrations
                             Count = 5,
                             Hotel_Id = 20,
                             IsActive = true,
-                            PricePerNight = 217m,
+                            PricePerNight = 426m,
                             Type = 3,
                             WiFi = true
                         },
@@ -1557,7 +1559,7 @@ namespace BookingSystem.Infrastructure.Migrations
                             Count = 5,
                             Hotel_Id = 20,
                             IsActive = true,
-                            PricePerNight = 218m,
+                            PricePerNight = 428m,
                             Type = 4,
                             WiFi = true
                         },
@@ -1567,7 +1569,7 @@ namespace BookingSystem.Infrastructure.Migrations
                             Count = 5,
                             Hotel_Id = 21,
                             IsActive = true,
-                            PricePerNight = 128m,
+                            PricePerNight = 251m,
                             Type = 2,
                             WiFi = true
                         },
@@ -1577,7 +1579,7 @@ namespace BookingSystem.Infrastructure.Migrations
                             Count = 5,
                             Hotel_Id = 21,
                             IsActive = true,
-                            PricePerNight = 140m,
+                            PricePerNight = 275m,
                             Type = 3,
                             WiFi = true
                         },
@@ -1587,7 +1589,7 @@ namespace BookingSystem.Infrastructure.Migrations
                             Count = 5,
                             Hotel_Id = 21,
                             IsActive = true,
-                            PricePerNight = 153m,
+                            PricePerNight = 300m,
                             Type = 4,
                             WiFi = true
                         });
@@ -2566,15 +2568,15 @@ namespace BookingSystem.Infrastructure.Migrations
                         {
                             Id = "8d1f0bdc-f9e5-4856-a127-fb84281d56ad",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "a2ce22ab-a9b4-4871-b888-33f4d10ac362",
+                            ConcurrencyStamp = "57c407e4-01ac-4432-b64a-c27fb012f07e",
                             Email = "guest@gmail.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             NormalizedEmail = "guest@gmail.com",
                             NormalizedUserName = "guest",
-                            PasswordHash = "AQAAAAEAACcQAAAAENy5iHPxwDMArFwBQa66W6mjtDxdnwPgvGEHpe7A4p5yGIf1+eFjFnt7aTxgugIcpw==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEDgDmavaL9L1mahdNX27m0FQ4IlFTLLnXrTKzlXyCDfbneHQMpcUIX4QRAF9kAakDg==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "e9d79a38-4be4-4653-bf17-7da3aec90259",
+                            SecurityStamp = "6a357852-9b40-493e-96ae-7ff5d1f5b663",
                             TwoFactorEnabled = false,
                             UserName = "Guest"
                         },
@@ -2582,15 +2584,15 @@ namespace BookingSystem.Infrastructure.Migrations
                         {
                             Id = "c9019544-ec91-4248-bfc4-9d8a4f13430b",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "00610829-ee51-4079-bd7a-0e633dccb39f",
+                            ConcurrencyStamp = "382ab236-a898-4bbe-bb39-00c594ea6588",
                             Email = "admin@gmail.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             NormalizedEmail = "admin@gmail.com",
                             NormalizedUserName = "administrator",
-                            PasswordHash = "AQAAAAEAACcQAAAAENFUFu6oy795n6VHeOAtmxuYZPsxy2bmJZrr2rpygH5lXAyqO/5yHu+lZmyRe+cV1w==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEG1SYVsbkd/HEfmlTEa0q2WFLtVlPzO+In0zmJf0a5FhKme7TIdFaBmUcy2kEukSuQ==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "182ded85-2f29-4d8c-bd7c-008f94d614c7",
+                            SecurityStamp = "03ac544b-7b30-42ba-89e1-a6c69ef0ddab",
                             TwoFactorEnabled = false,
                             UserName = "Administrator"
                         });

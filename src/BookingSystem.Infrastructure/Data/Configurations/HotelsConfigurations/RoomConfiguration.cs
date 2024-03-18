@@ -65,7 +65,17 @@
                     data.SotetsuFresaRoomDouble,
                     data.OakwoodPremierRoomSingle,
                     data.OakwoodPremierRoomDouble,
-                    data.OakwoodPremierRoomApartment
+                    data.OakwoodPremierRoomApartment,
+                    data.FlaminioHolidaysRoomSingle,
+                    data.FlaminioHolidaysRoomDouble,
+                    data.FlaminioHolidaysRoomTriple,
+                    data.FlaminioHolidaysRoomApartment,
+                    data.AliusAndFreeromeDouble,
+                    data.AliusAndFreeromeTriple,
+                    data.AliusAndFreeromeApartment,
+                    data.AdMaioraSuiteDouble,
+                    data.AdMaioraSuiteTriple,
+                    data.AdMaioraSuiteApartment
                 });
         }
     }
