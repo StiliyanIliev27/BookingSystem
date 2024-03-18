@@ -1,8 +1,10 @@
 ﻿namespace BookingSystem.Core.Enumerations
 {
     public enum HotelSorting
-    {
-        Newest = 0,
-        Oldest = 1
+    {        
+        PriceAscending = 0,
+        PriceDescending = 1,
+        Newest = 2,
+        Oldest = 3
     }
 }

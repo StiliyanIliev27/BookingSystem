@@ -9,6 +9,7 @@
     using BookingSystem.Infrastructure.Data.Models.Location;
     using Microsoft.EntityFrameworkCore;
     using System.Globalization;
+    using System.Runtime.InteropServices;
     using static BookingSystem.Infrastructure.Data.Constants.DataConstants.Hotel;
     using static BookingSystem.Infrastructure.Data.Constants.DataConstants.HotelReservation;
     public class HotelService : IHotelService
@@ -73,23 +74,30 @@
                 .AnyAsync(r => r.Id == roomId);
         }
 
-
-        public async Task<IEnumerable<HotelAllViewModel>> AllAsync()
+        public async Task<IEnumerable<string>> AllCitiesNamesAsync()
         {
-            return await repository.AllReadOnly<Hotel>()
-                .Where(h => h.IsActive == true)
-                .Select(h => new HotelAllViewModel()
-                {
-                    Id = h.Id,
-                    Name = h.Name,
-                    CityName = h.City.Name,
-                    CityId = h.City.Id,
-                    StarRate = h.StarRate,
-                    ImageUrl = h.ImageUrl,
-                    Rooms = repository.AllReadOnly<Room>()
-                                .Where(r => r.Hotel_Id == h.Id).ToList()
-                }).ToListAsync();
-        }       
+            return await repository.AllReadOnly<City>()
+                .Select(c => c.Name)
+                .Distinct()
+                .ToListAsync();
+        }
+
+        //public async Task<IEnumerable<HotelAllViewModel>> AllAsync()
+        //{
+        //    return await repository.AllReadOnly<Hotel>()
+        //        .Where(h => h.IsActive == true)
+        //        .Select(h => new HotelAllViewModel()
+        //        {
+        //            Id = h.Id,
+        //            Name = h.Name,
+        //            CityName = h.City.Name,
+        //            CityId = h.City.Id,
+        //            StarRate = h.StarRate,
+        //            ImageUrl = h.ImageUrl,
+        //            Rooms = repository.AllReadOnly<Room>()
+        //                        .Where(r => r.Hotel_Id == h.Id).ToList()
+        //        }).ToListAsync();
+        //}       
         public async Task<HotelDetailsViewModel> DetailsAsync(int hotelId)
         {
             var hotel = await repository.AllReadOnly<Hotel>()
@@ -338,6 +346,10 @@
             hotelsToShow = sorting switch
             {
                 HotelSorting.Oldest => hotelsToShow.OrderBy(h => h.Id),
+                HotelSorting.PriceAscending => hotelsToShow.OrderBy(h =>
+                    repository.AllReadOnly<Room>().Where(r => r.Hotel_Id == h.Id).Average(r => r.PricePerNight)),
+                HotelSorting.PriceDescending => hotelsToShow.OrderByDescending(h =>
+                    repository.AllReadOnly<Room>().Where(r => r.Hotel_Id == h.Id).Average(r => r.PricePerNight)),
                 _ => hotelsToShow.OrderByDescending(h => h.Id)
             };
 
@@ -357,7 +369,7 @@
                                 .Where(r => r.Hotel_Id == h.Id)
                                 .Select(r => new RoomTypeViewModel()
                                 {
-                                    Type = r.Type.ToString()
+                                    Type = r.Type.ToString(),
                                 }).ToList()
                 }).ToListAsync();
 
@@ -368,14 +380,6 @@
                 TotalHotelsCount = totalHotels,
                 Hotels = hotels
             };
-        }       
-
-        public async Task<IEnumerable<string>> AllCitiesNamesAsync()
-        {
-            return await repository.AllReadOnly<City>()
-                .Select(c => c.Name)
-                .Distinct()
-                .ToListAsync();
-        }
+        }           
     }
 }
