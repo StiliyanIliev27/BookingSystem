@@ -1,0 +1,38 @@
+﻿@model AllHotelsQueryModel
+
+@{
+    var previousPage = Model.CurrentPage - 1;
+    if (previousPage < 1)
+    {
+        previousPage = 1;
+    }
+
+    var maxPage = Math.Ceiling((double)Model.TotalHotelsCount /
+        Model.HotelsPerPage);
+}
+
+@{
+    var shouldButtonBeDisabled = Model.CurrentPage == maxPage || !Model.Hotels.Any();
+}
+
+<div class="row justify-content-center mt-2">
+    <div class="col-md-6 d-flex justify-content-between">
+        <a class="btn btn-primary @(Model.CurrentPage == 1 ? "disabled" : string.Empty)"
+           asp-controller="Hotel"
+           asp-action="All"
+           asp-route-currentPage="@previousPage"
+           asp-route-city="@Model.City"
+           asp-route-searchTerm="@Model.SearchTerm"
+           asp-route-sorting="@((int)Model.Sorting)"><<</a>
+
+        <p class="align-self-center">Page @Model.CurrentPage of @maxPage</p>
+
+        <a class="btn btn-primary @(shouldButtonBeDisabled ? "disabled" : string.Empty)"
+           asp-controller="Hotel"
+           asp-action="All"
+           asp-route-currentPage="@(Model.CurrentPage + 1)"
+           asp-route-genre="@Model.City"
+           asp-route-searchTerm="@Model.SearchTerm"
+           asp-route-sorting="@((int)Model.Sorting)">>></a>
+    </div>
+</div>

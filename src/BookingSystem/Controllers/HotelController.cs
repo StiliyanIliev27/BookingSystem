@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using System.Globalization;
 using System.Security.Claims;
 using static BookingSystem.Infrastructure.Data.Constants.DataConstants.HotelReservation;
+using BookingSystem.Core.Models.QueryModels.Hotel;
 
 namespace BookingSystem.Controllers
 {
@@ -19,20 +20,35 @@ namespace BookingSystem.Controllers
 
         [HttpGet]
         [AllowAnonymous]
-        public async Task<IActionResult> All()
+        public async Task<IActionResult> All([FromQuery]AllHotelsQueryModel query)
         {
-            var model = await hotelService.AllAsync();
+            var model = await hotelService.AllAsync(
+                query.City,
+                query.SearchTerm,
+                query.Sorting,
+                query.CurrentPage,
+                query.HotelsPerPage);
 
-            return View(model);
+            query.TotalHotelsCount = model.TotalHotelsCount;
+            query.Hotels = model.Hotels;
+            query.Cities = await hotelService.AllCitiesNamesAsync();
+
+            return View(query);
         }
 
         [HttpGet]
         [AllowAnonymous]
         public async Task<IActionResult> Details(int id)
         {
-            var model = await hotelService.DetailsAsync(id);
-
-            return View(model);
+            try
+            {
+                var model = await hotelService.DetailsAsync(id);
+                return View(model);
+            }
+            catch(ArgumentException)
+            {
+                return View("400", "Home");
+            }            
         }
 
         [HttpGet]
@@ -148,6 +164,21 @@ namespace BookingSystem.Controllers
             await hotelService.EditAsync(model, userId);
 
             return RedirectToAction(nameof(AllReservations));
+        }
+
+        public IActionResult Error(int statusCode)
+        {
+            if (statusCode == 400)
+            {
+                return View("Error400");
+            }
+
+            if (statusCode == 401)
+            {
+                return View("Error401");
+            }
+
+            return View();
         }
     }
 }

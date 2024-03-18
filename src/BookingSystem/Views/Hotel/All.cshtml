@@ -1,58 +1,61 @@
-﻿
-@model IEnumerable<HotelAllViewModel>
-@{
-    ViewData["Title"] = "All available hotels";    
-}
+﻿@using BookingSystem.Core.Models.QueryModels.Hotel
 
+
+@model AllHotelsQueryModel
+
+@{
+    ViewData["Title"] = "All hotels";
+}
 
 <h2 class="text-center">@ViewData["Title"]</h2>
 <hr />
 
-<div class="text-center row">
-    @foreach (var a in Model)
-    {
-        List<string> roomTypes = new List<string>();
 
-        <div class="card mb-3" style="max-width: 600px; margin-right: 30px;">
-            <div class="row g-0">
-                <div style="padding-top: 30px; padding-bottom: 30px; padding-left: 15px;" class="col-md-4">
-                    <img style="width: 190px; height: 160px; object-fit: cover;
-                        border: none;
-                        border-radius: 6px;" src="@a.ImageUrl" class="img-fluid rounded-start" alt="hotel image">
-                </div>
-                <div class="col-md-8">
-                    <div class="card-body">
-                        <h5 style="margin-bottom: 10px;" class="card-title">@a.Name</h5>
-                        <span>
-                            @for(int i = 1; i <= a.StarRate; i++)
-                            {
-                                @* <i class="fa-sharp fa-solid fa-star"></i> *@
-                                <img style="height: 12px; width: 12px;" src="~/icon/star.png"/>
-                            }
-                        </span>
+<form method="get">
+    <div class="row justify-content-center">
 
-                        <br />
-
-                        <a asp-controller="City" asp-action="Details" asp-route-id="@a.CityId" style="text-decoration: underline;">@a.CityName</a>
-                        
-                        @foreach(var room in a.Rooms)
-                        {
-                            roomTypes.Add(room.Type.ToString());
-                        }
-
-                        <p style="font-size: 17px;">Rooms: <span style="font-style: italic; font-size: 15px;">@string.Join(", ", roomTypes)</span></p>
-
-                        <a asp-controller="Hotel" asp-action="Details" asp-route-id="@a.Id" class="btn btn-primary">See availability ></a>
-
-                    </div>
-                </div>
-            </div>
+        <div class="form-group col-md-3 align-content-center">
+            <label asp-for="City"></label>
+            <select asp-for="City" class="form-control">
+                <option value="">All</option>
+                @foreach (var city in Model.Cities)
+                {
+                    <option value="@city">@city</option>
+                }
+            </select>
         </div>
-    }
-</div>
 
-@section Scripts {
-    <partial name="_ValidationScriptsPartial" />
+        <div class="form-group col-md-3">
+            <label asp-for="SearchTerm"></label>
+            <input asp-for="SearchTerm" class="form-control" placeholder="Search">
+        </div>
+
+        <div class="form-group col-md-2">
+            <label asp-for="Sorting"></label>
+            <select asp-for="Sorting" class="form-control">
+                <option value="0">Newest added</option>
+                <option value="1">Oldest added</option>
+            </select>
+        </div>        
+
+        <div class="col-md-1 d-flex align-items-end">
+            <input type="submit" value="Search" class="btn btn-success w-100" />
+        </div>
+    </div>
+</form>
+
+@if (!Model.Hotels.Any())
+{
+    <h2 class="text-center">No hotels found by the given criteria!</h2>
+}
+else
+{
+    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 mt-5">
+        @foreach (var hotel in Model.Hotels)
+        {
+            <partial name="_HotelPartial" model="@hotel" />
+        }
+    </div>
 }
 
-
+<partial name="_HotelPagesPartial" model="@Model" />

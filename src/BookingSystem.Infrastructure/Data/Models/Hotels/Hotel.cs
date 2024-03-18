@@ -53,7 +53,6 @@
         /// Hotel's Star Rate
         /// </summary>
         [Required]
-        [MaxLength(StarRateMaxValue)]
         [Comment("Hotel's Star Rate")]
         public int StarRate { get; set; }
 

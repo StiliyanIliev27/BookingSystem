@@ -1,14 +1,16 @@
 ﻿namespace BookingSystem.Core.Services
 {
     using BookingSystem.Core.Contracts;
+    using BookingSystem.Core.Enumerations;
     using BookingSystem.Core.Models.Hotel;
+    using BookingSystem.Core.Models.QueryModels.Hotel;
     using BookingSystem.Infrastructure.Common;
     using BookingSystem.Infrastructure.Data.Models.Hotels;
+    using BookingSystem.Infrastructure.Data.Models.Location;
     using Microsoft.EntityFrameworkCore;
     using System.Globalization;
     using static BookingSystem.Infrastructure.Data.Constants.DataConstants.Hotel;
     using static BookingSystem.Infrastructure.Data.Constants.DataConstants.HotelReservation;
-
     public class HotelService : IHotelService
     {
         private readonly IRepository repository;
@@ -308,6 +310,72 @@
             hr.LastName = model.LastName;
 
             await repository.SaveChangesAsync();
+        }
+
+        public async Task<HotelQueryServiceModel> AllAsync(
+            string? city = null,
+            string? searchTerm = null,
+            HotelSorting sorting = HotelSorting.Newest,
+            int currentPage = 1,
+            int hotelsPerPage = 4)
+        {
+            var hotelsToShow = repository.AllReadOnly<Hotel>();
+
+            if (city != null)
+            {
+                hotelsToShow = hotelsToShow
+                    .Where(h => h.City.Name == city);
+            }
+
+            if (searchTerm != null)
+            {
+                string normalizedSearchTerm = searchTerm.ToLower();
+                hotelsToShow = hotelsToShow
+                    .Where(h => h.Name.ToLower().Contains(normalizedSearchTerm) ||
+                                         h.Address.ToLower().Contains(normalizedSearchTerm));
+            }
+
+            hotelsToShow = sorting switch
+            {
+                HotelSorting.Oldest => hotelsToShow.OrderBy(h => h.Id),
+                _ => hotelsToShow.OrderByDescending(h => h.Id)
+            };
+
+            var hotels = await hotelsToShow
+                .Skip((currentPage - 1) * hotelsPerPage)
+                .Take(hotelsPerPage)
+                .Include(h => h.City)
+                .Select(h => new HotelServiceModel()
+                {
+                    Id = h.Id,
+                    Name = h.Name,
+                    CityName = h.City.Name,
+                    CityId = h.City.Id,
+                    StarRate = h.StarRate,
+                    ImageUrl = h.ImageUrl,
+                    RoomsTypes = repository.AllReadOnly<Room>()
+                                .Where(r => r.Hotel_Id == h.Id)
+                                .Select(r => new RoomTypeViewModel()
+                                {
+                                    Type = r.Type.ToString()
+                                }).ToList()
+                }).ToListAsync();
+
+            int totalHotels = await hotelsToShow.CountAsync();
+
+            return new HotelQueryServiceModel()
+            {
+                TotalHotelsCount = totalHotels,
+                Hotels = hotels
+            };
+        }       
+
+        public async Task<IEnumerable<string>> AllCitiesNamesAsync()
+        {
+            return await repository.AllReadOnly<City>()
+                .Select(c => c.Name)
+                .Distinct()
+                .ToListAsync();
         }
     }
 }

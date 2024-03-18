@@ -1,0 +1,43 @@
+﻿@model HotelServiceModel
+
+@{
+    List<string> types = new List<string>();
+}
+
+<div class="col-lg-4">
+    <div style="height: 243px;" class="card mb-3">
+        <div class="row g-0">
+            <div style="padding-top: 30px; padding-bottom: 30px; padding-left: 15px;" class="col-md-4">
+                <img style="width: 190px; height: 160px; object-fit: cover;
+                        border: none;
+                        border-radius: 6px;" src="@Model.ImageUrl" class="img-fluid rounded-start" alt="hotel image">
+            </div>
+            <div class="col-md-8">
+                <div class="card-body">
+                    <h5 style="margin-bottom: 10px;" class="card-title">@Model.Name</h5>
+                    <span>
+                        @for (int i = 1; i <= @Model.StarRate; i++)
+                        {
+                            <img style="height: 12px; width: 12px;" src="~/icon/star.png" />
+                        }
+                    </span>
+
+                    <br />
+
+                    <a asp-controller="City" asp-action="Details" asp-route-id="@Model.CityId" style="text-decoration: underline;">@Model.CityName</a>
+
+                    @foreach (var type in Model.RoomsTypes)
+                    {
+                        types.Add(type.Type);
+                    }
+
+                    <p style="font-size: 17px;">Rooms: <span style="font-style: italic; font-size: 15px;">@string.Join(", ", types)</span></p>
+
+                    <a asp-controller="Hotel" asp-action="Details" asp-route-id="@Model.Id" class="btn btn-primary">See availability ></a>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

@@ -1,11 +1,22 @@
 ﻿namespace BookingSystem.Core.Contracts
 {
+    using BookingSystem.Core.Enumerations;
     using BookingSystem.Core.Models.Hotel;
+    using BookingSystem.Core.Models.QueryModels.Hotel;
     using BookingSystem.Infrastructure.Data.Models.Hotels;
 
     public interface IHotelService
     {
-        Task<IEnumerable<HotelAllViewModel>> AllAsync();
+        Task<HotelQueryServiceModel> AllAsync(
+            string? city = null,
+            string? searchTerm = null,
+            HotelSorting sorting = HotelSorting.Newest,
+            int currentPage = 1,
+            int hotelsPerPage = 4);
+
+        Task<IEnumerable<string>> AllCitiesNamesAsync();
+
+        //Task<IEnumerable<HotelAllViewModel>> AllAsync();
         Task<HotelDetailsViewModel> DetailsAsync(int hotelId);
         Task<HotelReservationInputModel> GetForReserveAsync(int hotelId);
         Task ReserveAsync(HotelReservationInputModel model, string userId);

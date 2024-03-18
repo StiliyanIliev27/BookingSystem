@@ -1,8 +1,10 @@
 ﻿namespace BookingSystem.Core.Models.Hotel
 {
-    using BookingSystem.Infrastructure.Data.Models.Hotels;
     using System.ComponentModel.DataAnnotations;
+    using static BookingSystem.Infrastructure.Data.Constants.DataConstants;
     using static BookingSystem.Infrastructure.Data.Constants.DataConstants.HotelReservation;
+    using Room = Infrastructure.Data.Models.Hotels.Room;
+
     public class HotelReservationInputModel
     {
         [Required]

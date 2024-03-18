@@ -2,6 +2,8 @@
 {
     public static class DataConstants
     {
+        public const string RequiredMessage = "{0} field is required!";
+        public const string LengthErrorMessage = "{0} must be between {2} and {1} characters long!";
         public static class Continent
         {
             public const int NameMinLength = 3;
@@ -56,8 +58,8 @@
             public const int AddressMinLength = 5;
             public const int AddressMaxLength = 80;
 
-            public const int StarRateMinValue = 1;
-            public const int StarRateMaxValue = 5;
+            public const string StarRateMinValue = "1";
+            public const string StarRateMaxValue = "5";
 
             public const int DetailsMaxLength = 1000;
 
@@ -90,9 +92,7 @@
             public const int LastNameMinLength = 3;
             public const int LastNameMaxLength = 50;
 
-            public const string DateTimeFormat = "dd/MM/yyyy";
-
-            public const string RequiredMessage = "{0} field is required!";
+            public const string DateTimeFormat = "dd/MM/yyyy";            
 
             public const string CreatedOnFormat = "dd/MM/yyyy HH:mm";
         }
