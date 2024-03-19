@@ -9,7 +9,7 @@ using BookingSystem.Core.Models.QueryModels.Hotel;
 
 namespace BookingSystem.Controllers
 {
-    public class HotelController : Controller
+    public class HotelController : BaseController
     {
         private readonly IHotelService hotelService;
 
@@ -40,19 +40,17 @@ namespace BookingSystem.Controllers
         [AllowAnonymous]
         public async Task<IActionResult> Details(int id)
         {
-            try
+            if(await hotelService.HotelExistsAsync(id) == false)
             {
-                var model = await hotelService.DetailsAsync(id);
-                return View(model);
+                return BadRequest();
             }
-            catch(ArgumentException)
-            {
-                return View("400", "Home");
-            }            
+
+            var model = await hotelService.DetailsAsync(id);
+          
+            return View(model);        
         }
 
         [HttpGet]
-        [Authorize]
         public async Task<IActionResult> Reserve(int id)
         {
             var model = await hotelService.GetForReserveAsync(id);
@@ -61,7 +59,6 @@ namespace BookingSystem.Controllers
         }
 
         [HttpPost]
-        [Authorize]
         public async Task<IActionResult> Reserve(HotelReservationInputModel model)
         {
             if (await hotelService.RoomExistsAsync(model.Room_Id) == false)
@@ -92,7 +89,6 @@ namespace BookingSystem.Controllers
         }
 
         [HttpGet]
-        [Authorize]
         public async Task<IActionResult> Verify()
         {
             string userId = User.GetUserId();
@@ -102,9 +98,13 @@ namespace BookingSystem.Controllers
         }
 
         [HttpPost]
-        [Authorize]
         public async Task<IActionResult> Verify(string id)
         {
+            if(await hotelService.HotelReservationExistsAsync(id) == false)
+            {
+                return BadRequest();
+            }
+
             string userId = User.GetUserId();
             await hotelService.VerifyReservationAsync(id, userId);
 
@@ -112,9 +112,13 @@ namespace BookingSystem.Controllers
         }
 
         [HttpPost]
-        [Authorize]
         public async Task<IActionResult> CancellVerification(string id)
         {
+            if(await hotelService.HotelReservationExistsAsync(id) == false)
+            {
+                return BadRequest();
+            }
+
             string userId = User.GetUserId();
             await hotelService.CancellVerificationAsync(id, userId);
 
@@ -122,9 +126,13 @@ namespace BookingSystem.Controllers
         }
        
         [HttpPost]
-        [Authorize]
         public async Task<IActionResult> CancellReservation(string id)
         {
+            if (await hotelService.HotelReservationExistsAsync(id) == false)
+            {
+                return BadRequest();
+            }
+
             string userId = User.GetUserId();
             await hotelService.CancellVerificationAsync(id, userId);
 
@@ -132,7 +140,6 @@ namespace BookingSystem.Controllers
         }
 
         [HttpGet]
-        [Authorize]
         public async Task<IActionResult> AllReservations()
         {
             string userId = User.GetUserId();
@@ -142,9 +149,13 @@ namespace BookingSystem.Controllers
         }
 
         [HttpGet]
-        [Authorize]
         public async Task<IActionResult> EditReservation(string id)
         {
+            if (await hotelService.HotelReservationExistsAsync(id) == false)
+            {
+                return BadRequest();
+            }
+
             string userId = User.GetUserId();
             var model = await hotelService.GetForEditAsync(id, userId);
 
@@ -152,7 +163,6 @@ namespace BookingSystem.Controllers
         }
 
         [HttpPost]
-        [Authorize]
         public async Task<IActionResult> EditReservation(HotelReservationEditInputModel model)
         {
             if (!ModelState.IsValid)
@@ -164,21 +174,6 @@ namespace BookingSystem.Controllers
             await hotelService.EditAsync(model, userId);
 
             return RedirectToAction(nameof(AllReservations));
-        }
-
-        public IActionResult Error(int statusCode)
-        {
-            if (statusCode == 400)
-            {
-                return View("Error400");
-            }
-
-            if (statusCode == 401)
-            {
-                return View("Error401");
-            }
-
-            return View();
-        }
+        }       
     }
 }

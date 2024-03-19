@@ -9,7 +9,6 @@
     using BookingSystem.Infrastructure.Data.Models.Location;
     using Microsoft.EntityFrameworkCore;
     using System.Globalization;
-    using System.Runtime.InteropServices;
     using static BookingSystem.Infrastructure.Data.Constants.DataConstants.Hotel;
     using static BookingSystem.Infrastructure.Data.Constants.DataConstants.HotelReservation;
     public class HotelService : IHotelService
@@ -36,36 +35,18 @@
         {
             return await repository.AllReadOnly<Hotel>()
                 .CountAsync();
+        }       
+
+        public async Task<bool> HotelExistsAsync(int hotelId)
+        {
+            return await repository.AllReadOnly<Hotel>()
+                .AnyAsync(h => h.Id == hotelId);
         }
 
-        public int GetDurationDays(string reservationId)
+        public async Task<bool> HotelReservationExistsAsync(string reservationId)
         {
-            var hr = repository.AllReadOnly<HotelReservation>()
-                .Where(hr => hr.Id == reservationId).First();
-
-            return (int)(hr.EndDate - hr.StartDate).TotalDays;
-        }
-
-        public decimal GetTotalPrice(int roomId)
-        {
-            var hr = repository.AllReadOnly<HotelReservation>()
-                .Where(hr => hr.Room_Id == roomId).First();
-
-            var room = repository.AllReadOnly<Room>()
-                .Where(r => r.Id == roomId).First();
-
-            return room.PricePerNight * (int)(hr.EndDate - hr.StartDate).TotalDays;
-        }
-
-        public string GetHotelImageUrl(int hotelId)
-        {
-            var hr = repository.AllReadOnly<HotelReservation>()
-                .Where(hr => hr.Hotel_Id == hotelId).First();
-
-            var hotel = repository.AllReadOnly<Hotel>()
-                .Where(h => h.Id == hotelId).First();
-
-            return hotel.ImageUrl;
+            return await repository.AllReadOnly<HotelReservation>()
+                .AnyAsync(hr => hr.Id == reservationId);
         }
 
         public async Task<bool> RoomExistsAsync(int roomId)
@@ -380,6 +361,6 @@
                 TotalHotelsCount = totalHotels,
                 Hotels = hotels
             };
-        }           
+        }      
     }
 }

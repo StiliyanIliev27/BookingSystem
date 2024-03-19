@@ -1,4 +1,4 @@
-namespace BookingSystem.Models
+﻿namespace BookingSystem.Models
 {
     public class ErrorViewModel
     {
@@ -6,4 +6,5 @@ namespace BookingSystem.Models
 
         public bool ShowRequestId => !string.IsNullOrEmpty(RequestId);
     }
+
 }

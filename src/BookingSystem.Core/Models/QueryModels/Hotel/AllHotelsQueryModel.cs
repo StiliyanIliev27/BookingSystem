@@ -5,7 +5,7 @@ namespace BookingSystem.Core.Models.QueryModels.Hotel
 {
     public class AllHotelsQueryModel
     {
-        public int HotelsPerPage { get; } = 3;
+        public int HotelsPerPage { get; } = 6;
         public string City { get; set; } = null!;
 
         [Display(Name = "Search by text")]

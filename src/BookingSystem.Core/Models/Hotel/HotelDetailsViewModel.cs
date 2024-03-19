@@ -1,5 +1,5 @@
-﻿using BookingSystem.Infrastructure.Data.Models.Hotels;
-using BookingSystem.Infrastructure.Data.Models.Location;
+﻿using BookingSystem.Core.Models.Location;
+using BookingSystem.Infrastructure.Data.Models.Hotels;
 
 namespace BookingSystem.Core.Models.Hotel
 {
