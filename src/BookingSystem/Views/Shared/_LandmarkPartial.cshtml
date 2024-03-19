@@ -1,0 +1,20 @@
+﻿
+@model LandmarkViewModel
+
+<div class="card m-4 mt-3" style="width: 15rem;">
+    <img class="card-img-top" src="@Model.ImageUrl" alt="Landmark image">
+    <div class="card-body">
+        <a asp-controller="Landmark" asp-action="Details" asp-route-id="@Model.Id">
+            <h5 class="card-title">@Model.Name</h5>
+        </a>
+        <p class="card-text">@Model.CityName</p>
+        @if(Model.TicketPrice > 0)
+        {
+            <p style="font-weight: bold;" class="card-text">from $@Model.TicketPrice per adult</p>
+        }
+        else
+        {
+            <p style="font-weight: bold;" class="card-text">Free entry</p>
+        }
+    </div>
+</div>

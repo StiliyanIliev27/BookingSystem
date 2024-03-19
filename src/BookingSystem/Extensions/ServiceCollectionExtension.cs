@@ -13,6 +13,7 @@
             services.AddScoped<IHotelService, HotelService>();
             services.AddScoped<ICityService, CityService>();    
             services.AddScoped<ICountryService, CountryService>();
+            services.AddScoped<ILandmarkService, LandmarkService>();
 
             return services;
         }

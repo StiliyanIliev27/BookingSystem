@@ -9,7 +9,7 @@ namespace BookingSystem.Core.Models.Hotel
         public string Name { get; set; } = null!;
         public string Address { get; set; } = null!;
         public string CountryName { get; set; } = null!;
-        public string CityName { get; set; } = null!;
+        public CityViewModel City { get; set; } = null!;
         public int StarRate { get; set; }
         public string? Details { get; set; }
         public string ImageUrl { get; set; } = null!;

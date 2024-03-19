@@ -952,7 +952,7 @@
                 Name = "Central Park",
                 Address = "59th to 110th Street Manhattan Borough, NY 10022",
                 Details = "For more than 150 years, visitors have flocked to Central Park's 843 green acres in the heart of Manhattan. Since 1980, the Park has been managed by the Central Park Conservancy, in partnership with the public. Central Park is open 6 am to 1 am daily. Visit the official website of Central Park to learn more about Park happenings and activities and to learn how you to help Central Park!",
-                City_Id = 4,
+                City_Id = 3,
                 ImageUrl = "https://upload.wikimedia.org/wikipedia/commons/thumb/e/ee/New_York_City-Manhattan-Central_Park_%28Gentry%29.jpg/1200px-New_York_City-Manhattan-Central_Park_%28Gentry%29.jpg",
                 IsActive = true
             };

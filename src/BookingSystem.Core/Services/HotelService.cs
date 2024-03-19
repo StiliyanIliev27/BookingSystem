@@ -97,7 +97,11 @@
                 Id = hotel.Id,
                 Name = hotel.Name,
                 Address = hotel.Address,
-                CityName = hotel.City.Name,
+                City = new Models.Location.CityViewModel
+                    {
+                        Id = hotel.City.Id,
+                        Name = hotel.City.Name
+                    },
                 CountryName = hotel.City.Country.Name,
                 StarRate = hotel.StarRate,
                 Details = hotel.Details,

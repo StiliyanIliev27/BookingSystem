@@ -12,10 +12,12 @@ namespace BookingSystem.Controllers
     public class HotelController : BaseController
     {
         private readonly IHotelService hotelService;
+        private readonly ILandmarkService landmarkService;
 
-        public HotelController(IHotelService hotelService)
+        public HotelController(IHotelService hotelService, ILandmarkService landmarkService)
         {
             this.hotelService = hotelService;
+            this.landmarkService = landmarkService;
         }
 
         [HttpGet]
@@ -46,6 +48,7 @@ namespace BookingSystem.Controllers
             }
 
             var model = await hotelService.DetailsAsync(id);
+            model.City.Landmarks = await landmarkService.AllAsync(model.City.Id);
           
             return View(model);        
         }

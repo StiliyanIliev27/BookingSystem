@@ -24,4 +24,8 @@
     <ProjectReference Include="..\BookingSystem.Core\BookingSystem.Core.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Views\Landmark\" />
+  </ItemGroup>
+
 </Project>

@@ -24,7 +24,7 @@
                 </div>
 
                 <i class="fas fa-map-marker-alt"></i>
-                <small>@Model.Address, @Model.CityName, @Model.CountryName</small>
+                <small>@Model.Address, @Model.City.Name, @Model.CountryName</small>
 
                 <div style="width: 100%;">
                     <img style="width: 100%; height: auto; object-fit: cover; margin-top: 15px;" src="@Model.ImageUrl" class="card-img" />
@@ -167,6 +167,19 @@
                     </tr>
                 </table>
             </div>
+
+            
+            @if (Model.City.Landmarks.Any())
+            {
+                <h4 style="text-align: center;">Landmarks in @Model.City.Name ...</h4>
+
+                <div class="row">
+                    @foreach (var landmark in Model.City.Landmarks)
+                    {
+                        <partial name="_LandmarkPartial" model="@landmark" />
+                    }
+                </div>    
+            }
         </div>
     </div>
 </div>
