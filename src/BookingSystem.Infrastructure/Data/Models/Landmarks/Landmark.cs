@@ -63,6 +63,14 @@
         [Comment("Landmark's Ticket Price")]
         public decimal TicketPrice { get; set; } = 0.0m;
 
+
+        /// <summary>
+        /// Landmark's Image Url
+        /// </summary>
+        [Required]
+        [Comment("Landmark's Image Url")]
+        public string ImageUrl { get; set; } = null!;
+
         /// <summary>
         /// Landmark's active status
         /// </summary>
