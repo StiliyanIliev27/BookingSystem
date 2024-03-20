@@ -30,7 +30,31 @@
                 })
                 .ToListAsync();
         }
-      
+
+        public async Task<LandmarkDetailsViewModel> DetailsAsync(int landmarkId)
+        {
+            var landmark = await repository.AllReadOnly<Landmark>()
+                .Where(l => l.Id == landmarkId)
+                .Include(l => l.City)
+                .FirstOrDefaultAsync();
+
+            if(landmark == null)
+            {
+                throw new ArgumentException("Landmark does not exist!");
+            }
+
+            return new LandmarkDetailsViewModel()
+            {
+                Id = landmark.Id,
+                Name = landmark.Name,
+                CityName = landmark.City.Name,
+                ImageUrl = landmark.ImageUrl,
+                Address = landmark.Address,
+                Details = landmark.Details,
+                TicketPrice = landmark.TicketPrice
+            };
+        }
+
         public async Task<bool> LandmarkExistsAsync(int landmarkId)
         {
             return await repository.AllReadOnly<Landmark>()
