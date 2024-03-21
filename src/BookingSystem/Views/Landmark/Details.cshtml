@@ -10,23 +10,28 @@
             <div class="card mt-3 w-100">
                 <div class="card-body">
                     <h3 class="card-title mb-4">About</h3>
-                    <p style="font-style: italic;"><span style="font-weight: bold;">Address:</span> @Model.Address</p>
+                    <p style="font-style: italic;">
+                        <span style="font-weight: bold;">
+                            <i class="fas fa-map-marker-alt"></i>
+                            Address:
+                        </span> @Model.Address
+                    </p>
                     <p class="card-text">@Model.Details</p>
                     <hr />
-                    @if (Model.TicketPrice > 0)
+                    @if(Model.TicketPrice > 0)
                     {
                         <div class="d-flex flex-row justify-content-between">
                             <small class="fw-bold">Admission tickets</small>
                             <h4>from $@Model.TicketPrice</h4>
                         </div>
-                        <button style="margin-top: 10px; width: 100%; border-radius: 20px; font-weight: bold;" type="button" class="btn btn-warning">Reserve</button>
+                        <a asp-controller="Landmark" asp-action="Reserve" asp-route-id="@Model.Id" style="margin-top: 10px; width: 100%; border-radius: 20px; font-weight: bold;" class="btn btn-warning">Reserve</a>                        
                     }
                     else
                     {
                         <div class="d-flex flex-row justify-content-between">
                             <small class="fw-bold">Admission tickets</small>
                             <h4>Free entry</h4>
-                        </div>
+                        </div>                        
                         <button style="margin-top: 10px; width: 100%; border-radius: 20px; font-weight: bold;" type="button" class="btn btn-warning disabled">Reserve</button>
                     }
                 </div>

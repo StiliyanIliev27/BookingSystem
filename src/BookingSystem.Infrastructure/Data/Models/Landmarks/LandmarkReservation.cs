@@ -40,6 +40,34 @@
         public IdentityUser User { get; set; } = null!;
 
         /// <summary>
+        /// LandmarkReservation's Date
+        /// </summary>
+        [Required]
+        [Comment("LandmarkReservation's Date")]
+        public DateTime ReservationDate { get; set; }
+       
+        /// <summary>
+        /// LandmarkReservation's Time
+        /// </summary>
+        [Required]
+        [Comment("LandmarkReservation's Time")]
+        public DateTime ReservationTime { get; set; }
+
+        /// <summary>
+        /// LandmarkReservation's Group count
+        /// </summary>
+        [Required]
+        [Comment("LandmarkReservation's Group Count")]
+        public int GroupCount { get; set; }
+
+        /// <summary>
+        /// LandmarkReservation's Total Price
+        /// </summary>
+        [Required]
+        [Comment("LandmarkReservation's Total Price")]
+        public decimal TotalPrice { get; set; }
+
+        /// <summary>
         /// LandmarkReservation's CreatedOn time
         /// </summary>
         [Required]

@@ -96,5 +96,15 @@
 
             public const string CreatedOnFormat = "dd/MM/yyyy HH:mm";
         }
+
+        public static class LandmarkReservation
+        {
+            public const int MinimumPeoplePerReservation = 1;
+            public const int MaximumPeoplePerReservation = 10;
+
+            public const string DateFormat = "dd/MM/yyyy";
+           
+            public const string TimeFormat = "HH:mm";
+        }
     }
 }

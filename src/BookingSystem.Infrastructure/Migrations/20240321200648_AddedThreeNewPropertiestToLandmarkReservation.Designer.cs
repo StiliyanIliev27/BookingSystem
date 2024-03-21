@@ -4,6 +4,7 @@ using BookingSystem.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BookingSystem.Infrastructure.Migrations
 {
     [DbContext(typeof(BookingSystemDbContext))]
-    partial class BookingSystemDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240321200648_AddedThreeNewPropertiestToLandmarkReservation")]
+    partial class AddedThreeNewPropertiestToLandmarkReservation
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -1824,13 +1826,9 @@ namespace BookingSystem.Infrastructure.Migrations
                         .HasColumnType("bit")
                         .HasComment("LandmarkReservation's Active Status");
 
-                    b.Property<DateTime>("ReservationDate")
+                    b.Property<DateTime>("ReservationDateTime")
                         .HasColumnType("datetime2")
-                        .HasComment("LandmarkReservation's Date");
-
-                    b.Property<DateTime>("ReservationTime")
-                        .HasColumnType("datetime2")
-                        .HasComment("LandmarkReservation's Time");
+                        .HasComment("LandmarkReservation's DateTime");
 
                     b.Property<decimal>("TotalPrice")
                         .HasColumnType("decimal(18,2)")
@@ -2601,15 +2599,15 @@ namespace BookingSystem.Infrastructure.Migrations
                         {
                             Id = "8d1f0bdc-f9e5-4856-a127-fb84281d56ad",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "58f3f413-16f5-475f-a681-bfa11b91f5ab",
+                            ConcurrencyStamp = "0ab9a6d4-b70c-4cd4-bf2a-633431f32e64",
                             Email = "guest@gmail.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             NormalizedEmail = "guest@gmail.com",
                             NormalizedUserName = "guest",
-                            PasswordHash = "AQAAAAEAACcQAAAAEIKl/9/mE/q5Qaq0h2oVwYVnOQyEeRP/DCPhCAZzj6DIy1cRlCv6UwGSf5Qa7Axagw==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEHS6C9bNWuinui6hl8VK1NQTxvusHMB1Zc5TAVeCYU6HvSG5XK1jQW7PUbj1M6mHYA==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "215fe7e9-d848-4d9c-adcf-a021c81860bc",
+                            SecurityStamp = "89c13192-4ad2-4696-b724-a546c458b21e",
                             TwoFactorEnabled = false,
                             UserName = "Guest"
                         },
@@ -2617,15 +2615,15 @@ namespace BookingSystem.Infrastructure.Migrations
                         {
                             Id = "c9019544-ec91-4248-bfc4-9d8a4f13430b",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "832ed480-b184-4373-955a-0e4165ad3c29",
+                            ConcurrencyStamp = "8287506f-8d24-4d9c-beff-4c03fef18f9a",
                             Email = "admin@gmail.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             NormalizedEmail = "admin@gmail.com",
                             NormalizedUserName = "administrator",
-                            PasswordHash = "AQAAAAEAACcQAAAAELHc0fZKKIWhxTnnX5U1yLWQESZtWbcKHzxVdiZl4OC35dCBPPXIC01kkpVYfsPLFw==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEA+GmbLcxUZzBv5mz8EdL4O0ZvzlpJvLTN+X+Ab5sqvEsrUbFZtlezFbLKEWG1RMzw==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "6ca19346-e6cb-47c9-b064-2b3b19a5548c",
+                            SecurityStamp = "7975f2d8-3314-432a-9841-f68436bb98fc",
                             TwoFactorEnabled = false,
                             UserName = "Administrator"
                         });

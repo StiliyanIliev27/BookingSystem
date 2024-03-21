@@ -48,7 +48,7 @@
                 <span asp-validation-for="@Model.EndDate" class="text-danger"></span>
             </div>
             <div class="mb-3">
-                <label asp-for="@Model.Room_Id" class="form-label-add-edit">Select Room</label>
+                <label asp-for="@Model.Room_Id" class="form-label-add-edit">Select Room<span style="color: red"> *</span></label>
                 <select asp-for="@Model.Room_Id" class="form-control" aria-required="true">
                     <option disabled selected value="">Select Room...</option>
                     @foreach (var room in Model.Rooms!)
