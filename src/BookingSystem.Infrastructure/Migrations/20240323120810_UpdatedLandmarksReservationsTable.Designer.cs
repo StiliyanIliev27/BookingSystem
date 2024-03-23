@@ -4,6 +4,7 @@ using BookingSystem.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BookingSystem.Infrastructure.Migrations
 {
     [DbContext(typeof(BookingSystemDbContext))]
-    partial class BookingSystemDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240323120810_UpdatedLandmarksReservationsTable")]
+    partial class UpdatedLandmarksReservationsTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -912,7 +914,7 @@ namespace BookingSystem.Infrastructure.Migrations
                     b.Property<string>("FirstName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)")
-                        .HasComment("Hotel Reservation's Reserver's First Name");
+                        .HasComment("Hotel's Reserver's First Name");
 
                     b.Property<int>("Hotel_Id")
                         .HasColumnType("int")
@@ -925,7 +927,7 @@ namespace BookingSystem.Infrastructure.Migrations
                     b.Property<string>("LastName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)")
-                        .HasComment("Hotel Reservation's Reserver's Last Name");
+                        .HasComment("Hotel's Reserver's Last Name");
 
                     b.Property<decimal>("Price")
                         .HasPrecision(18, 2)
@@ -1812,11 +1814,6 @@ namespace BookingSystem.Infrastructure.Migrations
                         .HasColumnType("datetime2")
                         .HasComment("LandmarkReservation's CreatedOn Time");
 
-                    b.Property<string>("FirstName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)")
-                        .HasComment("Landmark Reservation's Reserver's First name");
-
                     b.Property<int>("GroupCount")
                         .HasColumnType("int")
                         .HasComment("LandmarkReservation's Group Count");
@@ -1828,11 +1825,6 @@ namespace BookingSystem.Infrastructure.Migrations
                     b.Property<int>("Landmark_Id")
                         .HasColumnType("int")
                         .HasComment("Landmark's Identifier");
-
-                    b.Property<string>("LastName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)")
-                        .HasComment("Landmark Reservation's Reserver's Last name");
 
                     b.Property<DateTime>("ReservationDate")
                         .HasColumnType("datetime2")
@@ -2619,15 +2611,15 @@ namespace BookingSystem.Infrastructure.Migrations
                         {
                             Id = "8d1f0bdc-f9e5-4856-a127-fb84281d56ad",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "1f347265-afcd-4b03-8ea7-f51e36a2ada3",
+                            ConcurrencyStamp = "675ed835-5c1f-4fdb-848b-9cc400316eb6",
                             Email = "guest@gmail.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             NormalizedEmail = "guest@gmail.com",
                             NormalizedUserName = "guest",
-                            PasswordHash = "AQAAAAEAACcQAAAAEOFKXQcQlDCgplWLdyDidgeRxG/mImxELLtq4KZPUmn0yMVV2Jp1vmKi0HulRVSMyg==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEAcgIyDoO24cp2wjPKzrTnAfkWLJnF0p/Q6acsSy9tb6/s8X/aW721bTEiRoeX7Ueg==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "f0bd9501-cbb4-4d32-bbab-2bed97e443a9",
+                            SecurityStamp = "6b41f7f4-5e93-48c8-ab79-613f8d1f1777",
                             TwoFactorEnabled = false,
                             UserName = "Guest"
                         },
@@ -2635,15 +2627,15 @@ namespace BookingSystem.Infrastructure.Migrations
                         {
                             Id = "c9019544-ec91-4248-bfc4-9d8a4f13430b",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "84ffdd69-3e0b-4587-9156-eb5736bb0f55",
+                            ConcurrencyStamp = "1b2f4064-3029-46d6-a967-59fc204dcf93",
                             Email = "admin@gmail.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             NormalizedEmail = "admin@gmail.com",
                             NormalizedUserName = "administrator",
-                            PasswordHash = "AQAAAAEAACcQAAAAEDq3F80S0BYsSXywsNiZDXaYIRVavTC+6baAkUX0YwptFNFFxg9SJZ+R1o89WpMEog==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEPXPREBO4pO7wdIThwKvgfHC49L0NgwTJlrArooTg5GLtWnZsYLkwM0gdpvGD/Qa4A==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "141caeb8-cb1c-4003-8c56-bdbff454c68f",
+                            SecurityStamp = "485a48ff-36dd-4d72-9612-8415f297f57b",
                             TwoFactorEnabled = false,
                             UserName = "Administrator"
                         });

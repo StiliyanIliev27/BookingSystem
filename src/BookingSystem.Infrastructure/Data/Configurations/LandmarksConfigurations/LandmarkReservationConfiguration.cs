@@ -8,7 +8,8 @@
         public void Configure(EntityTypeBuilder<LandmarkReservation> builder)
         {
             builder
-                .HasKey(lr => new {lr.Landmark_Id, lr.User_Id});
+                .Property(lr => lr.TotalPrice)
+                .HasPrecision(18, 2);
         }
     }
 }

@@ -22,18 +22,19 @@
         [Key]
         [Comment("Hotel Reservation Identifier")]
         public string Id { get; set; }
+        
         /// <summary>
-        /// Hotel's Reserver's First Name
+        /// HotelReservation's Reserver's First Name
         /// </summary>
         [Required]
-        [Comment("Hotel's Reserver's First Name")]
+        [Comment("Hotel Reservation's Reserver's First Name")]
         public string FirstName { get; set; } = null!;
 
         /// <summary>
-        /// Hotel's Reserver's Last Name
+        /// HotelReservation's Reserver's Last Name
         /// </summary>
         [Required]
-        [Comment("Hotel's Reserver's Last Name")]
+        [Comment("Hotel Reservation's Reserver's Last Name")]
         public string LastName { get; set; } = null!;
 
         /// <summary>

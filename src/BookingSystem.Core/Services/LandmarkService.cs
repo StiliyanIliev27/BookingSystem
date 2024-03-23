@@ -1,6 +1,7 @@
 ﻿namespace BookingSystem.Core.Services
 {
     using BookingSystem.Core.Contracts;
+    using BookingSystem.Core.Models.Hotel;
     using BookingSystem.Core.Models.Landmark;
     using BookingSystem.Infrastructure.Common;
     using BookingSystem.Infrastructure.Data.Models.Landmarks;
@@ -63,20 +64,29 @@
                 .AnyAsync(l => l.Id == landmarkId);
         }
 
-        public async Task<bool> ReservationExistsAsync(int landmarkId, string userId)
+        public async Task<bool> LandmarkReservationExistsAsync(string reservationId)
         {
             return await repository.AllReadOnly<LandmarkReservation>()
-                .AnyAsync(lr => lr.Landmark_Id == landmarkId && lr.User_Id == userId && lr.IsActive == true);
+                .AnyAsync(lr => lr.Id == reservationId);
+        }
+
+        public async Task<bool> ReservationExistsAsync(int landmarkId, string userId,
+            DateTime reservationDate, DateTime reservationTime)
+        {
+            return await repository.AllReadOnly<LandmarkReservation>()
+                .AnyAsync(lr => lr.Landmark_Id == landmarkId && lr.User_Id == userId && 
+                        lr.IsActive == true && lr.ReservationDate.Date == reservationDate.Date &&
+                        lr.ReservationTime == reservationTime);
         }
 
         public async Task<LandmarkReserveInputModel> GetForReserveAsync(int landmarkId)
         {
             var landmark = await repository.AllReadOnly<Landmark>()
-                .FirstOrDefaultAsync(l => l.Id == landmarkId);
+                .FirstOrDefaultAsync(l => l.Id == landmarkId && l.TicketPrice > 0.0m);
 
             if(landmark == null)
             {
-                throw new ArgumentException("The landmark does not exist!");
+                throw new ArgumentException("The landmark does not exist or you are not able to reserve it!");
             }
 
             return new LandmarkReserveInputModel()
@@ -89,15 +99,17 @@
         public async Task ReserveAsync(string userId, int landmarkId, LandmarkReserveInputModel model)
         {
             var landmark = await repository.AllReadOnly<Landmark>()
-                .FirstOrDefaultAsync(l => l.Id == landmarkId);
+                .FirstOrDefaultAsync(l => l.Id == landmarkId && l.TicketPrice > 0.0m);
 
             if (landmark == null)
             {
-                throw new ArgumentException("The landmark does not exist!");
+                throw new ArgumentException("The landmark does not exist or you are not able to reserve it!!");
             }
 
             var reservation = new LandmarkReservation()
             {
+                FirstName = model.FirstName, 
+                LastName = model.LastName,
                 User_Id = userId,
                 Landmark_Id = landmark.Id,
                 CreatedOn = DateTime.Now,
@@ -110,7 +122,8 @@
                 IsActive = true
             };
 
-            if (await ReservationExistsAsync(reservation.Landmark_Id, reservation.User_Id))
+            if (await ReservationExistsAsync(reservation.Landmark_Id,
+                reservation.User_Id, reservation.ReservationDate, reservation.ReservationTime))
             {
                 throw new ArgumentException("You have already a reservation on this landmark!");
             }
@@ -135,12 +148,28 @@
         }
 
         public async Task<IEnumerable<LandmarkReservationsViewModel>> AllReservationsAsync(string userId)
-        {
+        {          
+            var invalidRes = await repository.All<LandmarkReservation>()
+                .Where(r => r.ReservationDate.Date < DateTime.Now.Date)
+                .ToListAsync();
+
+            foreach(var res in invalidRes)
+            {
+                res.IsActive = false;
+            }
+
+            await repository.SaveChangesAsync();
+
             return await repository.AllReadOnly<LandmarkReservation>()
                 .Where(lr => lr.User_Id == userId && lr.IsActive == true)
                 .Include(lr => lr.Landmark)
                 .Select(lr => new LandmarkReservationsViewModel()
                 {
+                    Id = lr.Id,
+                    Landmark_Id = lr.Landmark_Id,
+                    Name = repository.AllReadOnly<Landmark>().First(l => l.Id == lr.Landmark_Id).Name,
+                    FirstName = lr.FirstName,
+                    LastName = lr.LastName,
                     GroupCount = lr.GroupCount,
                     CreatedOn = lr.CreatedOn.ToString("dd/MM/yyyy HH:mm"),
                     LandmarkImageUrl = lr.Landmark.ImageUrl,
@@ -149,6 +178,54 @@
                     TotalPrice = lr.TotalPrice                    
                 })
                 .ToListAsync();
+        }
+
+        public async Task CancellReservationAsync(string userId, string reservationId)
+        {
+            var reservation = await repository.All<LandmarkReservation>()
+                .FirstOrDefaultAsync(lr => lr.User_Id == userId && lr.Id == reservationId && lr.IsActive == true);
+
+            if(reservation == null)
+            {
+                throw new ArgumentException("The current reservation does not exist");
+            }
+
+            repository.Delete(reservation);
+            await repository.SaveChangesAsync();
+        }
+
+        public async Task<LandmarkEditInputModel> GetReservationForEditAsync(string userId, string reservationId)
+        {
+            var res = await repository.AllReadOnly<LandmarkReservation>()
+                .FirstOrDefaultAsync(lr => lr.User_Id == userId && lr.Id == reservationId);
+
+            if(res == null) 
+            {
+                throw new ArgumentException("The current reservation does not exist!");
+            }            
+
+            return new LandmarkEditInputModel()
+            {
+                Id = res.Id,
+                FirstName = res.FirstName,
+                LastName = res.LastName
+            };
+        }       
+
+        public async Task EditReservationAsync(LandmarkEditInputModel model, string userId)
+        {
+            var reservation = await repository.All<LandmarkReservation>()
+                .FirstOrDefaultAsync(lr => lr.Id == model.Id && lr.User_Id == userId);
+
+            if(reservation == null)
+            {
+                throw new ArgumentException("The current reservation does not exists!");
+            }
+
+            reservation.FirstName = model.FirstName;
+            reservation.LastName = model.LastName;
+
+            await repository.SaveChangesAsync();
         }
     }
 }

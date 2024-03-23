@@ -14,7 +14,15 @@ namespace BookingSystem.Core.Contracts
 
         Task<IEnumerable<LandmarkReservationsViewModel>> AllReservationsAsync(string userId);
 
-        Task<bool> ReservationExistsAsync(int landmarkId, string userId);
+        Task CancellReservationAsync(string userId, string reservationId);
+
+        Task<LandmarkEditInputModel> GetReservationForEditAsync(string userId, string reservationId);
+
+        Task EditReservationAsync(LandmarkEditInputModel model, string userId);
+
+        Task<bool> ReservationExistsAsync(int landmarkId, string userId, DateTime reservationDate, DateTime reservationTime);
+
+        Task<bool> LandmarkReservationExistsAsync(string reservationId);
 
         Task<bool> LandmarkExistsAsync(int landmarkId);
 

@@ -102,6 +102,12 @@
             public const int MinimumPeoplePerReservation = 1;
             public const int MaximumPeoplePerReservation = 10;
 
+            public const int FirstNameMinLength = 3;
+            public const int FirstNameMaxLength = 50;
+
+            public const int LastNameMinLength = 3;
+            public const int LastNameMaxLength = 50;
+
             public const string DateFormat = "dd/MM/yyyy";
            
             public const string TimeFormat = "HH:mm";

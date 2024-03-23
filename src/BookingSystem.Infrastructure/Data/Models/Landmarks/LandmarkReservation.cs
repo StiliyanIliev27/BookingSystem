@@ -11,6 +11,32 @@
     [Comment("Landmark Reservation")]
     public class LandmarkReservation
     {
+        public LandmarkReservation()
+        {
+            Id = Guid.NewGuid().ToString();
+        }
+
+        /// <summary>
+        /// Landmark Reservation Identifier
+        /// </summary>
+        [Key]
+        [Comment("Landmark Reservation Identifier")]
+        public string Id { get; set; }
+
+        /// <summary>
+        /// Landmark Reservation's Reserver's First name
+        /// </summary>
+        [Required]
+        [Comment("Landmark Reservation's Reserver's First name")]
+        public string FirstName { get; set; } = null!;
+
+        /// <summary>
+        /// Landmark Reservation's Reserver's Last name
+        /// </summary>
+        [Required]
+        [Comment("Landmark Reservation's Reserver's Last name")]
+        public string LastName { get; set; } = null!;
+
         /// <summary>
         /// Landmark's Identifier
         /// </summary>

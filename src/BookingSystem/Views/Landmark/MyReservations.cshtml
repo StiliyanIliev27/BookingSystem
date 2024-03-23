@@ -1,0 +1,76 @@
+﻿@model IEnumerable<LandmarkReservationsViewModel>
+@{
+    ViewData["Title"] = "Landmark reservations";
+}
+
+<h2 class="text-center">@ViewData["Title"]</h2>
+<hr />
+
+@if (Model.Any())
+{
+    <div class="container">
+        <div class="row">
+            @foreach (var landmark in Model)
+            {
+                <div class="col-lg-3 col-md-4 col-sm-6 mb-4">
+                    <div class="card">
+                        <img class="card-img-top" src="@landmark.LandmarkImageUrl" alt="Card image cap">
+                        <div class="card-body pb-0">
+                            <a asp-controller="Landmark" asp-action="Details" asp-route-id="@landmark.Landmark_Id">
+                                <h5 style="height: 30px; margin-bottom: 0px;" class="card-title text-center">@landmark.Name</h5>
+                            </a>
+                            <hr />
+                            <p class="card-text"><strong>Reserver's First Name:</strong> <span style="font-style: italic;">@landmark.FirstName</span></p>
+                            <p class="card-text"><strong>Reserver's Last Name:</strong> <span style="font-style: italic;">@landmark.LastName</span></p>
+                            <p class="card-text"><strong>Reservation date:</strong> <span style="font-style: italic;">@landmark.ReservationDate</span></p>
+                            <p class="card-text"><strong>Reservation time:</strong> <span style="font-style: italic;">@landmark.ReservationTime</span></p>
+                            <p class="card-text"><strong>Group count:</strong> <span style="font-style: italic;">@landmark.GroupCount</span></p>
+                            <p class="card-text"><strong>Total price:</strong> <span style="font-style: italic;">$@landmark.TotalPrice</span></p>
+
+                            <div class="d-flex justify-content-between align-items-center mb-3">
+                                <form method="post" asp-controller="Landmark" asp-action="CancellReservation" asp-route-id="@landmark.Id">
+                                    <button type="submit" style="width: 120px;" class="btn btn-danger fw-bold">Cancell the reservation</button>
+                                </form>
+                                <form method="get" asp-controller="Landmark" asp-action="EditReservation" asp-route-id="@landmark.Id">
+                                    <button type="submit" style="width: 120px; height: 61px;" class="btn btn-warning fw-bold">Edit</button>
+                                </form>
+                            </div>
+                        </div>
+                        <div class="card-footer">
+                            <small class="text-muted">Created on: @landmark.CreatedOn</small>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+}
+else
+{
+    <h3 class="text-center mt-5">You have no landmark reservations at the moment...</h3>
+}
+
+<style>
+    .card-img-top {
+        width: 100%;
+        height: 200px;
+        object-fit: cover;
+    }
+</style>
+
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            $('.row').each(function () {
+                var maxHeight = 0;
+                $(this).find('.card').each(function () {
+                    var cardHeight = $(this).outerHeight();
+                    if (cardHeight > maxHeight) {
+                        maxHeight = cardHeight;
+                    }
+                });
+                $(this).find('.card').css('min-height', maxHeight + 'px');
+            });
+        });
+    </script>
+}

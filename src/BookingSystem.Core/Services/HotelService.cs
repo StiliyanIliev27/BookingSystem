@@ -8,6 +8,7 @@
     using BookingSystem.Infrastructure.Data.Models.Hotels;
     using BookingSystem.Infrastructure.Data.Models.Location;
     using Microsoft.EntityFrameworkCore;
+    using Microsoft.IdentityModel.Tokens;
     using System.Globalization;
     using static BookingSystem.Infrastructure.Data.Constants.DataConstants.Hotel;
     using static BookingSystem.Infrastructure.Data.Constants.DataConstants.HotelReservation;
@@ -164,7 +165,7 @@
         public async Task<IEnumerable<HotelReservationVerifyViewModel>> GetForVerifyReservationAsync(string userId)
         {
             return await repository.AllReadOnly<HotelReservation>()
-                .Where(hr => hr.User_Id == userId && hr.IsActive == false)
+                .Where(hr => hr.User_Id == userId && hr.IsActive == false && hr.StartDate.Date >= DateTime.Now.Date)
                 .Select(hr => new HotelReservationVerifyViewModel()
                 {
                     Id = hr.Id,
@@ -240,7 +241,10 @@
 
             if(room.IsActive == true)
             {
-                room.Count += 1;
+                if(room.Count < 5)
+                {
+                    room.Count += 1;
+                }
             }
 
             repository.Delete(hr);
@@ -250,8 +254,25 @@
 
         public async Task<IEnumerable<HotelReservationViewModel>> AllReservationsAsync(string userId)
         {
+            var invalidRes = await repository.All<HotelReservation>()
+                .Where(hr => hr.EndDate.Date < DateTime.Now.Date)
+                .Include(hr => hr.Room)
+                .ToListAsync();
+
+            foreach(var res in invalidRes)
+            {
+                res.IsActive = false;
+               
+                if(res.Room.Count < 5)
+                {
+                    res.Room.Count += 1;
+                }
+            }
+
+            await repository.SaveChangesAsync();
+
             return await repository.AllReadOnly<HotelReservation>()
-                .Where(hr => hr.User_Id == userId && hr.IsActive == true && hr.EndDate > DateTime.Now)
+                .Where(hr => hr.User_Id == userId && hr.IsActive == true)
                 .Include(hr => hr.Hotel)
                 .Include(hr => hr.Room)
                 .Select(hr => new HotelReservationViewModel()
