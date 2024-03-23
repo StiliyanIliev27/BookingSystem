@@ -2,7 +2,6 @@
 {
     using BookingSystem.Core.Contracts;
     using BookingSystem.Core.Models.Landmark;
-    using BookingSystem.Infrastructure.Migrations;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
     using System.Globalization;
