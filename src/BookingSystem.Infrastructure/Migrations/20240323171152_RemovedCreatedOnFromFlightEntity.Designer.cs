@@ -4,6 +4,7 @@ using BookingSystem.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BookingSystem.Infrastructure.Migrations
 {
     [DbContext(typeof(BookingSystemDbContext))]
-    partial class BookingSystemDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240323171152_RemovedCreatedOnFromFlightEntity")]
+    partial class RemovedCreatedOnFromFlightEntity
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -109,12 +111,6 @@ namespace BookingSystem.Infrastructure.Migrations
                         .HasColumnType("nvarchar(50)")
                         .HasComment("Airport's Name");
 
-                    b.Property<string>("ShorterName")
-                        .IsRequired()
-                        .HasMaxLength(3)
-                        .HasColumnType("nvarchar(3)")
-                        .HasComment("Airport's ShorterName");
-
                     b.HasKey("Id");
 
                     b.HasIndex("City_Id");
@@ -128,50 +124,43 @@ namespace BookingSystem.Infrastructure.Migrations
                         {
                             Id = 4,
                             City_Id = 4,
-                            Name = "Istanbul International Airport",
-                            ShorterName = "SAW"
+                            Name = "Istanbul International Airport"
                         },
                         new
                         {
                             Id = 1,
                             City_Id = 1,
-                            Name = "Paris Charles de Gaulle Airport",
-                            ShorterName = "CDG"
+                            Name = "Paris Charles de Gaulle Airport"
                         },
                         new
                         {
                             Id = 3,
                             City_Id = 3,
-                            Name = "John F. Kennedy International Airport",
-                            ShorterName = "JFK"
+                            Name = "John F. Kennedy International Airport"
                         },
                         new
                         {
                             Id = 6,
                             City_Id = 6,
-                            Name = "Sofia International Airport",
-                            ShorterName = "SOF"
+                            Name = "Sofia International Airport"
                         },
                         new
                         {
                             Id = 5,
                             City_Id = 5,
-                            Name = "Leonardo da Vinci–Fiumicino Airport",
-                            ShorterName = "FCO"
+                            Name = "Leonardo da Vinci–Fiumicino Airport"
                         },
                         new
                         {
                             Id = 7,
                             City_Id = 7,
-                            Name = "Haneda Airport",
-                            ShorterName = "HND"
+                            Name = "Haneda Airport"
                         },
                         new
                         {
                             Id = 2,
                             City_Id = 2,
-                            Name = "Madrid–Barajas Airport",
-                            ShorterName = "MAD"
+                            Name = "Madrid–Barajas Airport"
                         });
                 });
 
@@ -239,10 +228,10 @@ namespace BookingSystem.Infrastructure.Migrations
                             Id = 1,
                             Airline_Id = 4,
                             ArrivalAirport_Id = 1,
-                            ArrivalTime = new DateTime(2024, 3, 24, 20, 25, 0, 0, DateTimeKind.Unspecified),
+                            ArrivalTime = new DateTime(2024, 3, 23, 20, 25, 0, 0, DateTimeKind.Unspecified),
                             CabinClass = 0,
                             DepartureAirport_Id = 6,
-                            DepartureTime = new DateTime(2024, 3, 24, 18, 15, 0, 0, DateTimeKind.Unspecified),
+                            DepartureTime = new DateTime(2024, 3, 23, 18, 15, 0, 0, DateTimeKind.Unspecified),
                             FlightDuration = 190,
                             IsActive = true,
                             TicketPrice = 75m
@@ -252,10 +241,10 @@ namespace BookingSystem.Infrastructure.Migrations
                             Id = 2,
                             Airline_Id = 3,
                             ArrivalAirport_Id = 4,
-                            ArrivalTime = new DateTime(2024, 3, 24, 18, 25, 0, 0, DateTimeKind.Unspecified),
+                            ArrivalTime = new DateTime(2024, 3, 23, 18, 25, 0, 0, DateTimeKind.Unspecified),
                             CabinClass = 0,
                             DepartureAirport_Id = 6,
-                            DepartureTime = new DateTime(2024, 3, 24, 15, 55, 0, 0, DateTimeKind.Unspecified),
+                            DepartureTime = new DateTime(2024, 3, 23, 15, 55, 0, 0, DateTimeKind.Unspecified),
                             FlightDuration = 90,
                             IsActive = true,
                             TicketPrice = 131m
@@ -265,10 +254,10 @@ namespace BookingSystem.Infrastructure.Migrations
                             Id = 3,
                             Airline_Id = 4,
                             ArrivalAirport_Id = 2,
-                            ArrivalTime = new DateTime(2024, 3, 24, 9, 35, 0, 0, DateTimeKind.Unspecified),
+                            ArrivalTime = new DateTime(2024, 3, 23, 9, 35, 0, 0, DateTimeKind.Unspecified),
                             CabinClass = 0,
                             DepartureAirport_Id = 6,
-                            DepartureTime = new DateTime(2024, 3, 24, 6, 40, 0, 0, DateTimeKind.Unspecified),
+                            DepartureTime = new DateTime(2024, 3, 23, 6, 40, 0, 0, DateTimeKind.Unspecified),
                             FlightDuration = 235,
                             IsActive = true,
                             TicketPrice = 91m
@@ -278,10 +267,10 @@ namespace BookingSystem.Infrastructure.Migrations
                             Id = 4,
                             Airline_Id = 2,
                             ArrivalAirport_Id = 5,
-                            ArrivalTime = new DateTime(2024, 3, 24, 11, 5, 0, 0, DateTimeKind.Unspecified),
+                            ArrivalTime = new DateTime(2024, 3, 23, 11, 5, 0, 0, DateTimeKind.Unspecified),
                             CabinClass = 0,
                             DepartureAirport_Id = 6,
-                            DepartureTime = new DateTime(2024, 3, 24, 10, 15, 0, 0, DateTimeKind.Unspecified),
+                            DepartureTime = new DateTime(2024, 3, 23, 10, 15, 0, 0, DateTimeKind.Unspecified),
                             FlightDuration = 110,
                             IsActive = true,
                             TicketPrice = 99m
@@ -291,10 +280,10 @@ namespace BookingSystem.Infrastructure.Migrations
                             Id = 5,
                             Airline_Id = 4,
                             ArrivalAirport_Id = 6,
-                            ArrivalTime = new DateTime(2024, 3, 24, 0, 50, 0, 0, DateTimeKind.Unspecified),
+                            ArrivalTime = new DateTime(2024, 3, 23, 0, 50, 0, 0, DateTimeKind.Unspecified),
                             CabinClass = 0,
                             DepartureAirport_Id = 1,
-                            DepartureTime = new DateTime(2024, 3, 24, 21, 0, 0, 0, DateTimeKind.Unspecified),
+                            DepartureTime = new DateTime(2024, 3, 23, 21, 0, 0, 0, DateTimeKind.Unspecified),
                             FlightDuration = 170,
                             IsActive = true,
                             TicketPrice = 75m
@@ -304,10 +293,10 @@ namespace BookingSystem.Infrastructure.Migrations
                             Id = 6,
                             Airline_Id = 3,
                             ArrivalAirport_Id = 6,
-                            ArrivalTime = new DateTime(2024, 3, 24, 9, 0, 0, 0, DateTimeKind.Unspecified),
+                            ArrivalTime = new DateTime(2024, 3, 23, 9, 0, 0, 0, DateTimeKind.Unspecified),
                             CabinClass = 0,
                             DepartureAirport_Id = 4,
-                            DepartureTime = new DateTime(2024, 3, 24, 8, 45, 0, 0, DateTimeKind.Unspecified),
+                            DepartureTime = new DateTime(2024, 3, 23, 8, 45, 0, 0, DateTimeKind.Unspecified),
                             FlightDuration = 75,
                             IsActive = true,
                             TicketPrice = 131m
@@ -317,10 +306,10 @@ namespace BookingSystem.Infrastructure.Migrations
                             Id = 7,
                             Airline_Id = 4,
                             ArrivalAirport_Id = 6,
-                            ArrivalTime = new DateTime(2024, 3, 24, 18, 10, 0, 0, DateTimeKind.Unspecified),
+                            ArrivalTime = new DateTime(2024, 3, 23, 18, 10, 0, 0, DateTimeKind.Unspecified),
                             CabinClass = 0,
                             DepartureAirport_Id = 2,
-                            DepartureTime = new DateTime(2024, 3, 24, 13, 45, 0, 0, DateTimeKind.Unspecified),
+                            DepartureTime = new DateTime(2024, 3, 23, 13, 45, 0, 0, DateTimeKind.Unspecified),
                             FlightDuration = 205,
                             IsActive = true,
                             TicketPrice = 91m
@@ -330,10 +319,10 @@ namespace BookingSystem.Infrastructure.Migrations
                             Id = 8,
                             Airline_Id = 2,
                             ArrivalAirport_Id = 6,
-                            ArrivalTime = new DateTime(2024, 3, 24, 17, 40, 0, 0, DateTimeKind.Unspecified),
+                            ArrivalTime = new DateTime(2024, 3, 23, 17, 40, 0, 0, DateTimeKind.Unspecified),
                             CabinClass = 0,
                             DepartureAirport_Id = 5,
-                            DepartureTime = new DateTime(2024, 3, 24, 14, 45, 0, 0, DateTimeKind.Unspecified),
+                            DepartureTime = new DateTime(2024, 3, 23, 14, 45, 0, 0, DateTimeKind.Unspecified),
                             FlightDuration = 120,
                             IsActive = true,
                             TicketPrice = 99m
@@ -343,10 +332,10 @@ namespace BookingSystem.Infrastructure.Migrations
                             Id = 9,
                             Airline_Id = 3,
                             ArrivalAirport_Id = 4,
-                            ArrivalTime = new DateTime(2024, 3, 24, 16, 55, 0, 0, DateTimeKind.Unspecified),
+                            ArrivalTime = new DateTime(2024, 3, 23, 16, 55, 0, 0, DateTimeKind.Unspecified),
                             CabinClass = 0,
                             DepartureAirport_Id = 1,
-                            DepartureTime = new DateTime(2024, 3, 24, 11, 20, 0, 0, DateTimeKind.Unspecified),
+                            DepartureTime = new DateTime(2024, 3, 23, 11, 20, 0, 0, DateTimeKind.Unspecified),
                             FlightDuration = 210,
                             IsActive = true,
                             TicketPrice = 116m
@@ -356,10 +345,10 @@ namespace BookingSystem.Infrastructure.Migrations
                             Id = 10,
                             Airline_Id = 3,
                             ArrivalAirport_Id = 1,
-                            ArrivalTime = new DateTime(2024, 3, 24, 17, 20, 0, 0, DateTimeKind.Unspecified),
+                            ArrivalTime = new DateTime(2024, 3, 23, 17, 20, 0, 0, DateTimeKind.Unspecified),
                             CabinClass = 0,
                             DepartureAirport_Id = 4,
-                            DepartureTime = new DateTime(2024, 3, 24, 15, 35, 0, 0, DateTimeKind.Unspecified),
+                            DepartureTime = new DateTime(2024, 3, 23, 15, 35, 0, 0, DateTimeKind.Unspecified),
                             FlightDuration = 225,
                             IsActive = true,
                             TicketPrice = 116m
@@ -369,10 +358,10 @@ namespace BookingSystem.Infrastructure.Migrations
                             Id = 11,
                             Airline_Id = 5,
                             ArrivalAirport_Id = 2,
-                            ArrivalTime = new DateTime(2024, 3, 24, 11, 15, 0, 0, DateTimeKind.Unspecified),
+                            ArrivalTime = new DateTime(2024, 3, 23, 11, 15, 0, 0, DateTimeKind.Unspecified),
                             CabinClass = 0,
                             DepartureAirport_Id = 1,
-                            DepartureTime = new DateTime(2024, 3, 24, 9, 5, 0, 0, DateTimeKind.Unspecified),
+                            DepartureTime = new DateTime(2024, 3, 23, 9, 5, 0, 0, DateTimeKind.Unspecified),
                             FlightDuration = 130,
                             IsActive = true,
                             TicketPrice = 65m
@@ -382,10 +371,10 @@ namespace BookingSystem.Infrastructure.Migrations
                             Id = 12,
                             Airline_Id = 5,
                             ArrivalAirport_Id = 1,
-                            ArrivalTime = new DateTime(2024, 3, 24, 17, 5, 0, 0, DateTimeKind.Unspecified),
+                            ArrivalTime = new DateTime(2024, 3, 23, 17, 5, 0, 0, DateTimeKind.Unspecified),
                             CabinClass = 0,
                             DepartureAirport_Id = 2,
-                            DepartureTime = new DateTime(2024, 3, 24, 14, 55, 0, 0, DateTimeKind.Unspecified),
+                            DepartureTime = new DateTime(2024, 3, 23, 14, 55, 0, 0, DateTimeKind.Unspecified),
                             FlightDuration = 130,
                             IsActive = true,
                             TicketPrice = 65m
@@ -395,10 +384,10 @@ namespace BookingSystem.Infrastructure.Migrations
                             Id = 13,
                             Airline_Id = 5,
                             ArrivalAirport_Id = 5,
-                            ArrivalTime = new DateTime(2024, 3, 24, 21, 0, 0, 0, DateTimeKind.Unspecified),
+                            ArrivalTime = new DateTime(2024, 3, 23, 21, 0, 0, 0, DateTimeKind.Unspecified),
                             CabinClass = 0,
                             DepartureAirport_Id = 1,
-                            DepartureTime = new DateTime(2024, 3, 24, 19, 0, 0, 0, DateTimeKind.Unspecified),
+                            DepartureTime = new DateTime(2024, 3, 23, 19, 0, 0, 0, DateTimeKind.Unspecified),
                             FlightDuration = 120,
                             IsActive = true,
                             TicketPrice = 45m
@@ -408,10 +397,10 @@ namespace BookingSystem.Infrastructure.Migrations
                             Id = 14,
                             Airline_Id = 5,
                             ArrivalAirport_Id = 1,
-                            ArrivalTime = new DateTime(2024, 3, 24, 8, 45, 0, 0, DateTimeKind.Unspecified),
+                            ArrivalTime = new DateTime(2024, 3, 23, 8, 45, 0, 0, DateTimeKind.Unspecified),
                             CabinClass = 0,
                             DepartureAirport_Id = 5,
-                            DepartureTime = new DateTime(2024, 3, 24, 6, 30, 0, 0, DateTimeKind.Unspecified),
+                            DepartureTime = new DateTime(2024, 3, 23, 6, 30, 0, 0, DateTimeKind.Unspecified),
                             FlightDuration = 135,
                             IsActive = true,
                             TicketPrice = 45m
@@ -421,10 +410,10 @@ namespace BookingSystem.Infrastructure.Migrations
                             Id = 15,
                             Airline_Id = 3,
                             ArrivalAirport_Id = 2,
-                            ArrivalTime = new DateTime(2024, 3, 24, 10, 20, 0, 0, DateTimeKind.Unspecified),
+                            ArrivalTime = new DateTime(2024, 3, 23, 10, 20, 0, 0, DateTimeKind.Unspecified),
                             CabinClass = 0,
                             DepartureAirport_Id = 4,
-                            DepartureTime = new DateTime(2024, 3, 24, 7, 55, 0, 0, DateTimeKind.Unspecified),
+                            DepartureTime = new DateTime(2024, 3, 23, 7, 55, 0, 0, DateTimeKind.Unspecified),
                             FlightDuration = 265,
                             IsActive = true,
                             TicketPrice = 250m
@@ -434,10 +423,10 @@ namespace BookingSystem.Infrastructure.Migrations
                             Id = 16,
                             Airline_Id = 3,
                             ArrivalAirport_Id = 4,
-                            ArrivalTime = new DateTime(2024, 3, 24, 21, 10, 0, 0, DateTimeKind.Unspecified),
+                            ArrivalTime = new DateTime(2024, 3, 23, 21, 10, 0, 0, DateTimeKind.Unspecified),
                             CabinClass = 0,
                             DepartureAirport_Id = 2,
-                            DepartureTime = new DateTime(2024, 3, 24, 14, 55, 0, 0, DateTimeKind.Unspecified),
+                            DepartureTime = new DateTime(2024, 3, 23, 14, 55, 0, 0, DateTimeKind.Unspecified),
                             FlightDuration = 255,
                             IsActive = true,
                             TicketPrice = 250m
@@ -447,10 +436,10 @@ namespace BookingSystem.Infrastructure.Migrations
                             Id = 17,
                             Airline_Id = 3,
                             ArrivalAirport_Id = 5,
-                            ArrivalTime = new DateTime(2024, 3, 24, 9, 55, 0, 0, DateTimeKind.Unspecified),
+                            ArrivalTime = new DateTime(2024, 3, 23, 9, 55, 0, 0, DateTimeKind.Unspecified),
                             CabinClass = 0,
                             DepartureAirport_Id = 4,
-                            DepartureTime = new DateTime(2024, 3, 24, 9, 15, 0, 0, DateTimeKind.Unspecified),
+                            DepartureTime = new DateTime(2024, 3, 23, 9, 15, 0, 0, DateTimeKind.Unspecified),
                             FlightDuration = 140,
                             IsActive = true,
                             TicketPrice = 150m
@@ -460,10 +449,10 @@ namespace BookingSystem.Infrastructure.Migrations
                             Id = 18,
                             Airline_Id = 3,
                             ArrivalAirport_Id = 4,
-                            ArrivalTime = new DateTime(2024, 3, 24, 0, 30, 0, 0, DateTimeKind.Unspecified),
+                            ArrivalTime = new DateTime(2024, 3, 23, 0, 30, 0, 0, DateTimeKind.Unspecified),
                             CabinClass = 0,
                             DepartureAirport_Id = 5,
-                            DepartureTime = new DateTime(2024, 3, 24, 20, 0, 0, 0, DateTimeKind.Unspecified),
+                            DepartureTime = new DateTime(2024, 3, 23, 20, 0, 0, 0, DateTimeKind.Unspecified),
                             FlightDuration = 130,
                             IsActive = true,
                             TicketPrice = 150m
@@ -573,8 +562,8 @@ namespace BookingSystem.Infrastructure.Migrations
                         {
                             Id = 1,
                             Address = "11 Rue Du Texel, 14th arr., 75014",
-                            CheckIn = new DateTime(2024, 3, 24, 16, 0, 0, 0, DateTimeKind.Unspecified),
-                            CheckOut = new DateTime(2024, 3, 24, 12, 0, 0, 0, DateTimeKind.Unspecified),
+                            CheckIn = new DateTime(2024, 3, 23, 16, 0, 0, 0, DateTimeKind.Unspecified),
+                            CheckOut = new DateTime(2024, 3, 23, 12, 0, 0, 0, DateTimeKind.Unspecified),
                             City_Id = 1,
                             Details = "Ideally set in the 14th arr. District of Paris, Ibis Paris Gare Montparnasse Catalogne is located 1.6 miles from Rodin Museum, 1.6 miles from Luxembourg Gardens and 2 miles from Orsay Museum. With a bar, the 3-star hotel has air-conditioned rooms with free WiFi, each with a private bathroom. Private parking is available on site.\r\n\r\nAt the hotel, rooms have a closet. The rooms include a desk and a flat-screen TV, and some accommodations at Ibis Paris Gare Montparnasse Catalogne have a balcony.\r\n\r\nA buffet, continental or American breakfast is available each morning at the property.\r\n\r\nSpeaking English, Spanish, French and Ukrainian at the 24-hour front desk, staff are ready to help around the clock.\r\n\r\nSainte Chapelle is 2 miles from the accommodation, while Paris Expo – Porte de Versailles is 2.1 miles from the property. The nearest airport is Paris - Orly Airport, 8.1 miles from Ibis Paris Gare Montparnasse Catalogne.",
                             ImageUrl = "https://cf.bstatic.com/xdata/images/hotel/max1280x900/499913403.jpg?k=d3a1f17f9ee7ce9f7340141392196e7ef4f27861d44d818d32e9da03e06ad674&o=&hp=1",
@@ -588,8 +577,8 @@ namespace BookingSystem.Infrastructure.Migrations
                         {
                             Id = 2,
                             Address = "43 Boulevard Saint-Marcel, 13th arr., 75013",
-                            CheckIn = new DateTime(2024, 3, 24, 15, 0, 0, 0, DateTimeKind.Unspecified),
-                            CheckOut = new DateTime(2024, 3, 24, 12, 0, 0, 0, DateTimeKind.Unspecified),
+                            CheckIn = new DateTime(2024, 3, 23, 15, 0, 0, 0, DateTimeKind.Unspecified),
+                            CheckOut = new DateTime(2024, 3, 23, 12, 0, 0, 0, DateTimeKind.Unspecified),
                             City_Id = 1,
                             Details = "You're eligible for a Genius discount at Hôtel Saint Marcel! To save at this property, all you have to do is sign in.\r\n\r\nFeaturing free Wi-Fi, Hôtel Saint Marcel offers accommodations in Paris, 1.2 mi from AccorHotels Arena. Guests can make use of the fitness area in the gym\r\n\r\nRooms feature a flat-screen TV with satellite channels. Certain rooms have a seating area where you can relax. For your comfort, you will find free toiletries and a hairdryer in the bathroom.\r\n\r\nYou will find a 24-hour front desk at the property.\r\n\r\nNoter Dame Cathedral is 1.2 mi from Hôtel Saint Marcel, while Opéra Bastille is 1.2 mi away. The nearest airport is Orly Airport, 7.5 mi from the property.",
                             ImageUrl = "https://cf.bstatic.com/xdata/images/hotel/max1280x900/50496815.jpg?k=8e4c7075f4c48de078c1d584716f38ccfcf56f51ee455b01fb0abcefddc2c9bd&o=&hp=1",
@@ -603,8 +592,8 @@ namespace BookingSystem.Infrastructure.Migrations
                         {
                             Id = 3,
                             Address = "37, rue du Hameau, 15th arr., 75015",
-                            CheckIn = new DateTime(2024, 3, 24, 15, 0, 0, 0, DateTimeKind.Unspecified),
-                            CheckOut = new DateTime(2024, 3, 24, 11, 0, 0, 0, DateTimeKind.Unspecified),
+                            CheckIn = new DateTime(2024, 3, 23, 15, 0, 0, 0, DateTimeKind.Unspecified),
+                            CheckOut = new DateTime(2024, 3, 23, 11, 0, 0, 0, DateTimeKind.Unspecified),
                             City_Id = 1,
                             Details = "You're eligible for a Genius discount at Kraft Hotel! To save at this property, all you have to do is sign in.\r\n\r\nThis hotel is located opposite the main entrance of Dôme de Paris - Palais des Sports, near the lively Vaugirard area with its boutiques, cafés and lovely restaurants.\r\n\r\nThe ambiance of the Kraft Hotel suits perfectly the diversity of guests who come to stay: those who come to discover the treasures of Paris and those who come to attend a show, symposium, fair or exposition.\r\n\r\nGuestrooms are stylishly decorated and furnished to offer you high-quality comfort. They offer a private bathroom and a TV.\r\n\r\nThe Kraft Hotel is an ideal location for business or leisure. It is located near the local metro station which offers direct access into the heart of the capital.",
                             ImageUrl = "https://cf.bstatic.com/xdata/images/hotel/max1280x900/501485308.jpg?k=4db18f42e477c422e0c412d87df0aed2bf16a463342daad5d672731287488c54&o=&hp=1",
@@ -618,8 +607,8 @@ namespace BookingSystem.Infrastructure.Migrations
                         {
                             Id = 4,
                             Address = "Calle Imperial 8, Centro, 28012",
-                            CheckIn = new DateTime(2024, 3, 24, 15, 0, 0, 0, DateTimeKind.Unspecified),
-                            CheckOut = new DateTime(2024, 3, 24, 12, 0, 0, 0, DateTimeKind.Unspecified),
+                            CheckIn = new DateTime(2024, 3, 23, 15, 0, 0, 0, DateTimeKind.Unspecified),
+                            CheckOut = new DateTime(2024, 3, 23, 12, 0, 0, 0, DateTimeKind.Unspecified),
                             City_Id = 2,
                             Details = "Less than 1 km from Mercado San Miguel and a 13-minute walk from Puerta de Toledo, the property offers a terrace and a bar. The accommodation provides a 24-hour front desk, spa and free WiFi is available.\r\n\r\nAt the hotel, every room comes with a desk and a flat-screen TV. The private bathroom is equipped with a shower, free toiletries and a hair dryer. The units at Pestana Plaza Mayor Madrid have air conditioning and a wardrobe.\r\n\r\nA buffet breakfast is available daily at the property.\r\n\r\nPestana Plaza Mayor Madrid is located in Plaza Mayor, while Thyssen-Bornemisza Museum is 1.1 km from the property. Adolfo Suarez Madrid-Barajas Airport is 13.8 km away.",
                             ImageUrl = "https://cf.bstatic.com/xdata/images/hotel/max1280x900/255649687.jpg?k=84b89c322748a0e6479cd2d71263e56f2eb9771d4010cc30d3018488d7ccc671&o=&hp=1",
@@ -633,8 +622,8 @@ namespace BookingSystem.Infrastructure.Migrations
                         {
                             Id = 5,
                             Address = "Atocha, 23, Centro, 28012",
-                            CheckIn = new DateTime(2024, 3, 24, 15, 0, 0, 0, DateTimeKind.Unspecified),
-                            CheckOut = new DateTime(2024, 3, 24, 12, 0, 0, 0, DateTimeKind.Unspecified),
+                            CheckIn = new DateTime(2024, 3, 23, 15, 0, 0, 0, DateTimeKind.Unspecified),
+                            CheckOut = new DateTime(2024, 3, 23, 12, 0, 0, 0, DateTimeKind.Unspecified),
                             City_Id = 2,
                             Details = "Catalonia Puerta del Sol is set in a magnificent 18th-century building in the historic centre of Madrid, a few minutes from Puerta del Sol. It offers free Wi-Fi throughout the hotel.\r\n\r\nThe hotel is just 50 metres from Puerta del Sol, Madrid's main square and from main tapas restaurants. You can walk to Madrid's famous Art Triangle in 15 minutes. Atocha Train Station is 1 km away.\r\n\r\nThe air-conditioned rooms feature parquet floors and smart décor. ach one has flat-screen satellite smart TV with Chromecast app, a private bathroom and a minibar.\r\n\r\nThe Puerta del Sol's restaurant serves a buffet breakfast each morning, and available until 12:00 at weekends. There is also a bar with a roofed terrace, El Patio, where you can get a snack or a drink. There is also a patio with crystal domes.\r\n\r\nAll hotel rooms have smart TVs, which are equipped with Chromecast app.",
                             ImageUrl = "https://cf.bstatic.com/xdata/images/hotel/max1280x900/159811810.jpg?k=f40061a37ae157fd42e62ece3bd402bca73e10528b6160719bb103c4ab69be25&o=&hp=1",
@@ -648,8 +637,8 @@ namespace BookingSystem.Infrastructure.Migrations
                         {
                             Id = 6,
                             Address = "Plaza de Oriente 2, 3º izquierda, Centro, 28013",
-                            CheckIn = new DateTime(2024, 3, 24, 14, 0, 0, 0, DateTimeKind.Unspecified),
-                            CheckOut = new DateTime(2024, 3, 24, 12, 0, 0, 0, DateTimeKind.Unspecified),
+                            CheckIn = new DateTime(2024, 3, 23, 14, 0, 0, 0, DateTimeKind.Unspecified),
+                            CheckOut = new DateTime(2024, 3, 23, 12, 0, 0, 0, DateTimeKind.Unspecified),
                             City_Id = 2,
                             Details = "Centrally located overlooking the Royal Palace and Sabatini Gardens in Madrid’s Plaza de Oriente, this elegant guest house offers 24-hour reception and free WiFi.\r\n\r\nThe spacious rooms at Hostal Central Palace Madrid feature wooden floors and classic décor. They all feature a private bathroom with shower and a hairdryer and toiletries. Some rooms offer views of the Royal Palace, Almudena Cathedral and the Sabatini Gardens.\r\n\r\nThere are many shops, bars and restaurants are within a short walk.\r\n\r\nLuggage storage is offered. Staff at reception can provide information about what to see and do in Madrid. There are also various car parks within a short walk.\r\n\r\nHostal Central Palace Madrid is the only guest house located in the Plaza de Oriente square, opposite the Royal Palace. It is 200 metres from Opera Metro Station and 10 minutes’ walk from Puerta del Sol.",
                             ImageUrl = "https://cf.bstatic.com/xdata/images/hotel/max1280x900/33799890.jpg?k=1d94fedc1ccb9dd41e53fcefc908ecc8f09cba9919315b4d9a7bf6d3afa951be&o=&hp=1",
@@ -663,8 +652,8 @@ namespace BookingSystem.Infrastructure.Migrations
                         {
                             Id = 7,
                             Address = "66 Park Avenue, Murray Hill, New York, NY 10016",
-                            CheckIn = new DateTime(2024, 3, 24, 15, 0, 0, 0, DateTimeKind.Unspecified),
-                            CheckOut = new DateTime(2024, 3, 24, 11, 0, 0, 0, DateTimeKind.Unspecified),
+                            CheckIn = new DateTime(2024, 3, 23, 15, 0, 0, 0, DateTimeKind.Unspecified),
+                            CheckOut = new DateTime(2024, 3, 23, 11, 0, 0, 0, DateTimeKind.Unspecified),
                             City_Id = 3,
                             Details = "This Japanese-style hotel is located 500 metres from Grand Central Station and features a rotating repertoire of gallery pieces in the lobby. There are 2 on-site restaurants.\r\n\r\nKitano New York features rooms with flat-screen TVs, iPod docking stations and a work desk. Free Japanese green tea and dressing gowns and slippers are provided.\r\n\r\nHakubai Restaurant at the New York Kitano serves gourmet Japanese cuisine for lunch and dinner. Guests can also have American and European dishes at Jazz at The Kitano Restaurant. In the evening, the Bar Lounge serves a full selection of cocktails.\r\n\r\nAvailable services at the Kitano include car rental, a tour desk, foreign currency exchange and a gift shop. The hotel also features a fitness centre, laundry facilities and dry cleaning.\r\n\r\nThe Empire State Building is 645 metres from the Kitano Manhattan.",
                             ImageUrl = "https://cf.bstatic.com/xdata/images/hotel/max1280x900/505296139.jpg?k=7e84172ea344cde933840092c3a9f3c4099e70903084b0d91ce3db747901c49d&o=&hp=1",
@@ -678,8 +667,8 @@ namespace BookingSystem.Infrastructure.Migrations
                         {
                             Id = 8,
                             Address = "326 West 37th Street , Hell's Kitchen, New York, NY 10018",
-                            CheckIn = new DateTime(2024, 3, 24, 15, 0, 0, 0, DateTimeKind.Unspecified),
-                            CheckOut = new DateTime(2024, 3, 24, 12, 0, 0, 0, DateTimeKind.Unspecified),
+                            CheckIn = new DateTime(2024, 3, 23, 15, 0, 0, 0, DateTimeKind.Unspecified),
+                            CheckOut = new DateTime(2024, 3, 23, 12, 0, 0, 0, DateTimeKind.Unspecified),
                             City_Id = 3,
                             Details = "The Hilton Garden Inn New York Times Square South is located less than 1 km away from Jacob K. Javits Convention Centre and 1.3 km from Times Square. Complimentary WiFi is provided.\r\n\r\nAll rooms at this property are fitted with a flat-screen TV, coffee maker, microwave and mini-refrigerator. A desk with an ergonomic chair are also provided.\r\n\r\nGuests will have access to free coffee in the morning and a fitness centre. The 24-hour Garden Market will carry snacks and sundry items.\r\n\r\nLaGuardia Airport is 18.3 km from the property while JFK Airport is 27 km from Hilton Garden Inn New York Times Square South. The Empire State Building is 1.6 km away.",
                             ImageUrl = "https://cf.bstatic.com/xdata/images/hotel/max1280x900/485847819.jpg?k=c8a7d6fe3756b65ddf1e88e4ece012a9e377f4da075e7f6c65d0064bee9dab61&o=&hp=1",
@@ -693,8 +682,8 @@ namespace BookingSystem.Infrastructure.Migrations
                         {
                             Id = 9,
                             Address = "125 West 45th Street, New York, NY 10036",
-                            CheckIn = new DateTime(2024, 3, 24, 15, 0, 0, 0, DateTimeKind.Unspecified),
-                            CheckOut = new DateTime(2024, 3, 24, 12, 0, 0, 0, DateTimeKind.Unspecified),
+                            CheckIn = new DateTime(2024, 3, 23, 15, 0, 0, 0, DateTimeKind.Unspecified),
+                            CheckOut = new DateTime(2024, 3, 23, 12, 0, 0, 0, DateTimeKind.Unspecified),
                             City_Id = 3,
                             Details = "Featuring 3-star accommodation, 45 Times Square Hotel is located in New York, 200 metres from Times Square and 500 metres from Radio City Music Hall. With free WiFi, this 3-star hotel offers a 24-hour front desk and a tour desk. The property is 600 metres from Bryant Park, and within 300 metres of the city centre.\r\n\r\nPopular points of interest near the hotel include Broadway Theatre, Rockefeller Center and New York Public Library. The nearest airport is LaGuardia Airport, 12 km from 45 Times Square Hotel.",
                             ImageUrl = "https://cf.bstatic.com/xdata/images/hotel/max1280x900/442811339.jpg?k=e89ae66126c9c1239ea05e7a9b5f0423ed15739432d7649eb6e6b06109aba180&o=&hp=1",
@@ -708,8 +697,8 @@ namespace BookingSystem.Infrastructure.Migrations
                         {
                             Id = 10,
                             Address = "6 Simeonovsko Shausse Blvd., Lozenets, 1700",
-                            CheckIn = new DateTime(2024, 3, 24, 14, 0, 0, 0, DateTimeKind.Unspecified),
-                            CheckOut = new DateTime(2024, 3, 24, 12, 0, 0, 0, DateTimeKind.Unspecified),
+                            CheckIn = new DateTime(2024, 3, 23, 14, 0, 0, 0, DateTimeKind.Unspecified),
+                            CheckOut = new DateTime(2024, 3, 23, 12, 0, 0, 0, DateTimeKind.Unspecified),
                             City_Id = 6,
                             Details = "Hotel ZOO Sofia is located In Sofia and next to a large green park, perfect for relaxation. Sopharma Business Towers are a 7-minute drive away, Inter Expo Center is a 10-minute drive away and the Grand Sports Hall Arena Armeec is 0.9 mi away.\r\n\r\nEnjoy a drink in the stylish bar and sample an assortment of cuisine in the elegant Bijou restaurant. The tastefully decorated, fully-equipped accommodations provide you with the air of tranquility.\r\n\r\nMake use of the free gym and free WiFi throughout the hotel. A secure parking is available against a surcharge.\r\n\r\nSofia City Zoo is only 656 feet from Hotel ZOO Sofia. Paradise Center, a vast shopping and entertainment center, is 1.6 mi away. Interpred business area is a 12-minute drive away.\r\n\r\nSofia Airport is a 15 minute drive away. Pickup from the Airport or Central Train Station pickup can be organized against a surcharge.",
                             ImageUrl = "https://cf.bstatic.com/xdata/images/hotel/max1280x900/294238843.jpg?k=11770c2bb4bcf168f0b6d6bc6435bcd507a1447750d6418205993540c608e268&o=&hp=1",
@@ -723,8 +712,8 @@ namespace BookingSystem.Infrastructure.Migrations
                         {
                             Id = 11,
                             Address = "6 Stara Planina Str., 1000",
-                            CheckIn = new DateTime(2024, 3, 24, 14, 0, 0, 0, DateTimeKind.Unspecified),
-                            CheckOut = new DateTime(2024, 3, 24, 12, 0, 0, 0, DateTimeKind.Unspecified),
+                            CheckIn = new DateTime(2024, 3, 23, 14, 0, 0, 0, DateTimeKind.Unspecified),
+                            CheckOut = new DateTime(2024, 3, 23, 12, 0, 0, 0, DateTimeKind.Unspecified),
                             City_Id = 6,
                             Details = "Conveniently located in the center of Sofia, Eurostars Sofia City provides air-conditioned rooms with free WiFi and private parking. This 4-star hotel offers a 24-hour front desk and a business center. The property is non-smoking throughout and is located a 4-minute walk from Cathedral Saint Alexandar Nevski.\r\n\r\nRooms are complete with a private bathroom equipped with free toiletries, while certain rooms at the hotel also offer a balcony.\r\n\r\nEurostars Sofia City offers a buffet or continental breakfast.\r\n\r\nPopular points of interest near the accommodation include Banya Bashi Mosque, Sofia University St. Kliment Ohridski and Council of Ministers Building. The nearest airport is Sofia, 3.1 miles from Eurostars Sofia City, and the property offers a paid airport shuttle service.",
                             ImageUrl = "https://cf.bstatic.com/xdata/images/hotel/max1280x900/281027010.jpg?k=ada420d7944091b2d98b431b4239a0ca5f07da5239023b81ad27f17d5ca52a35&o=&hp=1",
@@ -738,8 +727,8 @@ namespace BookingSystem.Infrastructure.Migrations
                         {
                             Id = 12,
                             Address = "11 Briuksel Blvd., 1592",
-                            CheckIn = new DateTime(2024, 3, 24, 14, 0, 0, 0, DateTimeKind.Unspecified),
-                            CheckOut = new DateTime(2024, 3, 24, 12, 0, 0, 0, DateTimeKind.Unspecified),
+                            CheckIn = new DateTime(2024, 3, 23, 14, 0, 0, 0, DateTimeKind.Unspecified),
+                            CheckOut = new DateTime(2024, 3, 23, 12, 0, 0, 0, DateTimeKind.Unspecified),
                             City_Id = 6,
                             Details = "The modern 4-star Best Western Premier Sofia Airport Hotel is located in a new business district, only 2461 feet away by car from Sofia International Airport Terminal 1 and 0.6 mi from Sofia International Airport Terminal 2. It is 2953 feet away from Sofia Airport Center and 1.4 mi away from Trade Center Europe.",
                             ImageUrl = "https://cf.bstatic.com/xdata/images/hotel/max1280x900/77419722.jpg?k=c00e5324b8b60246cc03dc25568672a7f3a4729c3b10598f5170bc09965838d3&o=&hp=1",
@@ -753,8 +742,8 @@ namespace BookingSystem.Infrastructure.Migrations
                         {
                             Id = 13,
                             Address = "Güvenlik Caddesi, Fatih, 34130",
-                            CheckIn = new DateTime(2024, 3, 24, 14, 0, 0, 0, DateTimeKind.Unspecified),
-                            CheckOut = new DateTime(2024, 3, 24, 12, 0, 0, 0, DateTimeKind.Unspecified),
+                            CheckIn = new DateTime(2024, 3, 23, 14, 0, 0, 0, DateTimeKind.Unspecified),
+                            CheckOut = new DateTime(2024, 3, 23, 12, 0, 0, 0, DateTimeKind.Unspecified),
                             City_Id = 4,
                             Details = "Located in Istanbul, Emin Palace offers 3-star accommodations with a terrace and a restaurant. The property is around 1.1 miles from Suleymaniye Mosque, 1.5 miles from Blue Mosque and 1.7 miles from Basilica Cistern. The property has a 24-hour front desk, airport transportation, room service and free WiFi throughout the property.",
                             ImageUrl = "https://cf.bstatic.com/xdata/images/hotel/max1280x900/306033163.jpg?k=b0e00a1da26349cd39fa387e6b76a82b94bef8b51630828e2afb6a98ec46164c&o=&hp=1",
@@ -768,8 +757,8 @@ namespace BookingSystem.Infrastructure.Migrations
                         {
                             Id = 14,
                             Address = "Güvenlik Caddesi, Fatih, 34130",
-                            CheckIn = new DateTime(2024, 3, 24, 14, 0, 0, 0, DateTimeKind.Unspecified),
-                            CheckOut = new DateTime(2024, 3, 24, 12, 0, 0, 0, DateTimeKind.Unspecified),
+                            CheckIn = new DateTime(2024, 3, 23, 14, 0, 0, 0, DateTimeKind.Unspecified),
+                            CheckOut = new DateTime(2024, 3, 23, 12, 0, 0, 0, DateTimeKind.Unspecified),
                             City_Id = 4,
                             Details = "Featuring a welcoming terrace, Hotel Zurich Istanbul Old City is close to Istanbul’s vibrant shopping district and 15 minutes’ walk from Grand Bazaar. It also offers a health center. Hagia Sophia, Blue Mosque and other major attractions are in 30 minutes' walk distance.",
                             ImageUrl = "https://cf.bstatic.com/xdata/images/hotel/max1280x900/501751933.jpg?k=99a158e38f1640dcaa9a56b0906ecafa05e8fe6c524667bbe1600a7200afa521&o=&hp=1",
@@ -783,8 +772,8 @@ namespace BookingSystem.Infrastructure.Migrations
                         {
                             Id = 15,
                             Address = "Alemdar, Marmara Region, Prof. Kazım İsmail Gürkan Cd. NO: 3, 34110",
-                            CheckIn = new DateTime(2024, 3, 24, 14, 0, 0, 0, DateTimeKind.Unspecified),
-                            CheckOut = new DateTime(2024, 3, 24, 12, 0, 0, 0, DateTimeKind.Unspecified),
+                            CheckIn = new DateTime(2024, 3, 23, 14, 0, 0, 0, DateTimeKind.Unspecified),
+                            CheckOut = new DateTime(2024, 3, 23, 12, 0, 0, 0, DateTimeKind.Unspecified),
                             City_Id = 4,
                             Details = "Popular points of interest near Florina Hotel include Basilica Cistern, Column of Constantine and Blue Mosque. The nearest airport is Istanbul, 28 miles from the hotel, and the property offers a paid airport shuttle service.",
                             ImageUrl = "https://cf.bstatic.com/xdata/images/hotel/max1024x768/309103534.jpg?k=d788f9ac2c270a0f155a7214d9e94089d86288f6acb8aefd8e95010903e5b580&o=&hp=1",
@@ -798,8 +787,8 @@ namespace BookingSystem.Infrastructure.Migrations
                         {
                             Id = 16,
                             Address = "140-0002 Tokyo-to, 4-12-8, higashishinagawa",
-                            CheckIn = new DateTime(2024, 3, 24, 15, 0, 0, 0, DateTimeKind.Unspecified),
-                            CheckOut = new DateTime(2024, 3, 24, 11, 0, 0, 0, DateTimeKind.Unspecified),
+                            CheckIn = new DateTime(2024, 3, 23, 15, 0, 0, 0, DateTimeKind.Unspecified),
+                            CheckOut = new DateTime(2024, 3, 23, 11, 0, 0, 0, DateTimeKind.Unspecified),
                             City_Id = 7,
                             Details = "In a prime location in the Shinagawa Ward district of Tokyo, Loisir Hotel Shinagawa Seaside is located a few steps from Shinagawa Seaside Forest Oval Garden, a 9-minute walk from Sinagawa Sentaikoujin Temple and half a mile from Seiun Inari Shrine. This 4-star hotel offers a 24-hour front desk. Free WiFi is available and private parking can be arranged at an extra charge.",
                             ImageUrl = "https://cf.bstatic.com/xdata/images/hotel/max1280x900/326305836.jpg?k=a4fddd97529943d3c8342a0cfe1110d14aeb57033494152dd86ce113f80afee9&o=&hp=1",
@@ -813,8 +802,8 @@ namespace BookingSystem.Infrastructure.Migrations
                         {
                             Id = 17,
                             Address = "108-0023 Tokyo-to, Minato-ku Shibaura 3-14-21",
-                            CheckIn = new DateTime(2024, 3, 24, 15, 0, 0, 0, DateTimeKind.Unspecified),
-                            CheckOut = new DateTime(2024, 3, 24, 11, 0, 0, 0, DateTimeKind.Unspecified),
+                            CheckIn = new DateTime(2024, 3, 23, 15, 0, 0, 0, DateTimeKind.Unspecified),
+                            CheckOut = new DateTime(2024, 3, 23, 11, 0, 0, 0, DateTimeKind.Unspecified),
                             City_Id = 7,
                             Details = "A 5-minute walk from JR Tamachi Train Station and Mita Subway Station, Sotetsu Fresa Inn Tokyo Tamachi offers simple modern accommodations with free wired internet access. Guests can request relaxing massages for an extra cost and store luggage for free at the 24-hour front desk. Tokyo Tamachi Sotetsu Fresa Inn is a 20-minute walk from Shiba Park and a 10-minute train ride from JR Shinagawa Train Station. The Imperial Palace is a 15-minute drive away.",
                             ImageUrl = "https://cf.bstatic.com/xdata/images/hotel/max1280x900/124760078.jpg?k=5b64947a1714bd3adbdebd6bff329c9a7debd693c4f02bb201390dc3988d4b63&o=&hp=1",
@@ -828,8 +817,8 @@ namespace BookingSystem.Infrastructure.Migrations
                         {
                             Id = 18,
                             Address = "100-0005 Tokyo-to, Chiyoda-ku, Marunouchi 1-8-2",
-                            CheckIn = new DateTime(2024, 3, 24, 15, 0, 0, 0, DateTimeKind.Unspecified),
-                            CheckOut = new DateTime(2024, 3, 24, 11, 0, 0, 0, DateTimeKind.Unspecified),
+                            CheckIn = new DateTime(2024, 3, 23, 15, 0, 0, 0, DateTimeKind.Unspecified),
+                            CheckOut = new DateTime(2024, 3, 23, 11, 0, 0, 0, DateTimeKind.Unspecified),
                             City_Id = 7,
                             Details = "Oakwood Premier Tokyo is a luxury serviced apartment with hotel-like services, located at just a 2-minute walk from JR Tokyo Station’s Yaesu North Exit. Located on the 6-19th floors of a 19-story building, this property is designed to offer a getaway in the center of Tokyo. There is a 24-hour front desk on site.",
                             ImageUrl = "https://cf.bstatic.com/xdata/images/hotel/max1280x900/253998054.jpg?k=3b996abd68f812376d2bea8e57bb8f5918e25228677a88d17db49e444c521d91&o=&hp=1",
@@ -843,8 +832,8 @@ namespace BookingSystem.Infrastructure.Migrations
                         {
                             Id = 19,
                             Address = "Viale Pinturicchio 19, Villa Borghese Parioli, 00196",
-                            CheckIn = new DateTime(2024, 3, 24, 13, 0, 0, 0, DateTimeKind.Unspecified),
-                            CheckOut = new DateTime(2024, 3, 24, 10, 0, 0, 0, DateTimeKind.Unspecified),
+                            CheckIn = new DateTime(2024, 3, 23, 13, 0, 0, 0, DateTimeKind.Unspecified),
+                            CheckOut = new DateTime(2024, 3, 23, 10, 0, 0, 0, DateTimeKind.Unspecified),
                             City_Id = 5,
                             Details = "Featuring air conditioning, Flaminio Holidays offers en suite rooms and an apartment in Rome. Ponte Milvio is 300 metres from the property. Free WiFi is provided throughout the property.There is a tram stop linking to Piazza del Popolo right in front of the property. Foro Italico - Rome is 700 metres from Flaminio Holidays.",
                             ImageUrl = "https://cf.bstatic.com/xdata/images/hotel/max1280x900/466841541.jpg?k=cb07cb3e10ddcbc2b29fdf20f30cb7f3e756e9cffa6bd9e5c8854a57e6c8984d&o=&hp=1",
@@ -858,8 +847,8 @@ namespace BookingSystem.Infrastructure.Migrations
                         {
                             Id = 20,
                             Address = "243 Via Nazionale, Central Station, 00184",
-                            CheckIn = new DateTime(2024, 3, 24, 14, 0, 0, 0, DateTimeKind.Unspecified),
-                            CheckOut = new DateTime(2024, 3, 24, 6, 0, 0, 0, DateTimeKind.Unspecified),
+                            CheckIn = new DateTime(2024, 3, 23, 14, 0, 0, 0, DateTimeKind.Unspecified),
+                            CheckOut = new DateTime(2024, 3, 23, 6, 0, 0, 0, DateTimeKind.Unspecified),
                             City_Id = 5,
                             Details = "Ideally situated in the Central Station district of Rome, Alius and Freerome Hotel is situated 800 metres from Santa Maria Maggiore, 1 km from Cavour Metro Station and 700 metres from Quirinal Hill. With free WiFi, this 2-star hotel offers a tour desk. The property is 1.1 km from the city centre and 200 metres from Repubblica - Teatro dell'Opera Metro Station.",
                             ImageUrl = "https://cf.bstatic.com/xdata/images/hotel/max1280x900/355779789.jpg?k=e854ebae86fae75b72fff8469f9783cac0428f94ff76313dffe0dc6018cc64b1&o=&hp=1",
@@ -873,8 +862,8 @@ namespace BookingSystem.Infrastructure.Migrations
                         {
                             Id = 21,
                             Address = "102 Via Principe Amedeo, Central Station, 00185",
-                            CheckIn = new DateTime(2024, 3, 24, 12, 0, 0, 0, DateTimeKind.Unspecified),
-                            CheckOut = new DateTime(2024, 3, 24, 9, 0, 0, 0, DateTimeKind.Unspecified),
+                            CheckIn = new DateTime(2024, 3, 23, 12, 0, 0, 0, DateTimeKind.Unspecified),
+                            CheckOut = new DateTime(2024, 3, 23, 9, 0, 0, 0, DateTimeKind.Unspecified),
                             City_Id = 5,
                             Details = "Right in the heart of Rome, situated within a short distance of Vittorio Emanuele Metro Station and Santa Maria Maggiore, AD MAIORA SUITE offers free WiFi, air conditioning and household amenities such as a fridge and coffee machine. This recently renovated apartment is located 1.1 km from Cavour Metro Station and 500 metres from Rome Termini Metro Station. The property is non-smoking and is located 400 metres from Rome Termini Train Station.",
                             ImageUrl = "https://cf.bstatic.com/xdata/images/hotel/max1280x900/472491611.jpg?k=d6136cf78533b12276bd7ff21f0a59f5a0d83dcda6b0d2e6d163986f39104f19&o=&hp=1",
@@ -2610,15 +2599,15 @@ namespace BookingSystem.Infrastructure.Migrations
                         {
                             Id = "8d1f0bdc-f9e5-4856-a127-fb84281d56ad",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "826f74b9-7a2c-4b94-901e-bb086c16fc08",
+                            ConcurrencyStamp = "7be2fafa-fd4c-4474-851e-21c3f481ef30",
                             Email = "guest@gmail.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             NormalizedEmail = "guest@gmail.com",
                             NormalizedUserName = "guest",
-                            PasswordHash = "AQAAAAEAACcQAAAAELDcigkktyXihGTrp97Fublfq2boXbWZ5cPj/M05SXgQukF9H0S4XpbBHB8Mj67L5Q==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEHG7ek3M4+Flid2IhBrZebCrauwMFfwUrlgwH7nOWRWzcgpVRS9zFoEp6CGR/FtYug==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "3af83654-27ba-4f69-b674-28b83455d833",
+                            SecurityStamp = "cf5187fa-09e7-4ccf-834a-f24620496988",
                             TwoFactorEnabled = false,
                             UserName = "Guest"
                         },
@@ -2626,15 +2615,15 @@ namespace BookingSystem.Infrastructure.Migrations
                         {
                             Id = "c9019544-ec91-4248-bfc4-9d8a4f13430b",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "3e9e71cc-e88d-41a0-b7be-50da4ad840d3",
+                            ConcurrencyStamp = "9a80ccb9-643e-421f-b78d-2448facc4fdd",
                             Email = "admin@gmail.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             NormalizedEmail = "admin@gmail.com",
                             NormalizedUserName = "administrator",
-                            PasswordHash = "AQAAAAEAACcQAAAAEOnZsqhuY6f4qk9PAPzogFmwZKZXrWwfGcZbRsfZ/HGYvymtgcmJ4pIzdehBCmH3PQ==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEMb9ZgQHu4tdOxZQwUU56ppw4Gdy/GVUfZcPraCu88TUwP2MWx/vxHJjKRLuey/dyg==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "6ca9597a-b1dd-4994-8c28-94cf09019f0f",
+                            SecurityStamp = "23afb0b8-255f-4a8f-a9f6-9eb9a3dae453",
                             TwoFactorEnabled = false,
                             UserName = "Administrator"
                         });

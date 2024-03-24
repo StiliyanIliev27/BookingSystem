@@ -28,6 +28,13 @@
         public string Name { get; set; } = null!;
 
         /// <summary>
+        /// Airport's ShorterName
+        /// </summary>
+        [Required]
+        [MaxLength(ShorterNameMaxLength)]
+        [Comment("Airport's ShorterName")]
+        public string ShorterName { get; set; } = null!;
+        /// <summary>
         /// Airport's City's Identifier
         /// </summary>
         [Required]

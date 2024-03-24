@@ -2138,6 +2138,7 @@
             {
                 Id = 1,
                 Name = "Paris Charles de Gaulle Airport",
+                ShorterName = "CDG",
                 City_Id = 1
             };
 
@@ -2145,6 +2146,7 @@
             {
                 Id = 2,
                 Name = "Madrid–Barajas Airport",
+                ShorterName = "MAD",
                 City_Id = 2
             };
 
@@ -2152,6 +2154,7 @@
             {
                 Id = 3,
                 Name = "John F. Kennedy International Airport",
+                ShorterName = "JFK",
                 City_Id = 3
             };
 
@@ -2159,6 +2162,7 @@
             {
                 Id = 4,
                 Name = "Istanbul International Airport",
+                ShorterName = "SAW",
                 City_Id = 4
             };
 
@@ -2166,6 +2170,7 @@
             {
                 Id = 5,
                 Name = "Leonardo da Vinci–Fiumicino Airport",
+                ShorterName = "FCO",
                 City_Id = 5
             };
 
@@ -2173,6 +2178,7 @@
             {
                 Id = 6,
                 Name = "Sofia International Airport",
+                ShorterName = "SOF",
                 City_Id = 6
             };
 
@@ -2180,6 +2186,7 @@
             {
                 Id = 7,
                 Name = "Haneda Airport",
+                ShorterName = "HND",
                 City_Id = 7
             };
         }

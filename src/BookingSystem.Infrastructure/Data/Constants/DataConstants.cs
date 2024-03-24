@@ -82,6 +82,14 @@
         {
             public const int NameMinLength = 3;
             public const int NameMaxLength = 50;
+            
+            public const int ShorterNameMinLength = 3;
+            public const int ShorterNameMaxLength = 3;
+        }
+
+        public static class Flight
+        {
+            public const string ArrivalDepartureTimeFormat = "HH:mm";
         }
 
         public static class HotelReservation

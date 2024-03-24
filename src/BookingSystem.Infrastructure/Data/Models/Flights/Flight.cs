@@ -96,13 +96,6 @@
         public decimal TicketPrice { get; set; }
 
         /// <summary>
-        /// Flight's Reservation Created Time
-        /// </summary>
-        [Required]
-        [Comment("Flight's Reservation Created Time")]
-        public DateTime CreatedOn { get; set; }
-
-        /// <summary>
         /// Flight's Active Status
         /// </summary>
         [Required]
