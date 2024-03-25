@@ -1,0 +1,38 @@
+﻿@using BookingSystem.Core.Models.QueryModels.Flight
+@model FlightServiceModel
+
+<div class="col-md-6 col-lg-4 mb-4">
+    <div class="card">
+        <div class="card-body">
+            <div style="display: flex; flex-direction: row; height: 40px;">
+                <img style="width: 80px; height: 40px; margin-bottom: 3px;" src="@Model.AirlineLogoUrl" />
+                <div style="margin-left: 50px; display: flex; flex-direction: row;">
+                    <div style="width: 80px; height: 80px;">
+                        <b style="margin-right: 20px;">@Model.DepartureTime</b>
+                        <small style="margin-left: 5px;">@Model.DepartureAirport</small>
+                    </div>
+                    <div style="width: 80px; height: 80px;">
+                        <small style="margin-left: 5px;">@Model.FlightDuration min</small>
+                        <hr style="margin-left: -26px;  margin-top: 5px; margin-bottom: 0px;" />
+                        <small style="margin-left: 10px;">Direct</small>
+                    </div>
+                    <div style="width: 80px; height: 80px;">
+                        <b style="margin-right: 20px; margin-left: 15px;">@Model.ArrivalTime</b>
+                        <small style="margin-left: 20px;">@Model.ArrivalAirport</small>
+                    </div>
+                </div>
+            </div>
+            <small style="font-size: 13px; font-style: italic;">@Model.Airline</small>
+            <hr />
+            <div style="display: flex; flex-direction: row; justify-content: space-between;">
+                <div>
+                    <b style="font-size: 18px; height: 20px;">Total price: $@Model.TicketPrice</b>
+                    <br />
+                    <small style="font-style: italic;">Includes taxes and charges</small>
+                </div>
+                <a asp-controller="Flight" asp-action="Details" asp-route-id="@Model.Id" style="margin-right: 10px; text-align: center; padding-top: 12px;" class="btn btn-primary">Details ></a>
+            </div>           
+        </div>
+    </div>
+</div>
+

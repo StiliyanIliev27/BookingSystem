@@ -20,7 +20,7 @@
 
         public async Task<FlightQueryServiceModel> AllAsync(string? departureCity = null, 
             string? arrivalCity = null, 
-            FlightSorting sorting = FlightSorting.Newest, 
+            FlightSorting sorting = FlightSorting.PriceAscending, 
             int currentPage = 1, 
             int flightsPerPage = 4)
         {
@@ -40,10 +40,8 @@
 
             flightsToShow = sorting switch
             {
-                FlightSorting.Oldest => flightsToShow.OrderBy(f => f.Id),
                 FlightSorting.PriceAscending => flightsToShow.OrderBy(f => f.TicketPrice),
-                FlightSorting.PriceDescending => flightsToShow.OrderByDescending(f => f.TicketPrice),
-                _ => flightsToShow.OrderByDescending(f => f.Id)
+                _ => flightsToShow.OrderByDescending(f => f.TicketPrice)
             };
 
             var flights = await flightsToShow

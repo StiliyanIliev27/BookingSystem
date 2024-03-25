@@ -1,0 +1,66 @@
+﻿@using BookingSystem.Core.Models.QueryModels.Flight
+
+@model AllFlightsQueryModel
+
+@{
+    ViewData["Title"] = "All flights";
+}
+
+<h2 class="text-center">@ViewData["Title"]</h2>
+<hr />
+
+
+<form method="get">
+    <div class="row justify-content-center">
+
+        <div class="form-group col-md-3 align-content-center">
+            <label asp-for="DepartureCity"></label>
+            <select asp-for="DepartureCity" class="form-control">
+                <option value="">All</option>
+                @foreach (var city in Model.Cities)
+                {
+                    <option value="@city">@city</option>
+                }
+            </select>
+        </div>
+        
+        <div class="form-group col-md-3 align-content-center">
+            <label asp-for="ArrivalCity"></label>
+            <select asp-for="ArrivalCity" class="form-control">
+                <option value="">All</option>
+                @foreach (var city in Model.Cities)
+                {
+                    <option value="@city">@city</option>
+                }
+            </select>
+        </div>
+
+        <div class="form-group col-md-2">
+            <label asp-for="Sorting"></label>
+            <select asp-for="Sorting" class="form-control">
+                <option value="0">Price ascending</option>
+                <option value="1">Price descending</option>
+            </select>
+        </div>
+
+        <div class="col-md-1 d-flex align-items-end">
+            <input type="submit" value="Search" class="btn btn-success w-100" />
+        </div>
+    </div>
+</form>
+
+@if (!Model.Flights.Any())
+{
+    <h2 class="text-center">No flights found by the given criteria!</h2>
+}
+else
+{
+    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 mt-5">
+        @foreach (var flight in Model.Flights)
+        {
+            <partial name="_FlightPartial" model="@flight" />
+        }
+    </div>
+}
+
+<partial name="_FlightPagesPartial" model="@Model" />

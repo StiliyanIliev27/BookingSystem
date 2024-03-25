@@ -7,7 +7,7 @@
         Task<FlightQueryServiceModel> AllAsync(
             string? departureCity = null,
             string? arrivalCity = null,
-            FlightSorting sorting = FlightSorting.Newest,
+            FlightSorting sorting = FlightSorting.PriceAscending,
             int currentPage = 1,
             int flightsPerPage = 4);
     }
