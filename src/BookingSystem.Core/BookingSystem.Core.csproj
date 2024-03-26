@@ -10,8 +10,4 @@
     <ProjectReference Include="..\BookingSystem.Infrastructure\BookingSystem.Infrastructure.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Models\Flight\" />
-  </ItemGroup>
-
 </Project>

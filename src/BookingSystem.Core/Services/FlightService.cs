@@ -2,6 +2,7 @@
 {
     using BookingSystem.Core.Contracts;
     using BookingSystem.Core.Enumerations;
+    using BookingSystem.Core.Models.Flight;
     using BookingSystem.Core.Models.QueryModels.Flight;
     using BookingSystem.Infrastructure.Common;
     using BookingSystem.Infrastructure.Data.Models.Flights;
@@ -74,6 +75,38 @@
             {
                 TotalFlightsCount = totalFlights,
                 Flights = flights
+            };
+        }
+
+        public async Task<FlightDetailsViewModel> DetailsAsync(int flightId)
+        {
+            var flight = await repository.AllReadOnly<Flight>()
+                .Include(f => f.ArrivalAirport.City)
+                .Include(f => f.ArrivalAirport)
+                .Include(f => f.DepartureAirport)
+                .Include(f => f.Airline)
+                .FirstOrDefaultAsync(f => f.Id == flightId);
+
+            if(flight == null)
+            {
+                throw new ArgumentException("The current flight is not found!");
+            }
+
+            return new FlightDetailsViewModel()
+            {
+                Id = flightId,
+                City = flight.ArrivalAirport.City.Name,
+                ArrivalAirportName = flight.ArrivalAirport.Name,
+                ArrivalAirportShorterName = flight.ArrivalAirport.ShorterName,
+                DepartureAirportName = flight.DepartureAirport.Name,
+                DepartureAirportShorterName = flight.DepartureAirport.ShorterName,
+                Airline = flight.Airline.Name,
+                AirlineLogoUrl = flight.Airline.ImageUrl,
+                DepartureTime = flight.DepartureTime.ToString(ArrivalDepartureTimeFormat),
+                ArrivalTime = flight.ArrivalTime.ToString(ArrivalDepartureTimeFormat),
+                FlightDuration = flight.FlightDuration,
+                CabinClass = flight.CabinClass.ToString(),
+                TicketPrice = flight.TicketPrice,
             };
         }
     }
