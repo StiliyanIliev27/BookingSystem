@@ -44,12 +44,11 @@
                             <br />
                             <small style="font-style: italic;">Includes taxes and charges</small>
                         </div>
-                        <div>
-                            <a asp-controller="Flight" asp-action="All" style=" margin-top: 5px; padding-left: 15px; padding-right: 15px; padding-top: 6px; padding-bottom: 9px; height: 40px; width: 190px;" class="btn btn-warning">Back to all flights</a>
-                            <a asp-controller="Flight" asp-action="Reserve" asp-route-id="@Model.Id" style="margin-left: 5px; margin-top: 5px; padding-top: 6px; padding-bottom: 9px; height: 40px; width: 120px;" class="btn btn-primary">Select</a>
+                        <div style="display: flex; flex-direction: row;">
+                            <a asp-controller="Flight" asp-action="All" style="margin-top: 5px; padding: 13px 15px; height: 55px; width: 100%;" class="btn btn-warning">Back to all flights</a>
+                            <a asp-controller="Flight" asp-action="Reserve" asp-route-id="@Model.Id" style="margin-left: 5px; margin-top: 5px; padding: 13px 15px; height: 55px; width: 40%;" class="btn btn-primary">Select</a>
                         </div>
-                        
-                    </div>                    
+                    </div>             
                 </div>
             </div>
         </div>
