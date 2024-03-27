@@ -12,6 +12,20 @@
     public class FlightReservation
     {
         /// <summary>
+        /// FlightReservation's Reserver's First Name
+        /// </summary>
+        [Required]
+        [Comment("Flight Reservation's Reserver's First Name")]
+        public string FirstName { get; set; } = null!;
+
+        /// <summary>
+        /// FlightReservation's Reserver's Last Name
+        /// </summary>
+        [Required]
+        [Comment("Flight Reservation's Reserver's Last Name")]
+        public string LastName { get; set; } = null!;
+
+        /// <summary>
         /// User's Identifier
         /// </summary>
         [Required]
