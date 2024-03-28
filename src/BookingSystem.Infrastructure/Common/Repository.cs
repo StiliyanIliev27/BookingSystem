@@ -24,6 +24,8 @@
 
         public EntityEntry Delete<T>(T entity) where T : class => context.Remove(entity);
        
-        public async Task<int> SaveChangesAsync() => await context.SaveChangesAsync();        
+        public async Task<int> SaveChangesAsync() => await context.SaveChangesAsync();
+
+        public async Task<T?> GetByIdAsync<T>(object id) where T : class => await DbSet<T>().FindAsync(id);
     }
 }
