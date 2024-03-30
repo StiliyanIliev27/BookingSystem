@@ -54,16 +54,11 @@
                             <br />
                             <small style="font-style: italic;">Includes taxes and charges</small>
                         </div>
-                        <div style="display: flex; flex-direction: row;">
-
-                            @if (currentViewName == "Reserve")
-                            {
-                                <a asp-controller="Flight" asp-action="Details" style="margin-top: 5px; padding: 13px 15px; height: 55px; width: 100%;" class="btn btn-warning">Back to flight details</a>
-                            }
-                            
+                        <div style="display: flex; flex-direction: row;">                            
 
                             @if(currentViewName == "Details")
                             {
+                                <a asp-controller="Flight" asp-action="All" style="margin-top: 5px; padding: 13px 15px; height: 55px; width: 100%;" class="btn btn-warning">Back to all flights</a>
                                 <a asp-controller="Flight" asp-action="Reserve" asp-route-id="@Model.Id" style="margin-left: 5px; margin-top: 5px; padding: 13px 15px; height: 55px; width: 40%;" class="btn btn-primary">Select</a>
                             }
 
