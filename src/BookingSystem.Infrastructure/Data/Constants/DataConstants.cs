@@ -92,6 +92,19 @@
             public const string ArrivalDepartureTimeFormat = "HH:mm";
         }
 
+        public static class FlightReservation
+        {
+            public const int FirstNameMinLength = 3;
+            public const int FirstNameMaxLength = 50;
+
+            public const int LastNameMinLength = 3;
+            public const int LastNameMaxLength = 50;
+
+            public const string DateTimeFormat = "dd/MM/yyyy";
+
+            public const string CreatedOnFormat = "dd/MM/yyyy HH:mm";
+        }
+
         public static class HotelReservation
         {
             public const int FirstNameMinLength = 3;

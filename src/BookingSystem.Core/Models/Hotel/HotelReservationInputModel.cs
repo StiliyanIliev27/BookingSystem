@@ -7,18 +7,18 @@
 
     public class HotelReservationInputModel
     {
-        [Required]
+        [Required(ErrorMessage = RequiredMessage)]
         [Display(Name = "First Name")]
         [StringLength(FirstNameMaxLength,
             MinimumLength = FirstNameMinLength,
-            ErrorMessage = RequiredMessage)]
+            ErrorMessage = LengthErrorMessage)]
         public string FirstName { get; set; } = string.Empty;
 
-        [Required]
+        [Required(ErrorMessage = RequiredMessage)]
         [Display(Name = "Last Name")]
         [StringLength(LastNameMaxLength,
             MinimumLength = LastNameMinLength,
-            ErrorMessage = RequiredMessage)]
+            ErrorMessage = LengthErrorMessage)]
         public string LastName { get; set; } = string.Empty;
 
         [Required]
@@ -28,11 +28,11 @@
         [Required]
         public int Hotel_Id { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = RequiredMessage)]
         [Display(Name = "Start Date")]
         public string StartDate { get; set; } = null!;
 
-        [Required]
+        [Required(ErrorMessage = RequiredMessage)]
         [Display(Name = "End Date")]
         public string EndDate { get; set; } = null!;
         

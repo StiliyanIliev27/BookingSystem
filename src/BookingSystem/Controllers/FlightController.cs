@@ -3,6 +3,8 @@
     using BookingSystem.Core.Contracts;
     using BookingSystem.Core.Models.QueryModels.Flight;
     using Microsoft.AspNetCore.Mvc;
+    using Microsoft.AspNetCore.Mvc.Rendering;
+
     public class FlightController : BaseController
     {
         private readonly IFlightService flightService;
@@ -34,7 +36,27 @@
         [HttpGet]
         public async Task<IActionResult> Details(int id)
         {
+            if(await flightService.ExistsByIdAsync(id) == false)
+            {
+                return BadRequest();
+            }
+
             var model = await flightService.DetailsAsync(id);
+            ViewData["Action"] = "Details";
+
+            return View(model);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Reserve(int id)
+        {
+            if(await flightService.ExistsByIdAsync(id) == false)
+            {
+                return BadRequest();
+            }
+
+            var model = await flightService.GetForReserveAsync(id);
+            ViewData["Action"] = "Reserve";
 
             return View(model);
         }

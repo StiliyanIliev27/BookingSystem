@@ -13,5 +13,9 @@
             int flightsPerPage = 4);
 
         Task<FlightDetailsViewModel> DetailsAsync(int flightId);
+       
+        Task<FlightReserveInputModel> GetForReserveAsync(int flightId);
+        
+        Task<bool> ExistsByIdAsync(int flightId);
     }
 }

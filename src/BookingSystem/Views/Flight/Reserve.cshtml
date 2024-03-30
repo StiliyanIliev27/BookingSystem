@@ -1,0 +1,73 @@
+﻿@using BookingSystem.Core.Models.Flight
+@model FlightReserveInputModel
+
+<div>
+    <partial name="_FlightDetailsPartial" model="@Model.DetailsViewModel" />
+
+    <div class="container-fluid">
+        <div class="row justify-content-center">
+            <div class="col-12 col-sm-10 col-md-8 col-lg-6">
+                <div class="card mt-4">
+                    <div class="card-body">
+                        <h2>Resarvation Details</h2>
+                        <form asp-controller="Hotel" asp-action="Reserve" asp-route-id="@Model.Flight_Id" method="post">
+                            <div class="mb-3">
+                                <label asp-for="@Model.FirstName" class="form-label-add-edit">
+                                    First Name:<span style="color: red"> *</span>
+                                </label>
+                                <input asp-for="@Model.FirstName" class="form-control" aria-required="true" placeholder="First name..." />
+                                <span asp-validation-for="@Model.FirstName" class="text-danger"></span>
+                            </div>
+                            <div class="mb-3">
+                                <label asp-for="@Model.LastName" class="form-label-add-edit">
+                                    Last Name:<span style="color: red"> *</span>
+                                </label>
+                                <input asp-for="@Model.LastName" class="form-control" aria-required="true" placeholder="Last name..." />
+                                <span asp-validation-for="@Model.LastName" class="text-danger"></span>
+                            </div>
+                            <div class="mb-3">
+                                <label asp-for="@Model.ReservationDate" class="form-label-add-edit">
+                                    Reservation Date<span style="color: red"> *</span>
+                                </label>
+                                <div class="input-group date" id="reservationDatePicker" data-target-input="nearest">
+                                    <input type="text" class="form-control datetimepicker-input" data-target="#reservationDatePicker" asp-for="@Model.ReservationDate" placeholder="Reservation date..." />
+                                    <div class="input-group-append" data-target="#reservationDatePicker" data-toggle="datetimepicker">
+                                        <div class="input-group-text"><i style="height: 37.33px; padding-top: 8px;" class="fa fa-calendar"></i></div>
+                                    </div>
+                                </div>
+                                <span asp-validation-for="@Model.ReservationDate" class="text-danger"></span>
+                            </div>
+
+                            <div class="mb-3">
+                                <input class="btn btn-warning mb-2 w-100 p-3 fw-bold" type="submit" value="Next step: Final Details -->" />
+                            </div>
+                            <div class="mb-3">
+                                <a asp-controller="Hotel" asp-action="Details" asp-route-id="@Model.ReservationDate" class="btn btn-primary mb-2 w-100 p-3 fw-bold">Back to all flights</a>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>  
+</div> 
+
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css" rel="stylesheet">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            $('#reservationDatePicker').datepicker({
+                format: 'dd/mm/yyyy',
+                autoclose: true,
+                todayHighlight: true,
+                startDate: new Date()
+            });
+        });
+    </script>
+}

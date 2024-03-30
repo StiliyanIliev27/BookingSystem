@@ -8,18 +8,18 @@
         [Required]
         public string Id { get; set; } = null!;
 
-        [Required]
+        [Required(ErrorMessage = RequiredMessage)]
         [Display(Name = "First Name")]
         [StringLength(FirstNameMaxLength,
             MinimumLength = FirstNameMinLength,
-            ErrorMessage = RequiredMessage)]
+            ErrorMessage = LengthErrorMessage)]
         public string FirstName { get; set; } = null!;
 
-        [Required]
+        [Required(ErrorMessage = RequiredMessage)]
         [Display(Name = "Last Name")]
         [StringLength(LastNameMaxLength,
             MinimumLength = LastNameMinLength,
-            ErrorMessage = RequiredMessage)]
+            ErrorMessage = LengthErrorMessage)]
         public string LastName { get; set; } = null!;
     }
 }

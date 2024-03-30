@@ -19,10 +19,16 @@
             this.repository = repository;
         }
 
-        public async Task<FlightQueryServiceModel> AllAsync(string? departureCity = null, 
-            string? arrivalCity = null, 
-            FlightSorting sorting = FlightSorting.PriceAscending, 
-            int currentPage = 1, 
+        public async Task<bool> ExistsByIdAsync(int flightId)
+        {
+            return await repository.AllReadOnly<Flight>()
+                .AnyAsync(f => f.Id == flightId);
+        }
+
+        public async Task<FlightQueryServiceModel> AllAsync(string? departureCity = null,
+            string? arrivalCity = null,
+            FlightSorting sorting = FlightSorting.PriceAscending,
+            int currentPage = 1,
             int flightsPerPage = 4)
         {
             var flightsToShow = repository.AllReadOnly<Flight>();
@@ -32,7 +38,7 @@
                 flightsToShow = flightsToShow
                     .Where(f => f.DepartureAirport.City.Name == departureCity);
             }
-         
+
             if (arrivalCity != null)
             {
                 flightsToShow = flightsToShow
@@ -87,7 +93,7 @@
                 .Include(f => f.Airline)
                 .FirstOrDefaultAsync(f => f.Id == flightId);
 
-            if(flight == null)
+            if (flight == null)
             {
                 throw new ArgumentException("The current flight is not found!");
             }
@@ -107,6 +113,22 @@
                 FlightDuration = flight.FlightDuration,
                 CabinClass = flight.CabinClass.ToString(),
                 TicketPrice = flight.TicketPrice,
+            };
+        }
+
+        public async Task<FlightReserveInputModel> GetForReserveAsync(int flightId)
+        {
+            var flight = await repository.GetByIdAsync<Flight>(flightId);
+
+            if (flight == null)
+            {
+                throw new ArgumentException("The current flight was not found!");
+            }
+
+            return new FlightReserveInputModel
+            {
+                Flight_Id = flightId, 
+                DetailsViewModel = await DetailsAsync(flightId)
             };
         }
     }

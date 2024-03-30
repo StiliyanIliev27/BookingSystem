@@ -61,6 +61,13 @@
         public int SeatNumber { get; set; }
 
         /// <summary>
+        /// Flight's Reservation's Date
+        /// </summary>
+        [Required]
+        [Comment("Flight's Reservation's Date")]
+        public DateTime ReservationDate { get; set; }
+
+        /// <summary>
         /// Flight's Reservation Creation Time
         /// </summary>
         [Required]
