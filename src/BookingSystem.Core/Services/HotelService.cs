@@ -8,7 +8,6 @@
     using BookingSystem.Infrastructure.Data.Models.Hotels;
     using BookingSystem.Infrastructure.Data.Models.Location;
     using Microsoft.EntityFrameworkCore;
-    using Microsoft.IdentityModel.Tokens;
     using System.Globalization;
     using static BookingSystem.Infrastructure.Data.Constants.DataConstants.Hotel;
     using static BookingSystem.Infrastructure.Data.Constants.DataConstants.HotelReservation;

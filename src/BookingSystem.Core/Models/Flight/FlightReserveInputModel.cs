@@ -13,7 +13,7 @@
         public string FirstName { get; set; } = null!;
 
         [StringLength(LastNameMaxLength, 
-            MinimumLength = LastNameMaxLength,
+            MinimumLength = LastNameMinLength,
             ErrorMessage = LengthErrorMessage)]
         [Display(Name = "Last Name")]
         [Required(ErrorMessage = RequiredMessage)]
@@ -24,18 +24,7 @@
         public string ReservationDate { get; set; } = null!;
 
         [Required]
-        public string User_Id { get; set; } = null!;
-        
-        [Required]
-        public int Flight_Id { get; set; }
-
-        [Display(Name = "Seat Number")]
-        [Required]
-        public int SeatNumber { get; set; }
-
-        [Required]
-        public string CreatedOn { get; set; } = null!;
-
-        public FlightDetailsViewModel DetailsViewModel { get; set; } = null!;
+        public int Flight_Id { get; set; } 
+        public FlightDetailsViewModel? DetailsViewModel { get; set; }
     }
 }

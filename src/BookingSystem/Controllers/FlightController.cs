@@ -1,9 +1,11 @@
 ﻿namespace BookingSystem.Controllers
 {
     using BookingSystem.Core.Contracts;
+    using BookingSystem.Core.Models.Flight;
     using BookingSystem.Core.Models.QueryModels.Flight;
+    using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
-    using Microsoft.AspNetCore.Mvc.Rendering;
+    using System.Security.Claims;
 
     public class FlightController : BaseController
     {
@@ -17,6 +19,7 @@
         }
 
         [HttpGet]
+        [AllowAnonymous]
         public async Task<IActionResult> All([FromQuery]AllFlightsQueryModel query)
         {
             var model = await flightService.AllAsync(
@@ -34,6 +37,7 @@
         }
 
         [HttpGet]
+        [AllowAnonymous]
         public async Task<IActionResult> Details(int id)
         {
             if(await flightService.ExistsByIdAsync(id) == false)
@@ -56,9 +60,24 @@
             }
 
             var model = await flightService.GetForReserveAsync(id);
+            
             ViewData["Action"] = "Reserve";
 
             return View(model);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Reserve(FlightReserveInputModel model, int id)
+        {
+            if(!ModelState.IsValid)
+            {
+                return View(model);
+            }
+
+            string userId = User.GetUserId();
+            await flightService.ReserveAsync(model, userId, id);
+
+            return RedirectToAction(nameof(All));
         }
     }
 }

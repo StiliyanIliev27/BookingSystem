@@ -2,6 +2,7 @@
 {
     using BookingSystem.Core.Enumerations;
     using BookingSystem.Core.Models.Flight;
+    using BookingSystem.Core.Models.Landmark;
     using BookingSystem.Core.Models.QueryModels.Flight;
     public interface IFlightService
     {
@@ -15,6 +16,8 @@
         Task<FlightDetailsViewModel> DetailsAsync(int flightId);
        
         Task<FlightReserveInputModel> GetForReserveAsync(int flightId);
+
+        Task ReserveAsync(FlightReserveInputModel model, string userId, int flightId);
         
         Task<bool> ExistsByIdAsync(int flightId);
     }

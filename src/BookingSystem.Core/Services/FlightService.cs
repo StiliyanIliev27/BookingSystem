@@ -7,8 +7,10 @@
     using BookingSystem.Infrastructure.Common;
     using BookingSystem.Infrastructure.Data.Models.Flights;
     using Microsoft.EntityFrameworkCore;
+    using System.Globalization;
     using System.Threading.Tasks;
     using static BookingSystem.Infrastructure.Data.Constants.DataConstants.Flight;
+    using static BookingSystem.Infrastructure.Data.Constants.DataConstants.FlightReservation;
 
     public class FlightService : IFlightService
     {
@@ -125,11 +127,32 @@
                 throw new ArgumentException("The current flight was not found!");
             }
 
-            return new FlightReserveInputModel
+            return new FlightReserveInputModel()
             {
-                Flight_Id = flightId, 
+                Flight_Id = flightId,
                 DetailsViewModel = await DetailsAsync(flightId)
             };
+        }
+
+        public async Task ReserveAsync(FlightReserveInputModel model, string userId, int flightId)
+        {
+            Random random = new Random();
+            int seatNumber = random.Next(1, 100);
+
+            var reservation = new FlightReservation()
+            {
+                FirstName = model.FirstName,
+                LastName = model.LastName,
+                SeatNumber = seatNumber,
+                ReservationDate = DateTime.ParseExact(model.ReservationDate, DateTimeFormat,
+                CultureInfo.CurrentCulture, DateTimeStyles.None),
+                CreatedOn = DateTime.Now,
+                Flight_Id = flightId,
+                User_Id = userId
+            };
+
+            await repository.AddAsync(reservation);
+            await repository.SaveChangesAsync();
         }
     }
 }
