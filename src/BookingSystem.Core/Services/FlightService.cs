@@ -7,6 +7,7 @@
     using BookingSystem.Infrastructure.Common;
     using BookingSystem.Infrastructure.Data.Models.Flights;
     using Microsoft.EntityFrameworkCore;
+    using System.Collections.Generic;
     using System.Globalization;
     using System.Threading.Tasks;
     using static BookingSystem.Infrastructure.Data.Constants.DataConstants.Flight;
@@ -118,7 +119,7 @@
             };
         }
 
-        public async Task<FlightReserveInputModel> GetForReserveAsync(int flightId)
+        public async Task<FlightReservationInputModel> GetForReserveAsync(int flightId)
         {
             var flight = await repository.GetByIdAsync<Flight>(flightId);
 
@@ -127,17 +128,24 @@
                 throw new ArgumentException("The current flight was not found!");
             }
 
-            return new FlightReserveInputModel()
+            return new FlightReservationInputModel()
             {
                 Flight_Id = flightId,
                 DetailsViewModel = await DetailsAsync(flightId)
             };
         }
 
-        public async Task ReserveAsync(FlightReserveInputModel model, string userId, int flightId)
+        public async Task ReserveAsync(FlightReservationInputModel model, string userId, int flightId)
         {
             Random random = new Random();
             int seatNumber = random.Next(1, 100);
+
+            var flight = await repository.GetByIdAsync<Flight>(flightId);
+
+            if(flight == null)
+            {
+                throw new ArgumentNullException("The current flight does not exist!");
+            }
 
             var reservation = new FlightReservation()
             {
@@ -147,12 +155,38 @@
                 ReservationDate = DateTime.ParseExact(model.ReservationDate, DateTimeFormat,
                 CultureInfo.CurrentCulture, DateTimeStyles.None),
                 CreatedOn = DateTime.Now,
+                TotalPrice = flight.TicketPrice,
                 Flight_Id = flightId,
                 User_Id = userId
             };
 
             await repository.AddAsync(reservation);
             await repository.SaveChangesAsync();
+        }
+
+        public async Task<IEnumerable<FlightReservationVerifyViewModel>> GetReservationsForVerifyAsync(string userId)
+        {
+            return await repository.AllReadOnly<FlightReservation>()
+                .Where(fr => fr.User_Id == userId && fr.ReservationDate >= DateTime.Now.Date && fr.IsActive == false)
+                .Include(fr => fr.Flight)
+                .Include(fr => fr.Flight.Airline)
+                .Include(fr => fr.Flight.DepartureAirport)
+                .Include(fr => fr.Flight.ArrivalAirport)
+                .Include(fr => fr.Flight.ArrivalAirport.City)
+                .Select(fr => new FlightReservationVerifyViewModel()
+                {
+                    Id = fr.Id,
+                    FirstName = fr.FirstName,
+                    LastName = fr.LastName,
+                    SeatNumber = fr.SeatNumber,
+                    ReservationDate = fr.ReservationDate.ToString(DateTimeFormat),
+                    TotalPrice = fr.TotalPrice,
+                    FlightId = fr.Flight_Id,
+                    Flight = $"{fr.Flight.DepartureAirport.City.Name} ({fr.Flight.DepartureAirport.ShorterName}) - {fr.Flight.ArrivalAirport.City.Name} ({fr.Flight.ArrivalAirport.ShorterName})",
+                    ArrivalCityImageUrl = fr.Flight.ArrivalAirport.City.ImageUrl,
+                    AirlineLogoUrl = fr.Flight.Airline.ImageUrl
+                })
+                .ToListAsync();           
         }
     }
 }

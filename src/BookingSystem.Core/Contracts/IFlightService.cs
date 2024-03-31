@@ -15,9 +15,11 @@
 
         Task<FlightDetailsViewModel> DetailsAsync(int flightId);
        
-        Task<FlightReserveInputModel> GetForReserveAsync(int flightId);
+        Task<FlightReservationInputModel> GetForReserveAsync(int flightId);
 
-        Task ReserveAsync(FlightReserveInputModel model, string userId, int flightId);
+        Task ReserveAsync(FlightReservationInputModel model, string userId, int flightId);
+
+        Task<IEnumerable<FlightReservationVerifyViewModel>> GetReservationsForVerifyAsync(string userId);
         
         Task<bool> ExistsByIdAsync(int flightId);
     }

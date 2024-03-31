@@ -1,0 +1,58 @@
+﻿@using BookingSystem.Core.Models.Flight
+@model IEnumerable<FlightReservationVerifyViewModel>
+@{
+    ViewData["Title"] = "Flight reservations confirmation in process...";
+}
+
+<h2 class="text-center">@ViewData["Title"]</h2>
+<hr />
+
+@if (Model.Any())
+{
+    <div class="container">
+        <div class="row">
+            @foreach (var reservation in Model)
+            {
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="card">
+                        <img style="height: 250px; width: 100%; object-fit: cover;" class="card-img-top img-fluid" src="@reservation.ArrivalCityImageUrl" alt="Arrival City image">
+                        <div class="card-body">
+                            <h4 style="height: 72px;" class="card-title text-center">
+                                Flight: <br /><span>@reservation.Flight</span>
+
+                            </h4>
+
+                            <div style="margin-left: 80px;">        
+                                <img style="width: 187px; height: 65px;" class="img-fluid" src="@reservation.AirlineLogoUrl" />
+                            </div>
+
+                            <hr />
+
+                            <p class="card-text"><strong>Reservation Holder's First Name:</strong> <span style="font-style: italic;">@reservation.FirstName</span></p>
+                            <p class="card-text"><strong>Reservation Holder's Last Name:</strong> <span style="font-style: italic;">@reservation.LastName</span></p>
+                            <p class="card-text"><strong>Seat Number:</strong> <span style="font-style: italic;">@reservation.SeatNumber</span></p>
+                            <p class="card-text"><strong>Total Price:</strong> <span style="font-style: italic;">$@reservation.TotalPrice</span></p>
+                            <p class="card-text"><strong>Flight Date:</strong> <span style="font-style: italic;">@reservation.ReservationDate</span></p>
+                       
+     
+                            <div class="d-flex justify-content-between align-items-center mb-3">
+                                <form method="post" asp-controller="Flight" asp-action="CancellVerification" asp-route-id="@reservation.Id">
+                                    <button type="submit" style="margin-right: 10px;" class="btn btn-danger fw-bold">Remove the reservation</button>
+                                </form>
+                                <form method="post" asp-controller="Flight" asp-action="Verify" asp-route-id="@reservation.Id">
+                                    <button type="submit" class="btn btn-success fw-bold">Confirm the reservation</button>
+                                </form>
+                            </div>
+                            <a asp-controller="Flight" asp-action="All" style="width: 100%;" class="btn btn-warning btn-block fw-bold">Back to All Flights</a>
+                        </div>
+                    </div>
+                </div>
+            }           
+        </div>
+    </div>
+}
+else
+{
+    <h3 class="text-center mt-5">No verifications in process!</h3>
+}
+

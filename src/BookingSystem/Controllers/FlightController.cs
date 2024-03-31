@@ -67,7 +67,7 @@
         }
 
         [HttpPost]
-        public async Task<IActionResult> Reserve(FlightReserveInputModel model, int id)
+        public async Task<IActionResult> Reserve(FlightReservationInputModel model, int id)
         {
             if(!ModelState.IsValid)
             {
@@ -77,7 +77,16 @@
             string userId = User.GetUserId();
             await flightService.ReserveAsync(model, userId, id);
 
-            return RedirectToAction(nameof(All));
+            return RedirectToAction(nameof(Verify));
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Verify(int id)
+        {
+            string userId = User.GetUserId();
+            var model = await flightService.GetReservationsForVerifyAsync(userId);
+
+            return View(model); 
         }
     }
 }

@@ -3,7 +3,7 @@
     using System.ComponentModel.DataAnnotations;
     using static BookingSystem.Infrastructure.Data.Constants.DataConstants;
     using static BookingSystem.Infrastructure.Data.Constants.DataConstants.FlightReservation;
-    public class FlightReserveInputModel
+    public class FlightReservationInputModel
     {
         [StringLength(FirstNameMaxLength,
             MinimumLength = FirstNameMinLength,
@@ -25,6 +25,7 @@
 
         [Required]
         public int Flight_Id { get; set; } 
+        
         public FlightDetailsViewModel? DetailsViewModel { get; set; }
     }
 }
