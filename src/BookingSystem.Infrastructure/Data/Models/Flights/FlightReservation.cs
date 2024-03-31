@@ -11,6 +11,18 @@
     [Comment("FlightReservations")]
     public class FlightReservation
     {
+        public FlightReservation()
+        {
+            Id = Guid.NewGuid().ToString();
+        }
+
+        /// <summary>
+        /// Flight Reservation Identifier
+        /// </summary>
+        [Key]
+        [Comment("Flight Reservation Identifier")]
+        public string Id { get; set; }
+
         /// <summary>
         /// FlightReservation's Reserver's First Name
         /// </summary>
@@ -60,6 +72,13 @@
         [Comment("Flight's Reseravation's Seat Number")]
         public int SeatNumber { get; set; }
 
+        /// <summary>
+        /// Flight's Reseravation's Total Price
+        /// </summary>
+        [Required]
+        [Comment("Flight's Reseravation's Total Price")]
+        public decimal TotalPrice { get; set; }
+        
         /// <summary>
         /// Flight's Reservation's Date
         /// </summary>

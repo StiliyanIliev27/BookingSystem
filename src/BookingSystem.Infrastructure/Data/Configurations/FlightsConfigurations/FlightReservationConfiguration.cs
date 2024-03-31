@@ -8,7 +8,8 @@
         public void Configure(EntityTypeBuilder<FlightReservation> builder)
         {
             builder
-                .HasKey(fr => new { fr.Flight_Id, fr.User_Id });
+                .Property(fr => fr.TotalPrice)
+                .HasPrecision(18, 2);
         }
     }
 }
