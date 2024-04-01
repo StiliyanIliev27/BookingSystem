@@ -87,6 +87,13 @@
         public DateTime ReservationDate { get; set; }
 
         /// <summary>
+        /// Flight's Reservation's First and Last Name Changed Counter
+        /// </summary>
+        [Required]
+        [Comment("Flight's Reservation's First and Last Name Changed Counter")]
+        public int TotalChangedNameCount { get; set; } = 0;
+
+        /// <summary>
         /// Flight's Reservation Creation Time
         /// </summary>
         [Required]
