@@ -114,5 +114,26 @@
 
             return RedirectToAction(nameof(Verify));
         }
+
+        [HttpGet]
+        public async Task<IActionResult> MyReservations()
+        {
+            string userId = User.GetUserId();
+            var model = await flightService.MyReservations(userId);
+
+            return View(model);
+        }
+
+        public async Task<IActionResult> CancellReservation(string id)
+        {
+            if (!await flightService.ReservationExistsByIdAsync(id))
+            {
+                return BadRequest();
+            }
+
+            await flightService.CancellVerificationAsync(id);
+
+            return RedirectToAction(nameof(MyReservations));
+        }
     }
 }

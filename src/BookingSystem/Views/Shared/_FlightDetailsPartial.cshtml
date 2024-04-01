@@ -6,7 +6,7 @@
 
     if (ViewContext != null && ViewContext.ViewData["Action"] != null)
     {
-        currentViewName = ViewContext.ViewData["Action"].ToString();
+        currentViewName = ViewContext.ViewData["Action"]!.ToString();
     }
 
     ViewData["Title"] = "Flight Details";

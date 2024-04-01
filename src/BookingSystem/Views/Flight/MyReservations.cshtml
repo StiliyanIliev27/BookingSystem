@@ -1,0 +1,69 @@
+﻿@using BookingSystem.Core.Models.Flight
+@model IEnumerable<FlightReservationViewModel>
+@{
+    ViewData["Title"] = "My Flights";
+}
+
+<h2 class="text-center">@ViewData["Title"]</h2>
+<hr />
+
+@if (Model.Any())
+{
+    <div class="container">
+        <div class="row">
+            @foreach (var reservation in Model)
+            {
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="card">
+                        <a asp-controller="City" asp-action="Details" asp-route-id="@reservation.CityId">
+                            <img style="height: 250px; width: 100%; object-fit: cover;" class="card-img-top img-fluid" src="@reservation.ArrivalCityImageUrl" alt="Arrival City image">
+                        </a>
+                        
+                        <div class="card-body">
+                            <a asp-controller="Flight" asp-action="Details" asp-route-id="@reservation.FlightId">
+                                <h4 style="height: 72px;" class="card-title text-center">
+                                    Flight: <br /><span>@reservation.Flight</span>
+
+                                </h4>
+                            </a>
+
+                            <div style="margin-left: 25%; margin-top: 10px;">
+                                <img style="width: 187px; height: 65px;" class="img-fluid" src="@reservation.AirlineLogoUrl" />
+                            </div>
+
+                            <hr />
+
+                            <p class="card-text"><strong>Reservation Holder's First Name:</strong> <span style="font-style: italic;">@reservation.FirstName</span></p>
+                            <p class="card-text"><strong>Reservation Holder's Last Name:</strong> <span style="font-style: italic;">@reservation.LastName</span></p>
+                            <p class="card-text"><strong>Seat Number:</strong> <span style="font-style: italic;">@reservation.SeatNumber</span></p>
+                            <p class="card-text"><strong>Total Price:</strong> <span style="font-style: italic;">$@reservation.TotalPrice</span></p>
+                            <p class="card-text"><strong>Flight Date:</strong> <span style="font-style: italic;">@reservation.ReservationDate</span></p>
+                            <p class="card-text"><strong>Departure Time:</strong> <span style="font-style: italic;">@reservation.DepartureTime</span></p>
+                            <p class="card-text"><strong>Arrival Time:</strong> <span style="font-style: italic;">@reservation.ArrivalTime</span></p>
+
+
+                            <div class="d-flex justify-content-between mb-1">
+                                <form method="post" asp-controller="Flight" asp-action="CancellReservation" asp-route-id="@reservation.Id">
+                                    <button style="height: 70px; padding-top: 8px; padding-bottom: 8px;" type="submit" class="btn btn-danger fw-bold">Cancell the reservation</button>
+                                </form>
+                                <form method="post" asp-controller="Flight" asp-action="Edit" asp-route-id="@reservation.Id">
+                                    <button style="margin-left: 8px; height: 70px; padding-top: 5px; padding-bottom: 8px;" type="submit" class="btn btn-warning fw-bold">Edit reservation details</button>
+                                </form>
+                            </div>
+                           
+                        </div>
+                        <div class="card-footer">
+                            <small class="text-muted">Created on: @reservation.CreatedOn</small>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+}
+else
+{
+    <h3 class="text-center mt-5">No verifications in process!</h3>
+}
+
+

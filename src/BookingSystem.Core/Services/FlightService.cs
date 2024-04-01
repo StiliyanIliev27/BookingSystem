@@ -34,6 +34,12 @@
                 .AnyAsync(fr => fr.IsActive == false && fr.Id == verificationId);
         }
 
+        public async Task<bool> ReservationExistsByIdAsync(string reservationId)
+        {
+            return await repository.AllReadOnly<FlightReservation>()
+                .AnyAsync(fr => fr.IsActive == true && fr.Id == reservationId);
+        }
+
         public async Task<FlightQueryServiceModel> AllAsync(string? departureCity = null,
             string? arrivalCity = null,
             FlightSorting sorting = FlightSorting.PriceAscending,
@@ -224,5 +230,34 @@
             repository.Delete(reservation);
             await repository.SaveChangesAsync();
         }
+
+        public async Task<IEnumerable<FlightReservationViewModel>> MyReservations(string userId)
+        {
+            return await repository.AllReadOnly<FlightReservation>()
+                .Where(fr => fr.User_Id == userId && fr.ReservationDate >= DateTime.Now.Date && fr.IsActive == true)
+                .Include(fr => fr.Flight)
+                .Include(fr => fr.Flight.Airline)
+                .Include(fr => fr.Flight.DepartureAirport)
+                .Include(fr => fr.Flight.ArrivalAirport)
+                .Include(fr => fr.Flight.ArrivalAirport.City)
+                .Select(fr => new FlightReservationViewModel()
+                {
+                    Id = fr.Id,
+                    FirstName = fr.FirstName,
+                    LastName = fr.LastName,
+                    SeatNumber = fr.SeatNumber,
+                    ReservationDate = fr.ReservationDate.ToString(DateTimeFormat),
+                    DepartureTime = fr.Flight.DepartureTime.ToString(ArrivalDepartureTimeFormat),
+                    ArrivalTime = fr.Flight.ArrivalTime.ToString(ArrivalDepartureTimeFormat),
+                    CityId = fr.Flight.ArrivalAirport.City.Id,
+                    CreatedOn = fr.CreatedOn.ToString(CreatedOnFormat),
+                    TotalPrice = fr.TotalPrice,
+                    FlightId = fr.Flight_Id,
+                    Flight = $"{fr.Flight.DepartureAirport.City.Name} ({fr.Flight.DepartureAirport.ShorterName}) - {fr.Flight.ArrivalAirport.City.Name} ({fr.Flight.ArrivalAirport.ShorterName})",
+                    ArrivalCityImageUrl = fr.Flight.ArrivalAirport.City.ImageUrl,
+                    AirlineLogoUrl = fr.Flight.Airline.ImageUrl
+                })
+                .ToListAsync();
+        }       
     }
 }

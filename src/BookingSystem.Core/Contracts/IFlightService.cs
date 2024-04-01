@@ -24,7 +24,11 @@
 
         Task CancellVerificationAsync(string reservationId);
 
+        Task<IEnumerable<FlightReservationViewModel>> MyReservations(string userId);
+        
         Task<bool> VerificationExistsByIdAsync(string verificationId);
+
+        Task<bool> ReservationExistsByIdAsync(string reservationId);
 
         Task<bool> ExistsByIdAsync(int flightId);
     }
