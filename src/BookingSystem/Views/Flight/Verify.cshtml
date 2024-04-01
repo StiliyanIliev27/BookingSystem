@@ -17,14 +17,17 @@
                     <div class="card">
                         <img style="height: 250px; width: 100%; object-fit: cover;" class="card-img-top img-fluid" src="@reservation.ArrivalCityImageUrl" alt="Arrival City image">
                         <div class="card-body">
-                            <h4 style="height: 72px;" class="card-title text-center">
-                                Flight: <br /><span>@reservation.Flight</span>
+                            <a asp-controller="Flight" asp-action="Details" asp-route-id="@reservation.FlightId">
+                                <h4 style="height: 72px;" class="card-title text-center">
+                                    Flight: <br /><span>@reservation.Flight</span>
 
-                            </h4>
+                                </h4>
+                            </a>
+                            
 
                             <div style="margin-left: 25%; margin-top: 10px;">        
                                 <img style="width: 187px; height: 65px;" class="img-fluid" src="@reservation.AirlineLogoUrl" />
-                            </div>
+                            </div>                        
 
                             <hr />
 

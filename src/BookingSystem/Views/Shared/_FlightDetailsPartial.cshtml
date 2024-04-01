@@ -8,8 +8,12 @@
     {
         currentViewName = ViewContext.ViewData["Action"].ToString();
     }
+
+    ViewData["Title"] = "Flight Details";
 }
 
+<h2 class="text-center">@ViewData["Title"]</h2>
+<hr />
 
 <div class="container-fluid">
     <div class="row justify-content-center">
