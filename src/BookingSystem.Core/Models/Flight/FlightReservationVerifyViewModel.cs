@@ -18,6 +18,10 @@
 
         public string ReservationDate { get; set; } = null!;
 
+        public string DepartureTime { get; set; } = null!;
+
+        public string ArrivalTime {  get; set; } = null!;
+
         public string ArrivalCityImageUrl { get; set; } = null!;
        
         public string? AirlineLogoUrl { get; set; } = null!;

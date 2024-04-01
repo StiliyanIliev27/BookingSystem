@@ -81,12 +81,38 @@
         }
 
         [HttpGet]
-        public async Task<IActionResult> Verify(int id)
+        public async Task<IActionResult> Verify()
         {
             string userId = User.GetUserId();
             var model = await flightService.GetReservationsForVerifyAsync(userId);
 
             return View(model); 
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Verify(string id)
+        {
+            if(!await flightService.VerificationExistsByIdAsync(id))
+            {
+                return BadRequest();
+            }
+
+            await flightService.VerifyAsync(id);
+
+            return RedirectToAction(nameof(Verify));
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> CancellVerification(string id)
+        {
+            if(!await flightService.VerificationExistsByIdAsync(id))
+            {
+                return BadRequest();
+            }
+
+            await flightService.CancellVerificationAsync(id);
+
+            return RedirectToAction(nameof(Verify));
         }
     }
 }

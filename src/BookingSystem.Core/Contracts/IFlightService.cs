@@ -2,7 +2,6 @@
 {
     using BookingSystem.Core.Enumerations;
     using BookingSystem.Core.Models.Flight;
-    using BookingSystem.Core.Models.Landmark;
     using BookingSystem.Core.Models.QueryModels.Flight;
     public interface IFlightService
     {
@@ -20,7 +19,13 @@
         Task ReserveAsync(FlightReservationInputModel model, string userId, int flightId);
 
         Task<IEnumerable<FlightReservationVerifyViewModel>> GetReservationsForVerifyAsync(string userId);
-        
+
+        Task VerifyAsync(string reservationId);
+
+        Task CancellVerificationAsync(string reservationId);
+
+        Task<bool> VerificationExistsByIdAsync(string verificationId);
+
         Task<bool> ExistsByIdAsync(int flightId);
     }
 }

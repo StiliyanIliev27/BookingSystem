@@ -28,6 +28,12 @@
                 .AnyAsync(f => f.Id == flightId);
         }
 
+        public async Task<bool> VerificationExistsByIdAsync(string verificationId)
+        {
+            return await repository.AllReadOnly<FlightReservation>()
+                .AnyAsync(fr => fr.IsActive == false && fr.Id == verificationId);
+        }
+
         public async Task<FlightQueryServiceModel> AllAsync(string? departureCity = null,
             string? arrivalCity = null,
             FlightSorting sorting = FlightSorting.PriceAscending,
@@ -180,6 +186,8 @@
                     LastName = fr.LastName,
                     SeatNumber = fr.SeatNumber,
                     ReservationDate = fr.ReservationDate.ToString(DateTimeFormat),
+                    DepartureTime = fr.Flight.DepartureTime.ToString(ArrivalDepartureTimeFormat),
+                    ArrivalTime = fr.Flight.ArrivalTime.ToString(ArrivalDepartureTimeFormat),
                     TotalPrice = fr.TotalPrice,
                     FlightId = fr.Flight_Id,
                     Flight = $"{fr.Flight.DepartureAirport.City.Name} ({fr.Flight.DepartureAirport.ShorterName}) - {fr.Flight.ArrivalAirport.City.Name} ({fr.Flight.ArrivalAirport.ShorterName})",
@@ -187,6 +195,34 @@
                     AirlineLogoUrl = fr.Flight.Airline.ImageUrl
                 })
                 .ToListAsync();           
+        }
+
+        public async Task VerifyAsync(string reservationId)
+        {
+            var reservation = await repository.GetByIdAsync<FlightReservation>(reservationId);
+
+            if(reservation == null)
+            {
+                throw new ArgumentNullException("The current reservation was not found!");
+            }
+
+            reservation.CreatedOn = DateTime.Now;
+            reservation.IsActive = true;
+            
+            await repository.SaveChangesAsync();
+        }
+
+        public async Task CancellVerificationAsync(string reservationId)
+        {
+            var reservation = await repository.GetByIdAsync<FlightReservation>(reservationId);
+
+            if (reservation == null)
+            {
+                throw new ArgumentNullException("The current reservation was not found!");
+            }
+
+            repository.Delete(reservation);
+            await repository.SaveChangesAsync();
         }
     }
 }
