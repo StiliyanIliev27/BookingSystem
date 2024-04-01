@@ -124,6 +124,7 @@
             return View(model);
         }
 
+        [HttpPost]
         public async Task<IActionResult> CancellReservation(string id)
         {
             if (!await flightService.ReservationExistsByIdAsync(id))
@@ -132,6 +133,39 @@
             }
 
             await flightService.CancellVerificationAsync(id);
+
+            return RedirectToAction(nameof(MyReservations));
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> EditReservation(string id)
+        {
+            if(!await flightService.ReservationExistsByIdAsync(id))
+            {
+                return BadRequest();    
+            }
+
+            string userId = User.GetUserId();
+            var model = await flightService.GetForEditAsync(id, userId);
+
+            return View(model);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> EditReservation(FlightReservationEditInputModel model)
+        {
+            if (!await flightService.ReservationExistsByIdAsync(model.Id))
+            {
+                return BadRequest();
+            }
+
+            if (!ModelState.IsValid)
+            {
+                return View(model); 
+            }
+
+            string userId = User.GetUserId();
+            await flightService.EditAsync(model, userId);
 
             return RedirectToAction(nameof(MyReservations));
         }

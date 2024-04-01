@@ -46,7 +46,7 @@
                                 <form method="post" asp-controller="Flight" asp-action="CancellReservation" asp-route-id="@reservation.Id">
                                     <button style="height: 70px; padding-top: 8px; padding-bottom: 8px;" type="submit" class="btn btn-danger fw-bold">Cancell the reservation</button>
                                 </form>
-                                <form method="post" asp-controller="Flight" asp-action="Edit" asp-route-id="@reservation.Id">
+                                <form method="get" asp-controller="Flight" asp-action="EditReservation" asp-route-id="@reservation.Id">
                                     <button style="margin-left: 8px; height: 70px; padding-top: 5px; padding-bottom: 8px;" type="submit" class="btn btn-warning fw-bold">Edit reservation details</button>
                                 </form>
                             </div>

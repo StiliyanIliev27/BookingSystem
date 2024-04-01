@@ -258,6 +258,46 @@
                     AirlineLogoUrl = fr.Flight.Airline.ImageUrl
                 })
                 .ToListAsync();
-        }       
+        }
+
+        public async Task<FlightReservationEditInputModel> GetForEditAsync(string reservationId, string userId)
+        {
+            var reservation = await repository.AllReadOnly<FlightReservation>()
+                .FirstOrDefaultAsync(fr => fr.Id == reservationId && fr.User_Id == userId);
+
+            if(reservation == null)
+            {
+                throw new ArgumentNullException("The current flight reservation was not found!");
+            }
+
+            return new FlightReservationEditInputModel()
+            {
+                Id = reservation.Id,
+                FirstName = reservation.FirstName,
+                LastName = reservation.LastName,
+                TotalChangesNameCnt = reservation.TotalChangedNameCount
+            };
+        }
+
+        public async Task EditAsync(FlightReservationEditInputModel model, string userId)
+        {
+            var reservation = await repository.All<FlightReservation>()
+                .FirstOrDefaultAsync(fr => fr.Id == model.Id && fr.User_Id == userId);
+
+            if(reservation == null )
+            {
+                throw new ArgumentNullException("The current flight reservation was not found!");
+            }
+
+            if(reservation.TotalChangedNameCount == 0)
+            {
+                reservation.FirstName = model.FirstName;
+                reservation.LastName = model.LastName;
+                
+                reservation.TotalChangedNameCount += 1;
+            }
+
+            await repository.SaveChangesAsync();
+        }
     }
 }
