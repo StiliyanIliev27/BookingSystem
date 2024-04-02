@@ -2,7 +2,6 @@
 {
     using BookingSystem.Core.Contracts;
     using BookingSystem.Core.Exceptions;
-    using BookingSystem.Core.Models.Hotel;
     using BookingSystem.Core.Models.Landmark;
     using BookingSystem.Infrastructure.Common;
     using BookingSystem.Infrastructure.Data.Models.Landmarks;

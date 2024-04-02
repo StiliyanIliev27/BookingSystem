@@ -11,9 +11,13 @@
     {
         private readonly ILandmarkService landmarkService;
 
-        public LandmarkController(ILandmarkService landmarkService)
+        private readonly ILogger logger;
+
+        public LandmarkController(ILandmarkService landmarkService, 
+            ILogger logger)
         {
-            this.landmarkService = landmarkService;    
+            this.landmarkService = landmarkService;
+            this.logger = logger;
         }
 
         [HttpGet]
@@ -100,8 +104,23 @@
         [HttpPost]
         public async Task<IActionResult> CancellReservation(string id)
         {
+            if(!await landmarkService.LandmarkReservationExistsAsync(id))
+            {
+                return BadRequest();
+            }
+
             string userId = User.GetUserId();
-            await landmarkService.CancellReservationAsync(userId, id);
+
+            try
+            {
+                await landmarkService.CancellReservationAsync(userId, id);
+            }
+            catch(UnauthorizedAccessException uae)
+            {
+                logger.LogError(uae, "Landmark/CancellReservation[POST]");
+
+                return Unauthorized();
+            }
 
             return RedirectToAction(nameof(MyReservations));
         }
@@ -115,9 +134,19 @@
             }
 
             string userId = User.GetUserId();
-            var model = await landmarkService.GetReservationForEditAsync(userId, id);
 
-            return View(model);
+            try
+            {
+                var model = await landmarkService.GetReservationForEditAsync(userId, id);
+
+                return View(model);
+            }
+            catch(UnauthorizedAccessException uae)
+            {
+                logger.LogError(uae, "Landmark/EditReservation[GET]");
+
+                return Unauthorized();
+            }
         }
 
         [HttpPost]
@@ -129,7 +158,15 @@
             }
 
             string userId = User.GetUserId();
-            await landmarkService.EditReservationAsync(model, userId);
+
+            try
+            {
+                await landmarkService.EditReservationAsync(model, userId);
+            }
+            catch(UnauthorizedAccessException uae)
+            {
+                logger.LogError(uae, "Landmark/EditReservation[POST]");
+            }
 
             return RedirectToAction(nameof(MyReservations));
         }
