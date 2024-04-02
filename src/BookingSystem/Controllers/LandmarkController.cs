@@ -1,6 +1,7 @@
 ﻿namespace BookingSystem.Controllers
 {
     using BookingSystem.Core.Contracts;
+    using BookingSystem.Core.Exceptions;
     using BookingSystem.Core.Models.Landmark;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
@@ -11,10 +12,10 @@
     {
         private readonly ILandmarkService landmarkService;
 
-        private readonly ILogger logger;
+        private readonly ILogger<LandmarkController> logger;
 
         public LandmarkController(ILandmarkService landmarkService, 
-            ILogger logger)
+            ILogger<LandmarkController> logger)
         {
             this.landmarkService = landmarkService;
             this.logger = logger;
@@ -115,7 +116,7 @@
             {
                 await landmarkService.CancellReservationAsync(userId, id);
             }
-            catch(UnauthorizedAccessException uae)
+            catch(UnauthorizedActionException uae)
             {
                 logger.LogError(uae, "Landmark/CancellReservation[POST]");
 
@@ -141,7 +142,7 @@
 
                 return View(model);
             }
-            catch(UnauthorizedAccessException uae)
+            catch(UnauthorizedActionException uae)
             {
                 logger.LogError(uae, "Landmark/EditReservation[GET]");
 
@@ -163,7 +164,7 @@
             {
                 await landmarkService.EditReservationAsync(model, userId);
             }
-            catch(UnauthorizedAccessException uae)
+            catch(UnauthorizedActionException uae)
             {
                 logger.LogError(uae, "Landmark/EditReservation[POST]");
             }

@@ -9,6 +9,15 @@
       "dotnetRunMessages": true,
       "applicationUrl": "https://localhost:7088;http://localhost:5063"
     },
+    "BookingSystemProduction": {
+      "commandName": "Project",
+      "launchBrowser": true,
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Production"
+      },
+      "dotnetRunMessages": true,
+      "applicationUrl": "https://localhost:7088;http://localhost:5063"
+    },
     "IIS Express": {
       "commandName": "IISExpress",
       "launchBrowser": true,

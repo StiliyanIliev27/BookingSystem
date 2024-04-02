@@ -22,7 +22,8 @@ namespace BookingSystem
             }
             else
             {
-                app.UseExceptionHandler("/Home/Error");
+                app.UseExceptionHandler("/Home/Error/500");
+                app.UseStatusCodePagesWithReExecute("/Home/Error", "?statusCode={0}");
                 app.UseHsts();
             }
 

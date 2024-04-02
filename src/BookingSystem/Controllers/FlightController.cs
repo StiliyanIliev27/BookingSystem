@@ -1,6 +1,7 @@
 ﻿namespace BookingSystem.Controllers
 {
     using BookingSystem.Core.Contracts;
+    using BookingSystem.Core.Exceptions;
     using BookingSystem.Core.Models.Flight;
     using BookingSystem.Core.Models.QueryModels.Flight;
     using Microsoft.AspNetCore.Authorization;
@@ -13,11 +14,11 @@
       
         private readonly IHotelService hotelService;
       
-        private readonly ILogger logger;
+        private readonly ILogger<FlightController> logger;
 
         public FlightController(IFlightService flightService, 
             IHotelService hotelService,
-            ILogger logger)
+            ILogger<FlightController> logger)
         {
             this.flightService = flightService;
             this.hotelService = hotelService;
@@ -117,7 +118,7 @@
             {
                 await flightService.VerifyAsync(id, userId);
             }
-            catch(UnauthorizedAccessException uae)
+            catch(UnauthorizedActionException uae)
             {
                 logger.LogError(uae, "Flight/Verify[POST]");
 
@@ -141,7 +142,7 @@
             {
                 await flightService.CancellVerificationAsync(id, userId);
             }
-            catch(UnauthorizedAccessException uae)
+            catch(UnauthorizedActionException uae)
             {
                 logger.LogError(uae, "Flight/CancellVerification[POST]");
 
@@ -174,7 +175,7 @@
             {
                 await flightService.CancellReservationAsync(id, userId);
             }
-            catch(UnauthorizedAccessException uae)
+            catch(UnauthorizedActionException uae)
             {
                 logger.LogError(uae, "Flight/CancellReservation[POST]");
 
@@ -200,7 +201,7 @@
                
                 return View(model);
             }
-            catch(UnauthorizedAccessException uae)
+            catch(UnauthorizedActionException uae)
             {
                 logger.LogError(uae, "Flight/EditReservatio[GET]");
 
@@ -227,7 +228,7 @@
             {
                 await flightService.EditAsync(model, userId);
             }
-            catch(UnauthorizedAccessException uae)
+            catch(UnauthorizedActionException uae)
             {
                 logger.LogError(uae, "Flight/EditReservatio[POST]");
 

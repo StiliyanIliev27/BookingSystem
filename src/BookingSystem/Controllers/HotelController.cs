@@ -6,6 +6,7 @@ using System.Globalization;
 using System.Security.Claims;
 using static BookingSystem.Infrastructure.Data.Constants.DataConstants.HotelReservation;
 using BookingSystem.Core.Models.QueryModels.Hotel;
+using BookingSystem.Core.Exceptions;
 
 namespace BookingSystem.Controllers
 {
@@ -15,10 +16,10 @@ namespace BookingSystem.Controllers
         
         private readonly ILandmarkService landmarkService;
 
-        private readonly ILogger logger;
+        private readonly ILogger<HotelController> logger;
         public HotelController(IHotelService hotelService,
             ILandmarkService landmarkService,
-            ILogger logger)
+            ILogger<HotelController> logger)
         {
             this.hotelService = hotelService;
             this.landmarkService = landmarkService;
@@ -119,7 +120,7 @@ namespace BookingSystem.Controllers
             {
                 await hotelService.VerifyReservationAsync(id, userId);
             }
-            catch(UnauthorizedAccessException uae)
+            catch(UnauthorizedActionException uae)
             {
                 logger.LogError(uae, "Hotel/Verify[POST]");
 
@@ -143,7 +144,7 @@ namespace BookingSystem.Controllers
             {
                 await hotelService.CancellVerificationAsync(id, userId);
             }
-            catch(UnauthorizedAccessException uae)
+            catch(UnauthorizedActionException uae)
             {
                 logger.LogError(uae, "Hotel/CancellVerification[POST]");
 
@@ -167,7 +168,7 @@ namespace BookingSystem.Controllers
             {
                 await hotelService.CancellReservationAsync(id, userId);
             }
-            catch(UnauthorizedAccessException uae)
+            catch(UnauthorizedActionException uae)
             {
                 logger.LogError(uae, "Hotel/CancellReservation[POST]");
 
@@ -202,7 +203,7 @@ namespace BookingSystem.Controllers
 
                 return View(model);
             }
-            catch(UnauthorizedAccessException uae)
+            catch(UnauthorizedActionException uae)
             {
                 logger.LogError(uae, "Hotel/EditReservation[GET]");
 
@@ -224,7 +225,7 @@ namespace BookingSystem.Controllers
             {
                 await hotelService.EditAsync(model, userId);
             }
-            catch(UnauthorizedAccessException uae)
+            catch(UnauthorizedActionException uae)
             {
                 logger.LogError(uae, "Hotel/EditReservation[POST]");
 
