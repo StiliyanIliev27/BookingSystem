@@ -20,15 +20,17 @@
 
         Task<IEnumerable<FlightReservationVerifyViewModel>> GetReservationsForVerifyAsync(string userId);
 
-        Task VerifyAsync(string reservationId);
+        Task VerifyAsync(string reservationId, string userId);
 
-        Task CancellVerificationAsync(string reservationId);
+        Task CancellVerificationAsync(string reservationId, string userId);
 
         Task<IEnumerable<FlightReservationViewModel>> MyReservations(string userId);
 
         Task<FlightReservationEditInputModel> GetForEditAsync(string reservationId, string userId);
 
         Task EditAsync(FlightReservationEditInputModel model, string userId);
+
+        Task CancellReservationAsync(string reservationId, string userId);
         
         Task<bool> VerificationExistsByIdAsync(string verificationId);
 

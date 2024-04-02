@@ -2,6 +2,7 @@
 {
     using BookingSystem.Core.Contracts;
     using BookingSystem.Core.Enumerations;
+    using BookingSystem.Core.Exceptions;
     using BookingSystem.Core.Models.Flight;
     using BookingSystem.Core.Models.QueryModels.Flight;
     using BookingSystem.Infrastructure.Common;
@@ -178,6 +179,21 @@
 
         public async Task<IEnumerable<FlightReservationVerifyViewModel>> GetReservationsForVerifyAsync(string userId)
         {
+            var verificationsToRemove = await repository.All<FlightReservation>()
+                .Where(fr => fr.User_Id == userId && fr.IsActive == false
+                    && fr.ReservationDate.Date < DateTime.Now.Date)
+                .ToListAsync();
+
+            if(verificationsToRemove.Any())
+            {
+                foreach(var ver in verificationsToRemove)
+                {
+                    repository.Delete(ver);
+                }
+               
+                await repository.SaveChangesAsync();
+            }
+
             return await repository.AllReadOnly<FlightReservation>()
                 .Where(fr => fr.User_Id == userId && fr.ReservationDate >= DateTime.Now.Date && fr.IsActive == false)
                 .Include(fr => fr.Flight)
@@ -203,7 +219,7 @@
                 .ToListAsync();           
         }
 
-        public async Task VerifyAsync(string reservationId)
+        public async Task VerifyAsync(string reservationId, string userId)
         {
             var reservation = await repository.GetByIdAsync<FlightReservation>(reservationId);
 
@@ -212,13 +228,18 @@
                 throw new ArgumentNullException("The current reservation was not found!");
             }
 
+            if(reservation.User_Id != userId)
+            {
+                throw new UnauthorizedActionException();
+            }
+
             reservation.CreatedOn = DateTime.Now;
             reservation.IsActive = true;
             
             await repository.SaveChangesAsync();
         }
 
-        public async Task CancellVerificationAsync(string reservationId)
+        public async Task CancellVerificationAsync(string reservationId, string userId)
         {
             var reservation = await repository.GetByIdAsync<FlightReservation>(reservationId);
 
@@ -227,12 +248,32 @@
                 throw new ArgumentNullException("The current reservation was not found!");
             }
 
+            if (reservation.User_Id != userId)
+            {
+                throw new UnauthorizedActionException();
+            }
+
             repository.Delete(reservation);
             await repository.SaveChangesAsync();
         }
 
         public async Task<IEnumerable<FlightReservationViewModel>> MyReservations(string userId)
         {
+            var reservationsNoLongerAvailable = await repository.All<FlightReservation>()
+                .Where(fr => fr.User_Id == userId && fr.IsActive == true
+                    && fr.ReservationDate.Date < DateTime.Now.Date)
+                .ToListAsync();
+
+            if(reservationsNoLongerAvailable.Any())
+            {
+                foreach(var res in reservationsNoLongerAvailable)
+                {
+                    res.IsActive = false;
+                }
+
+                await repository.SaveChangesAsync();
+            }
+
             return await repository.AllReadOnly<FlightReservation>()
                 .Where(fr => fr.User_Id == userId && fr.ReservationDate >= DateTime.Now.Date && fr.IsActive == true)
                 .Include(fr => fr.Flight)
@@ -262,12 +303,21 @@
 
         public async Task<FlightReservationEditInputModel> GetForEditAsync(string reservationId, string userId)
         {
-            var reservation = await repository.AllReadOnly<FlightReservation>()
-                .FirstOrDefaultAsync(fr => fr.Id == reservationId && fr.User_Id == userId);
+            var reservation = await repository.GetByIdAsync<FlightReservation>(reservationId);
 
             if(reservation == null)
             {
                 throw new ArgumentNullException("The current flight reservation was not found!");
+            }
+
+            if(reservation.User_Id != userId)
+            {
+                throw new UnauthorizedActionException();
+            }
+
+            if(reservation.IsActive == false)
+            {
+                throw new NoLongerActiveReservationException();
             }
 
             return new FlightReservationEditInputModel()
@@ -281,15 +331,24 @@
 
         public async Task EditAsync(FlightReservationEditInputModel model, string userId)
         {
-            var reservation = await repository.All<FlightReservation>()
-                .FirstOrDefaultAsync(fr => fr.Id == model.Id && fr.User_Id == userId);
+            var reservation = await repository.GetByIdAsync<FlightReservation>(model.Id);
 
-            if(reservation == null )
+            if(reservation == null)
             {
                 throw new ArgumentNullException("The current flight reservation was not found!");
             }
 
-            if(reservation.TotalChangedNameCount == 0)
+            if (reservation.User_Id != userId)
+            {
+                throw new UnauthorizedActionException();
+            }
+
+            if (reservation.IsActive == false)
+            {
+                throw new NoLongerActiveReservationException();
+            }
+
+            if (reservation.TotalChangedNameCount == 0)
             {
                 reservation.FirstName = model.FirstName;
                 reservation.LastName = model.LastName;
@@ -297,6 +356,29 @@
                 reservation.TotalChangedNameCount += 1;
             }
 
+            await repository.SaveChangesAsync();
+        }
+
+        public async Task CancellReservationAsync(string reservationId, string userId)
+        {
+            var reservation = await repository.GetByIdAsync<FlightReservation>(reservationId);
+
+            if (reservation == null)
+            {
+                throw new ArgumentNullException("The current reservation was not found!");
+            }
+
+            if (reservation.User_Id != userId)
+            {
+                throw new UnauthorizedActionException();
+            }
+
+            if(reservation.IsActive == false)
+            {
+                throw new NoLongerActiveReservationException();
+            }
+
+            repository.Delete(reservation);
             await repository.SaveChangesAsync();
         }
     }

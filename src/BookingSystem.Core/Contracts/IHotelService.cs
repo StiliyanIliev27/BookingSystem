@@ -35,6 +35,8 @@
         Task<HotelReservationEditInputModel> GetForEditAsync(string reservationId, string userId);
         
         Task EditAsync(HotelReservationEditInputModel model, string userId);
+
+        Task CancellReservationAsync(string reservationId, string userId);
        
         Task<bool> HotelExistsAsync(int hotelId);  
 

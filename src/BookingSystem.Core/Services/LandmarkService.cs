@@ -1,6 +1,7 @@
 ﻿namespace BookingSystem.Core.Services
 {
     using BookingSystem.Core.Contracts;
+    using BookingSystem.Core.Exceptions;
     using BookingSystem.Core.Models.Hotel;
     using BookingSystem.Core.Models.Landmark;
     using BookingSystem.Infrastructure.Common;
@@ -153,12 +154,15 @@
                 .Where(r => r.ReservationDate.Date < DateTime.Now.Date)
                 .ToListAsync();
 
-            foreach(var res in invalidRes)
+            if(invalidRes.Any())
             {
-                res.IsActive = false;
-            }
+                foreach (var res in invalidRes)
+                {
+                    res.IsActive = false;
+                }
 
-            await repository.SaveChangesAsync();
+                await repository.SaveChangesAsync();
+            }
 
             return await repository.AllReadOnly<LandmarkReservation>()
                 .Where(lr => lr.User_Id == userId && lr.IsActive == true)
@@ -182,12 +186,21 @@
 
         public async Task CancellReservationAsync(string userId, string reservationId)
         {
-            var reservation = await repository.All<LandmarkReservation>()
-                .FirstOrDefaultAsync(lr => lr.User_Id == userId && lr.Id == reservationId && lr.IsActive == true);
+            var reservation = await repository.GetByIdAsync<LandmarkReservation>(reservationId);
 
             if(reservation == null)
             {
                 throw new ArgumentException("The current reservation does not exist");
+            }
+
+            if (reservation.User_Id != userId)
+            {
+                throw new UnauthorizedActionException();
+            }
+
+            if (reservation.IsActive == false)
+            {
+                throw new NoLongerActiveReservationException();
             }
 
             repository.Delete(reservation);
@@ -196,13 +209,22 @@
 
         public async Task<LandmarkEditInputModel> GetReservationForEditAsync(string userId, string reservationId)
         {
-            var res = await repository.AllReadOnly<LandmarkReservation>()
-                .FirstOrDefaultAsync(lr => lr.User_Id == userId && lr.Id == reservationId);
+            var res = await repository.GetByIdAsync<LandmarkReservation>(reservationId);
 
             if(res == null) 
             {
                 throw new ArgumentException("The current reservation does not exist!");
-            }            
+            }
+
+            if (res.User_Id != userId)
+            {
+                throw new UnauthorizedActionException();
+            }
+
+            if (res.IsActive == false)
+            {
+                throw new NoLongerActiveReservationException();
+            }
 
             return new LandmarkEditInputModel()
             {
@@ -214,12 +236,21 @@
 
         public async Task EditReservationAsync(LandmarkEditInputModel model, string userId)
         {
-            var reservation = await repository.All<LandmarkReservation>()
-                .FirstOrDefaultAsync(lr => lr.Id == model.Id && lr.User_Id == userId);
+            var reservation = await repository.GetByIdAsync<LandmarkReservation>(model.Id);
 
             if(reservation == null)
             {
                 throw new ArgumentException("The current reservation does not exists!");
+            }
+
+            if(reservation.User_Id != userId)
+            {
+                throw new UnauthorizedActionException();
+            }
+
+            if(reservation.IsActive == false)
+            {
+                throw new NoLongerActiveReservationException();
             }
 
             reservation.FirstName = model.FirstName;
