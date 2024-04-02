@@ -5,8 +5,8 @@
     using BookingSystem.Core.Models.QueryModels.Flight;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
+    using System.Globalization;
     using System.Security.Claims;
-
     public class FlightController : BaseController
     {
         private readonly IFlightService flightService;
@@ -69,7 +69,15 @@
         [HttpPost]
         public async Task<IActionResult> Reserve(FlightReservationInputModel model, int id)
         {
-            if(!ModelState.IsValid)
+            DateTime reservationDate;
+
+            if (!DateTime.TryParse(model.ReservationDate, CultureInfo.CurrentCulture,
+                DateTimeStyles.None, out reservationDate))
+            {
+                ModelState.AddModelError(nameof(model.ReservationDate), "Incorrect data provided!");
+            }
+
+            if (!ModelState.IsValid)
             {
                 return View(model);
             }
@@ -96,8 +104,9 @@
             {
                 return BadRequest();
             }
-
-            await flightService.VerifyAsync(id);
+            
+            string userId = User.GetUserId();
+            await flightService.VerifyAsync(id, userId);
 
             return RedirectToAction(nameof(Verify));
         }
@@ -110,7 +119,8 @@
                 return BadRequest();
             }
 
-            await flightService.CancellVerificationAsync(id);
+            string userId = User.GetUserId();
+            await flightService.CancellVerificationAsync(id, userId);
 
             return RedirectToAction(nameof(Verify));
         }
@@ -132,7 +142,8 @@
                 return BadRequest();
             }
 
-            await flightService.CancellVerificationAsync(id);
+            string userId = User.GetUserId();
+            await flightService.CancellReservationAsync(id, userId);
 
             return RedirectToAction(nameof(MyReservations));
         }

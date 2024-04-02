@@ -137,7 +137,7 @@ namespace BookingSystem.Controllers
             }
 
             string userId = User.GetUserId();
-            await hotelService.CancellVerificationAsync(id, userId);
+            await hotelService.CancellReservationAsync(id, userId);
 
             return RedirectToAction(nameof(AllReservations));
         }
