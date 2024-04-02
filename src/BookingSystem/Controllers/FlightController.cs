@@ -10,12 +10,18 @@
     public class FlightController : BaseController
     {
         private readonly IFlightService flightService;
+      
         private readonly IHotelService hotelService;
+      
+        private readonly ILogger logger;
 
-        public FlightController(IFlightService flightService, IHotelService hotelService)
+        public FlightController(IFlightService flightService, 
+            IHotelService hotelService,
+            ILogger logger)
         {
             this.flightService = flightService;
             this.hotelService = hotelService;
+            this.logger = logger;
         }
 
         [HttpGet]
@@ -106,7 +112,17 @@
             }
             
             string userId = User.GetUserId();
-            await flightService.VerifyAsync(id, userId);
+
+            try
+            {
+                await flightService.VerifyAsync(id, userId);
+            }
+            catch(UnauthorizedAccessException uae)
+            {
+                logger.LogError(uae, "Flight/Verify[POST]");
+
+                return Unauthorized();
+            }
 
             return RedirectToAction(nameof(Verify));
         }
@@ -120,7 +136,17 @@
             }
 
             string userId = User.GetUserId();
-            await flightService.CancellVerificationAsync(id, userId);
+
+            try
+            {
+                await flightService.CancellVerificationAsync(id, userId);
+            }
+            catch(UnauthorizedAccessException uae)
+            {
+                logger.LogError(uae, "Flight/CancellVerification[POST]");
+
+                return Unauthorized();
+            }
 
             return RedirectToAction(nameof(Verify));
         }
@@ -143,7 +169,17 @@
             }
 
             string userId = User.GetUserId();
-            await flightService.CancellReservationAsync(id, userId);
+            
+            try
+            {
+                await flightService.CancellReservationAsync(id, userId);
+            }
+            catch(UnauthorizedAccessException uae)
+            {
+                logger.LogError(uae, "Flight/CancellReservation[POST]");
+
+                return Unauthorized();
+            }
 
             return RedirectToAction(nameof(MyReservations));
         }
@@ -157,9 +193,19 @@
             }
 
             string userId = User.GetUserId();
-            var model = await flightService.GetForEditAsync(id, userId);
 
-            return View(model);
+            try
+            {
+                var model = await flightService.GetForEditAsync(id, userId);
+               
+                return View(model);
+            }
+            catch(UnauthorizedAccessException uae)
+            {
+                logger.LogError(uae, "Flight/EditReservatio[GET]");
+
+                return Unauthorized();
+            }
         }
 
         [HttpPost]
@@ -176,7 +222,17 @@
             }
 
             string userId = User.GetUserId();
-            await flightService.EditAsync(model, userId);
+
+            try
+            {
+                await flightService.EditAsync(model, userId);
+            }
+            catch(UnauthorizedAccessException uae)
+            {
+                logger.LogError(uae, "Flight/EditReservatio[POST]");
+
+                return Unauthorized();
+            }
 
             return RedirectToAction(nameof(MyReservations));
         }
