@@ -12,12 +12,17 @@ namespace BookingSystem.Controllers
     public class HotelController : BaseController
     {
         private readonly IHotelService hotelService;
+        
         private readonly ILandmarkService landmarkService;
 
-        public HotelController(IHotelService hotelService, ILandmarkService landmarkService)
+        private readonly ILogger logger;
+        public HotelController(IHotelService hotelService,
+            ILandmarkService landmarkService,
+            ILogger logger)
         {
             this.hotelService = hotelService;
             this.landmarkService = landmarkService;
+            this.logger = logger;
         }
 
         [HttpGet]
@@ -109,7 +114,17 @@ namespace BookingSystem.Controllers
             }
 
             string userId = User.GetUserId();
-            await hotelService.VerifyReservationAsync(id, userId);
+
+            try
+            {
+                await hotelService.VerifyReservationAsync(id, userId);
+            }
+            catch(UnauthorizedAccessException uae)
+            {
+                logger.LogError(uae, "Hotel/Verify[POST]");
+
+                return Unauthorized();
+            }
 
             return RedirectToAction(nameof(AllReservations));
         }
@@ -123,7 +138,17 @@ namespace BookingSystem.Controllers
             }
 
             string userId = User.GetUserId();
-            await hotelService.CancellVerificationAsync(id, userId);
+          
+            try
+            {
+                await hotelService.CancellVerificationAsync(id, userId);
+            }
+            catch(UnauthorizedAccessException uae)
+            {
+                logger.LogError(uae, "Hotel/CancellVerification[POST]");
+
+                return Unauthorized();
+            }
 
             return RedirectToAction(nameof(Verify));
         }
@@ -137,7 +162,17 @@ namespace BookingSystem.Controllers
             }
 
             string userId = User.GetUserId();
-            await hotelService.CancellReservationAsync(id, userId);
+
+            try
+            {
+                await hotelService.CancellReservationAsync(id, userId);
+            }
+            catch(UnauthorizedAccessException uae)
+            {
+                logger.LogError(uae, "Hotel/CancellReservation[POST]");
+
+                return Unauthorized();
+            }
 
             return RedirectToAction(nameof(AllReservations));
         }
@@ -160,9 +195,19 @@ namespace BookingSystem.Controllers
             }
 
             string userId = User.GetUserId();
-            var model = await hotelService.GetForEditAsync(id, userId);
+          
+            try
+            {
+                var model = await hotelService.GetForEditAsync(id, userId);
 
-            return View(model);
+                return View(model);
+            }
+            catch(UnauthorizedAccessException uae)
+            {
+                logger.LogError(uae, "Hotel/EditReservation[GET]");
+
+                return Unauthorized();
+            }
         }
 
         [HttpPost]
@@ -174,7 +219,17 @@ namespace BookingSystem.Controllers
             }
             
             string userId = User.GetUserId();
-            await hotelService.EditAsync(model, userId);
+
+            try
+            {
+                await hotelService.EditAsync(model, userId);
+            }
+            catch(UnauthorizedAccessException uae)
+            {
+                logger.LogError(uae, "Hotel/EditReservation[POST]");
+
+                return Unauthorized();
+            }
 
             return RedirectToAction(nameof(AllReservations));
         }       
