@@ -1,11 +1,12 @@
 ﻿namespace BookingSystem.Core.Models.Hotel
 {
+    using BookingSystem.Core.Contracts;
     using System.ComponentModel.DataAnnotations;
     using static BookingSystem.Infrastructure.Data.Constants.DataConstants;
     using static BookingSystem.Infrastructure.Data.Constants.DataConstants.HotelReservation;
     using Room = Infrastructure.Data.Models.Hotels.Room;
 
-    public class HotelReservationInputModel
+    public class HotelReservationInputModel : IHotelModel
     {
         [Required(ErrorMessage = RequiredMessage)]
         [Display(Name = "First Name")]
@@ -37,5 +38,9 @@
         public string EndDate { get; set; } = null!;
         
         public IEnumerable<Room>? Rooms { get; set; }
+
+        public string Name { get; set; } = null!;
+
+        public string Address { get; set; } = null!;
     }
 }

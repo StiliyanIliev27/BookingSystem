@@ -4,8 +4,9 @@
     using System.ComponentModel.DataAnnotations;
     using static BookingSystem.Infrastructure.Data.Constants.DataConstants.Hotel;
     using BookingSystem.Infrastructure.Data.Constants;
+    using BookingSystem.Core.Contracts;
 
-    public class HotelServiceModel
+    public class HotelServiceModel : IHotelModel
     {
         public int Id { get; set; }
 
@@ -15,6 +16,9 @@
             ErrorMessage = DataConstants.LengthErrorMessage)]
         [Display(Name = "Hotel name")]
         public string Name { get; set; } = null!;
+
+        [Required(ErrorMessage = DataConstants.RequiredMessage)]
+        public string Address { get; set; } = null!;
 
         [Required(ErrorMessage = DataConstants.RequiredMessage)]       
         [StringLength(DataConstants.City.NameMaxLength,
@@ -38,5 +42,6 @@
         [Display(Name = "Image URL")]
         public string ImageUrl { get; set; } = null!;
         public IEnumerable<RoomTypeViewModel> RoomsTypes { get; set; } = null!;
+        
     }
 }

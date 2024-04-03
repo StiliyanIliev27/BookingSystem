@@ -2,6 +2,7 @@
 {
     using BookingSystem.Core.Contracts;
     using BookingSystem.Core.Exceptions;
+    using BookingSystem.Core.Extensions;
     using BookingSystem.Core.Models.Landmark;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
@@ -32,7 +33,7 @@
 
         [HttpGet]
         [AllowAnonymous]
-        public async Task<IActionResult> Details(int id)
+        public async Task<IActionResult> Details(int id, string information)
         {
             if(await landmarkService.LandmarkExistsAsync(id) == false)
             {
@@ -40,6 +41,11 @@
             }
 
             var model = await landmarkService.DetailsAsync(id);
+
+            if(information != model.GetInformation())
+            {
+                return BadRequest();
+            }
 
             return View(model); 
         }

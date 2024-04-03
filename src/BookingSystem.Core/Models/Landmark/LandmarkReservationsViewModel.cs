@@ -1,6 +1,7 @@
 ﻿namespace BookingSystem.Core.Models.Landmark
 {
-    public class LandmarkReservationsViewModel
+    using BookingSystem.Core.Contracts;
+    public class LandmarkReservationsViewModel : ILandmarkModel
     {
         public string Id { get; set; } = null!;
         
@@ -23,5 +24,7 @@
         public string LandmarkImageUrl { get; set; } = null!;
      
         public string CreatedOn { get; set; } = null!;
+       
+        public string City { get; set; } = null!;
     }
 }

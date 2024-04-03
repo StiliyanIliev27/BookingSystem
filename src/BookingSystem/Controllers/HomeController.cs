@@ -1,9 +1,7 @@
 ﻿namespace BookingSystem.Controllers
 {
-    using BookingSystem.Models;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
-    using System.Diagnostics;
     public class HomeController : BaseController
     {
         private readonly ILogger<HomeController> _logger;

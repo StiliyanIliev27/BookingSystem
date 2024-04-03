@@ -7,6 +7,7 @@ using System.Security.Claims;
 using static BookingSystem.Infrastructure.Data.Constants.DataConstants.HotelReservation;
 using BookingSystem.Core.Models.QueryModels.Hotel;
 using BookingSystem.Core.Exceptions;
+using BookingSystem.Core.Extensions;
 
 namespace BookingSystem.Controllers
 {
@@ -46,7 +47,7 @@ namespace BookingSystem.Controllers
 
         [HttpGet]
         [AllowAnonymous]
-        public async Task<IActionResult> Details(int id)
+        public async Task<IActionResult> Details(int id, string information)
         {
             if(await hotelService.HotelExistsAsync(id) == false)
             {
@@ -55,6 +56,11 @@ namespace BookingSystem.Controllers
 
             var model = await hotelService.DetailsAsync(id);
             model.City.Landmarks = await landmarkService.AllAsync(model.City.Id);
+
+            if(information != model.GetInformation())
+            {
+                return BadRequest();
+            }
           
             return View(model);        
         }

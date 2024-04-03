@@ -1,9 +1,10 @@
-﻿using BookingSystem.Core.Models.Location;
+﻿using BookingSystem.Core.Contracts;
+using BookingSystem.Core.Models.Location;
 using BookingSystem.Infrastructure.Data.Models.Hotels;
 
 namespace BookingSystem.Core.Models.Hotel
 {
-    public class HotelDetailsViewModel
+    public class HotelDetailsViewModel : IHotelModel
     {
         public int Id { get; set; }
         public string Name { get; set; } = null!;

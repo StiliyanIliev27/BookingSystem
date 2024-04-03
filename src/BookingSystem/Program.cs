@@ -1,3 +1,5 @@
+using Microsoft.AspNetCore.Mvc;
+
 namespace BookingSystem
 {
     public class Program
@@ -9,7 +11,10 @@ namespace BookingSystem
             builder.Services.AddApplicationDbContext(builder.Configuration);
             builder.Services.AddApplicationIdentity(builder.Configuration);
 
-            builder.Services.AddControllersWithViews();
+            builder.Services.AddControllersWithViews(options =>
+            {
+                options.Filters.Add<AutoValidateAntiforgeryTokenAttribute>();
+            });
 
             builder.Services.AddApplicationServices();
 
@@ -35,8 +40,29 @@ namespace BookingSystem
             app.UseAuthentication();
             app.UseAuthorization();
 
-            app.MapDefaultControllerRoute();
-            app.MapRazorPages();
+            app.UseEndpoints(endpoints =>
+            {
+                endpoints.MapControllerRoute(
+                    name: "Hotel Details",
+                    pattern: "/Hotel/Details/{id}/{information}",
+                    defaults: new { Controller = "Hotel", Action = "Details"}
+                    );
+
+                endpoints.MapControllerRoute(
+                    name: "Flight Details",
+                    pattern: "/Flight/Details/{id}/{information}",
+                    defaults: new { Controller = "Flight", Action = "Details" }
+                    );
+
+                endpoints.MapControllerRoute(
+                    name: "Landmark Details",
+                    pattern: "/Landmark/Details/{id}/{information}",
+                    defaults: new { Controller = "Landmark", Action = "Details" }
+                    );
+
+                endpoints.MapDefaultControllerRoute();
+                endpoints.MapRazorPages();
+            });
 
             await app.RunAsync();
         }

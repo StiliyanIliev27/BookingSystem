@@ -122,6 +122,7 @@
                 {
                     Id = h.Id,
                     Name = h.Name,
+                    Address = h.Address,
                     CityName = h.City.Name,
                     CityId = h.City.Id,
                     StarRate = h.StarRate,
@@ -367,7 +368,7 @@
                     FirstName = hr.FirstName,
                     LastName = hr.LastName,
                     Hotel_Id = hr.Hotel_Id,
-                    HotelName = hr.Hotel.Name,
+                    Name = hr.Hotel.Name,
                     HotelImageUrl = hr.Hotel.ImageUrl,
                     Price = hr.Price,
                     RoomType = hr.Room.Type.ToString(),
@@ -459,7 +460,7 @@
 
             if (room.IsActive == true)
             {
-                if (room.Count < 5)
+                if(room.Count < 5)
                 {
                     room.Count += 1;
                 }

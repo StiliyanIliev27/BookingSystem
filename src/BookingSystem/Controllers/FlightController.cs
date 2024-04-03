@@ -2,6 +2,7 @@
 {
     using BookingSystem.Core.Contracts;
     using BookingSystem.Core.Exceptions;
+    using BookingSystem.Core.Extensions;
     using BookingSystem.Core.Models.Flight;
     using BookingSystem.Core.Models.QueryModels.Flight;
     using Microsoft.AspNetCore.Authorization;
@@ -45,7 +46,7 @@
 
         [HttpGet]
         [AllowAnonymous]
-        public async Task<IActionResult> Details(int id)
+        public async Task<IActionResult> Details(int id, string information)
         {
             if(await flightService.ExistsByIdAsync(id) == false)
             {
@@ -54,6 +55,11 @@
 
             var model = await flightService.DetailsAsync(id);
             ViewData["Action"] = "Details";
+
+            if(information != model.GetInformation())
+            {
+                return BadRequest();
+            }
 
             return View(model);
         }

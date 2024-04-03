@@ -16,7 +16,8 @@
                     <div class="card">
                         <img class="card-img-top" src="@landmark.LandmarkImageUrl" alt="Card image cap">
                         <div class="card-body pb-0">
-                            <a asp-controller="Landmark" asp-action="Details" asp-route-id="@landmark.Landmark_Id">
+                            <a asp-controller="Landmark" asp-action="Details" asp-route-id="@landmark.Landmark_Id"
+                            asp-route-information="@landmark.GetInformation()">
                                 <h5 style="height: 30px; margin-bottom: 0px;" class="card-title text-center">@landmark.Name</h5>
                             </a>
                             <hr />

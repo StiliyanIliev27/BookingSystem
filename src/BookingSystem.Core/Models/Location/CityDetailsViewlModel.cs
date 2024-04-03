@@ -1,4 +1,6 @@
-﻿namespace BookingSystem.Core.Models.Location
+﻿using BookingSystem.Core.Contracts;
+
+namespace BookingSystem.Core.Models.Location
 {
     public class CityDetailsViewlModel
     {

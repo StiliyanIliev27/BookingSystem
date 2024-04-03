@@ -20,7 +20,8 @@
                         </a>
                         
                         <div class="card-body">
-                            <a asp-controller="Flight" asp-action="Details" asp-route-id="@reservation.FlightId">
+                            <a asp-controller="Flight" asp-action="Details" asp-route-id="@reservation.FlightId"
+                            asp-route-information="@reservation.GetInformation()">
                                 <h4 style="height: 72px;" class="card-title text-center">
                                     Flight: <br /><span>@reservation.Flight</span>
 

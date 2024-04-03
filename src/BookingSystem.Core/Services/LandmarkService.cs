@@ -27,7 +27,7 @@
                 {
                     Id = l.Id,
                     Name = l.Name,
-                    CityName = l.City.Name,
+                    City = l.City.Name,
                     ImageUrl = l.ImageUrl,
                     TicketPrice = l.TicketPrice,
                 })
@@ -50,7 +50,7 @@
             {
                 Id = landmark.Id,
                 Name = landmark.Name,
-                CityName = landmark.City.Name,
+                City = landmark.City.Name,
                 ImageUrl = landmark.ImageUrl,
                 Address = landmark.Address,
                 Details = landmark.Details,

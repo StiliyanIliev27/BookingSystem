@@ -17,7 +17,8 @@
                     <div class="card">
                         <img style="height: 250px; width: 100%; object-fit: cover;" class="card-img-top img-fluid" src="@reservation.ArrivalCityImageUrl" alt="Arrival City image">
                         <div class="card-body">
-                            <a asp-controller="Flight" asp-action="Details" asp-route-id="@reservation.FlightId">
+                            <a asp-controller="Flight" asp-action="Details" asp-route-id="@reservation.FlightId"
+                            asp-route-information="@reservation.GetInformation()">
                                 <h4 style="height: 72px;" class="card-title text-center">
                                     Flight: <br /><span>@reservation.Flight</span>
 
