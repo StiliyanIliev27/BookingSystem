@@ -1,6 +1,7 @@
 ﻿namespace Microsoft.Extensions.DependencyInjection
 {
     using BookingSystem.Core.Contracts;
+    using BookingSystem.Core.Models.User;
     using BookingSystem.Core.Services;
     using BookingSystem.Infrastructure.Common;
     using BookingSystem.Infrastructure.Data;
@@ -35,7 +36,7 @@
 
         public static IServiceCollection AddApplicationIdentity(this IServiceCollection services, IConfiguration config)
         {
-            services.AddDefaultIdentity<IdentityUser>(options =>
+            services.AddDefaultIdentity<ApplicationUser>(options =>
             {
                 options.SignIn.RequireConfirmedAccount = false;
                 options.Password.RequireNonAlphanumeric = false;

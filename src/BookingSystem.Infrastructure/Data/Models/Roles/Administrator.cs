@@ -4,6 +4,8 @@
     using Microsoft.EntityFrameworkCore;
     using System.ComponentModel.DataAnnotations.Schema;
     using System.ComponentModel.DataAnnotations;
+    using BookingSystem.Core.Models.User;
+
     public class Administrator
     {
         /// <summary>
@@ -25,6 +27,6 @@
         /// </summary>
         [ForeignKey(nameof(UserId))]
         [Comment("User")]
-        public IdentityUser User { get; set; } = null!;
+        public ApplicationUser User { get; set; } = null!;
     }
 }

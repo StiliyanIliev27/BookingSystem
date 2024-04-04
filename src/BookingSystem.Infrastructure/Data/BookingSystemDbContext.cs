@@ -1,5 +1,6 @@
 ﻿namespace BookingSystem.Infrastructure.Data
 {
+    using BookingSystem.Core.Models.User;
     using BookingSystem.Infrastructure.Data.Configurations.FlightConfigurations;
     using BookingSystem.Infrastructure.Data.Configurations.HotelConfigurations;
     using BookingSystem.Infrastructure.Data.Configurations.LandmarkConfigurations;
@@ -18,7 +19,7 @@
     /// <summary>
     /// Context of the database
     /// </summary>
-    public class BookingSystemDbContext : IdentityDbContext
+    public class BookingSystemDbContext : IdentityDbContext<ApplicationUser>
     {
         /// <summary>
         /// Constructor of the context of the database

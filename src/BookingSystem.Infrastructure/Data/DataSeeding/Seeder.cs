@@ -1,5 +1,6 @@
 ﻿namespace BookingSystem.Infrastructure.Data.DataSeeding
 {
+    using BookingSystem.Core.Models.User;
     using BookingSystem.Infrastructure.Data.Models.Flights;
     using BookingSystem.Infrastructure.Data.Models.Hotels;
     using BookingSystem.Infrastructure.Data.Models.Landmarks;
@@ -32,8 +33,8 @@
         //Properties
 
         #region Users
-        public IdentityUser AdministratorUser { get; set; } = null!;
-        public IdentityUser GuestUser { get; set; } = null!;
+        public ApplicationUser AdministratorUser { get; set; } = null!;
+        public ApplicationUser GuestUser { get; set; } = null!;
 
         #endregion
 
@@ -357,26 +358,30 @@
         //Methods
         private void SeedUsers()
         {
-            var hasher = new PasswordHasher<IdentityUser>();
+            var hasher = new PasswordHasher<ApplicationUser>();
 
-            AdministratorUser = new IdentityUser()
+            AdministratorUser = new ApplicationUser()
             {
                 Id = "c9019544-ec91-4248-bfc4-9d8a4f13430b",
                 UserName = "Administrator",
                 NormalizedUserName = "administrator",
                 Email = "admin@gmail.com",
-                NormalizedEmail = "admin@gmail.com"
+                NormalizedEmail = "admin@gmail.com",
+                FirstName = "Stiliyan",
+                LastName = "Iliev"
             };
 
             AdministratorUser.PasswordHash = hasher.HashPassword(AdministratorUser, "admin777");
 
-            GuestUser = new IdentityUser()
+            GuestUser = new ApplicationUser()
             {
                 Id = "8d1f0bdc-f9e5-4856-a127-fb84281d56ad",
                 UserName = "Guest",
                 NormalizedUserName = "guest",
                 Email = "guest@gmail.com",
-                NormalizedEmail = "guest@gmail.com"
+                NormalizedEmail = "guest@gmail.com",
+                FirstName = "Bogdan",
+                LastName = "Slavchev"
             };
 
             GuestUser.PasswordHash = hasher.HashPassword(GuestUser, "guest777");

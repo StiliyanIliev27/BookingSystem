@@ -1,5 +1,6 @@
 ﻿namespace BookingSystem.Infrastructure.Data.Models.Hotels
 {
+    using BookingSystem.Core.Models.User;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.EntityFrameworkCore;
     using System.ComponentModel.DataAnnotations;
@@ -77,7 +78,7 @@
         /// </summary>
         [ForeignKey(nameof(User_Id))]
         [Comment("HotelReservation's User")]
-        public IdentityUser User { get; set; } = null!;
+        public ApplicationUser User { get; set; } = null!;
        
         /// <summary>
         /// HotelReservation's Total Price

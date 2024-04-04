@@ -1,5 +1,6 @@
 ﻿namespace BookingSystem.Infrastructure.Data.Models.Flights
 {
+    using BookingSystem.Core.Models.User;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.EntityFrameworkCore;
     using System.ComponentModel.DataAnnotations;
@@ -49,7 +50,7 @@
         /// </summary>
         [ForeignKey(nameof(User_Id))]
         [Comment("User")]
-        public IdentityUser User { get; set; } = null!;
+        public ApplicationUser User { get; set; } = null!;
 
         /// <summary>
         /// Flight's Identifier

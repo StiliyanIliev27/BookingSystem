@@ -4,7 +4,8 @@
     using Microsoft.EntityFrameworkCore;
     using System.ComponentModel.DataAnnotations.Schema;
     using System.ComponentModel.DataAnnotations;
-  
+    using BookingSystem.Core.Models.User;
+
     /// <summary>
     /// Landmark Reservation
     /// </summary>
@@ -63,7 +64,7 @@
         /// </summary>
         [ForeignKey(nameof(User_Id))]
         [Comment("LandmarkReservation's User")]
-        public IdentityUser User { get; set; } = null!;
+        public ApplicationUser User { get; set; } = null!;
 
         /// <summary>
         /// LandmarkReservation's Date

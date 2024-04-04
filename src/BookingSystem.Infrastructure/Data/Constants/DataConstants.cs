@@ -133,5 +133,14 @@
            
             public const string TimeFormat = "HH:mm";
         }
+
+        public static class User
+        {
+            public const int FirstNameMinLength = 3;
+            public const int FirstNameMaxLength = 50;
+
+            public const int LastNameMinLength = 3;
+            public const int LastNameMaxLength = 50;
+        }
     }
 }
