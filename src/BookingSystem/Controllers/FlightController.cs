@@ -7,6 +7,7 @@
     using BookingSystem.Core.Models.QueryModels.Flight;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
+    using Microsoft.EntityFrameworkCore.Diagnostics;
     using System.Globalization;
     using System.Security.Claims;
     public class FlightController : BaseController
@@ -90,8 +91,10 @@
                 ModelState.AddModelError(nameof(model.ReservationDate), "Incorrect data provided!");
             }
 
-            if (!ModelState.IsValid)
+            if(!ModelState.IsValid)
             {
+                model.DetailsViewModel = await flightService.DetailsAsync(id);
+                model.Flight_Id = id;
                 return View(model);
             }
 

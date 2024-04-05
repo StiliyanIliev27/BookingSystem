@@ -104,9 +104,9 @@
 
         public async Task<FlightDetailsViewModel> DetailsAsync(int flightId)
         {
-            var flight = await repository.AllReadOnly<Flight>()
-                .Include(f => f.ArrivalAirport.City)
+            var flight = await repository.AllReadOnly<Flight>()                
                 .Include(f => f.ArrivalAirport)
+                .Include(f => f.ArrivalAirport.City)
                 .Include(f => f.DepartureAirport)
                 .Include(f => f.Airline)
                 .FirstOrDefaultAsync(f => f.Id == flightId);

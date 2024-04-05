@@ -166,6 +166,7 @@
             return await repository.AllReadOnly<LandmarkReservation>()
                 .Where(lr => lr.User_Id == userId && lr.IsActive == true)
                 .Include(lr => lr.Landmark)
+                .Include(lr => lr.Landmark.City)
                 .Select(lr => new LandmarkReservationsViewModel()
                 {
                     Id = lr.Id,
@@ -178,7 +179,8 @@
                     LandmarkImageUrl = lr.Landmark.ImageUrl,
                     ReservationDate = lr.ReservationDate.ToString(DateFormat),
                     ReservationTime = lr.ReservationTime.ToString(TimeFormat),
-                    TotalPrice = lr.TotalPrice                    
+                    TotalPrice = lr.TotalPrice,
+                    City = lr.Landmark.City.Name
                 })
                 .ToListAsync();
         }
