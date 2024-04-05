@@ -375,6 +375,7 @@
                     StartDate = hr.StartDate.ToString(DateTimeFormat),
                     EndDate = hr.EndDate.ToString(DateTimeFormat),
                     CreatedOn = hr.CreatedOn.ToString(CreatedOnFormat),
+                    Address = hr.Hotel.Address
                 })
                 .ToListAsync();
         }

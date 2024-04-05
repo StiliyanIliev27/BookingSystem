@@ -1,10 +1,36 @@
-﻿@model HotelDetailsViewModel
+﻿@using BookingSystem.Core.Contracts
+@model HotelDetailsViewModel
+@inject IHotelService hotels;
 @{
     ViewData["Title"] = "Hotel Details";
     int nextHotelId = Model.Id + 1;
     int previousHotelId = Model.Id - 1;
     int firstHotelId = 1;
     int lastHotelId = Model.HotelsCount;
+
+    HotelDetailsViewModel nextHotel;
+    HotelDetailsViewModel previousHotel;
+
+
+    if(Model.Id == 1)
+    {
+        nextHotel = await hotels.DetailsAsync(nextHotelId);
+        previousHotel = await hotels.DetailsAsync(lastHotelId);
+    }
+    else if(Model.Id == lastHotelId)
+    {
+        nextHotel = await hotels.DetailsAsync(firstHotelId);
+        previousHotel = await hotels.DetailsAsync(previousHotelId);
+    }
+    else
+    {
+        nextHotel = await hotels.DetailsAsync(nextHotelId);
+        previousHotel = await hotels.DetailsAsync(previousHotelId);
+    }
+
+
+    HotelDetailsViewModel firstHotel = await hotels.DetailsAsync(firstHotelId);
+    HotelDetailsViewModel lastHotel = await hotels.DetailsAsync(lastHotelId);
 }
 
 <h2 class="text-center">@ViewData["Title"]</h2>
@@ -37,26 +63,26 @@
                 @if (Model.Id == 1)//First hotel case
                 {
                     <a asp-controller="Hotel" asp-action="Details" asp-route-id="@lastHotelId"
-                       asp-route-information="@Model.GetInformation()" style="margin-left: 10px;" class="btn btn-primary fw-bold">&#8592 Previous hotel</a>
+                       asp-route-information="@lastHotel.GetInformation()" style="margin-left: 10px;" class="btn btn-primary fw-bold">&#8592 Previous hotel</a>
                     
                     <a asp-controller="Hotel" asp-action="Details" asp-route-id="@nextHotelId"
-                       asp-route-information="@Model.GetInformation()" style=" margin-right: 10px;" class="btn btn-primary fw-bold">Next hotel &#8594</a>
+                       asp-route-information="@nextHotel.GetInformation()" style=" margin-right: 10px;" class="btn btn-primary fw-bold">Next hotel &#8594</a>
                 }
                 else if (Model.Id == lastHotelId)//Last hotel case
                 {
                     <a asp-controller="Hotel" asp-action="Details" asp-route-id="@previousHotelId"
-                       asp-route-information="@Model.GetInformation()" style="margin-left: 10px;" class="btn btn-primary fw-bold">&#8592 Previous hotel</a>
+                       asp-route-information="@previousHotel.GetInformation()" style="margin-left: 10px;" class="btn btn-primary fw-bold">&#8592 Previous hotel</a>
                     
                     <a asp-controller="Hotel" asp-action="Details" asp-route-id="@firstHotelId"
-                       asp-route-information="@Model.GetInformation()style=" margin-right: 10px;" class="btn btn-primary fw-bold">Next hotel &#8594</a>
+                       asp-route-information="@firstHotel.GetInformation()" style=" margin-right: 10px;" class="btn btn-primary fw-bold">Next hotel &#8594</a>
                 }
                 else
                 {
                     <a asp-controller="Hotel" asp-action="Details" asp-route-id="@previousHotelId"
-                      asp-route-information="@Model.GetInformation()" style="margin-left: 10px;" class="btn btn-primary fw-bold">&#8592 Previous hotel</a>
+                      asp-route-information="@previousHotel.GetInformation()" style="margin-left: 10px;" class="btn btn-primary fw-bold">&#8592 Previous hotel</a>
                    
                       <a asp-controller="Hotel" asp-action="Details" asp-route-id="@nextHotelId"
-                      asp-route-information="@Model.GetInformation()" style="margin-right: 10px;" class="btn btn-primary fw-bold">Next hotel &#8594</a>
+                      asp-route-information="@nextHotel.GetInformation()" style="margin-right: 10px;" class="btn btn-primary fw-bold">Next hotel &#8594</a>
                 }
             </div>
 

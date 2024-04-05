@@ -17,7 +17,7 @@
                         <img class="card-img-top" src="@reservation.HotelImageUrl" alt="Card image cap">
                         <div class="card-body pb-0">
                             <a asp-controller="Hotel" asp-action="Details" asp-route-id="@reservation.Hotel_Id"
-                               asp-route-information="@reservation.GetInformation()">
+                            asp-route-information="@reservation.GetInformation()">
                                 <h5 style="height: 50px;" class="card-title text-center">@reservation.Name</h5>
                             </a>
                             <p class="card-text"><strong>Reservation Holder's First Name:</strong> <span style="font-style: italic;">@reservation.FirstName</span></p>
