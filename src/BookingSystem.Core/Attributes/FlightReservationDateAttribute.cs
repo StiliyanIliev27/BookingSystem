@@ -22,7 +22,7 @@
             {
                 DateTime minimumDate = DateTime.Now.AddDays(_minimumDays);
 
-                if (reservationDate >= minimumDate)
+                if(reservationDate >= minimumDate)
                 {
                     return ValidationResult.Success;
                 }

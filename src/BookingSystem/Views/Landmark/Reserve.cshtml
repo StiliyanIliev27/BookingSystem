@@ -1,4 +1,6 @@
-﻿@model LandmarkReserveInputModel
+﻿@using System.Globalization
+
+@model LandmarkReserveInputModel
 @{
     ViewData["Title"] = "Landmark Reservation";
 }
@@ -35,7 +37,7 @@
                     Reservation Date:<span style="color: red"> *</span>
                 </label>
                 <div class="input-group date" id="reservationDatePicker" data-target-input="nearest">
-                    <input type="text" class="form-control datetimepicker-input" data-target="#reservationDatePicker" asp-for="@Model.ReservationDate" placeholder="Reservation date..." />
+                    <input type="text" class="form-control datetimepicker-input" id="reservationDate" data-target="#reservationDatePicker" asp-for="@Model.ReservationDate" placeholder="Reservation date..." />
                     <div class="input-group-append" data-target="#reservationDatePicker" data-toggle="datetimepicker">
                         <div style="height: 37.3px;" class="input-group-text"><i class="fa fa-calendar"></i></div>
                     </div>
@@ -44,7 +46,7 @@
             </div>
             <div class="mb-3">
                 <label asp-for="@Model.ReservationTime" class="form-label-add-edit">Select Hour:<span style="color: red"> *</span></label>
-                <select asp-for="@Model.ReservationTime" class="form-control" aria-required="true">
+                <select id="reservationTime" asp-for="@Model.ReservationTime" class="form-control" aria-required="true">
                     <option disabled selected value="">Select Hour...</option>
                     @foreach (var hour in Model.AvailableHours)
                     {
@@ -54,7 +56,7 @@
                 <span asp-validation-for="@Model.ReservationTime" class="text-danger"></span>
             </div>
             <form method="post" asp-controller="Landmark" asp-action="Reserve" asp-route-id="@Model.Landmark_Id">
-                <button style="width: 636px;" type="submit" class="btn btn-success mb-2 p-3 fw-bold">Reserve</button>
+                <button style="width: 100%;" type="submit" class="btn btn-success mb-2 p-3 fw-bold">Reserve</button>
             </form>
         </form>
     </div>
@@ -75,6 +77,47 @@
                 todayHighlight: true,
                 startDate: new Date()
             });
+
+            $('#reservationDatePicker').change(function () {
+                validateReservationTime();
+            });
+
+            $('#reservationTime').change(function () {
+                validateReservationTime();
+            });
+
+            function validateReservationTime() {
+                var selectedTime = $('#reservationTime').val();
+                var currentDate = new Date();
+                var currentTime = currentDate.getHours() + ':' + currentDate.getMinutes();
+                var reservationDate = $('#reservationDate').val();
+
+                // Convert reservationDate to Date object
+                var parts = reservationDate.split('/');
+                var selectedDate = new Date(parts[2], parts[1] - 1, parts[0]);
+
+                // Check if the selected date is today and if the selected time is in the past
+                if (selectedDate.toDateString() === currentDate.toDateString()) {
+                    $('#reservationTime option').each(function () {
+                        var optionTime = $(this).val();
+                        if (optionTime < currentTime) {
+                            $(this).prop('disabled', true);
+                        } else {
+                            $(this).prop('disabled', false);
+                        }
+                    });
+
+                    // Check if the selected time is in the past
+                    if (selectedTime < currentTime) {
+                        alert('Selected time is in the past. Please select a future time.');
+                        $('#reservationTime').val('');
+                    }
+                } else {
+                    // If the selected date is in the future, enable all options
+                    $('#reservationTime option').prop('disabled', false);
+                }
+            }
         });
     </script>
 }
+

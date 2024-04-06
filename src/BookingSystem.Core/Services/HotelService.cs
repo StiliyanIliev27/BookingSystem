@@ -219,7 +219,9 @@
             return new HotelReservationInputModel()
             {
                 Hotel_Id = hotelId,
-                Rooms = await GetRoomsAsync(hotelId)
+                Rooms = await GetRoomsAsync(hotelId),
+                Name = hotel.Name,
+                Address = hotel.Address
             };
         }
 

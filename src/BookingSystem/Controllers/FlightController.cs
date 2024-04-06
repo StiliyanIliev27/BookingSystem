@@ -7,7 +7,6 @@
     using BookingSystem.Core.Models.QueryModels.Flight;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
-    using Microsoft.EntityFrameworkCore.Diagnostics;
     using System.Globalization;
     using System.Security.Claims;
     public class FlightController : BaseController
