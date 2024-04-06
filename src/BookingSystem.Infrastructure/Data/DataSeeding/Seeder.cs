@@ -355,10 +355,10 @@
             AdminUser = new ApplicationUser()
             {
                 Id = "62d28ee6-5a44-4529-bb9d-91cb7ee61ce0",
-                UserName = "Administrator",
-                NormalizedUserName = "ADMINISTRATOR",
+                UserName = "admin@mail.com",
+                NormalizedUserName = "ADMIN@MAIL.COM",
                 Email = "admin@mail.com",
-                NormalizedEmail = "ADMIN@GMAIL.COM",
+                NormalizedEmail = "ADMIN@MAIL.COM",
                 FirstName = "Stiliyan",
                 LastName = "Iliev"
             };
@@ -368,8 +368,8 @@
             GuestUser = new ApplicationUser()
             {
                 Id = "ebf07620-6aa8-4fef-9170-461d816c12f6",
-                UserName = "Guest",
-                NormalizedUserName = "GUEST",
+                UserName = "guest@mail.com",
+                NormalizedUserName = "GUEST@MAIL.COM",
                 Email = "guest@mail.com",
                 NormalizedEmail = "GUEST@MAIL.COM",
                 FirstName = "Bogdan",
