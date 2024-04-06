@@ -14,7 +14,7 @@
                 .HasData(new ApplicationUser[]
                 {
                     data.GuestUser,
-                    data.AdministratorUser
+                    data.AdminUser
                 });
         }
     }

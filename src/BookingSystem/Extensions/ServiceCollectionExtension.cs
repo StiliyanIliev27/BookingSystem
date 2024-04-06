@@ -43,6 +43,7 @@
                 options.Password.RequireDigit = false;
                 options.Password.RequireUppercase = false;
             })
+                .AddRoles<IdentityRole>()
                 .AddEntityFrameworkStores<BookingSystemDbContext>();
 
             return services;

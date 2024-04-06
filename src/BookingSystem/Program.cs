@@ -67,6 +67,8 @@ namespace BookingSystem
                 endpoints.MapRazorPages();
             });
 
+            await app.CreateAdminRoleAsync();
+
             await app.RunAsync();
         }
     }

@@ -5,7 +5,6 @@
     using BookingSystem.Infrastructure.Data.Models.Hotels;
     using BookingSystem.Infrastructure.Data.Models.Landmarks;
     using BookingSystem.Infrastructure.Data.Models.Location;
-    using BookingSystem.Infrastructure.Data.Models.Roles;
     using Microsoft.AspNetCore.Identity;
     using System.Globalization;
     using static BookingSystem.Infrastructure.Data.Constants.DataConstants.Hotel;
@@ -17,7 +16,6 @@
         public Seeder()
         {
             SeedUsers();
-            SeedAdministrator();
             SeedLanguages();
             SeedContinents();
             SeedCountries();
@@ -33,14 +31,8 @@
         //Properties
 
         #region Users
-        public ApplicationUser AdministratorUser { get; set; } = null!;
+        public ApplicationUser AdminUser { get; set; } = null!;
         public ApplicationUser GuestUser { get; set; } = null!;
-
-        #endregion
-
-
-        #region Roles
-        public Administrator Administrator { get; set; } = null!;
 
         #endregion
 
@@ -360,39 +352,31 @@
         {
             var hasher = new PasswordHasher<ApplicationUser>();
 
-            AdministratorUser = new ApplicationUser()
+            AdminUser = new ApplicationUser()
             {
-                Id = "c9019544-ec91-4248-bfc4-9d8a4f13430b",
+                Id = "62d28ee6-5a44-4529-bb9d-91cb7ee61ce0",
                 UserName = "Administrator",
-                NormalizedUserName = "administrator",
-                Email = "admin@gmail.com",
-                NormalizedEmail = "admin@gmail.com",
+                NormalizedUserName = "ADMINISTRATOR",
+                Email = "admin@mail.com",
+                NormalizedEmail = "ADMIN@GMAIL.COM",
                 FirstName = "Stiliyan",
                 LastName = "Iliev"
             };
 
-            AdministratorUser.PasswordHash = hasher.HashPassword(AdministratorUser, "admin777");
+            AdminUser.PasswordHash = hasher.HashPassword(AdminUser, "admin123");
 
             GuestUser = new ApplicationUser()
             {
-                Id = "8d1f0bdc-f9e5-4856-a127-fb84281d56ad",
+                Id = "ebf07620-6aa8-4fef-9170-461d816c12f6",
                 UserName = "Guest",
-                NormalizedUserName = "guest",
-                Email = "guest@gmail.com",
-                NormalizedEmail = "guest@gmail.com",
+                NormalizedUserName = "GUEST",
+                Email = "guest@mail.com",
+                NormalizedEmail = "GUEST@MAIL.COM",
                 FirstName = "Bogdan",
                 LastName = "Slavchev"
             };
 
-            GuestUser.PasswordHash = hasher.HashPassword(GuestUser, "guest777");
-        }
-        private void SeedAdministrator()
-        {
-            Administrator = new Administrator()
-            {
-                Id = 1,
-                UserId = AdministratorUser.Id
-            };
+            GuestUser.PasswordHash = hasher.HashPassword(GuestUser, "guest123");
         }
         private void SeedLanguages()
         {
