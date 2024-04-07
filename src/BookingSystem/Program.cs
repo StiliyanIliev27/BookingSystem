@@ -63,6 +63,11 @@ namespace BookingSystem
                     defaults: new { Controller = "Landmark", Action = "Details" }
                     );
 
+                endpoints.MapControllerRoute(
+                    name: "areas",
+                    pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}"
+                    );
+
                 endpoints.MapDefaultControllerRoute();
                 endpoints.MapRazorPages();
             });
