@@ -8,6 +8,7 @@
     using Microsoft.AspNetCore.Identity;
     using System.Globalization;
     using static BookingSystem.Infrastructure.Data.Constants.DataConstants.Hotel;
+    using static BookingSystem.Infrastructure.Data.Constants.CustomClaims;
     internal class Seeder
     {
         /// <summary>
@@ -34,6 +35,13 @@
         public ApplicationUser AdminUser { get; set; } = null!;
         public ApplicationUser GuestUser { get; set; } = null!;
 
+        #endregion
+
+      
+        #region Claims
+        public IdentityUserClaim<string> AdminUserClaim { get; set; } = null!;
+        public IdentityUserClaim<string> GuestUserClaim { get; set; } = null!;
+      
         #endregion
 
 
@@ -363,6 +371,14 @@
                 LastName = "Iliev"
             };
 
+            AdminUserClaim = new IdentityUserClaim<string>()
+            {
+                Id = 1,
+                ClaimType = UserFullNameClaim,
+                ClaimValue = "Stiliyan Iliev",
+                UserId = "62d28ee6-5a44-4529-bb9d-91cb7ee61ce0"
+            };
+
             AdminUser.PasswordHash = hasher.HashPassword(AdminUser, "admin123");
 
             GuestUser = new ApplicationUser()
@@ -374,6 +390,14 @@
                 NormalizedEmail = "GUEST@MAIL.COM",
                 FirstName = "Bogdan",
                 LastName = "Slavchev"
+            };
+
+            GuestUserClaim = new IdentityUserClaim<string>()
+            {
+                Id = 2,
+                ClaimType = UserFullNameClaim,
+                ClaimValue = "Bogdan Slavchev",
+                UserId = "ebf07620-6aa8-4fef-9170-461d816c12f6"
             };
 
             GuestUser.PasswordHash = hasher.HashPassword(GuestUser, "guest123");
