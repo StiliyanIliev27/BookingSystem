@@ -1,5 +1,43 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
-}
+﻿
+<div class="mt-4 p-5 bg-light text-center">
+    <h2 class="display-4">Hello, Admin!</h2>
+    <p class="lead mb-1 mt-3">
+        This is your administrator area - you can <b>read</b>, <b>create</b>,
+        <b>delete</b> and <b>edit</b> hotels, flights and landmarks as well.
+        <br />You can <b>make reservations</b>, too!
+    </p>
+    <p class="lead mt-1">
+        You can also see <b>all users</b> and <b>all confirmed and not confirmed reservations</b> in the system.
+    </p>
+    <hr class="my-4">
+    
+    <a asp-area="" asp-controller="Hotel" asp-action="All"
+       class="btn btn-primary btn-lg">All Hotels</a>
+    
+    <a asp-area="Admin" asp-controller="Hotel" asp-action="Add"
+       class="btn btn-primary btn-lg">Add Hotel</a>
+
+        <span>  |   </span>
+
+    <a asp-area="" asp-controller="Flight" asp-action="All"
+       class="btn btn-primary btn-lg">All Flights</a>
+
+    <a asp-area="Admin" asp-controller="Flight" asp-action="Add"
+       class="btn btn-primary btn-lg">Add Flight</a>
+
+        <span>  |   </span>
+
+    <a asp-area="Admin" asp-controller="Landmark" asp-action="All"
+       class="btn btn-primary btn-lg">All Landmarks</a>
+
+    <a asp-area="Admin" asp-controller="Landmark" asp-action="Add"
+       class="btn btn-primary btn-lg">Add Landmark</a>
+   
+       <span>  |   </span>
+   
+    <a asp-area="Admin" asp-controller="Reservation" asp-action="All"
+       class="btn btn-primary btn-lg">All Reservations</a>
+   
+    <a asp-area="Admin" asp-controller="User" asp-action="All"
+       class="btn btn-primary btn-lg">All Users</a>
+</div>

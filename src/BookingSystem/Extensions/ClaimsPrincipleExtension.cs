@@ -1,6 +1,6 @@
 ﻿namespace System.Security.Claims
 {
-    using static BookingSystem.Core.Constants.RoleConstants;
+    using static BookingSystem.Core.Constants.AdministratorConstants;
     public static class ClaimsPrincipleExtension
     {
         public static string GetUserId(this ClaimsPrincipal user)

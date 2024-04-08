@@ -2,7 +2,7 @@
 {
     using BookingSystem.Core.Models.User;
     using Microsoft.AspNetCore.Identity;
-    using static BookingSystem.Core.Constants.RoleConstants;
+    using static BookingSystem.Core.Constants.AdministratorConstants;
     public static class ApplicationBuilderExtensions
     {
         public static async Task CreateAdminRoleAsync(this IApplicationBuilder app)
