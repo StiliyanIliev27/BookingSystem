@@ -382,7 +382,7 @@
                 .ToListAsync();
         }
 
-        public async Task<HotelReservationEditInputModel> GetForEditAsync(string reservationId, string userId)
+        public async Task<HotelReservationEditInputModel> GetForEditReservationAsync(string reservationId, string userId)
         {
             var hr = await repository.GetByIdAsync<HotelReservation>(reservationId);
 
@@ -409,7 +409,7 @@
             };
         }
 
-        public async Task EditAsync(HotelReservationEditInputModel model, string userId)
+        public async Task EditReservationAsync(HotelReservationEditInputModel model, string userId)
         {
             var hr = await repository.GetByIdAsync<HotelReservation>(model.Id);
 
@@ -472,6 +472,65 @@
             repository.Delete(hr);
 
             await repository.SaveChangesAsync();
-        }             
+        }
+
+        public async Task<HotelEditInputModel> GetForEditAsync(int hotelId)
+        {
+            var hotel = await repository.GetByIdAsync<Hotel>(hotelId);
+
+            if(hotel == null)
+            {
+                throw new ArgumentException("The hotel was not found!");
+            }
+
+            return new HotelEditInputModel()
+            {
+                Id = hotel.Id,
+                Name = hotel.Name,
+                StarRate = hotel.StarRate,
+                Address = hotel.Address,
+                Details = hotel.Details,
+                CheckIn = hotel.CheckIn.ToString(TimeFormat),
+                CheckOut = hotel.CheckOut.ToString(TimeFormat),
+                ImageUrl = hotel.ImageUrl,
+                Parking = (bool)hotel.Parking! ? "Available" : "Not Available",
+                Pets = (bool)hotel.Pets! ? "Allowed" : "Not Allowed"
+            };
+        }
+
+        public async Task EditAsync(HotelEditInputModel model)
+        {
+            var hotel = await repository.GetByIdAsync<Hotel>(model.Id);
+            
+            if(hotel == null) 
+            {
+                throw new ArgumentException("The hotel was not found!");
+            }
+
+            bool parkingStatus = false;
+            bool petStatus = false;
+
+            if(model.Parking == "Available")
+            {
+                parkingStatus = true;
+            }
+
+            if (model.Pets == "Allowed")
+            {
+                petStatus = true;
+            }
+
+            hotel.Name = model.Name;
+            hotel.StarRate = model.StarRate;
+            hotel.Address = model.Address;
+            hotel.Details = model.Details;
+            hotel.CheckIn = DateTime.ParseExact(model.CheckIn, TimeFormat, CultureInfo.InvariantCulture);
+            hotel.CheckOut = DateTime.ParseExact(model.CheckOut, TimeFormat, CultureInfo.InvariantCulture);
+            hotel.Parking = parkingStatus;
+            hotel.Pets = petStatus;
+            hotel.ImageUrl = model.ImageUrl;
+
+            await repository.SaveChangesAsync();
+        }
     }
 }

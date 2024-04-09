@@ -32,11 +32,15 @@
       
         Task<IEnumerable<HotelReservationViewModel>> AllReservationsAsync(string userId);
       
-        Task<HotelReservationEditInputModel> GetForEditAsync(string reservationId, string userId);
+        Task<HotelReservationEditInputModel> GetForEditReservationAsync(string reservationId, string userId);
         
-        Task EditAsync(HotelReservationEditInputModel model, string userId);
+        Task EditReservationAsync(HotelReservationEditInputModel model, string userId);
 
         Task CancellReservationAsync(string reservationId, string userId);
+
+        Task<HotelEditInputModel> GetForEditAsync(int hotelId);
+
+        Task EditAsync(HotelEditInputModel model);
        
         Task<bool> HotelExistsAsync(int hotelId);  
 

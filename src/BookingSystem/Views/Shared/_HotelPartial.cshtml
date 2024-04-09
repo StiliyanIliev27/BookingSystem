@@ -3,6 +3,7 @@
 @using Microsoft.AspNetCore.Identity
 
 @model HotelServiceModel
+@inject SignInManager<ApplicationUser> SignInManager
 @inject UserManager<ApplicationUser> UserManager
 
 @{
@@ -40,17 +41,20 @@
 
                     <div style="display: flex; flex-direction: row; justify-content: space-between; width: 240px;">                                   
 
-                     @if (await UserManager.IsInRoleAsync(user, AdministratorConstants.AdminRole))
-                     {
-                          <a style="width: 100%; margin-right: 10px;" asp-area="Admin" asp-controller="Hotel" asp-action="Edit" asp-route-id="@Model.Id"
-                             class="btn btn-warning">Edit</a>
-                     
-                             <br />
+                        @if (SignInManager.IsSignedIn(User))
+                        {
+                            @if (await UserManager.IsInRoleAsync(user, AdministratorConstants.AdminRole))
+                            {
+                                <a style="width: 100%; margin-right: 10px;" asp-area="Admin" asp-controller="Hotel" asp-action="Edit" asp-route-id="@Model.Id"
+                                   class="btn btn-warning">Edit</a>
 
-                            <a style="width: 100%;" asp-area="Admin" asp-controller="Hotel" asp-action="Delete" asp-route-id="@Model.Id"
-                             class="btn btn-danger">Delete</a>
-                         
-                     }
+                                <br />
+
+                                <a style="width: 100%;" asp-area="Admin" asp-controller="Hotel" asp-action="Delete" asp-route-id="@Model.Id"
+                                   class="btn btn-danger">Delete</a>
+
+                            }
+                        }
 
                     </div>
                     

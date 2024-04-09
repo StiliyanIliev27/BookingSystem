@@ -205,7 +205,7 @@ namespace BookingSystem.Controllers
           
             try
             {
-                var model = await hotelService.GetForEditAsync(id, userId);
+                var model = await hotelService.GetForEditReservationAsync(id, userId);
 
                 return View(model);
             }
@@ -229,7 +229,7 @@ namespace BookingSystem.Controllers
 
             try
             {
-                await hotelService.EditAsync(model, userId);
+                await hotelService.EditReservationAsync(model, userId);
             }
             catch(UnauthorizedActionException uae)
             {

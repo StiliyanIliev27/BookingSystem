@@ -60,6 +60,7 @@
 
             public const string StarRateMinValue = "1";
             public const string StarRateMaxValue = "5";
+            public const string StarRateErrorMessage = "Hotel's star rate must be between {1} and {2} stars!";
 
             public const int DetailsMaxLength = 1000;
 
