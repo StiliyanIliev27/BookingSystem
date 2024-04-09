@@ -88,7 +88,7 @@
             int currentPage = 1,
             int hotelsPerPage = 4)
         {
-            var hotelsToShow = repository.AllReadOnly<Hotel>();
+            var hotelsToShow = repository.AllReadOnly<Hotel>().Where(h => h.IsActive == true);
 
             if (city != null)
             {
@@ -531,6 +531,81 @@
             hotel.ImageUrl = model.ImageUrl;
 
             await repository.SaveChangesAsync();
+        }
+
+        public async Task DeleteAsync(int hotelId)
+        {
+            var hotel = await repository.GetByIdAsync<Hotel>(hotelId);
+
+            if(hotel == null)
+            {
+                throw new ArgumentException("The hotel was not found!");
+            }
+
+            var hotelReservations = await repository.All<HotelReservation>()
+                .Where(hr => hr.Hotel_Id == hotelId).ToListAsync();
+
+            if(hotelReservations.Any())
+            {
+                foreach(var reservation in hotelReservations)
+                {
+                    repository.Delete(reservation);
+                }
+            }
+
+            hotel.IsActive = false;
+
+            await repository.SaveChangesAsync();
+        }
+
+        public async Task<int> GetPreviousActiveHotelIdAsync(int currentHotelId)
+        {
+            int? lastHotelId = await repository.AllReadOnly<Hotel>()
+                .Where(h => h.Id < currentHotelId && h.IsActive)
+                .OrderByDescending(h => h.Id)
+                .Select(h => h.Id)
+                .FirstOrDefaultAsync();
+
+            if (lastHotelId == null)
+            {
+                return await GetLastActiveHotelIdAsync();
+            }
+
+            return (int)lastHotelId;
+        }
+
+        public async Task<int> GetNextActiveHotelIdAsync(int currentHotelId)
+        {
+            int? nextHotelId = await repository.AllReadOnly<Hotel>()
+                .Where(h => h.Id > currentHotelId && h.IsActive)
+                .OrderBy(h => h.Id)
+                .Select(h => h.Id)
+                .FirstOrDefaultAsync();
+
+            if(nextHotelId == null)
+            {
+                return await GetFirstActiveHotelIdAsync();
+            }
+
+            return (int)nextHotelId;
+        }
+
+        public async Task<int> GetFirstActiveHotelIdAsync()
+        {
+            return await repository.AllReadOnly<Hotel>()
+                .Where(h => h.IsActive)
+                .OrderBy(h => h.Id)
+                .Select(h => h.Id)
+                .FirstAsync();
+        }
+
+        public async Task<int> GetLastActiveHotelIdAsync()
+        {
+            return await repository.AllReadOnly<Hotel>()
+                .Where(h => h.IsActive)
+                .OrderByDescending(h => h.Id)
+                .Select(h => h.Id)
+                .FirstAsync();
         }
     }
 }

@@ -50,8 +50,9 @@
 
                                 <br />
 
-                                <a style="width: 100%;" asp-area="Admin" asp-controller="Hotel" asp-action="Delete" asp-route-id="@Model.Id"
-                                   class="btn btn-danger">Delete</a>
+                                <form method="post" asp-area="Admin" asp-controller="Hotel" asp-action="Delete" asp-route-id="@Model.Id">
+                                    <button type="submit" class="btn btn-danger">Delete</button>
+                                </form>
 
                             }
                         }

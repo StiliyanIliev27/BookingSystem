@@ -22,6 +22,7 @@
             return View(model);
         }
 
+        [HttpPost]
         public async Task<IActionResult> Edit(HotelEditInputModel model)
         {
             DateTime checkIn;
@@ -43,6 +44,14 @@
             }
             
             await hotelService.EditAsync(model);
+
+            return RedirectToAction("All", "Hotel", new { area = "" });
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Delete(int id)
+        {
+            await hotelService.DeleteAsync(id);
 
             return RedirectToAction("All", "Hotel", new { area = "" });
         }

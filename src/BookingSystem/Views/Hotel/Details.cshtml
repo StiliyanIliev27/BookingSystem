@@ -1,23 +1,28 @@
 ﻿@using BookingSystem.Core.Contracts
+
 @model HotelDetailsViewModel
+
 @inject IHotelService hotels;
+
 @{
     ViewData["Title"] = "Hotel Details";
-    int nextHotelId = Model.Id + 1;
-    int previousHotelId = Model.Id - 1;
-    int firstHotelId = 1;
-    int lastHotelId = Model.HotelsCount;
+
+    int nextHotelId = await hotels.GetNextActiveHotelIdAsync(Model.Id);
+    int previousHotelId = await hotels.GetPreviousActiveHotelIdAsync(Model.Id);
+    
+    int firstHotelId = await hotels.GetFirstActiveHotelIdAsync();
+    int lastHotelId = await hotels.GetLastActiveHotelIdAsync();
 
     HotelDetailsViewModel nextHotel;
     HotelDetailsViewModel previousHotel;
 
 
-    if(Model.Id == 1)
+    if(Model.Id == firstHotelId)//First hotel
     {
         nextHotel = await hotels.DetailsAsync(nextHotelId);
         previousHotel = await hotels.DetailsAsync(lastHotelId);
     }
-    else if(Model.Id == lastHotelId)
+    else if(Model.Id == lastHotelId)//Last hotel
     {
         nextHotel = await hotels.DetailsAsync(firstHotelId);
         previousHotel = await hotels.DetailsAsync(previousHotelId);

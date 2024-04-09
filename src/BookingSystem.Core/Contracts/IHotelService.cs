@@ -41,6 +41,8 @@
         Task<HotelEditInputModel> GetForEditAsync(int hotelId);
 
         Task EditAsync(HotelEditInputModel model);
+
+        Task DeleteAsync(int hotelId);
        
         Task<bool> HotelExistsAsync(int hotelId);  
 
@@ -53,5 +55,13 @@
         Task<IEnumerable<Room>> GetRoomsAsync(int hotelId);
         
         Task<int> GetHotelsCountAsync();
+
+        Task<int> GetNextActiveHotelIdAsync(int currentHotelId);
+       
+        Task<int> GetPreviousActiveHotelIdAsync(int currentHotelId);
+       
+        Task<int> GetFirstActiveHotelIdAsync();
+       
+        Task<int> GetLastActiveHotelIdAsync();
     }
 }
