@@ -23,7 +23,7 @@
         }
 
         [HttpPost]
-        public async Task<IActionResult> Edit(HotelEditInputModel model)
+        public async Task<IActionResult> Edit(HotelEditAddInputModel model)
         {
             DateTime checkIn;
             DateTime checkOut;
@@ -40,6 +40,7 @@
 
             if (!ModelState.IsValid)
             {
+                model.Cities = await hotelService.GetAllCitiesAsync();
                 return View(model);
             }
             
@@ -52,6 +53,40 @@
         public async Task<IActionResult> Delete(int id)
         {
             await hotelService.DeleteAsync(id);
+
+            return RedirectToAction("All", "Hotel", new { area = "" });
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Add()
+        {
+            var model = await hotelService.GetForAddAsync();
+
+            return View(model);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Add(HotelEditAddInputModel model)
+        {
+            DateTime checkIn;
+            DateTime checkOut;
+
+            if (!DateTime.TryParse(model.CheckIn, CultureInfo.InvariantCulture, DateTimeStyles.None, out checkIn))
+            {
+                ModelState.AddModelError(nameof(model.CheckIn), "Invalid data provided! Please, enter Check In in format \"HH:mm\"");
+            }
+
+            if (!DateTime.TryParse(model.CheckOut, CultureInfo.InvariantCulture, DateTimeStyles.None, out checkOut))
+            {
+                ModelState.AddModelError(nameof(model.CheckOut), "Invalid data provided! Please, enter Check In in format \"HH:mm\"");
+            }
+
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+
+            await hotelService.AddAsync(model);
 
             return RedirectToAction("All", "Hotel", new { area = "" });
         }

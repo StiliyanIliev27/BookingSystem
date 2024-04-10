@@ -1,20 +1,27 @@
 ﻿namespace BookingSystem.Controllers
 {
+    using BookingSystem.Core.Contracts;
+    using BookingSystem.Core.Services;
+    using BookingSystem.Infrastructure.Migrations;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
     public class HomeController : BaseController
     {
         private readonly ILogger<HomeController> _logger;
+        private readonly IHotelService _hotelService;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ILogger<HomeController> logger, IHotelService hotelService)
         {
             _logger = logger;
+            _hotelService = hotelService;
         }
 
         [AllowAnonymous]
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            return View();
+            var model = await _hotelService.LastThreeHotelsAsync();
+
+            return View(model);
         }
         
         [AllowAnonymous]

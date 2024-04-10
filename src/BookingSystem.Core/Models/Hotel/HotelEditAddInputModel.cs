@@ -1,9 +1,10 @@
 ﻿namespace BookingSystem.Core.Models.Hotel
 {
+    using BookingSystem.Core.Models.Location;
     using System.ComponentModel.DataAnnotations;
     using static BookingSystem.Infrastructure.Data.Constants.DataConstants;
     using static BookingSystem.Infrastructure.Data.Constants.DataConstants.Hotel;
-    public class HotelEditInputModel
+    public class HotelEditAddInputModel
     {
         public int Id { get; set; }
 
@@ -37,6 +38,9 @@
         [Required]
         public string CheckOut { get; set; } = null!;
 
+        [Required]
+        public int City_Id {  get; set; }   
+
         public string? Parking { get; set; }
 
         public string? Pets { get; set; }
@@ -44,5 +48,7 @@
         public IEnumerable<string> PetsStatuses { get; set; } = new List<string>() { "Allowed", "Not Allowed" }; 
         
         public IEnumerable<string> ParkingAvailabilities { get; set; } = new List<string>() { "Available", "Not Available" };
+
+        public IEnumerable<CityFormModel> Cities { get; set; } = new HashSet<CityFormModel>();
     }
 }

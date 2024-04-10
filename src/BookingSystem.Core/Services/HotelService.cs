@@ -4,6 +4,7 @@
     using BookingSystem.Core.Enumerations;
     using BookingSystem.Core.Exceptions;
     using BookingSystem.Core.Models.Hotel;
+    using BookingSystem.Core.Models.Location;
     using BookingSystem.Core.Models.QueryModels.Hotel;
     using BookingSystem.Infrastructure.Common;
     using BookingSystem.Infrastructure.Data.Models.Hotels;
@@ -64,6 +65,56 @@
                 .ToListAsync();
         }
 
+        public async Task<int> GetPreviousActiveHotelIdAsync(int currentHotelId)
+        {
+            int? lastHotelId = await repository.AllReadOnly<Hotel>()
+                .Where(h => h.Id < currentHotelId && h.IsActive)
+                .OrderByDescending(h => h.Id)
+                .Select(h => h.Id)
+                .FirstOrDefaultAsync();
+
+            if (lastHotelId == null)
+            {
+                return await GetLastActiveHotelIdAsync();
+            }
+
+            return (int)lastHotelId;
+        }
+
+        public async Task<int> GetNextActiveHotelIdAsync(int currentHotelId)
+        {
+            int? nextHotelId = await repository.AllReadOnly<Hotel>()
+                .Where(h => h.Id > currentHotelId && h.IsActive)
+                .OrderBy(h => h.Id)
+                .Select(h => h.Id)
+                .FirstOrDefaultAsync();
+
+            if (nextHotelId == null)
+            {
+                return await GetFirstActiveHotelIdAsync();
+            }
+
+            return (int)nextHotelId;
+        }
+
+        public async Task<int> GetFirstActiveHotelIdAsync()
+        {
+            return await repository.AllReadOnly<Hotel>()
+                .Where(h => h.IsActive)
+                .OrderBy(h => h.Id)
+                .Select(h => h.Id)
+                .FirstAsync();
+        }
+
+        public async Task<int> GetLastActiveHotelIdAsync()
+        {
+            return await repository.AllReadOnly<Hotel>()
+                .Where(h => h.IsActive)
+                .OrderByDescending(h => h.Id)
+                .Select(h => h.Id)
+                .FirstAsync();
+        }
+
         //public async Task<IEnumerable<HotelAllViewModel>> AllAsync()
         //{
         //    return await repository.AllReadOnly<Hotel>()
@@ -81,6 +132,22 @@
         //        }).ToListAsync();
         //}       
 
+        public async Task<IEnumerable<HotelIndexPageModel>> LastThreeHotelsAsync()
+        {
+            return await repository
+                .AllReadOnly<Hotel>()
+                .Where(h => h.IsActive)
+                .OrderByDescending(h => h.Id)
+                .Take(3)
+                .Select(h => new HotelIndexPageModel()
+                {
+                    Id = h.Id,
+                    Name = h.Name,
+                    Address = h.Address,
+                    ImageUrl = h.ImageUrl,
+                })
+                .ToListAsync();
+        }
         public async Task<HotelQueryServiceModel> AllAsync(
             string? city = null,
             string? searchTerm = null,
@@ -474,7 +541,7 @@
             await repository.SaveChangesAsync();
         }
 
-        public async Task<HotelEditInputModel> GetForEditAsync(int hotelId)
+        public async Task<HotelEditAddInputModel> GetForEditAsync(int hotelId)
         {
             var hotel = await repository.GetByIdAsync<Hotel>(hotelId);
 
@@ -483,7 +550,7 @@
                 throw new ArgumentException("The hotel was not found!");
             }
 
-            return new HotelEditInputModel()
+            return new HotelEditAddInputModel()
             {
                 Id = hotel.Id,
                 Name = hotel.Name,
@@ -498,7 +565,7 @@
             };
         }
 
-        public async Task EditAsync(HotelEditInputModel model)
+        public async Task EditAsync(HotelEditAddInputModel model)
         {
             var hotel = await repository.GetByIdAsync<Hotel>(model.Id);
             
@@ -558,54 +625,56 @@
             await repository.SaveChangesAsync();
         }
 
-        public async Task<int> GetPreviousActiveHotelIdAsync(int currentHotelId)
+        public async Task AddAsync(HotelEditAddInputModel model)
         {
-            int? lastHotelId = await repository.AllReadOnly<Hotel>()
-                .Where(h => h.Id < currentHotelId && h.IsActive)
-                .OrderByDescending(h => h.Id)
-                .Select(h => h.Id)
-                .FirstOrDefaultAsync();
+            bool parkingStatus = false;
+            bool petStatus = false;
 
-            if (lastHotelId == null)
+            if (model.Parking == "Available")
             {
-                return await GetLastActiveHotelIdAsync();
+                parkingStatus = true;
             }
 
-            return (int)lastHotelId;
-        }
-
-        public async Task<int> GetNextActiveHotelIdAsync(int currentHotelId)
-        {
-            int? nextHotelId = await repository.AllReadOnly<Hotel>()
-                .Where(h => h.Id > currentHotelId && h.IsActive)
-                .OrderBy(h => h.Id)
-                .Select(h => h.Id)
-                .FirstOrDefaultAsync();
-
-            if(nextHotelId == null)
+            if (model.Pets == "Allowed")
             {
-                return await GetFirstActiveHotelIdAsync();
+                petStatus = true;
             }
 
-            return (int)nextHotelId;
+            var hotel = new Hotel()
+            {
+                Name = model.Name,
+                Address = model.Address,
+                Details = model.Details,
+                StarRate = model.StarRate,
+                City_Id = model.City_Id,
+                CheckIn = DateTime.ParseExact(model.CheckIn, TimeFormat, CultureInfo.InvariantCulture),
+                CheckOut = DateTime.ParseExact(model.CheckOut, TimeFormat, CultureInfo.InvariantCulture),
+                ImageUrl = model.ImageUrl,
+                Parking = parkingStatus,
+                Pets = petStatus,
+                IsActive = true
+            };
+
+            await repository.AddAsync(hotel);
+            await repository.SaveChangesAsync();
         }
 
-        public async Task<int> GetFirstActiveHotelIdAsync()
+        public async Task<HotelEditAddInputModel> GetForAddAsync()
         {
-            return await repository.AllReadOnly<Hotel>()
-                .Where(h => h.IsActive)
-                .OrderBy(h => h.Id)
-                .Select(h => h.Id)
-                .FirstAsync();
+            return new HotelEditAddInputModel()
+            {
+                Cities = await GetAllCitiesAsync(),
+            };
         }
 
-        public async Task<int> GetLastActiveHotelIdAsync()
+        public async Task<IEnumerable<CityFormModel>> GetAllCitiesAsync()
         {
-            return await repository.AllReadOnly<Hotel>()
-                .Where(h => h.IsActive)
-                .OrderByDescending(h => h.Id)
-                .Select(h => h.Id)
-                .FirstAsync();
+            return await repository.AllReadOnly<City>()
+                .Select(c => new CityFormModel()
+                {
+                    Id = c.Id,
+                    Name = c.Name
+                }).ToListAsync();
         }
     }
 }

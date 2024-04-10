@@ -2,11 +2,14 @@
 {
     using BookingSystem.Core.Enumerations;
     using BookingSystem.Core.Models.Hotel;
+    using BookingSystem.Core.Models.Location;
     using BookingSystem.Core.Models.QueryModels.Hotel;
     using BookingSystem.Infrastructure.Data.Models.Hotels;
 
     public interface IHotelService
     {
+        Task<IEnumerable<HotelIndexPageModel>> LastThreeHotelsAsync();
+
         Task<HotelQueryServiceModel> AllAsync(
             string? city = null,
             string? searchTerm = null,
@@ -38,9 +41,13 @@
 
         Task CancellReservationAsync(string reservationId, string userId);
 
-        Task<HotelEditInputModel> GetForEditAsync(int hotelId);
+        Task<HotelEditAddInputModel> GetForEditAsync(int hotelId);
 
-        Task EditAsync(HotelEditInputModel model);
+        Task EditAsync(HotelEditAddInputModel model);
+        
+        Task<HotelEditAddInputModel> GetForAddAsync();
+        
+        Task AddAsync(HotelEditAddInputModel model);
 
         Task DeleteAsync(int hotelId);
        
@@ -63,5 +70,7 @@
         Task<int> GetFirstActiveHotelIdAsync();
        
         Task<int> GetLastActiveHotelIdAsync();
+
+        Task<IEnumerable<CityFormModel>> GetAllCitiesAsync();
     }
 }

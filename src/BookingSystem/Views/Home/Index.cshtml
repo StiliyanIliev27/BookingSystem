@@ -1,8 +1,147 @@
-﻿@{
+﻿
+@model IEnumerable<HotelIndexPageModel>
+
+@{
     ViewData["Title"] = "Booking System";
+    var hotels = Model.ToList();
 }
 
 <div class="text-center">
     <h1 class="display-4">Welcome to @ViewData["Title"]</h1>
-    <p>The best booking system app.</p>
+    <p style="font-size: 20px;">The best booking system app for hotels, flights and landmarks.</p>
 </div>
+
+<div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
+    <div class="carousel-inner">
+        @for (int i = 0; i < hotels.Count(); i++)
+        {
+            var hotel = hotels[i];
+            <div class="carousel-item @(i == 0 ? "active" : string.Empty)">
+                <img class="d-block w-100" style="height: 500px; object-fit: cover;"
+                 src="@hotel.ImageUrl" alt="@hotel.Name">
+                <div class="carousel-caption d-none d-md-block">
+                    <h5>
+                        <button class="first-button">
+                            <a class="first-link" asp-area="" asp-controller="Hotel" asp-action="Details"
+                               asp-route-id="@hotel.Id" asp-route-information="@hotel.GetInformation()"> @hotel.Name</a>
+                        </button>
+                    </h5>
+                </div>
+            </div>
+        }
+    </div>
+    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+    </button>
+</div>
+
+<div style="display: flex; flex-direction: row; margin-top: 20px; justify-content: space-between;">
+
+    <button class="button"><a class="link" asp-area="" asp-controller="Hotel" asp-action="All">Take a look at our amazing hotels</a></button>
+
+    <button class="button"><a class="link" asp-area="" asp-controller="Flight" asp-action="All">Explore our available flights</a></button>
+
+</div>
+
+<style>
+    .button {
+        padding: 1em 2em;
+        border: none;
+        border-radius: 5px;
+        font-weight: bold;
+        letter-spacing: 5px;
+        text-transform: uppercase;
+        cursor: pointer;
+        color: #2c9caf;
+        transition: all 1000ms;
+        font-size: 15px;
+        position: relative;
+        overflow: hidden;
+        outline: 2px solid #2c9caf;
+    }
+
+    .button:hover {
+        color: #ffffff;
+        transform: scale(1.1);
+        outline: 2px solid #70bdca;
+        box-shadow: 4px 5px 17px -4px #268391;
+    }
+
+    .button::before {
+        content: "";
+        position: absolute;
+        left: -50px;
+        top: 0;
+        width: 0;
+        height: 100%;
+        background-color: #2c9caf;
+        transform: skewX(45deg);
+        z-index: -1;
+        transition: width 1000ms;
+    }
+
+    .button:hover::before {
+        width: 250%;
+    }
+
+    .link{
+        text-decoration: none;
+        color: #2c9caf;
+    }
+
+    .link:hover {
+        color: #ffffff;
+        transform: scale(1.1);
+        box-shadow: 4px 5px 17px -4px #268391;
+    }
+
+    .first-button {
+        display: inline-block;
+        border-radius: 4px;
+        background-color: #3d405b;
+        border: none;
+        color: white;
+        text-align: center;
+        font-size: 17px;
+        padding: 16px;
+        width: 250px;
+        transition: all 0.5s;
+        cursor: pointer;
+        margin: 5px;
+    }
+
+    .first-button .first-link {
+        cursor: pointer;
+        display: inline-block;
+        position: relative;
+        transition: 0.5s;
+    }
+
+    .first-button .first-link:after {
+        content: '»';
+        position: absolute;
+        opacity: 0;
+        top: 0;
+        right: -15px;
+        transition: 0.5s;
+    }
+
+    .first-button:hover .first-link {
+        padding-right: 15px;
+    }
+
+    .first-button:hover .first-link:after {
+        opacity: 1;
+        right: 0;
+    }
+
+    .first-link, .first-link:hover {
+        text-decoration: none;
+        color: white;
+    }
+</style>

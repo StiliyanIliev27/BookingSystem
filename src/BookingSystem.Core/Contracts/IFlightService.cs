@@ -4,7 +4,7 @@
     using BookingSystem.Core.Models.Flight;
     using BookingSystem.Core.Models.QueryModels.Flight;
     public interface IFlightService
-    {
+    {        
         Task<FlightQueryServiceModel> AllAsync(
             string? departureCity = null,
             string? arrivalCity = null,
