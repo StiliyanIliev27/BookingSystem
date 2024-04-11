@@ -131,6 +131,10 @@
                                 <div style="display: flex; flex-direction: row; justify-content: space-between;">
                                     <div>
                                         @room.Type.ToString()
+                                        @if(room.WiFi == true)
+                                        {
+                                            <img style="height: 40px; width: 40px; object-fit: cover;" src="~/images/wifi_img.webp" />
+                                        }
                                         <br />
                                         @if (room.Count == 0)
                                         {
@@ -157,8 +161,11 @@
                                                 <a style="margin-bottom: 5px; width: 100%;" asp-area="Admin" asp-controller="Hotel" asp-action="EditRoom" asp-route-id="@room.Id"
                                                    class="btn btn-warning btn-sm">Edit</a>
                                                 <br />
-                                                <a style="width: 100%;" asp-area="Admin" asp-controller="Hotel" asp-action="DeleteRoom" asp-route-id="@room.Id"
-                                                   class="btn btn-danger btn-sm">Delete</a>
+
+                                                <form method="post" asp-area="Admin" asp-controller="Hotel" asp-action="DeleteRoom" asp-route-roomId="@room.Id"
+                                                      asp-route-hotelId="@Model.Id" asp-route-information="@Model.GetInformation()">
+                                                    <button style="width: 100%;" type="submit" class="btn btn-danger btn-sm">Delete</button>
+                                                </form>
                                             }
                                         }
                                     </div>

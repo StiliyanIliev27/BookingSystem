@@ -54,6 +54,12 @@
         Task<RoomInputModel> GetForAddRoomAsync(int hotelId);
 
         Task AddRoomAsync(RoomInputModel model);
+
+        Task<RoomEditInputModel> GetForEditRoomAsync(int roomId);
+
+        Task EditRoomAsync(RoomEditInputModel model);
+
+        Task DeleteRoomAsync(int roomId);
        
         Task<bool> HotelExistsAsync(int hotelId);  
 

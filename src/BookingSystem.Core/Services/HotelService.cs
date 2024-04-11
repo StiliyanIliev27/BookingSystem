@@ -766,5 +766,71 @@
 
             return validRoomTypes;
         }
+
+        public async Task<RoomEditInputModel> GetForEditRoomAsync(int roomId)
+        {
+            var room = await repository.AllReadOnly<Room>()
+                .Where(r => r.Id == roomId).FirstOrDefaultAsync();
+
+            if (room == null)
+            {
+                throw new ArgumentException("The room does not exist!");
+            }
+
+            var hotel = await repository.AllReadOnly<Hotel>()
+                .Where(h => h.Id == room.Hotel_Id).FirstOrDefaultAsync();
+
+            if(hotel == null)
+            {
+                throw new ArgumentException("The hotel does not exist!");
+            }
+
+            return new RoomEditInputModel()
+            {
+                Id = roomId,
+                Hotel_Id = room.Hotel_Id,
+                PricePerNight = room.PricePerNight,
+                Name = hotel.Name,
+                Address = hotel.Address
+            };
+        }
+
+        public async Task EditRoomAsync(RoomEditInputModel model)
+        {
+            var room = await repository.GetByIdAsync<Room>(model.Id);
+
+            if(room == null)
+            {
+                throw new ArgumentException("The room does not exist!");
+            }
+
+            var hotel = await repository.GetByIdAsync<Hotel>(room.Hotel_Id);
+
+            if(hotel == null)
+            {
+                throw new ArgumentException("The hotel does not exist!");
+            }
+
+            model.Name = hotel.Name;
+            model.Address = hotel.Address;
+            model.Hotel_Id = hotel.Id;
+
+            room.PricePerNight = model.PricePerNight;
+
+            await repository.SaveChangesAsync();
+        }
+
+        public async Task DeleteRoomAsync(int roomId)
+        {
+            var room = await repository.GetByIdAsync<Room>(roomId);
+
+            if(room == null)
+            {
+                throw new ArgumentException("The room does not exist!");
+            }
+
+            repository.Delete(room);
+            await repository.SaveChangesAsync();
+        }
     }
 }

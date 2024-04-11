@@ -13,7 +13,7 @@
     <div class="col-sm-12 offset-lg-2 col-lg-8 offset-xl-3 col-xl-6">
         <form method="post" asp-area="Admin" asp-controller="Hotel" asp-action="AddRoom">
             <div class="mb-3">
-                <label asp-for="@Model.Type" class="form-label-add-edit">Select Room Type<span style="color: red"> *</span></label>
+                <label asp-for="@Model.Type" class="form-label-add-edit">Select Room Type:<span style="color: red"> *</span></label>
                 <select asp-for="@Model.Type" class="form-control" aria-required="true">
                     <option disabled selected value="">Select Room Type...</option>
                     @foreach (var type in Model.Types)
@@ -31,7 +31,7 @@
                 <span asp-validation-for="@Model.PricePerNight" class="text-danger"></span>
             </div>           
             <div class="mb-3">
-                <label asp-for="@Model.Wifi" class="form-label-add-edit">Select Wi-Fi Availability<span style="color: red"> *</span></label>
+                <label asp-for="@Model.Wifi" class="form-label-add-edit">Select Wi-Fi Availability:<span style="color: red"> *</span></label>
                 <select asp-for="@Model.Wifi" class="form-control" aria-required="true">
                     <option disabled selected value="">Select Wi-Fi Availability...</option>
                     @foreach (var availability in Model.WifiAvailability)

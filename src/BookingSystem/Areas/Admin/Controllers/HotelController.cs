@@ -6,6 +6,7 @@
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.EntityFrameworkCore.Metadata.Internal;
     using System.Globalization;
+    using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
     public class HotelController : AdminBaseController
     {
@@ -113,6 +114,35 @@
             await hotelService.AddRoomAsync(model);
 
             return RedirectToAction("Details", "Hotel", new { area = " ", id = model.Id, information = model.GetInformation()});
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> EditRoom(int id)
+        {
+            var model = await hotelService.GetForEditRoomAsync(id);
+
+            return View(model);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> EditRoom(RoomEditInputModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View();
+            }
+
+            await hotelService.EditRoomAsync(model);
+
+            return RedirectToAction("Details", "Hotel", new { area = " ", id = model.Hotel_Id, information = model.GetInformation() });
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> DeleteRoom(int roomId, int hotelId, string information)
+        {
+            await hotelService.DeleteRoomAsync(roomId);
+
+            return RedirectToAction("Details", "Hotel", new { area = " ", id = hotelId, information = information });
         }
     }
 }

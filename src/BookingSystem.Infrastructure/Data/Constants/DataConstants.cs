@@ -71,6 +71,11 @@
         {
             public const int CountMaxValue = 5;
             public const int CountMinValue = 0;
+
+            public const double MinPricePerNight = 15.00;
+            public const double MaxPricePerNight = 5000.00;
+
+            public const string PriceErrorMessage = "{0} must be between {1} and {2} Euro!";
         }
 
         public static class Airline
