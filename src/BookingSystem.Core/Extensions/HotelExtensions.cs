@@ -1,7 +1,6 @@
 ﻿namespace BookingSystem.Core.Extensions
 {
     using BookingSystem.Core.Contracts;
-    using System.Text.RegularExpressions;
 
     public static class HotelExtensions
     {

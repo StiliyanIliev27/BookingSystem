@@ -1,8 +1,10 @@
 ﻿namespace BookingSystem.Areas.Admin.Controllers
 {
     using BookingSystem.Core.Contracts;
+    using BookingSystem.Core.Extensions;
     using BookingSystem.Core.Models.Hotel;
     using Microsoft.AspNetCore.Mvc;
+    using Microsoft.EntityFrameworkCore.Metadata.Internal;
     using System.Globalization;
 
     public class HotelController : AdminBaseController
@@ -89,6 +91,28 @@
             await hotelService.AddAsync(model);
 
             return RedirectToAction("All", "Hotel", new { area = "" });
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> AddRoom(int id)
+        {
+            var model = await hotelService.GetForAddRoomAsync(id);
+
+            return View(model);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> AddRoom(RoomInputModel model)
+        {
+            if(!ModelState.IsValid)
+            {
+                model.Types = await hotelService.GetAllValidRoomTypesAsync(model.Id);
+                return View();
+            }          
+
+            await hotelService.AddRoomAsync(model);
+
+            return RedirectToAction("Details", "Hotel", new { area = " ", id = model.Id, information = model.GetInformation()});
         }
     }
 }

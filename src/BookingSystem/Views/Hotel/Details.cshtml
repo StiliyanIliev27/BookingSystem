@@ -1,11 +1,18 @@
-﻿@using BookingSystem.Core.Contracts
+﻿@using BookingSystem.Core.Constants
+@using BookingSystem.Core.Contracts
+@using BookingSystem.Core.Models.User
+@using Microsoft.AspNetCore.Identity
 
 @model HotelDetailsViewModel
 
 @inject IHotelService hotels;
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
 
 @{
     ViewData["Title"] = "Hotel Details";
+
+    var user = await UserManager.FindByIdAsync(User.GetUserId());
 
     int nextHotelId = await hotels.GetNextActiveHotelIdAsync(Model.Id);
     int previousHotelId = await hotels.GetPreviousActiveHotelIdAsync(Model.Id);
@@ -97,7 +104,17 @@
     </div>
     <div class="col-md-6">
         <div class="table-responsive">
-            <h4 style="text-align: center; margin-bottom: 10px;">Availability</h4>
+            <div style="display: flex; flex-direction: row; margin-top: 10px; margin-bottom: 10px; max-width: fit-content; margin-left: auto; margin-right: auto;">
+                <h4 style="text-align: center;">Availability</h4>
+                @if (SignInManager.IsSignedIn(User))
+                {
+                    @if (await UserManager.IsInRoleAsync(user, AdministratorConstants.AdminRole))
+                    {
+                        <a style="margin-left: 17px;" asp-area="Admin" asp-controller="Hotel" asp-action="AddRoom" asp-route-id="@Model.Id"
+                           class="btn btn-success">Add Room</a>
+                    }
+                }
+            </div>
             <table class="table table-bordered">
                 <thead class="table-primary">
                     <tr>
@@ -107,28 +124,46 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach (var room in Model.Rooms)
+                    @foreach (var room in Model.Rooms.OrderBy(r => (int)r.Type))
                     {
                         <tr class="table-light">
                             <td>
-                                @room.Type.ToString()
-                                <br />
-                                @if (room.Count == 0)
-                                {
-                                    <small style="font-size: 11px; color: red;">
-                                        <span>
-                                            <i class="fas fa-exclamation-triangle"></i>
-                                        </span>
-                                        @room.Count @room.Type rooms left on our site
-                                    </small>
-                                }
-                                else
-                                {
-                                    <small style="font-size: 11px; color: orange;">
-                                        <span><i class="fas fa-hourglass-end"></i></span>
-                                        Only @room.Count rooms left on our site
-                                    </small>
-                                }
+                                <div style="display: flex; flex-direction: row; justify-content: space-between;">
+                                    <div>
+                                        @room.Type.ToString()
+                                        <br />
+                                        @if (room.Count == 0)
+                                        {
+                                            <small style="font-size: 11px; color: red;">
+                                                <span>
+                                                    <i class="fas fa-exclamation-triangle"></i>
+                                                </span>
+                                                @room.Count @room.Type rooms left on our site
+                                            </small>
+                                        }
+                                        else
+                                        {
+                                            <small style="font-size: 11px; color: orange;">
+                                                <span><i class="fas fa-hourglass-end"></i></span>
+                                                Only @room.Count rooms left on our site
+                                            </small>
+                                        }
+                                    </div>
+                                    <div>
+                                        @if (SignInManager.IsSignedIn(User))
+                                        {
+                                            @if (await UserManager.IsInRoleAsync(user, AdministratorConstants.AdminRole))
+                                            {
+                                                <a style="margin-bottom: 5px; width: 100%;" asp-area="Admin" asp-controller="Hotel" asp-action="EditRoom" asp-route-id="@room.Id"
+                                                   class="btn btn-warning btn-sm">Edit</a>
+                                                <br />
+                                                <a style="width: 100%;" asp-area="Admin" asp-controller="Hotel" asp-action="DeleteRoom" asp-route-id="@room.Id"
+                                                   class="btn btn-danger btn-sm">Delete</a>
+                                            }
+                                        }
+                                    </div>
+                                </div>
+                                
                             </td>
                             <td>
                                 @for (int i = 1; i <= (int)room.Type; i++)

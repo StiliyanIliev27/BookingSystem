@@ -7,6 +7,7 @@
     using BookingSystem.Core.Models.Location;
     using BookingSystem.Core.Models.QueryModels.Hotel;
     using BookingSystem.Infrastructure.Common;
+    using BookingSystem.Infrastructure.Data.Enums;
     using BookingSystem.Infrastructure.Data.Models.Hotels;
     using BookingSystem.Infrastructure.Data.Models.Location;
     using Microsoft.EntityFrameworkCore;
@@ -675,6 +676,95 @@
                     Id = c.Id,
                     Name = c.Name
                 }).ToListAsync();
+        }
+
+        public async Task<RoomInputModel> GetForAddRoomAsync(int hotelId)
+        {
+            var hotel = await repository.GetByIdAsync<Hotel>(hotelId);
+
+            if(hotel == null)
+            {
+                throw new ArgumentException("The hotel does not exists!");
+            }
+
+            return new RoomInputModel()
+            {
+                Hotel_Id = hotelId,
+                Types = await GetAllValidRoomTypesAsync(hotelId),
+                Name = hotel.Name,
+                Address = hotel.Address
+            };
+        }
+
+        public async Task AddRoomAsync(RoomInputModel model)
+        {
+            var hotel = await repository.GetByIdAsync<Hotel>(model.Id);
+
+            if (hotel == null)
+            {
+                throw new ArgumentException("Hotel does not exist!");
+            }
+
+            model.Name = hotel.Name;
+            model.Address = hotel.Address;
+
+            bool wifi = false;
+
+            if(model.Wifi == "Available")
+            {
+                wifi = true;
+            }
+            else if(model.Wifi == "Not Available")
+            {
+                wifi = false;
+            }
+
+            RoomType type;        
+            _ = Enum.TryParse(model.Type, out type);
+
+            var room = new Room()
+            {
+                Hotel_Id = model.Id,
+                Count = 5,
+                PricePerNight = model.PricePerNight,
+                Type = type,
+                WiFi = wifi,
+                IsActive = true
+            };
+
+            await repository.AddAsync(room);
+            await repository.SaveChangesAsync();
+        }
+
+        public IEnumerable<string> GetAllRoomTypes()
+        {
+            return new List<string>
+            {
+                "Single",
+                "Double",
+                "Triple",
+                "Apartment"
+            };
+        }
+
+        public async Task<IEnumerable<string>> GetAllValidRoomTypesAsync(int hotelId)
+        {
+            var roomTypes = await repository.AllReadOnly<Room>()
+                .Where(r => r.Hotel_Id == hotelId)
+                .Select(r => r.Type.ToString())
+                .ToListAsync();
+
+            ICollection<string> validRoomTypes = new HashSet<string>();
+
+            foreach (var roomType in GetAllRoomTypes())
+            {
+                if (!roomTypes.Contains(roomType))
+                {
+                    validRoomTypes.Add(roomType);
+                }
+            }
+
+            return validRoomTypes;
         }
     }
 }

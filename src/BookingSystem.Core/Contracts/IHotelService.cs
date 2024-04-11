@@ -50,6 +50,10 @@
         Task AddAsync(HotelEditAddInputModel model);
 
         Task DeleteAsync(int hotelId);
+
+        Task<RoomInputModel> GetForAddRoomAsync(int hotelId);
+
+        Task AddRoomAsync(RoomInputModel model);
        
         Task<bool> HotelExistsAsync(int hotelId);  
 
@@ -72,5 +76,9 @@
         Task<int> GetLastActiveHotelIdAsync();
 
         Task<IEnumerable<CityFormModel>> GetAllCitiesAsync();
+
+        IEnumerable<string> GetAllRoomTypes();
+
+        Task<IEnumerable<string>> GetAllValidRoomTypesAsync(int hotelId);
     }
 }
