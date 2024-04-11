@@ -4,9 +4,7 @@
     using BookingSystem.Core.Extensions;
     using BookingSystem.Core.Models.Hotel;
     using Microsoft.AspNetCore.Mvc;
-    using Microsoft.EntityFrameworkCore.Metadata.Internal;
     using System.Globalization;
-    using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
     public class HotelController : AdminBaseController
     {
