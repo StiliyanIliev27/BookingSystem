@@ -4,6 +4,7 @@
     using BookingSystem.Core.Enumerations;
     using BookingSystem.Core.Exceptions;
     using BookingSystem.Core.Models.Flight;
+    using BookingSystem.Core.Models.QueryModels.Admin.Flight;
     using BookingSystem.Core.Models.QueryModels.Flight;
     using BookingSystem.Infrastructure.Common;
     using BookingSystem.Infrastructure.Data.Models.Flights;
@@ -386,6 +387,78 @@
 
             repository.Delete(reservation);
             await repository.SaveChangesAsync();
+        }
+
+        public async Task<FlightQueryViewModel> AllFlightsForAdminAsync(
+            string? departureCity = null,
+            string? arrivalCity = null,
+            FlightSorting sorting = FlightSorting.PriceAscending)
+        {
+            var flightsToShow = repository.AllReadOnly<Flight>();
+
+            if (departureCity != null)
+            {
+                flightsToShow = flightsToShow
+                    .Where(f => f.DepartureAirport.City.Name == departureCity);
+            }
+
+            if (arrivalCity != null)
+            {
+                flightsToShow = flightsToShow
+                    .Where(f => f.ArrivalAirport.City.Name == arrivalCity);
+            }
+
+            flightsToShow = sorting switch
+            {
+                FlightSorting.IdentifierAscending => flightsToShow.OrderBy(f => f.Id),
+                FlightSorting.PriceAscending => flightsToShow.OrderBy(f => f.TicketPrice),             
+                _ => flightsToShow.OrderByDescending(f => f.TicketPrice)
+            };
+
+            var flights = await flightsToShow
+                .Include(f => f.Airline)
+                .Include(f => f.DepartureAirport)
+                .ThenInclude(f => f.City)
+                .Include(f => f.ArrivalAirport)
+                .ThenInclude(f => f.City)
+                .Select(f => new FlightViewModel()
+                {
+                    Id = f.Id,
+                    Airline = f.Airline.Name,
+                    DepartureAirport = f.DepartureAirport.Name,
+                    DepartureTime = f.DepartureTime.ToString(ArrivalDepartureTimeFormat),
+                    ArrivalAirport = f.ArrivalAirport.Name,
+                    ArrivalTime = f.ArrivalTime.ToString(ArrivalDepartureTimeFormat),
+                    FlightDuration = f.FlightDuration,
+                    TicketPrice = f.TicketPrice,
+                    CabinClass = f.CabinClass.ToString()
+                    
+                }).ToListAsync();
+
+
+            return new FlightQueryViewModel()
+            {
+                Flights = flights
+            };
+
+
+            //return await repository.AllReadOnly<Flight>()
+            //    .Include(f => f.DepartureAirport)
+            //    .Include(f => f.ArrivalAirport)
+            //    .Include(f => f.Airline)
+            //    .Select(f => new FlightAllViewModel()
+            //    {
+            //        Id = f.Id,
+            //        DepartureAirport = f.DepartureAirport.Name,
+            //        ArrivalAirport = f.ArrivalAirport.Name,
+            //        DepartureTime = f.DepartureTime.ToString(ArrivalDepartureTimeFormat),
+            //        ArrivalTime = f.ArrivalTime.ToString(ArrivalDepartureTimeFormat),
+            //        FlightDuration = f.FlightDuration,
+            //        Airline = f.Airline.Name,
+            //        CabinClass = f.CabinClass.ToString(),
+            //        TicketPrice = f.TicketPrice
+            //    })
+            //    .ToListAsync();
         }
     }
 }

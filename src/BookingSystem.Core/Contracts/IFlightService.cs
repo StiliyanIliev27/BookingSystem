@@ -2,6 +2,7 @@
 {
     using BookingSystem.Core.Enumerations;
     using BookingSystem.Core.Models.Flight;
+    using BookingSystem.Core.Models.QueryModels.Admin.Flight;
     using BookingSystem.Core.Models.QueryModels.Flight;
     public interface IFlightService
     {        
@@ -31,6 +32,11 @@
         Task EditAsync(FlightReservationEditInputModel model, string userId);
 
         Task CancellReservationAsync(string reservationId, string userId);
+
+        Task<FlightQueryViewModel> AllFlightsForAdminAsync(
+            string? departureCity = null,
+            string? arrivalCity = null,
+            FlightSorting sorting = FlightSorting.PriceAscending);
         
         Task<bool> VerificationExistsByIdAsync(string verificationId);
 

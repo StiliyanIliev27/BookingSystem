@@ -1,0 +1,111 @@
+﻿@using BookingSystem.Core.Extensions
+@model AllFlightsAdminQueryModel
+
+@{
+    ViewData["Title"] = "All Flights";
+}
+
+<h2 class="text-center">@ViewData["Title"]</h2>
+<hr />
+
+
+<form method="get">
+    <div class="row justify-content-center">
+
+        <div class="form-group col-md-3 align-content-center">
+            <label asp-for="DepartureCity"></label>
+            <select asp-for="DepartureCity" class="form-control">
+                <option value="">All</option>
+                @foreach (var city in Model.Cities)
+                {
+                    <option value="@city">@city</option>
+                }
+            </select>
+        </div>
+
+        <div class="form-group col-md-3 align-content-center">
+            <label asp-for="ArrivalCity"></label>
+            <select asp-for="ArrivalCity" class="form-control">
+                <option value="">All</option>
+                @foreach (var city in Model.Cities)
+                {
+                    <option value="@city">@city</option>
+                }
+            </select>
+        </div>
+
+        <div class="form-group col-md-2">
+            <label asp-for="Sorting"></label>
+            <select asp-for="Sorting" class="form-control">
+                <option value="0">ID ascending</option>
+                <option value="1">Price ascending</option>
+                <option value="2">Price descending</option>
+            </select>
+        </div>
+
+        <div class="col-md-1 d-flex align-items-end">
+            <input type="submit" value="Search" class="btn btn-success w-100" />
+        </div>
+    </div>
+</form>
+
+<br />
+
+@if (!Model.Flights.Any())
+{
+    <h2 class="text-center">No flights found by the given criteria!</h2>
+}
+else
+{
+    <div style="width: 75%; margin-left: auto; margin-right: auto;">
+        <table style="margin-left: auto; margin-right: auto;" class="table table-sm table-bordered">
+            <thead>
+                <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">Departure Airport</th>
+                    <th scope="col">Arrival Airport</th>
+                    <th scope="col">Airline</th>
+                    <th scope="col">Departure Time</th>
+                    <th scope="col">Arrival Time</th>
+                    <th scope="col">Flight Duration(min)</th>
+                    <th scope="col">Cabin Class</th>
+                    <th style="width: 100px;" scope="col">Ticket Price</th>
+                    <th scope="col">Operations</th>
+                </tr>
+            </thead>
+
+        @foreach(var flight in Model.Flights)
+        {
+            <tbody>
+                    <tr>
+                        <th scope="row">@flight.Id</th>
+                        <td>@flight.DepartureAirport</td>
+                        <td>@flight.ArrivalAirport</td>
+                        <td>@flight.Airline</td>
+                        <td>@flight.DepartureTime</td>
+                        <td>@flight.ArrivalTime</td>
+                        <td>@flight.FlightDuration</td>
+                        <td>@flight.CabinClass</td>
+                        <td>&#8364 @flight.TicketPrice</td>
+                        
+                        <th scope="col">
+                            <div>
+                                <a asp-area="" asp-action="Details" asp-controller="Flight" asp-route-id="@flight.Id" asp-route-information="@flight.GetInformation()" style="width: 80%; margin-bottom: 8px; margin-top: 5px;" class="btn btn-primary btn-sm">Details</a>
+                                <a asp-area="Admin" asp-action="Edit" asp-controller="Flight" asp-route-id="@flight.Id" style="width: 80%; margin-bottom: 8px;" class="btn btn-warning btn-sm">Edit</a>
+                                <a asp-area="Admin" asp-action="Delete" asp-controller="Flight" asp-route-id="@flight.Id" style="width: 80%; margin-bottom: 5px;" class="btn btn-danger btn-sm">Delete</a>
+                            </div>
+                        </th>
+                    </tr>
+            </tbody>
+        }
+        </table>
+    </div>
+}
+
+
+<style>
+    td, th {
+        text-align: center;
+        vertical-align: middle;
+    }
+</style> 

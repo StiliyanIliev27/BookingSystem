@@ -2,7 +2,8 @@
 {
     public enum FlightSorting
     {
-        PriceAscending = 0,
-        PriceDescending = 1
+        IdentifierAscending = 0,
+        PriceAscending = 1,
+        PriceDescending = 2,      
     }
 }
