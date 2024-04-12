@@ -621,6 +621,17 @@
                 }
             }
 
+            var roomsToDelete = await repository.All<Room>()
+                .Where(r => r.Hotel_Id == hotel.Id).ToListAsync();
+
+            if(roomsToDelete.Any())
+            {
+                foreach (var room in roomsToDelete)
+                {
+                    repository.Delete(room);
+                }
+            }
+
             hotel.IsActive = false;
 
             await repository.SaveChangesAsync();

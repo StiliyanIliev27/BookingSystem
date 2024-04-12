@@ -1,16 +1,15 @@
-﻿using BookingSystem.Core.Contracts;
-using BookingSystem.Core.Models.Hotel;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
-using System.Globalization;
-using System.Security.Claims;
-using static BookingSystem.Infrastructure.Data.Constants.DataConstants.HotelReservation;
-using BookingSystem.Core.Models.QueryModels.Hotel;
-using BookingSystem.Core.Exceptions;
-using BookingSystem.Core.Extensions;
-
-namespace BookingSystem.Controllers
+﻿namespace BookingSystem.Controllers
 {
+    using BookingSystem.Core.Contracts;
+    using BookingSystem.Core.Models.Hotel;
+    using Microsoft.AspNetCore.Authorization;
+    using Microsoft.AspNetCore.Mvc;
+    using System.Globalization;
+    using System.Security.Claims;
+    using static BookingSystem.Infrastructure.Data.Constants.DataConstants.HotelReservation;
+    using BookingSystem.Core.Models.QueryModels.Hotel;
+    using BookingSystem.Core.Exceptions;
+    using BookingSystem.Core.Extensions;
     public class HotelController : BaseController
     {
         private readonly IHotelService hotelService;
