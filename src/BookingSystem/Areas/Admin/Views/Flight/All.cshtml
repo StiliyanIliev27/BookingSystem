@@ -99,7 +99,10 @@ else
                             <div>
                                 <a asp-area="" asp-action="Details" asp-controller="Flight" asp-route-id="@flight.Id" asp-route-information="@flight.GetInformation()" style="width: 80%; margin-bottom: 8px; margin-top: 5px;" class="btn btn-primary btn-sm">Details</a>
                                 <a asp-area="Admin" asp-action="Edit" asp-controller="Flight" asp-route-id="@flight.Id" style="width: 80%; margin-bottom: 8px;" class="btn btn-warning btn-sm">Edit</a>
-                                <a asp-area="Admin" asp-action="Delete" asp-controller="Flight" asp-route-id="@flight.Id" style="width: 80%; margin-bottom: 5px;" class="btn btn-danger btn-sm">Delete</a>
+                               
+                                <form method="post" asp-area="Admin" asp-controller="Flight" asp-action="Delete" asp-route-id="@flight.Id">
+                                    <button type="submit" style="width: 80%; margin-bottom: 8px;" class="btn btn-danger">Delete</button>
+                                </form>
                             </div>
                         </th>
                     </tr>

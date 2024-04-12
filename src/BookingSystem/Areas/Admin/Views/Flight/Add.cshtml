@@ -1,7 +1,8 @@
 ﻿@using BookingSystem.Core.Models.Flight
-@model FlightEditInputModel
+
+@model FlightAddInputModel
 @{
-    ViewData["Title"] = "Edit Flight Details";
+    ViewData["Title"] = "Add Flight";
 }
 
 <h2 class="text-center">@ViewData["Title"]</h2>
@@ -9,7 +10,29 @@
 
 <div class="row">
     <div class="col-sm-12 offset-lg-2 col-lg-8 offset-xl-3 col-xl-6">
-        <form method="post" asp-area="Admin" asp-controller="Flight" asp-action="Edit">
+        <form method="post" asp-area="Admin" asp-controller="Flight" asp-action="Add">
+            <div class="mb-3">
+                <label asp-for="@Model.DepartureAirport_Id" class="form-label-add-edit">Select Departure Airport:<span style="color: red"> *</span></label>
+                <select asp-for="@Model.DepartureAirport_Id" class="form-control" aria-required="true">
+                    <option disabled selected value="">Select Departure Airport...</option>
+                    @foreach (var airport in Model.Airports)
+                    {
+                        <option value="@airport.Id">@airport.Name</option>
+                    }
+                </select>
+                <span asp-validation-for="@Model.DepartureAirport_Id" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <label asp-for="@Model.ArrivalAirport_Id" class="form-label-add-edit">Select Arrival Airport:<span style="color: red"> *</span></label>
+                <select asp-for="@Model.ArrivalAirport_Id" class="form-control" aria-required="true">
+                    <option disabled selected value="">Select Arrival Airline...</option>
+                    @foreach (var airport in Model.Airports)
+                    {
+                        <option value="@airport.Id">@airport.Name</option>
+                    }
+                </select>
+                <span asp-validation-for="@Model.ArrivalAirport_Id" class="text-danger"></span>
+            </div>
             <div class="mb-3">
                 <label asp-for="@Model.DepartureTime" class="form-label-add-edit">
                     Departure time:<span style="color: red"> *</span>
@@ -55,18 +78,18 @@
                     <option disabled selected value="">Select Cabin class...</option>
                     @foreach (var cabinClass in Model.CabinClasses)
                     {
-                           <option value="@cabinClass">@cabinClass</option>             
+                        <option value="@cabinClass">@cabinClass</option>
                     }
                 </select>
                 <span asp-validation-for="@Model.CabinClass" class="text-danger"></span>
             </div>
-           
+
 
 
             <div class="d-flex justify-content-between align-items-center mb-3">
                 <a asp-area="Admin" asp-controller="Flight" asp-action="All" style="margin-right: 15px;" class="btn btn-primary mb-2 w-100 p-3 fw-bold">Back to all flights</a>
 
-                <button type="submit" class="btn btn-warning mb-2 w-100 p-3 fw-bold">Edit Flight Details</button>
+                <button type="submit" class="btn btn-warning mb-2 w-100 p-3 fw-bold">Add the flight</button>
             </div>
 
         </form>
@@ -76,4 +99,5 @@
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
 }
+
 

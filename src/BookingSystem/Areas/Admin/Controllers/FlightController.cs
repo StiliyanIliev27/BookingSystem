@@ -1,6 +1,7 @@
 ﻿namespace BookingSystem.Areas.Admin.Controllers
 {
     using BookingSystem.Core.Contracts;
+    using BookingSystem.Core.Models.Flight;
     using BookingSystem.Core.Models.QueryModels.Admin.Flight;
     using Microsoft.AspNetCore.Mvc;
 
@@ -35,6 +36,52 @@
             var model = await flightService.GetForEditAsync(id);
 
             return View(model);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Edit(FlightEditInputModel model)
+        {
+            if(!ModelState.IsValid)
+            {
+                model.Airlines = await flightService.GetAllAirlinesAsync();
+                model.CabinClasses = flightService.GetAllCabinClasses();
+                return View();
+            }
+
+            await flightService.EditAsync(model);
+
+            return RedirectToAction(nameof(All), new { area = "Admin" });
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Delete(int id)
+        {
+            await flightService.DeleteAsync(id);
+
+            return RedirectToAction(nameof(All), new { area = "Admin" });
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Add()
+        {
+            var model = await flightService.GetForAddAsync();
+
+            return View(model);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Add(FlightAddInputModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                model.Airlines = await flightService.GetAllAirlinesAsync();
+                model.CabinClasses = flightService.GetAllCabinClasses();
+                return View();
+            }
+
+            await flightService.AddAsync(model);
+
+            return RedirectToAction(nameof(All), new { area = "Admin" });
         }
     }
 }

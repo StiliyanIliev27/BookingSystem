@@ -5,6 +5,9 @@
     using static BookingSystem.Infrastructure.Data.Constants.DataConstants.Flight;
     public class FlightEditInputModel
     {
+        [Required]
+        public int Id { get; set; }
+
         [Required(ErrorMessage = RequiredMessage)]
         [Display(Name = "Departure time")]
         public string DepartureTime { get; set; } = null!;

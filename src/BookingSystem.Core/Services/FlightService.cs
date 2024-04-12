@@ -454,6 +454,7 @@
 
             return new FlightEditInputModel()
             {
+                Id = flight.Id,
                 DepartureTime = flight.DepartureTime.ToString(ArrivalDepartureTimeFormat),
                 ArrivalTime = flight.ArrivalTime.ToString(ArrivalDepartureTimeFormat),
                 FlightDuration = flight.FlightDuration,
@@ -465,9 +466,37 @@
             };
         }
 
-        public Task EditAsync(FlightEditInputModel model)
+        public async Task EditAsync(FlightEditInputModel model)
         {
-            throw new NotImplementedException();
+            var flight = await repository.GetByIdAsync<Flight>(model.Id);
+
+            if(flight == null)
+            {
+                throw new ArgumentException("Flight was not found!");
+            }
+
+            DateTime departureTime = DateTime.ParseExact(model.DepartureTime, ArrivalDepartureTimeFormat, CultureInfo.InvariantCulture);
+            DateTime arrivalTime = DateTime.ParseExact(model.ArrivalTime, ArrivalDepartureTimeFormat, CultureInfo.InvariantCulture);
+
+            CabinClass cabinClass;
+
+            if (model.CabinClass == "Premium Economy")
+            {
+                cabinClass = CabinClass.PremiumEconomy;
+            }
+            else
+            {
+                _ = Enum.TryParse(model.CabinClass, out cabinClass);
+            }
+
+            flight.DepartureTime = departureTime;
+            flight.ArrivalTime = arrivalTime;
+            flight.CabinClass = cabinClass;
+            flight.Airline_Id = model.Airline_Id;
+            flight.TicketPrice = model.TicketPrice;
+            flight.FlightDuration = model.FlightDuration;
+
+            await repository.SaveChangesAsync();
         }
 
         public IEnumerable<string> GetAllCabinClasses()
@@ -493,6 +522,83 @@
                     Name = a.Name
                 })
                 .ToListAsync();
+        }
+
+        public async Task DeleteAsync(int flightId)
+        {
+            var flight = await repository.GetByIdAsync<Flight>(flightId);
+
+            if(flight == null)
+            {
+                throw new ArgumentException("The flight was not found!");
+            }
+
+            var flightReservations = await repository.All<FlightReservation>()
+                .Where(fr => fr.Flight_Id == flight.Id).ToListAsync();
+
+            if(flightReservations.Any())
+            {
+                foreach(var fr in flightReservations)
+                {
+                    repository.Delete(fr);
+                }
+            }
+
+            repository.Delete(flight);
+            await repository.SaveChangesAsync();
+        }
+
+        public async Task<FlightAddInputModel> GetForAddAsync()
+        {
+            return new FlightAddInputModel()
+            {
+                Airlines = await GetAllAirlinesAsync(),
+                CabinClasses = GetAllCabinClasses(),
+                Airports = await GetAllAirportsAsync()
+            };
+        }
+
+        public async Task<IEnumerable<AirportViewModel>> GetAllAirportsAsync()
+        {
+            return await repository.AllReadOnly<Airport>()
+                .Select(a => new AirportViewModel()
+                {
+                    Id = a.Id,
+                    Name = a.Name,
+                }).ToListAsync();
+        }
+
+        public async Task AddAsync(FlightAddInputModel model)
+        {
+            DateTime departureTime = DateTime.ParseExact(model.DepartureTime, ArrivalDepartureTimeFormat, CultureInfo.InvariantCulture);
+            DateTime arrivalTime = DateTime.ParseExact(model.ArrivalTime, ArrivalDepartureTimeFormat, CultureInfo.InvariantCulture);
+
+            CabinClass cabinClass;
+
+            if (model.CabinClass == "Premium Economy")
+            {
+                cabinClass = CabinClass.PremiumEconomy;
+            }
+            else
+            {
+                _ = Enum.TryParse(model.CabinClass, out cabinClass);
+            }
+
+            var flight = new Flight()
+            {
+                DepartureAirport_Id = model.DepartureAirport_Id,
+                ArrivalAirport_Id = model.ArrivalAirport_Id,
+                Airline_Id = model.Airline_Id,
+                DepartureTime = departureTime,
+                ArrivalTime = arrivalTime,
+                CabinClass = cabinClass,
+                FlightDuration = model.FlightDuration,
+                TicketPrice = model.TicketPrice,
+                IsActive = true
+            };
+
+            await repository.AddAsync(flight);
+            await repository.SaveChangesAsync();
         }
     }
 }

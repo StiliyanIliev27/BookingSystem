@@ -2,4 +2,36 @@
     <li class="nav-item">
         <a class="nav-link text-dark" asp-area="Admin" asp-controller="Home" asp-action="Management">Home</a>     
     </li>
+    <li class="nav-item dropdown">
+        <div class="dropdown">
+            <button class="btn dropdown-toggle" type="button"
+                    data-bs-toggle="dropdown">
+                Hotels
+            </button>
+            <ul class="dropdown-menu">
+                <li class="nav-item">
+                    <a class="dropdown-item" asp-area="" asp-controller="Hotel" asp-action="All">All Hotels</a>
+                </li>
+                <li>
+                    <a class="dropdown-item" asp-area="Admin" asp-controller="Flight" asp-action="Add">Add Hotel</a>
+                </li>
+            </ul>
+        </div>
+    </li>
+    <li class="nav-item dropdown">
+        <div class="dropdown">
+            <button class="btn dropdown-toggle" type="button"
+                    data-bs-toggle="dropdown">
+                Flights
+            </button>
+            <ul class="dropdown-menu">
+                <li class="nav-item">
+                    <a class="dropdown-item" asp-area="Admin" asp-controller="Flight" asp-action="All">All Flights</a>
+                </li>
+                <li class="nav-item">
+                    <a class="dropdown-item" asp-area="Admin" asp-controller="Flight" asp-action="Add">Add Flight</a>
+                </li>
+            </ul>
+        </div>
+    </li>
 </ul>

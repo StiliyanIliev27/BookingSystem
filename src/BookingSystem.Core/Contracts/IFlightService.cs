@@ -43,6 +43,12 @@
         Task<FlightEditInputModel> GetForEditAsync(int flightId);
 
         Task EditAsync(FlightEditInputModel model);
+
+        Task DeleteAsync(int flightId);
+
+        Task<FlightAddInputModel> GetForAddAsync();
+
+        Task AddAsync(FlightAddInputModel model);
         
         Task<bool> VerificationExistsByIdAsync(string verificationId);
 
@@ -53,5 +59,7 @@
         IEnumerable<string> GetAllCabinClasses();
 
         Task<IEnumerable<AirlineViewModel>> GetAllAirlinesAsync();
+      
+        Task<IEnumerable<AirportViewModel>> GetAllAirportsAsync();
     }
 }
