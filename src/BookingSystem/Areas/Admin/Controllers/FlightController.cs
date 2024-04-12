@@ -29,12 +29,12 @@
             return View(query);
         }
 
-        //[HttpGet]
-        //public async Task<IActionResult> All([FromQuery])
-        //{
-        //    var model = await flightService.AllFlightsForAdmin();
+        [HttpGet]
+        public async Task<IActionResult> Edit(int id)
+        {
+            var model = await flightService.GetForEditAsync(id);
 
-        //    return View(model);
-        //}
+            return View(model);
+        }
     }
 }

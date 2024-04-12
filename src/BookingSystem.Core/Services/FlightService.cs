@@ -7,6 +7,7 @@
     using BookingSystem.Core.Models.QueryModels.Admin.Flight;
     using BookingSystem.Core.Models.QueryModels.Flight;
     using BookingSystem.Infrastructure.Common;
+    using BookingSystem.Infrastructure.Data.Enums;
     using BookingSystem.Infrastructure.Data.Models.Flights;
     using Microsoft.EntityFrameworkCore;
     using System.Collections.Generic;
@@ -308,7 +309,7 @@
                 .ToListAsync();
         }
 
-        public async Task<FlightReservationEditInputModel> GetForEditAsync(string reservationId, string userId)
+        public async Task<FlightReservationEditInputModel> GetForEditReservationAsync(string reservationId, string userId)
         {
             var reservation = await repository.GetByIdAsync<FlightReservation>(reservationId);
 
@@ -336,7 +337,7 @@
             };
         }
 
-        public async Task EditAsync(FlightReservationEditInputModel model, string userId)
+        public async Task EditReservationAsync(FlightReservationEditInputModel model, string userId)
         {
             var reservation = await repository.GetByIdAsync<FlightReservation>(model.Id);
 
@@ -440,25 +441,58 @@
             {
                 Flights = flights
             };
+        }
 
+        public async Task<FlightEditInputModel> GetForEditAsync(int flightId)
+        {
+            var flight = await repository.GetByIdAsync<Flight>(flightId);
 
-            //return await repository.AllReadOnly<Flight>()
-            //    .Include(f => f.DepartureAirport)
-            //    .Include(f => f.ArrivalAirport)
-            //    .Include(f => f.Airline)
-            //    .Select(f => new FlightAllViewModel()
-            //    {
-            //        Id = f.Id,
-            //        DepartureAirport = f.DepartureAirport.Name,
-            //        ArrivalAirport = f.ArrivalAirport.Name,
-            //        DepartureTime = f.DepartureTime.ToString(ArrivalDepartureTimeFormat),
-            //        ArrivalTime = f.ArrivalTime.ToString(ArrivalDepartureTimeFormat),
-            //        FlightDuration = f.FlightDuration,
-            //        Airline = f.Airline.Name,
-            //        CabinClass = f.CabinClass.ToString(),
-            //        TicketPrice = f.TicketPrice
-            //    })
-            //    .ToListAsync();
+            if(flight == null)
+            {
+                throw new ArgumentException("Flight was not found!");
+            }
+
+            return new FlightEditInputModel()
+            {
+                DepartureTime = flight.DepartureTime.ToString(ArrivalDepartureTimeFormat),
+                ArrivalTime = flight.ArrivalTime.ToString(ArrivalDepartureTimeFormat),
+                FlightDuration = flight.FlightDuration,
+                CabinClass = flight.CabinClass.ToString(),
+                TicketPrice = flight.TicketPrice,
+                Airline_Id = flight.Airline_Id,
+                Airlines = await GetAllAirlinesAsync(),
+                CabinClasses = GetAllCabinClasses()
+            };
+        }
+
+        public Task EditAsync(FlightEditInputModel model)
+        {
+            throw new NotImplementedException();
+        }
+
+        public IEnumerable<string> GetAllCabinClasses()
+        {
+            var cabinClassesEnum = Enum.GetValues(typeof(CabinClass));
+
+            ICollection<string> cabinClasses = new List<string>();
+
+            foreach(var cabinClass in cabinClassesEnum)
+            {
+                cabinClasses.Add(cabinClass.ToString()!);
+            }
+
+            return cabinClasses;
+        }
+        
+        public async Task<IEnumerable<AirlineViewModel>> GetAllAirlinesAsync()
+        {
+            return await repository.AllReadOnly<Airline>()
+                .Select(a => new AirlineViewModel()
+                {
+                    Id = a.Id,
+                    Name = a.Name
+                })
+                .ToListAsync();
         }
     }
 }

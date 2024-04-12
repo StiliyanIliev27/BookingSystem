@@ -4,6 +4,8 @@
     using BookingSystem.Core.Models.Flight;
     using BookingSystem.Core.Models.QueryModels.Admin.Flight;
     using BookingSystem.Core.Models.QueryModels.Flight;
+    using BookingSystem.Infrastructure.Data.Enums;
+
     public interface IFlightService
     {        
         Task<FlightQueryServiceModel> AllAsync(
@@ -27,9 +29,9 @@
 
         Task<IEnumerable<FlightReservationViewModel>> MyReservations(string userId);
 
-        Task<FlightReservationEditInputModel> GetForEditAsync(string reservationId, string userId);
+        Task<FlightReservationEditInputModel> GetForEditReservationAsync(string reservationId, string userId);
 
-        Task EditAsync(FlightReservationEditInputModel model, string userId);
+        Task EditReservationAsync(FlightReservationEditInputModel model, string userId);
 
         Task CancellReservationAsync(string reservationId, string userId);
 
@@ -37,11 +39,19 @@
             string? departureCity = null,
             string? arrivalCity = null,
             FlightSorting sorting = FlightSorting.PriceAscending);
+
+        Task<FlightEditInputModel> GetForEditAsync(int flightId);
+
+        Task EditAsync(FlightEditInputModel model);
         
         Task<bool> VerificationExistsByIdAsync(string verificationId);
 
         Task<bool> ReservationExistsByIdAsync(string reservationId);
 
         Task<bool> ExistsByIdAsync(int flightId);
+
+        IEnumerable<string> GetAllCabinClasses();
+
+        Task<IEnumerable<AirlineViewModel>> GetAllAirlinesAsync();
     }
 }

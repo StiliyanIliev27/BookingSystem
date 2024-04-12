@@ -95,6 +95,11 @@
 
         public static class Flight
         {
+            public const double TicketPriceMinValue = 15;
+            public const double TicketPriceMaxValue = 5000;
+
+            public const string TicketPriceErrorMessage = "{0} must be between {1} and {2}";
+
             public const string ArrivalDepartureTimeFormat = "HH:mm";
         }
 

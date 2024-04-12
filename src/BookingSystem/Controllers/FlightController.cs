@@ -205,7 +205,7 @@
 
             try
             {
-                var model = await flightService.GetForEditAsync(id, userId);
+                var model = await flightService.GetForEditReservationAsync(id, userId);
                
                 return View(model);
             }
@@ -234,7 +234,7 @@
 
             try
             {
-                await flightService.EditAsync(model, userId);
+                await flightService.EditReservationAsync(model, userId);
             }
             catch(UnauthorizedActionException uae)
             {

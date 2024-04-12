@@ -76,6 +76,13 @@ else
 
         @foreach(var flight in Model.Flights)
         {
+            string cabClass = flight.CabinClass;
+
+            if(cabClass == "PremiumEconomy")
+            {
+                cabClass = "Premium Economy";
+            }
+
             <tbody>
                     <tr>
                         <th scope="row">@flight.Id</th>
@@ -85,7 +92,7 @@ else
                         <td>@flight.DepartureTime</td>
                         <td>@flight.ArrivalTime</td>
                         <td>@flight.FlightDuration</td>
-                        <td>@flight.CabinClass</td>
+                        <td>@cabClass</td>
                         <td>&#8364 @flight.TicketPrice</td>
                         
                         <th scope="col">
