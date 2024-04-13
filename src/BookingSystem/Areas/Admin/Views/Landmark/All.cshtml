@@ -1,0 +1,107 @@
+﻿@model AllLandmarksAdminQueryModel
+
+@{
+    ViewData["Title"] = "All Landmarks";
+}
+
+<h2 class="text-center">@ViewData["Title"]</h2>
+<hr />
+
+
+<form method="get">
+    <div class="row justify-content-center">
+
+        <div class="form-group col-md-3 align-content-center">
+            <label asp-for="City"></label>
+            <select asp-for="City" class="form-control">
+                <option value="">All</option>
+                @foreach (var city in Model.Cities)
+                {
+                    <option value="@city">@city</option>
+                }
+            </select>
+        </div>
+
+        <div class="form-group col-md-3">
+            <label asp-for="SearchTerm"></label>
+            <input asp-for="SearchTerm" class="form-control" placeholder="Search">
+        </div>
+
+        <div class="form-group col-md-2">
+            <label asp-for="Sorting"></label>
+            <select asp-for="Sorting" class="form-control">
+                <option value="0">ID ascending</option>
+                <option value="1">Price ascending</option>
+                <option value="2">Price descending</option>
+            </select>
+        </div>
+
+        <div class="col-md-1 d-flex align-items-end">
+            <input type="submit" value="Search" class="btn btn-success w-100" />
+        </div>
+    </div>
+</form>
+
+<br />
+
+@if (!Model.Landmarks.Any())
+{
+    <h2 class="text-center">No landmarks found by the given criteria!</h2>
+}
+else
+{
+    <div style="width: 75%; margin-left: auto; margin-right: auto;">
+        <table style="margin-left: auto; margin-right: auto;" class="table table-sm table-bordered">
+            <thead>
+                <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">Image</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Location</th>
+                    <th scope="col">Ticket Price</th>
+                    <th scope="col">Operations</th>
+                </tr>
+            </thead>
+
+        @foreach(var landmark in Model.Landmarks)
+        {
+                string ticketPrice = $"€ {landmark.TicketPrice.ToString()}";
+
+            if(landmark.TicketPrice == 0.0m)
+            {
+                ticketPrice = "Free entry";
+            }
+
+            <tbody>
+                    <tr>
+                        <th scope="row">@landmark.Id</th>
+                        <td style="width: 20%;"><img style="width: 100%; height: 100%;" src="@landmark.ImageUrl" alt="landmark picture"/></td>
+                        <td>@landmark.Name</td>
+                        <td>@landmark.City, @landmark.Country</td>
+                        <td>@ticketPrice</td>
+                        
+                        <th scope="col">
+                            <div>
+                                <a asp-area="" asp-action="Details" asp-controller="Landmark" asp-route-id="@landmark.Id" asp-route-information="@landmark.GetInformation()" style="width: 80%; margin-bottom: 8px; margin-top: 5px;" class="btn btn-primary btn-sm">Details</a>
+                                <a asp-area="Admin" asp-action="Edit" asp-controller="Landmark" asp-route-id="@landmark.Id" style="width: 80%; margin-bottom: 8px;" class="btn btn-warning btn-sm">Edit</a>
+                               
+                                <form method="post" asp-area="Admin" asp-controller="Landmark" asp-action="Delete" asp-route-id="@landmark.Id">
+                                    <button type="submit" style="width: 80%; margin-bottom: 8px;" class="btn btn-danger">Delete</button>
+                                </form>
+                            </div>
+                        </th>
+                    </tr>
+            </tbody>
+        }
+        </table>
+    </div>
+}
+
+
+<style>
+    td, th {
+        text-align: center;
+        vertical-align: middle;
+    }
+</style> 
+

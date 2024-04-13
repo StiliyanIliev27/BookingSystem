@@ -1,8 +1,13 @@
 ﻿namespace BookingSystem.Core.Services
 {
     using BookingSystem.Core.Contracts;
+    using BookingSystem.Core.Enumerations;
     using BookingSystem.Core.Exceptions;
+    using BookingSystem.Core.Models.Hotel;
     using BookingSystem.Core.Models.Landmark;
+    using BookingSystem.Core.Models.QueryModels.Admin.Flight;
+    using BookingSystem.Core.Models.QueryModels.Admin.Landmark;
+    using BookingSystem.Core.Models.QueryModels.Hotel;
     using BookingSystem.Infrastructure.Common;
     using BookingSystem.Infrastructure.Data.Models.Landmarks;
     using Microsoft.EntityFrameworkCore;
@@ -258,6 +263,55 @@
             reservation.LastName = model.LastName;
 
             await repository.SaveChangesAsync();
+        }
+
+        public async Task<LandmarkQueryViewModel> AllLandmarksForAdminAsync(
+            string? city = null, 
+            string? searchTerm = null, 
+            LandmarkSorting sorting = LandmarkSorting.IdentifierAscending)
+        {
+            var landmarksToShow = repository.AllReadOnly<Landmark>();
+
+            if (city != null)
+            {
+                landmarksToShow = landmarksToShow
+                    .Where(l => l.City.Name == city);
+            }
+
+            if (searchTerm != null)
+            {
+                string normalizedSearchTerm = searchTerm.ToLower();
+                landmarksToShow = landmarksToShow
+                    .Where(h => h.Name.ToLower().Contains(normalizedSearchTerm) ||
+                                         h.Address.ToLower().Contains(normalizedSearchTerm) ||
+                                         h.City.Name.ToLower().Contains(normalizedSearchTerm));
+            }
+
+            landmarksToShow = sorting switch
+            {
+                LandmarkSorting.IdentifierAscending => landmarksToShow.OrderBy(f => f.Id),
+                LandmarkSorting.PriceAscending => landmarksToShow.OrderBy(f => f.TicketPrice),
+                _ => landmarksToShow.OrderByDescending(f => f.TicketPrice)
+            };
+
+            var landmarks = await landmarksToShow
+                .Include(l => l.City)
+                .ThenInclude(c => c.Country)
+                .Select(l => new LandmarkViewModel()
+                {
+                    Id = l.Id,
+                    Name = l.Name,
+                    City = l.City.Name,
+                    Country = l.City.Country.Name,
+                    ImageUrl = l.ImageUrl,
+                    TicketPrice = l.TicketPrice,
+
+                }).ToListAsync();
+
+            return new LandmarkQueryViewModel()
+            {
+                Landmarks = landmarks
+            };
         }
     }
 }

@@ -1,7 +1,6 @@
 ﻿namespace BookingSystem.Core.Models.QueryModels.Admin.Flight
 {
     using BookingSystem.Core.Enumerations;
-    using BookingSystem.Core.Models.QueryModels.Flight;
     using System.ComponentModel.DataAnnotations;
     public class AllFlightsAdminQueryModel
     {
