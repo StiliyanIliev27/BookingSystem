@@ -1,0 +1,76 @@
+﻿@using BookingSystem.Core.Models.Landmark
+@model LandmarkEditInputModel
+
+@{
+    ViewData["Title"] = "Edit Landmark Details";
+}
+
+<h2 class="text-center">@ViewData["Title"]</h2>
+<hr />
+
+<div class="row">
+    <div class="col-sm-12 offset-lg-2 col-lg-8 offset-xl-3 col-xl-6">
+        <form method="post" asp-area="Admin" asp-controller="Landmark" asp-action="Edit">
+            <div style="width: 60%; margin-left: auto; margin-right: auto;">
+                <img id="landmarkImage" style="width: 100%; height: auto; object-fit: cover; margin-bottom: 10px;" src="@Model.ImageUrl" alt="Landmark image" class="card-img" />
+            </div>
+            <div class="mb-3">
+                <label asp-for="@Model.Name" class="form-label-add-edit">
+                    Name:<span style="color: red"> *</span>
+                </label>
+                <input asp-for="@Model.Name" class="form-control" aria-required="true" placeholder="Landmark's name..." />
+                <span asp-validation-for="@Model.Name" class="text-danger"></span>
+            </div>          
+            <div class="mb-3">
+                <label asp-for="@Model.Address" class="form-label-add-edit">
+                    Address:<span style="color: red"> *</span>
+                </label>
+                <input asp-for="@Model.Address" class="form-control" aria-required="true" placeholder="Landmark's address..." />
+                <span asp-validation-for="@Model.Address" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <label asp-for="@Model.Details" class="form-label-add-edit">
+                    Details:<span style="color: red"> *</span>
+                </label>
+                <textarea asp-for="@Model.Details" class="form-control" aria-required="true" placeholder="Landmark's details..." rows="10"></textarea>
+                <span asp-validation-for="@Model.Details" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <label asp-for="@Model.TicketPrice" class="form-label-add-edit">
+                    Ticket price:<span style="color: red"> *</span>
+                </label>
+                <input asp-for="@Model.TicketPrice" class="form-control" aria-required="true" placeholder="Landmark's ticket price..." />
+                <span asp-validation-for="@Model.TicketPrice" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <label asp-for="@Model.ImageUrl" class="form-label-add-edit">
+                    Image URL:<span style="color: red"> *</span>
+                </label>
+                <input id="imageUrlInput" asp-for="@Model.ImageUrl" class="form-control" aria-required="true" placeholder="Landmark's Image URL..." />
+                <span asp-validation-for="@Model.ImageUrl" class="text-danger"></span>
+            </div>
+
+
+            <div class="d-flex justify-content-between align-items-center mb-3">
+                <a asp-area="Admin" asp-controller="Landmark" asp-action="All" style="margin-right: 15px;" class="btn btn-primary mb-2 w-100 p-3 fw-bold">Back to all landmarks</a>
+
+                <button type="submit" class="btn btn-warning mb-2 w-100 p-3 fw-bold">Edit</button>
+            </div>
+
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+
+    <script>
+        $(document).ready(function () {
+            $('#imageUrlInput').on('input', function () {
+                var newImageUrl = $(this).val();
+                $('#landmarkImage').attr('src', newImageUrl);
+            });
+        });
+    </script>
+}
+

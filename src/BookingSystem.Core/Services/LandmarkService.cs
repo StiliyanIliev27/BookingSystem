@@ -3,13 +3,12 @@
     using BookingSystem.Core.Contracts;
     using BookingSystem.Core.Enumerations;
     using BookingSystem.Core.Exceptions;
-    using BookingSystem.Core.Models.Hotel;
     using BookingSystem.Core.Models.Landmark;
-    using BookingSystem.Core.Models.QueryModels.Admin.Flight;
+    using BookingSystem.Core.Models.Location;
     using BookingSystem.Core.Models.QueryModels.Admin.Landmark;
-    using BookingSystem.Core.Models.QueryModels.Hotel;
     using BookingSystem.Infrastructure.Common;
     using BookingSystem.Infrastructure.Data.Models.Landmarks;
+    using BookingSystem.Infrastructure.Data.Models.Location;
     using Microsoft.EntityFrameworkCore;
     using System.Globalization;
     using static BookingSystem.Infrastructure.Data.Constants.DataConstants.LandmarkReservation;
@@ -213,7 +212,7 @@
             await repository.SaveChangesAsync();
         }
 
-        public async Task<LandmarkEditInputModel> GetReservationForEditAsync(string userId, string reservationId)
+        public async Task<LandmarkReservationEditInputModel> GetReservationForEditAsync(string userId, string reservationId)
         {
             var res = await repository.GetByIdAsync<LandmarkReservation>(reservationId);
 
@@ -232,7 +231,7 @@
                 throw new NoLongerActiveReservationException();
             }
 
-            return new LandmarkEditInputModel()
+            return new LandmarkReservationEditInputModel()
             {
                 Id = res.Id,
                 FirstName = res.FirstName,
@@ -240,7 +239,7 @@
             };
         }       
 
-        public async Task EditReservationAsync(LandmarkEditInputModel model, string userId)
+        public async Task EditReservationAsync(LandmarkReservationEditInputModel model, string userId)
         {
             var reservation = await repository.GetByIdAsync<LandmarkReservation>(model.Id);
 
@@ -312,6 +311,105 @@
             {
                 Landmarks = landmarks
             };
+        }
+
+        public async Task<LandmarkEditInputModel> GetForEditAsync(int landmarkId)
+        {
+            var landmark = await repository.GetByIdAsync<Landmark>(landmarkId);
+
+            if(landmark == null)
+            {
+                throw new ArgumentException("The landmark was not found!");
+            }
+
+            return new LandmarkEditInputModel()
+            {
+                Id = landmark.Id,
+                Name = landmark.Name,
+                Address = landmark.Address,
+                Details = landmark.Details,
+                TicketPrice = landmark.TicketPrice,
+                ImageUrl = landmark.ImageUrl
+            };
+        }
+
+        public async Task EditAsync(LandmarkEditInputModel model)
+        {
+            var landmark = await repository.All<Landmark>()
+                .Where(l => l.Id == model.Id).FirstOrDefaultAsync();
+
+            if (landmark == null)
+            {
+                throw new ArgumentException("The landmark was not found!");
+            }
+
+            landmark.Name = model.Name;
+            landmark.Address = model.Address;
+            landmark.TicketPrice = model.TicketPrice;
+            landmark.ImageUrl = model.ImageUrl;
+
+            await repository.SaveChangesAsync();
+        }
+
+        public async Task DeleteAsync(int landmarkId)
+        {
+            var landmark = await repository.GetByIdAsync<Landmark>(landmarkId);
+
+            if(landmark == null)
+            {
+                throw new ArgumentException("The landmark was not found!");
+            }
+
+            var reservations = await repository.All<LandmarkReservation>()
+                .Where(lr => lr.Landmark_Id == landmarkId)
+                .ToListAsync();
+
+            if(reservations.Any())
+            {
+                foreach(var res in reservations)
+                {
+                    repository.Delete(res);
+                }
+            }
+
+            repository.Delete(landmark);
+            await repository.SaveChangesAsync();
+        }
+
+        public async Task<LandmarkAddInputModel> GetForAddAsync()
+        {
+            return new LandmarkAddInputModel()
+            {
+                Cities = await GetAllCitiesAsync()
+            };
+        }
+        
+        public async Task AddAsync(LandmarkAddInputModel model)
+        {
+            var landmark = new Landmark()
+            {
+                Name = model.Name,
+                Address = model.Address,
+                Details = model.Details,
+                City_Id = model.CityId,
+                ImageUrl = model.ImageUrl,
+                TicketPrice = model.TicketPrice,
+                IsActive = true
+            };
+
+            await repository.AddAsync(landmark);
+            await repository.SaveChangesAsync();
+        }
+
+        public async Task<IEnumerable<CityFormModel>> GetAllCitiesAsync()
+        {
+            return await repository.AllReadOnly<City>()
+                .Select(c => new CityFormModel()
+                {
+                    Id = c.Id,
+                    Name = c.Name
+                })
+                .ToListAsync();
         }
     }
 }

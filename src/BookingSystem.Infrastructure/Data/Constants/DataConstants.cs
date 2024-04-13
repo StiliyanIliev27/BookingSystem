@@ -1,4 +1,6 @@
-﻿namespace BookingSystem.Infrastructure.Data.Constants
+﻿using System.Data;
+
+namespace BookingSystem.Infrastructure.Data.Constants
 {
     public static class DataConstants
     {
@@ -43,11 +45,18 @@
         {
             public const int NameMinLength = 3;
             public const int NameMaxLength = 50;
+            public const string NameErrorMessage = "{0} should be between {2} and {1} characters long!";
 
             public const int AddressMinLength = 5;
             public const int AddressMaxLength = 80;
+            public const string AddressErrorMessage = "{0} should be between {2} and {1} characters long!";
 
             public const int DetailsMaxLength = 1000;
+            public const string DetailsErrorMessage = "{0} should be less than {1} characters long!";
+
+            public const double TicketMinPriceValue = 0.0;
+            public const double TicketMaxPriceValue = 2000.0;
+            public const string TicketErrorMessage = "{0} should be between {1} and {2} euros!";
         }
 
         public static class Hotel

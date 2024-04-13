@@ -157,7 +157,7 @@
         }
 
         [HttpPost]
-        public async Task<IActionResult> EditReservation(LandmarkEditInputModel model)
+        public async Task<IActionResult> EditReservation(LandmarkReservationEditInputModel model)
         {
             if (!ModelState.IsValid)
             {
