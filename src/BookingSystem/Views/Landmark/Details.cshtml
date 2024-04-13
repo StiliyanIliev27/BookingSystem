@@ -1,5 +1,14 @@
-﻿@model LandmarkDetailsViewModel
+﻿@using BookingSystem.Core.Constants
+@using BookingSystem.Core.Models.User
+@using Microsoft.AspNetCore.Identity
 
+@model LandmarkDetailsViewModel
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
+
+@{
+    var user = await UserManager.FindByIdAsync(User.GetUserId());
+}
 
 <div class="row">
     <div class="col-md-7 d-flex align-items-stretch">
@@ -9,7 +18,16 @@
             </div>
             <div class="card mt-3 w-100">
                 <div class="card-body">
-                    <h3 class="card-title mb-4">About</h3>
+                    <div style="display: flex; flex-direction: row; justify-content: space-between;">
+                        <h3 class="card-title mb-4">About</h3>
+                        @if (SignInManager.IsSignedIn(User))
+                        {
+                            @if (await UserManager.IsInRoleAsync(user, AdministratorConstants.AdminRole))
+                            {
+                                <a asp-area="Admin" asp-controller="Landmark" asp-action="All" style="height: 40%;" class="btn btn-primary">All Landmarks</a>
+                            }
+                        }    
+                    </div>
                     <p style="font-style: italic;">
                         <span style="font-weight: bold;">
                             <i class="fas fa-map-marker-alt"></i>
