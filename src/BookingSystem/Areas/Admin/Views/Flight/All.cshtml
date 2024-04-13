@@ -5,7 +5,10 @@
     ViewData["Title"] = "All Flights";
 }
 
-<h2 class="text-center">@ViewData["Title"]</h2>
+<div style="display: flex; flex-direction: row; max-width: fit-content; margin-left: auto; margin-right: auto;">
+    <h2 class="text-center">@ViewData["Title"]</h2>
+    <a asp-area="Admin" asp-action="Add" asp-controller="Flight" style=" margin-left: 15px; height: 40%;" class="btn btn-success text-center">Add Flight</a>
+</div>
 <hr />
 
 
