@@ -1,0 +1,77 @@
+﻿@model IEnumerable<BookingSystem.Core.Models.Reservation.LandmarkReservationViewModel>
+
+@{
+    ViewData["Title"] = "All Landmark Reservations";
+
+    int id = 1;
+}
+
+
+<h2 class="text-center">@ViewData["Title"]</h2>
+<hr />
+
+
+<br />
+
+@if (!Model.Any())
+{
+    <h2 class="text-center">There are no landmark reservations at the moment...</h2>
+}
+else
+{
+    <div style="width: 90%; margin-left: auto; margin-right: auto;">
+        <table style="margin-left: auto; margin-right: auto;" class="table table-sm table-bordered">
+            <thead>
+                <tr>
+                    <th scope="col">Res. number</th>
+                    <th scope="col">Landmark Image</th>
+                    <th scope="col">Landmark</th>
+                    <th scope="col">Reserver's Full Name</th>
+                    <th scope="col">Reservation Date</th>
+                    <th scope="col">Group Count</th>
+                    <th scope="col">Total Price</th>
+                    <th scope="col">Username</th>
+                    <th scope="col">User Email</th>
+                    <th scope="col">Created On</th>
+                    <th scope="col">Active Status</th>
+                </tr>
+            </thead>
+
+            @foreach (var res in Model)
+            {
+                <tbody>
+                    <tr>
+                        <th scope="row">@id</th>
+                        <td style="width: 10%;"><img style="width: 100%; height: 100%;" src="@res.LandmarkImageUrl" alt="landmark picture" /></td>
+                        <td style="width: 20%;">
+                            <a asp-area="" asp-controller="Landmark" asp-action="Details"
+                               asp-route-id="@res.Landmark_Id" asp-route-information="@res.GetInformation()">
+                                @res.Name
+                            </a>
+                        </td>
+                        <td>@res.ReserverFullName</td>
+                        <td>@res.ReservationDateTime</td>
+                        <td>@res.GroupCount</td>
+                        <td style="width: 10%;">&#8364 @res.TotalPrice</td>                   
+                        <td>@res.UserFullName</td>
+                        <td>@res.UserEmail</td>
+                        <td>@res.CreatedOn</td>
+                        <td>@res.IsActive</td>
+                    </tr>
+                </tbody>
+
+                id++;
+            }
+        </table>
+    </div>
+}
+
+
+<style>
+    td, th {
+        text-align: center;
+        vertical-align: middle;
+    }
+</style>
+
+

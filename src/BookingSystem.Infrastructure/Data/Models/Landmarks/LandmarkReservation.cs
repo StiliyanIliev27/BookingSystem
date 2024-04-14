@@ -1,6 +1,5 @@
 ﻿namespace BookingSystem.Infrastructure.Data.Models.Landmarks
 {
-    using Microsoft.AspNetCore.Identity;
     using Microsoft.EntityFrameworkCore;
     using System.ComponentModel.DataAnnotations.Schema;
     using System.ComponentModel.DataAnnotations;

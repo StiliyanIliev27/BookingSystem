@@ -1,0 +1,96 @@
+﻿@using System.Globalization
+@model IEnumerable<BookingSystem.Core.Models.Reservation.FlightReservationViewModel>
+
+@{
+    ViewData["Title"] = "All Flight Reservations";
+
+    int id = 1;
+}
+
+
+<h2 class="text-center">@ViewData["Title"]</h2>
+<hr />
+
+
+<br />
+
+@if (!Model.Any())
+{
+    <h2 class="text-center">There are no flight reservations at the moment...</h2>
+}
+else
+{
+    <div style="width: 100%; margin-left: auto; margin-right: auto;">
+        <table style="margin-left: auto; margin-right: auto;" class="table table-sm table-bordered">
+            <thead>
+                <tr>
+                    <th scope="col">Res. number</th>
+                    <th scope="col">Reserver's Full Name</th>
+                    <th scope="col">Flight</th>
+                    <th scope="col">Departure Airport</th>
+                    <th scope="col">Arrival Airport</th>
+                    <th scope="col">Airline</th>
+                    <th scope="col">Seat Number</th>
+                    <th scope="col">Reservation Date</th>
+                    <th scope="col">Total Price</th>
+                    <th scope="col">Username</th>
+                    <th scope="col">User Email</th>
+                    <th scope="col">Created On</th>
+                    <th scope="col">Active Status</th>
+                </tr>
+            </thead>
+
+            @foreach (var res in Model)
+            {
+                DateTime reservationDate = DateTime.ParseExact(res.ReservationDate, "dd/MM/yyyy", CultureInfo.InvariantCulture);
+
+                <tbody>
+                    <tr>
+                        <th scope="row">@id</th>
+                        <td>@res.ReserverFullName</td>
+                        <td style="width: 20%;">
+                            <a asp-area="" asp-controller="Flight" asp-action="Details"
+                               asp-route-id="@res.Flight_Id" asp-route-information="@res.GetInformation()">
+                                @res.Flight
+                            </a>
+                        </td>
+                        <td>@res.DepartureAirport</td>
+                        <td>@res.ArrivalAirport</td>
+                        <td style="width: 10%;">@res.Airline <img style="width: 60%; height: 50%; margin-top: 8px;" src="@res.AirlineImageUrl" alt="airline image"/></td>
+                        <td>@res.SeatNumber</td>
+                        <td>@res.ReservationDate</td>
+                        <td style="width: 10%;">&#8364 @res.TotalPrice</td>
+                        <td>@res.UserFullName</td>
+                        <td>@res.UserEmail</td>
+                        <td>@res.CreatedOn</td>
+                        @if (res.IsActive == "Not active" && reservationDate.Date < DateTime.Now.Date)
+                        {
+                            <td style="width: 10%;">@res.IsActive</td>
+                        }
+                        else if (res.IsActive == "Not active" && reservationDate.Date >= DateTime.Now.Date)
+                        {
+                            <td style ="width: 10%;">Not yet confirmed</td>
+                        }
+                        else
+                        {
+                            <td style="width: 10%;">@res.IsActive</td>
+                        }
+                    </tr>
+                </tbody>
+
+                id++;
+            }
+        </table>
+    </div>
+}
+
+
+<style>
+    td, th {
+        text-align: center;
+        vertical-align: middle;
+    }
+</style>
+
+
+

@@ -50,4 +50,23 @@
             </ul>
         </div>
     </li>
+    <li class="nav-item dropdown">
+        <div class="dropdown">
+            <button class="btn dropdown-toggle" type="button"
+                    data-bs-toggle="dropdown">
+                Reservations
+            </button>
+            <ul class="dropdown-menu">
+                <li class="nav-item">
+                    <a class="dropdown-item" asp-area="Admin" asp-controller="Reservation" asp-action="HotelReservations">Hotel reservations</a>
+                </li>
+                <li class="nav-item">
+                    <a class="dropdown-item" asp-area="Admin" asp-controller="Reservation" asp-action="FlightReservations">Flight reservations</a>
+                </li>
+                <li class="nav-item">
+                    <a class="dropdown-item" asp-area="Admin" asp-controller="Reservation" asp-action="LandmarkReservations">Landmark reservations</a>
+                </li>
+            </ul>
+        </div>
+    </li>
 </ul>

@@ -1,0 +1,95 @@
+﻿@using System.Globalization
+@model IEnumerable<BookingSystem.Core.Models.Reservation.HotelReservationViewModel>
+
+@{
+    ViewData["Title"] = "All Hotel Reservations";
+
+    int id = 1;
+}
+
+
+<h2 class="text-center">@ViewData["Title"]</h2>
+<hr />
+
+
+<br />
+
+@if (!Model.Any())
+{
+    <h2 class="text-center">There are no hotel reservations at the moment...</h2>
+}
+else
+{
+    <div style="width: 90%; margin-left: auto; margin-right: auto;">
+        <table style="margin-left: auto; margin-right: auto;" class="table table-sm table-bordered">
+            <thead>
+                <tr>
+                    <th scope="col">Res. number</th>
+                    <th scope="col">Hotel Image</th>
+                    <th scope="col">Hotel Name</th>
+                    <th scope="col">Room Type</th>
+                    <th scope="col">Reserver's Full Name</th>
+                    <th scope="col">Total Price</th>
+                    <th scope="col">Start Date</th>
+                    <th scope="col">End Date</th>
+                    <th scope="col">Username</th>
+                    <th scope="col">User Email</th>
+                    <th scope="col">Created On</th>
+                    <th scope="col">Active Status</th>
+                </tr>
+            </thead>
+
+            @foreach(var res in Model)
+            {
+                
+                DateTime startDate = DateTime.ParseExact(res.StartDate, "dd/MM/yyyy", CultureInfo.InvariantCulture);
+                DateTime endDate = DateTime.ParseExact(res.EndDate, "dd/MM/yyyy", CultureInfo.InvariantCulture);
+
+                <tbody>
+                    <tr>
+                        <th scope="row">@id</th>
+                        <td style="width: 10%;"><img style="width: 100%; height: 100%;" src="@res.HotelImageUrl" alt="hotel picture" /></td>
+                        <td style="width: 20%;">
+                            <a asp-area="" asp-controller="Hotel" asp-action="Details"
+                               asp-route-id="@res.Hotel_Id" asp-route-information="@res.GetInformation()">
+                                @res.Name
+                            </a>
+                        </td>
+                        <td>@res.RoomType</td>
+                        <td>@res.ReserverFullName</td>
+                        <td style="width: 10%;">&#8364 @res.Price</td>
+                        <td>@res.StartDate</td>
+                        <td>@res.EndDate</td>
+                        <td>@res.UserFullName</td>
+                        <td>@res.UserEmail</td>
+                        <td>@res.CreatedOn</td>
+                        @if(res.IsActive == "Not active" && endDate.Date < DateTime.Now.Date)
+                        {
+                            <td>@res.IsActive</td>
+                        }
+                        else if (res.IsActive == "Not active" && endDate.Date >= DateTime.Now.Date)
+                        {
+                            <td>Not yet confirmed</td>
+                        }
+                        else
+                        {
+                            <td>@res.IsActive</td>
+                        }
+                    </tr>
+                </tbody>
+                
+                id++;
+            }                
+        </table>
+    </div>
+}
+
+
+<style>
+    td, th {
+        text-align: center;
+        vertical-align: middle;
+    }
+</style>
+
+

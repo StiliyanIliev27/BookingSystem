@@ -39,8 +39,8 @@
         
         public IEnumerable<Room>? Rooms { get; set; }
 
-        public string Name { get; set; } = null!;
+        public string Name { get; set; } = string.Empty;
 
-        public string Address { get; set; } = null!;
+        public string Address { get; set; } = string.Empty;
     }
 }
