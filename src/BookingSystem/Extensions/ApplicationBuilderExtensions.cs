@@ -1,6 +1,7 @@
 ﻿namespace Microsoft.AspNetCore.Builder
 {
     using BookingSystem.Core.Models.User;
+    using BookingSystem.Middlewares;
     using Microsoft.AspNetCore.Identity;
     using static BookingSystem.Core.Constants.AdministratorConstants;
     public static class ApplicationBuilderExtensions
@@ -23,6 +24,11 @@
                     await userManager.AddToRoleAsync(admin, role.Name);
                 }
             }
+        }
+
+        public static IApplicationBuilder EnableOnlineUsersCheck(this IApplicationBuilder app)
+        {
+            return app.UseMiddleware<OnlineUsersMiddleware>();
         }
     }
 }

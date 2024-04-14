@@ -43,6 +43,8 @@ namespace BookingSystem
             app.UseAuthentication();
             app.UseAuthorization();
 
+            app.EnableOnlineUsersCheck();
+
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(
