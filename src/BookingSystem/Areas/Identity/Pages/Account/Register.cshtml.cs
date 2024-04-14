@@ -12,7 +12,9 @@ using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.WebUtilities;
+using Microsoft.Extensions.Caching.Memory;
 using static BookingSystem.Infrastructure.Data.Constants.DataConstants.User;
+using static BookingSystem.Core.Constants.GeneralApplicationConstants;
 
 namespace BookingSystem.Areas.Identity.Pages.Account
 {
@@ -24,13 +26,15 @@ namespace BookingSystem.Areas.Identity.Pages.Account
         private readonly IUserEmailStore<ApplicationUser> _emailStore;
         private readonly ILogger<RegisterModel> _logger;
         private readonly IEmailSender _emailSender;
+        private readonly IMemoryCache _memoryCache;
 
         public RegisterModel(
             UserManager<ApplicationUser> userManager,
             IUserStore<ApplicationUser> userStore,
             SignInManager<ApplicationUser> signInManager,
             ILogger<RegisterModel> logger,
-            IEmailSender emailSender)
+            IEmailSender emailSender,
+            IMemoryCache memoryCache)
         {
             _userManager = userManager;
             _userStore = userStore;
@@ -38,6 +42,7 @@ namespace BookingSystem.Areas.Identity.Pages.Account
             _signInManager = signInManager;
             _logger = logger;
             _emailSender = emailSender;
+            _memoryCache = memoryCache;
         }
 
         /// <summary>
@@ -148,6 +153,9 @@ namespace BookingSystem.Areas.Identity.Pages.Account
                     else
                     {
                         await _signInManager.SignInAsync(user, isPersistent: false);
+                       
+                        _memoryCache.Remove(UsersCacheKey);
+
                         return LocalRedirect(returnUrl);
                     }
                 }
