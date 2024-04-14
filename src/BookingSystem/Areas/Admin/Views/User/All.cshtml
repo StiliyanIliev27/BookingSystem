@@ -1,0 +1,39 @@
+﻿@using BookingSystem.Middlewares;
+
+@model IEnumerable<UserViewModel>
+
+@{
+    ViewData["Title"] = "All Users";
+}
+
+<h2 class="text-center">@ViewData["Title"]</h2>
+<hr />
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th><label>Email</label></th>
+            <th><label>Full Name</label></th>
+            <th><label>Is User Online</label></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var user in Model)
+        {
+            <tr>
+                <td><label>@user.Email</label></td>
+                <td><label>@user.FullName</label></td>
+                <td>
+                    @if(OnlineUsersMiddleware.CheckIfUserIsOnline(user.Id))
+                    {
+                        <label>✔</label>
+                    }
+                    else
+                    {
+                        <label class="text-center">❌</label>
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

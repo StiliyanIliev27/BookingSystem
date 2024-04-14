@@ -17,6 +17,7 @@
             services.AddScoped<ILandmarkService, LandmarkService>();
             services.AddScoped<IFlightService, FlightService>();
             services.AddScoped<IReservationService, ReservationService>();
+            services.AddScoped<IUserService, UserService>();
 
             return services;
         }
