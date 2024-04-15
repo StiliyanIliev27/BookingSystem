@@ -5,9 +5,11 @@ VisualStudioVersion = 17.8.34408.163
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BookingSystem", "BookingSystem.csproj", "{D9490EF1-41E7-488C-A283-E23A0289A821}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BookingSystem.Infrastructure", "..\BookingSystem.Infrastructure\BookingSystem.Infrastructure.csproj", "{22EDBEB4-022B-4F48-A992-BE3D5964EBD6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BookingSystem.Infrastructure", "..\BookingSystem.Infrastructure\BookingSystem.Infrastructure.csproj", "{22EDBEB4-022B-4F48-A992-BE3D5964EBD6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BookingSystem.Core", "..\BookingSystem.Core\BookingSystem.Core.csproj", "{E335DE34-506C-4805-851A-56DAF36BDFE7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BookingSystem.Core", "..\BookingSystem.Core\BookingSystem.Core.csproj", "{E335DE34-506C-4805-851A-56DAF36BDFE7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BookingSystem.Tests", "..\BookingSystem.Tests\BookingSystem.Tests.csproj", "{FBA3CD3A-4188-4F33-9B8A-9DBA22F20E91}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,6 +29,10 @@ Global
 		{E335DE34-506C-4805-851A-56DAF36BDFE7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E335DE34-506C-4805-851A-56DAF36BDFE7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E335DE34-506C-4805-851A-56DAF36BDFE7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FBA3CD3A-4188-4F33-9B8A-9DBA22F20E91}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FBA3CD3A-4188-4F33-9B8A-9DBA22F20E91}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FBA3CD3A-4188-4F33-9B8A-9DBA22F20E91}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FBA3CD3A-4188-4F33-9B8A-9DBA22F20E91}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
