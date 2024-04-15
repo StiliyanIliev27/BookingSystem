@@ -41,6 +41,7 @@
                     TotalPrice = fr.TotalPrice,
                     ReservationDate = fr.ReservationDate.ToString(DateTimeFormat),
                     CreatedOn = fr.CreatedOn.ToString(CreatedOnFormat),
+                    CreatedOnDateFormat = fr.CreatedOn,
                     IsActive = fr.IsActive ? "Active" : "Not active",
                 })
                 .ToListAsync(); 
@@ -66,6 +67,7 @@
                     StartDate = hr.StartDate.ToString(DateTimeFormat),
                     EndDate = hr.EndDate.ToString(DateTimeFormat),
                     CreatedOn = hr.CreatedOn.ToString(CreatedOnFormat),
+                    CreatedOnDateFormat = hr.CreatedOn,
                     IsActive = hr.IsActive ? "Active" : "Not active"
                 })
                 .ToListAsync();
@@ -90,6 +92,7 @@
                    GroupCount = hr.GroupCount,
                    TotalPrice = hr.TotalPrice,
                    CreatedOn = hr.CreatedOn.ToString(CreatedOnFormat),
+                   CreatedOnDateFormat = hr.CreatedOn,
                    IsActive = hr.IsActive ? "Active" : "Not active"
                })
                 .ToListAsync();

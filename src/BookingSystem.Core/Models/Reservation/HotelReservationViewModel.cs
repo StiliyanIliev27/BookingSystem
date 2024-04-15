@@ -37,6 +37,8 @@
 
         public string CreatedOn { get; set; } = null!;
 
-        public string IsActive { get; set; } = null!;       
+        public string IsActive { get; set; } = null!;
+
+        public DateTime CreatedOnDateFormat { get; set; }
     }
 }

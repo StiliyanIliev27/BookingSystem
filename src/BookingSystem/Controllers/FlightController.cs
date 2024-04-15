@@ -9,12 +9,11 @@
     using Microsoft.AspNetCore.Mvc;
     using System.Globalization;
     using System.Security.Claims;
+    using static BookingSystem.Core.Constants.GeneralApplicationConstants;
     public class FlightController : BaseController
     {
-        private readonly IFlightService flightService;
-      
-        private readonly IHotelService hotelService;
-      
+        private readonly IFlightService flightService;     
+        private readonly IHotelService hotelService;   
         private readonly ILogger<FlightController> logger;
 
         public FlightController(IFlightService flightService, 
@@ -58,7 +57,7 @@
 
             if(information != model.GetInformation())
             {
-                return BadRequest();
+                return NotFound();
             }
 
             return View(model);
@@ -132,6 +131,8 @@
 
                 return Unauthorized();
             }
+
+            TempData[UserMessageSuccess] = "You have verified your reservation successfully!";
 
             return RedirectToAction(nameof(Verify));
         }

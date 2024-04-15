@@ -37,7 +37,7 @@ else
                 </tr>
             </thead>
 
-            @foreach (var res in Model)
+            @foreach (var res in Model.OrderBy(r => r.CreatedOnDateFormat))
             {
                 <tbody>
                     <tr>

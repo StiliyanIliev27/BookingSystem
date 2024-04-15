@@ -36,6 +36,10 @@
             {
                 return View("Error401");
             }
+            else if (statusCode == 404)
+            {
+                return View("Error404");
+            }
 
             return View();
         }

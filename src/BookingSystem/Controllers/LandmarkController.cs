@@ -8,6 +8,7 @@
     using Microsoft.AspNetCore.Mvc;
     using System.Globalization;
     using System.Security.Claims;
+    using static BookingSystem.Core.Constants.GeneralApplicationConstants;
 
     public class LandmarkController : BaseController
     {
@@ -44,7 +45,7 @@
 
             if(information != model.GetInformation())
             {
-                return BadRequest();
+                return NotFound();
             }
 
             return View(model); 
@@ -95,6 +96,8 @@
             string userId = User.GetUserId();
 
             await landmarkService.ReserveAsync(userId, id, model);
+
+            TempData[UserMessageSuccess] = "You have made reservation successfully!";
 
             return RedirectToAction(nameof(MyReservations));
         }

@@ -6,6 +6,7 @@
     using Microsoft.AspNetCore.Mvc;
     using System.Globalization;
     using System.Security.Claims;
+    using static BookingSystem.Core.Constants.GeneralApplicationConstants;
     using static BookingSystem.Infrastructure.Data.Constants.DataConstants.HotelReservation;
     using BookingSystem.Core.Models.QueryModels.Hotel;
     using BookingSystem.Core.Exceptions;
@@ -57,7 +58,7 @@
 
             if(information != model.GetInformation())
             {
-                return BadRequest();
+                return NotFound();
             }
           
             return View(model);        
@@ -130,6 +131,8 @@
 
                 return Unauthorized();
             }
+
+            TempData[UserMessageSuccess] = "You have verified your reservation successfully!";
 
             return RedirectToAction(nameof(AllReservations));
         }

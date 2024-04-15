@@ -30,5 +30,7 @@
         public string DepartureAirport { get; set; } = null!;
        
         public string ArrivalAirport { get; set; } = null!;
+
+        public DateTime CreatedOnDateFormat { get ; set; }
     }
 }

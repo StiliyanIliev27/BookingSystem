@@ -40,7 +40,7 @@ else
                 </tr>
             </thead>
 
-            @foreach (var res in Model)
+            @foreach (var res in Model.OrderBy(r => r.CreatedOnDateFormat))
             {
                 DateTime reservationDate = DateTime.ParseExact(res.ReservationDate, "dd/MM/yyyy", CultureInfo.InvariantCulture);
 
