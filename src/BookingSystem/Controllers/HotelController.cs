@@ -10,12 +10,11 @@
     using BookingSystem.Core.Models.QueryModels.Hotel;
     using BookingSystem.Core.Exceptions;
     using BookingSystem.Core.Extensions;
+
     public class HotelController : BaseController
     {
-        private readonly IHotelService hotelService;
-        
+        private readonly IHotelService hotelService;    
         private readonly ILandmarkService landmarkService;
-
         private readonly ILogger<HotelController> logger;
         public HotelController(IHotelService hotelService,
             ILandmarkService landmarkService,

@@ -19,12 +19,11 @@
         }
 
         [HttpGet]
-        [ResponseCache(Duration = 30)]
         public async Task<IActionResult> All()
         {
             IEnumerable<UserViewModel> users = memoryCache.Get<IEnumerable<UserViewModel>>(UsersCacheKey);
 
-            if(users == null)
+            if(users == null || !users.Any())
             {
                 users = await userService.AllAsync();
 

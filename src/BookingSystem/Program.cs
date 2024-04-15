@@ -20,6 +20,7 @@ namespace BookingSystem
             });
 
             builder.Services.AddApplicationServices();
+            builder.Services.AddMemoryCache();
 
             var app = builder.Build();
 

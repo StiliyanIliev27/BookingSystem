@@ -1,7 +1,11 @@
 ﻿namespace BookingSystem.Areas.Admin.Controllers
 {
     using BookingSystem.Core.Contracts;
+    using BookingSystem.Core.Models.Reservation;
     using Microsoft.AspNetCore.Mvc;
+    using Microsoft.Extensions.Caching.Memory;
+    using static BookingSystem.Core.Constants.GeneralApplicationConstants;
+
     public class ReservationController : AdminBaseController
     {
         private readonly IReservationService reservationService;
@@ -26,7 +30,7 @@
 
             return View(model);
         }
-
+        
         [HttpGet]
         public async Task<IActionResult> LandmarkReservations()
         {
