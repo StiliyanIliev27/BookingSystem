@@ -97,7 +97,7 @@
 
             string userId = User.GetUserId();
 
-            await hotelService.ReserveAsync(model, userId);
+            _= await hotelService.ReserveAsync(model, userId);
 
             return RedirectToAction(nameof(Verify));
         }

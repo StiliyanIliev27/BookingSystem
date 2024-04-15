@@ -25,7 +25,7 @@
        
         Task<HotelReservationInputModel> GetForReserveAsync(int hotelId);
        
-        Task ReserveAsync(HotelReservationInputModel model, string userId);
+        Task<string> ReserveAsync(HotelReservationInputModel model, string userId);
       
         Task<IEnumerable<HotelReservationVerifyViewModel>> GetForVerifyReservationAsync(string userId);
         
@@ -81,6 +81,8 @@
        
         Task<int> GetLastActiveHotelIdAsync();
 
+        Task<bool> HotelVerificationExistsAsync(string verificationId);
+        
         Task<IEnumerable<CityFormModel>> GetAllCitiesAsync();
 
         IEnumerable<string> GetAllRoomTypes();

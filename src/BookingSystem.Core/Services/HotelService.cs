@@ -51,6 +51,13 @@
             return await repository.AllReadOnly<HotelReservation>()
                 .AnyAsync(hr => hr.Id == reservationId);
         }
+        
+        public async Task<bool> HotelVerificationExistsAsync(string verificationId)
+        {
+            return await repository.AllReadOnly<HotelReservation>()
+                .AnyAsync(hr => hr.Id == verificationId && hr.IsActive == false
+                    && hr.StartDate.Date >= DateTime.Now.Date);
+        }
 
         public async Task<bool> RoomExistsAsync(int roomId)
         {
@@ -74,7 +81,7 @@
                 .Select(h => h.Id)
                 .FirstOrDefaultAsync();
 
-            if (lastHotelId == null)
+            if (lastHotelId == 0)
             {
                 return await GetLastActiveHotelIdAsync();
             }
@@ -247,7 +254,7 @@
                 HotelsCount = await GetHotelsCountAsync()
             };
         }
-        public async Task ReserveAsync(HotelReservationInputModel model, string userId)
+        public async Task<string> ReserveAsync(HotelReservationInputModel model, string userId)
         {
             var room = await repository.GetByIdAsync<Room>(model.Room_Id);
 
@@ -273,13 +280,15 @@
 
             await repository.AddAsync(hrf);
             await repository.SaveChangesAsync();
+
+            return hrf.Id;
         }
 
         public async Task<HotelReservationInputModel> GetForReserveAsync(int hotelId)
         {
             var hotel = await repository.GetByIdAsync<Hotel>(hotelId);
 
-            if(hotel ==null)
+            if(hotel == null)
             {
                 throw new ArgumentException("The hotel does not exist!");
             }
@@ -842,6 +851,6 @@
 
             repository.Delete(room);
             await repository.SaveChangesAsync();
-        }
+        }     
     }
 }

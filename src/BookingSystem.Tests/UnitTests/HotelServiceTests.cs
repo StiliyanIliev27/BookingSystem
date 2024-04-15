@@ -1,4 +1,7 @@
 ﻿using BookingSystem.Core.Contracts;
+using BookingSystem.Core.Exceptions;
+using BookingSystem.Core.Models.Hotel;
+using BookingSystem.Core.Models.User;
 using BookingSystem.Core.Services;
 using BookingSystem.Infrastructure.Common;
 using BookingSystem.Infrastructure.Data;
@@ -6,7 +9,6 @@ using BookingSystem.Infrastructure.Data.Enums;
 using BookingSystem.Infrastructure.Data.Models.Hotels;
 using BookingSystem.Infrastructure.Data.Models.Location;
 using Microsoft.EntityFrameworkCore;
-using System;
 using System.Globalization;
 using static BookingSystem.Infrastructure.Data.Constants.DataConstants.Hotel;
 
@@ -24,18 +26,36 @@ namespace BookingSystem.Tests.UnitTests
         private IEnumerable<Continent> continents;
         private IEnumerable<Country> countries;
         private IEnumerable<Language> languages;
+        private IEnumerable<ApplicationUser> users;
 
         private IRepository repository;
         private IHotelService service;
 
-        #region Reservations
+        #region Users
 
-        private HotelReservation FirstUserReservation { get; set; } = null!;
-        private HotelReservation SecondUserReservation { get; set; } = null!;
+        private ApplicationUser FirstUser { get; set; } = null!;
+        private ApplicationUser SecondUser { get; set; } = null!;
 
         #endregion
 
+
+        #region Reservations
+
+        private HotelReservation FirstUserReservation { get; set; } = null!;
+
+        private HotelReservation FirstUserReservationLate { get; set; } = null!;
+
+        private HotelReservation FirstUserReservationFourRooms { get; set; } = null!;
         
+        private HotelReservation SecondUserReservation { get; set; } = null!;
+
+        private HotelReservation SecondUserReservationInvalidRoom { get; set; } = null!;
+
+        private HotelReservation SecondUserReservationZeroRooms { get; set; } = null!;
+       
+        #endregion
+
+
         #region Languages
         private Language French { get; set; } = null!;
         private Language Spanish { get; set; } = null!;
@@ -82,7 +102,9 @@ namespace BookingSystem.Tests.UnitTests
 
         #region Rooms
         private Room IbisParisRoomDouble { get; set; } = null!;
+        private Room IbisParisRoomTriple { get; set; } = null!;
         private Room CataloniaPuertaRoomSingle { get; set; } = null!;
+        private Room CataloniaPuertaRoomDoubleFour { get; set; } = null!;
         private Room HiltonGardenRoomTriple { get; set; } = null!;
         private Room SotetsuFresaRoomSingle { get; set; } = null!;
 
@@ -92,6 +114,33 @@ namespace BookingSystem.Tests.UnitTests
         [SetUp]
         public void Setup()
         {
+            #region Users 
+
+            FirstUser = new ApplicationUser()
+            {
+                Id = "firstUserId",
+                UserName = "firstUser@mail.com",
+                NormalizedUserName = "FIRSTUSER@MAIL.COM",
+                Email = "firstUser@mail.com",
+                NormalizedEmail = "FIRSTUSER@MAIL.COM",
+                FirstName = "Stiliyan",
+                LastName = "Iliev"
+            };
+
+            SecondUser = new ApplicationUser()
+            {
+                Id = "secondUserId",
+                UserName = "secondUser@mail.com",
+                NormalizedUserName = "SECONDUSER@MAIL.COM",
+                Email = "secondUser@mail.com",
+                NormalizedEmail = "SECONDUSER@MAIL.COM",
+                FirstName = "Bogdan",
+                LastName = "Slavchev"
+            };
+
+            #endregion
+
+
             #region Languages
 
             Spanish = new Language
@@ -105,7 +154,7 @@ namespace BookingSystem.Tests.UnitTests
                 Id = 2,
                 Name = "English"
             };
-            
+
             Japanese = new Language
             {
                 Id = 3,
@@ -142,10 +191,10 @@ namespace BookingSystem.Tests.UnitTests
             };
 
             #endregion
-       
+
 
             #region Countries
-            
+
             France = new Country()
             {
                 Id = 1,
@@ -249,7 +298,7 @@ namespace BookingSystem.Tests.UnitTests
 
             #endregion
 
-        
+
             #region Hotels
 
             IbisParis = new Hotel()
@@ -259,7 +308,7 @@ namespace BookingSystem.Tests.UnitTests
                 Address = "11 Rue Du Texel, 14th arr., 75014",
                 City_Id = 1,
                 StarRate = 3,
-                Details = "Ideally set in the 14th arr. District of Paris, Ibis Paris Gare Montparnasse Catalogne is located 1.6 miles from Rodin Museum, 1.6 miles from Luxembourg Gardens and 2 miles from Orsay Museum. With a bar, the 3-star hotel has air-conditioned rooms with free WiFi, each with a private bathroom. Private parking is available on site.\r\n\r\nAt the hotel, rooms have a closet. The rooms include a desk and a flat-screen TV, and some accommodations at Ibis Paris Gare Montparnasse Catalogne have a balcony.\r\n\r\nA buffet, continental or American breakfast is available each morning at the property.\r\n\r\nSpeaking English, Spanish, French and Ukrainian at the 24-hour front desk, staff are ready to help around the clock.\r\n\r\nSainte Chapelle is 2 miles from the accommodation, while Paris Expo – Porte de Versailles is 2.1 miles from the property. The nearest airport is Paris - Orly Airport, 8.1 miles from Ibis Paris Gare Montparnasse Catalogne.",
+                Details = "Ibis Paris Details",
                 ImageUrl = "https://cf.bstatic.com/xdata/images/hotel/max1280x900/499913403.jpg?k=d3a1f17f9ee7ce9f7340141392196e7ef4f27861d44d818d32e9da03e06ad674&o=&hp=1",
                 CheckIn = DateTime.ParseExact("16:00", TimeFormat, CultureInfo.CurrentCulture, DateTimeStyles.None),
                 CheckOut = DateTime.ParseExact("12:00", TimeFormat, CultureInfo.CurrentCulture, DateTimeStyles.None),
@@ -267,7 +316,7 @@ namespace BookingSystem.Tests.UnitTests
                 Pets = true,
                 IsActive = true
             };
-            
+
             CataloniaPuerta = new Hotel()
             {
                 Id = 2,
@@ -332,6 +381,17 @@ namespace BookingSystem.Tests.UnitTests
                 Count = 5
             };
 
+            IbisParisRoomTriple = new Room()
+            {
+                Id = 4,
+                Type = RoomType.Double,
+                Hotel_Id = 1,
+                PricePerNight = 302m,
+                WiFi = true,
+                IsActive = true,
+                Count = 0
+            };
+
             CataloniaPuertaRoomSingle = new Room()
             {
                 Id = 2,
@@ -341,6 +401,17 @@ namespace BookingSystem.Tests.UnitTests
                 WiFi = true,
                 IsActive = true,
                 Count = 5
+            };
+
+            CataloniaPuertaRoomDoubleFour = new Room()
+            {
+                Id = 6,
+                Type = RoomType.Single,
+                Hotel_Id = 2,
+                PricePerNight = 201m,
+                WiFi = true,
+                IsActive = true,
+                Count = 4
             };
 
             HiltonGardenRoomTriple = new Room()
@@ -356,7 +427,7 @@ namespace BookingSystem.Tests.UnitTests
 
             SotetsuFresaRoomSingle = new Room()
             {
-                Id = 4,
+                Id = 5,
                 Type = RoomType.Single,
                 Hotel_Id = 4,
                 PricePerNight = 223m,
@@ -367,7 +438,7 @@ namespace BookingSystem.Tests.UnitTests
 
             #endregion
 
-           
+
             #region Reservations
 
             FirstUserReservation = new HotelReservation()
@@ -385,11 +456,41 @@ namespace BookingSystem.Tests.UnitTests
                 Room_Id = 1
             };
 
+            FirstUserReservationLate = new HotelReservation()
+            {               
+                User_Id = "firstUserId",
+                StartDate = DateTime.ParseExact("12/04/2024", "dd/MM/yyyy", CultureInfo.InvariantCulture),
+                EndDate = DateTime.ParseExact("13/04/2024", "dd/MM/yyyy", CultureInfo.InvariantCulture),
+                Hotel_Id = 1,
+                CreatedOn = DateTime.Now,
+                FirstName = "First",
+                LastName = "User",
+                Id = "firstResLate",
+                Price = 604m,
+                IsActive = false,
+                Room_Id = 1
+            };
+
+            FirstUserReservationFourRooms = new HotelReservation()
+            {
+                User_Id = "firstUserId",
+                StartDate = DateTime.ParseExact("22/04/2024", "dd/MM/yyyy", CultureInfo.InvariantCulture),
+                EndDate = DateTime.ParseExact("27/04/2024", "dd/MM/yyyy", CultureInfo.InvariantCulture),
+                Hotel_Id = 1,
+                CreatedOn = DateTime.Now,
+                FirstName = "First",
+                LastName = "User",
+                Id = "firstResFourRooms",
+                Price = 604m,
+                IsActive = false,
+                Room_Id = 6
+            };
+
             SecondUserReservation = new HotelReservation()
             {
                 User_Id = "secondUserId",
-                StartDate = DateTime.ParseExact("21/04/2024", "dd/MM/yyyy", CultureInfo.InvariantCulture),
-                EndDate = DateTime.ParseExact("22/04/2024", "dd/MM/yyyy", CultureInfo.InvariantCulture),
+                StartDate = DateTime.ParseExact("23/04/2024", "dd/MM/yyyy", CultureInfo.InvariantCulture),
+                EndDate = DateTime.ParseExact("24/04/2024", "dd/MM/yyyy", CultureInfo.InvariantCulture),
                 Hotel_Id = 2,
                 CreatedOn = DateTime.Now,
                 FirstName = "Second",
@@ -398,6 +499,36 @@ namespace BookingSystem.Tests.UnitTests
                 Price = 201m,
                 IsActive = true,
                 Room_Id = 2
+            };
+
+            SecondUserReservationInvalidRoom = new HotelReservation()
+            {
+                User_Id = "secondUserId",
+                StartDate = DateTime.ParseExact("25/04/2024", "dd/MM/yyyy", CultureInfo.InvariantCulture),
+                EndDate = DateTime.ParseExact("26/04/2024", "dd/MM/yyyy", CultureInfo.InvariantCulture),
+                Hotel_Id = 2,
+                CreatedOn = DateTime.Now,
+                FirstName = "Second",
+                LastName = "User",
+                Id = "secondResInvRoom",
+                Price = 201m,
+                IsActive = true,
+                Room_Id = 5
+            };
+
+            SecondUserReservationZeroRooms = new HotelReservation()
+            {
+                User_Id = "secondUserId",
+                StartDate = DateTime.ParseExact("05/05/2024", "dd/MM/yyyy", CultureInfo.InvariantCulture),
+                EndDate = DateTime.ParseExact("07/05/2024", "dd/MM/yyyy", CultureInfo.InvariantCulture),
+                Hotel_Id = 2,
+                CreatedOn = DateTime.Now,
+                FirstName = "Second",
+                LastName = "User",
+                Id = "secondResZeroRooms",
+                Price = 201m,
+                IsActive = true,
+                Room_Id = 4
             };
 
             #endregion
@@ -432,17 +563,23 @@ namespace BookingSystem.Tests.UnitTests
 
             rooms = new List<Room>()
             {
-                IbisParisRoomDouble, CataloniaPuertaRoomSingle, HiltonGardenRoomTriple, SotetsuFresaRoomSingle
+                IbisParisRoomDouble, IbisParisRoomTriple, CataloniaPuertaRoomSingle, CataloniaPuertaRoomDoubleFour, HiltonGardenRoomTriple, SotetsuFresaRoomSingle
             };
 
             reservations = new List<HotelReservation>()
             {
-                FirstUserReservation, SecondUserReservation
+                FirstUserReservation, SecondUserReservation, FirstUserReservationFourRooms, FirstUserReservationLate, SecondUserReservationInvalidRoom, SecondUserReservationZeroRooms
+            };
+
+            users = new List<ApplicationUser>() 
+            { 
+                FirstUser, 
+                SecondUser 
             };
 
             #endregion
 
-            
+
             var dbContextOptions = new DbContextOptionsBuilder<BookingSystemDbContext>()
                     .UseInMemoryDatabase("BookingSystemInMemoryDb"
                         + Guid.NewGuid().ToString())
@@ -457,6 +594,8 @@ namespace BookingSystem.Tests.UnitTests
             dbContext.AddRangeAsync(hotels);
             dbContext.AddRangeAsync(rooms);
             dbContext.AddRangeAsync(reservations);
+            dbContext.AddRangeAsync(users);
+            dbContext.SaveChangesAsync();
 
             repository = new Repository(dbContext);
             service = new HotelService(repository);
@@ -470,9 +609,629 @@ namespace BookingSystem.Tests.UnitTests
         }
 
         [Test]
-        public void Test1()
+        public async Task Test_AllAsync_FiltersByCity()
         {
-            Assert.Pass();
+            var firstResult = await service.AllAsync("Paris");
+            var secondResult = await service.AllAsync("NotAnExistingCity");
+
+            Assert.That(firstResult.TotalHotelsCount, Is.EqualTo(1));
+            Assert.IsTrue(firstResult.Hotels.First().Id == 1);
+
+            Assert.That(secondResult.TotalHotelsCount, Is.EqualTo(0));
+            Assert.IsEmpty(secondResult.Hotels);
+        }
+
+        [Test]
+        public async Task Test_AllAsync_FiltersBySearchTerm()
+        {
+            var firstResult = await service.AllAsync(null, "Ibis Paris Gare Montparnasse Catalogne");
+            var secondResult = await service.AllAsync(null, "NotAnExistingHotelName");
+
+            Assert.That(firstResult.TotalHotelsCount, Is.EqualTo(1));
+            Assert.IsTrue(firstResult.Hotels.First().Id == 1);
+
+            Assert.That(secondResult.TotalHotelsCount, Is.EqualTo(0));
+            Assert.IsEmpty(secondResult.Hotels);
+        }
+
+        [Test]
+        public async Task Test_AllAsync_SortsByNewest()
+        {
+            var hotelsNewestSorting = await service.AllAsync();
+            var hotelIds = new List<int>()
+            {
+                hotelsNewestSorting.Hotels.First().Id,
+                hotelsNewestSorting.Hotels.Skip(1).First().Id,
+                hotelsNewestSorting.Hotels.Skip(2).First().Id,
+                hotelsNewestSorting.Hotels.Last().Id
+            };
+
+            Assert.IsNotNull(hotelsNewestSorting.Hotels);
+            Assert.That(hotelsNewestSorting.Hotels.Count(), Is.EqualTo(4));
+            Assert.That(hotelIds, Is.EqualTo(new List<int>() { 4, 3, 2, 1 }));
+        }
+
+        [Test]
+        public async Task Test_AllAsync_SortsByOldest()
+        {
+            var hotelsOldestSorting = await service.AllAsync(null, null, Core.Enumerations.HotelSorting.Oldest);
+            var hotelIds = new List<int>()
+            {
+                hotelsOldestSorting.Hotels.First().Id,
+                hotelsOldestSorting.Hotels.Skip(1).First().Id,
+                hotelsOldestSorting.Hotels.Skip(2).First().Id,
+                hotelsOldestSorting.Hotels.Last().Id
+            };
+
+            Assert.IsNotNull(hotelsOldestSorting.Hotels);
+            Assert.That(hotelsOldestSorting.Hotels.Count(), Is.EqualTo(4));
+            Assert.That(hotelIds, Is.EqualTo(new List<int>() { 1, 2, 3, 4 }));
+        }
+
+        [Test]
+        public async Task Test_AllAsync_SortsByPriceAscending()
+        {
+            var hotelsPriceAscSorting = await service.AllAsync(null, null, Core.Enumerations.HotelSorting.PriceAscending);
+            var hotelIds = new List<int>()
+            {
+                hotelsPriceAscSorting.Hotels.First().Id,
+                hotelsPriceAscSorting.Hotels.Skip(1).First().Id,
+                hotelsPriceAscSorting.Hotels.Skip(2).First().Id,
+                hotelsPriceAscSorting.Hotels.Last().Id
+            };
+
+            Assert.IsNotNull(hotelsPriceAscSorting.Hotels);
+            Assert.That(hotelsPriceAscSorting.Hotels.Count(), Is.EqualTo(4));
+            Assert.That(hotelIds, Is.EqualTo(new List<int>() { 2, 4, 3, 1 }));
+        }
+
+        [Test]
+        public async Task Test_AllAsync_SortsByPriceDescending()
+        {
+            var hotelsPriceDescSorting = await service.AllAsync(null, null, Core.Enumerations.HotelSorting.PriceDescending);
+            var hotelIds = new List<int>()
+            {
+                hotelsPriceDescSorting.Hotels.First().Id,
+                hotelsPriceDescSorting.Hotels.Skip(1).First().Id,
+                hotelsPriceDescSorting.Hotels.Skip(2).First().Id,
+                hotelsPriceDescSorting.Hotels.Last().Id
+            };
+
+            Assert.IsNotNull(hotelsPriceDescSorting.Hotels);
+            Assert.That(hotelsPriceDescSorting.Hotels.Count(), Is.EqualTo(4));
+            Assert.That(hotelIds, Is.EqualTo(new List<int>() { 1, 3, 4, 2 }));
+        }
+
+        [Test]
+        public async Task Test_GetRoomsAsync_ShouldReturnCorrectResult()
+        {
+            var result = await service.GetRoomsAsync(1);
+
+            Assert.That(result.Count(), Is.EqualTo(2));
+            Assert.That(result.First().Id, Is.EqualTo(1));
+            Assert.That(result.First().Hotel_Id, Is.EqualTo(1));
+            Assert.That(result.First().Count, Is.EqualTo(5));
+            Assert.That(result.First().PricePerNight, Is.EqualTo(302m));
+            Assert.That(result.First().WiFi, Is.EqualTo(true));
+            Assert.That(result.First().IsActive, Is.EqualTo(true));
+            Assert.That(result.First().Type, Is.EqualTo(RoomType.Double));
+        }
+
+        [Test]
+        public async Task Test_GetRoomAsync_ShouldReturnCorrectResult()
+        {
+            var result = await service.GetRoomAsync(1);
+
+            Assert.That(result.Id, Is.EqualTo(1));
+            Assert.That(result.Hotel_Id, Is.EqualTo(1));
+            Assert.That(result.Count, Is.EqualTo(5));
+            Assert.That(result.PricePerNight, Is.EqualTo(302m));
+            Assert.That(result.WiFi, Is.EqualTo(true));
+            Assert.That(result.IsActive, Is.EqualTo(true));
+            Assert.That(result.Type, Is.EqualTo(RoomType.Double));
+        }
+
+        [Test]
+        public async Task Test_GetHotelsCountAsync_ShouldReturnCorrectResult()
+        {
+            var result = await service.GetHotelsCountAsync();
+
+            Assert.That(result, Is.EqualTo(4));
+        }
+
+        [Test]
+        public async Task Test_HotelExistsAsync_ShouldReturnTrueIfExists()
+        {
+            var result = await service.HotelExistsAsync(1);
+
+            Assert.That(result, Is.EqualTo(true));
+        }
+
+        [Test]
+        public async Task Test_HotelExistsAsync_ShouldReturnFalseIfDoesNotExist()
+        {
+            var result = await service.HotelExistsAsync(5);
+
+            Assert.That(result, Is.EqualTo(false));
+        }
+
+        [Test]
+        public async Task Test_HotelReservationExistsAsync_ShouldReturnTrueIfExists()
+        {
+            var result = await service.HotelReservationExistsAsync("secondRes");
+
+            Assert.That(result, Is.EqualTo(true));
+        }
+
+        [Test]
+        public async Task Test_HotelReservationExistsAsync_ShouldReturnFalseIfDoesNotExist()
+        {
+            var result = await service.HotelReservationExistsAsync("NotExistingRes");
+
+            Assert.That(result, Is.EqualTo(false));
+        }
+
+        [Test]
+        public async Task Test_RoomExistsAsync_ShouldReturnTrueIfExists()
+        {
+            var result = await service.RoomExistsAsync(1);
+
+            Assert.That(result, Is.EqualTo(true));
+        }
+
+        [Test]
+        public async Task Test_RoomExistsAsync_ShouldReturnFalseIfDoesNotExist()
+        {
+            var result = await service.RoomExistsAsync(999);
+
+            Assert.That(result, Is.EqualTo(false));
+        }
+
+        [Test]
+        public async Task Test_AllCitiesNamesAsync_ShouldReturnCorrectResult()
+        {
+            var result = await service.AllCitiesNamesAsync();
+
+            Assert.That(result.Count(), Is.EqualTo(4));
+            Assert.That(result.First(), Is.EqualTo("Paris"));
+            Assert.That(result.Skip(1).First(), Is.EqualTo("Madrid"));
+            Assert.That(result.Skip(2).First(), Is.EqualTo("Tokyo"));
+            Assert.That(result.Skip(3).First(), Is.EqualTo("New York"));
+        }
+
+        [Test]
+        public async Task Test_GetPreviousActiveHotelIdAsync_ShouldReturnCorrectResult()
+        {
+            var result = await service.GetPreviousActiveHotelIdAsync(2);
+
+            Assert.That(result, Is.EqualTo(1));
+        }
+
+        [Test]
+        public async Task Test_GetPreviousActiveHotelIdAsync_ShouldReturnCorrectResultIfCurrentHotelIdIsFirst()
+        {
+            var result = await service.GetPreviousActiveHotelIdAsync(1);
+
+            Assert.That(result, Is.EqualTo(4));
+        }
+
+        [Test]
+        public async Task Test_GetNextActiveHotelIdAsync_ShouldReturnCorrectResult()
+        {
+            var result = await service.GetNextActiveHotelIdAsync(1);
+
+            Assert.That(result, Is.EqualTo(2));
+        }
+
+        [Test]
+        public async Task Test_GetPreviousActiveHotelIdAsync_ShouldReturnCorrectResultIfCurrentHotelIdIsLast()
+        {
+            var result = await service.GetNextActiveHotelIdAsync(4);
+
+            Assert.That(result, Is.EqualTo(0));
+        }
+
+        [Test]
+        public async Task Test_GetFirstActiveHotelIdAsync_ShouldReturnCorrectResult()
+        {
+            var result = await service.GetFirstActiveHotelIdAsync();
+
+            Assert.That(result, Is.EqualTo(1));
+        }
+
+        [Test]
+        public async Task Test_GetLastActiveHotelIdAsync_ShouldReturnCorrectResult()
+        {
+            var result = await service.GetLastActiveHotelIdAsync();
+
+            Assert.That(result, Is.EqualTo(4));
+        }
+
+        [Test]
+        public async Task Test_LastThreeHotelsAsync_ShouldReturnCorrectResult()
+        {
+            var result = await service.LastThreeHotelsAsync();
+
+            Assert.Multiple(() =>
+            {
+                Assert.That(result.Count(), Is.EqualTo(3));
+                Assert.That(result.First().Id, Is.EqualTo(4));
+                Assert.That(result.First().Name, Is.EqualTo("Sotetsu Fresa Inn Tokyo Tamachi"));
+                Assert.That(result.First().Address, Is.EqualTo("108-0023 Tokyo-to, Minato-ku Shibaura 3-14-21"));
+                Assert.That(result.First().ImageUrl, Is.EqualTo("https://cf.bstatic.com/xdata/images/hotel/max1280x900/124760078.jpg?k=5b64947a1714bd3adbdebd6bff329c9a7debd693c4f02bb201390dc3988d4b63&o=&hp=1"));
+                Assert.That(result.Skip(1).First().Id, Is.EqualTo(3));
+                Assert.That(result.Skip(1).First().Name, Is.EqualTo("Hilton Garden Inn New York Times Square South"));
+                Assert.That(result.Skip(1).First().Address, Is.EqualTo("326 West 37th Street , Hell's Kitchen, New York, NY 10018"));
+                Assert.That(result.Skip(1).First().ImageUrl, Is.EqualTo("https://cf.bstatic.com/xdata/images/hotel/max1280x900/485847819.jpg?k=c8a7d6fe3756b65ddf1e88e4ece012a9e377f4da075e7f6c65d0064bee9dab61&o=&hp=1"));
+                Assert.That(result.Skip(2).First().Id, Is.EqualTo(2));
+                Assert.That(result.Skip(2).First().Name, Is.EqualTo("Catalonia Puerta del Sol"));
+                Assert.That(result.Skip(2).First().Address, Is.EqualTo("Atocha, 23, Centro, 28012"));
+                Assert.That(result.Skip(2).First().ImageUrl, Is.EqualTo("https://cf.bstatic.com/xdata/images/hotel/max1280x900/159811810.jpg?k=f40061a37ae157fd42e62ece3bd402bca73e10528b6160719bb103c4ab69be25&o=&hp=1"));
+            });
+        }
+
+        [Test]
+        public async Task Test_DetailsAsync_ShouldReturnCorrectResultIfHotelExists()
+        {
+            var result = await service.DetailsAsync(1);
+
+            Assert.Multiple(() =>
+            {
+                Assert.That(result.Id, Is.EqualTo(1));
+                Assert.That(result.Name, Is.EqualTo("Ibis Paris Gare Montparnasse Catalogne"));
+                Assert.That(result.Address, Is.EqualTo("11 Rue Du Texel, 14th arr., 75014"));
+                Assert.That(result.City.Id, Is.EqualTo(1));
+                Assert.That(result.City.Name, Is.EqualTo("Paris"));
+                Assert.That(result.CountryName, Is.EqualTo("France"));
+                Assert.That(result.StarRate, Is.EqualTo(3));
+                Assert.That(result.Details, Is.EqualTo("Ibis Paris Details"));
+                Assert.That(result.ImageUrl, Is.EqualTo("https://cf.bstatic.com/xdata/images/hotel/max1280x900/499913403.jpg?k=d3a1f17f9ee7ce9f7340141392196e7ef4f27861d44d818d32e9da03e06ad674&o=&hp=1"));
+                Assert.That(result.CheckIn, Is.EqualTo("16:00"));
+                Assert.That(result.CheckOut, Is.EqualTo("12:00"));
+                Assert.That(result.Parking, Is.EqualTo(true));
+                Assert.That(result.Pets, Is.EqualTo(true));
+                Assert.That(result.Rooms.First().Id, Is.EqualTo(1));
+                Assert.That(result.Rooms.First().Type, Is.EqualTo(RoomType.Double));
+                Assert.That(result.Rooms.First().Hotel_Id, Is.EqualTo(1));
+                Assert.That(result.Rooms.First().PricePerNight, Is.EqualTo(302m));
+                Assert.That(result.Rooms.First().WiFi, Is.EqualTo(true));
+                Assert.That(result.Rooms.First().IsActive, Is.EqualTo(true));
+                Assert.That(result.Rooms.First().Count, expression: Is.EqualTo(5));
+                Assert.That(result.HotelsCount, Is.EqualTo(4));
+            });
+        }
+
+        [Test]
+        public async Task Test_DetailsAsync_ShouldReturnCorrectResultIfHotelDoesNotExist()
+        {
+            try
+            {
+                await service.DetailsAsync(5);
+            }
+            catch(ArgumentException ex)
+            {
+                Assert.That(ex.Message, Is.EqualTo("The hotel was not found!"));
+            }     
+        }
+
+        [Test]
+        public async Task Test_ReserveAsync_ShouldReturnCorrectResultIfRoomExists()
+        {
+            // Arrange
+            var model = new HotelReservationInputModel()
+            {
+                FirstName = "John",
+                LastName = "Doe",
+                Room_Id = 1,
+                StartDate = "15/04/2024",
+                EndDate = "18/04/2024"
+            };
+
+            var userId = "firstUserId";
+
+            // Act
+            var result = await service.ReserveAsync(model, userId);
+            var exists = await service.HotelReservationExistsAsync(result);
+
+            // Assert
+            Assert.That(result, Is.Not.Null);
+            Assert.That(exists, Is.True);
+        }
+
+        [Test]
+        public async Task Test_ReserveAsync_ShouldReturnCorrectResultIfRoomDoesNotExist()
+        { 
+            var model = new HotelReservationInputModel()
+            {
+                FirstName = "John",
+                LastName = "Doe",
+                Room_Id = 5,
+                StartDate = "15/04/2024",
+                EndDate = "18/04/2024"
+            };
+
+            var userId = "firstUserId";
+
+            try
+            {
+                _= await service.ReserveAsync(model, userId);
+            }
+            catch(ArgumentException ex)
+            {
+                Assert.That(ex.Message, Is.EqualTo("The room was not found!"));
+            }
+        }
+
+        [Test]
+        public async Task Test_GetForReserveAsync_ShouldReturnCorrectResultIfHotelExists()
+        {
+            var model = new HotelReservationInputModel()
+            {
+                Hotel_Id = 1,
+                Rooms = await service.GetRoomsAsync(1),
+                Name = "Ibis Paris Gare Montparnasse Catalogne",
+                Address = "11 Rue Du Texel, 14th arr., 75014",
+            };
+
+            var result = await service.GetForReserveAsync(1);
+           
+            Assert.Multiple(() =>
+            {
+                Assert.That(result, Is.Not.Null);
+                Assert.That(result.Hotel_Id, Is.EqualTo(model.Hotel_Id));
+                Assert.That(result.Rooms?.First().Id, Is.EqualTo(1));
+                Assert.That(result.Rooms?.First().Type, Is.EqualTo(RoomType.Double));
+                Assert.That(result.Rooms?.First().Hotel_Id, Is.EqualTo(1));
+                Assert.That(result.Rooms?.First().PricePerNight, Is.EqualTo(302m));
+                Assert.That(result.Rooms?.First().WiFi, Is.EqualTo(true));
+                Assert.That(result.Rooms?.First().IsActive, Is.EqualTo(true));
+                Assert.That(result.Rooms?.First().Count, expression: Is.EqualTo(5));
+                Assert.That(result.Name, Is.EqualTo(model.Name));
+                Assert.That(result.Address, Is.EqualTo(model.Address));
+            });
+        }
+
+        [Test]
+        public async Task Test_GetForReserveAsync_ShouldReturnCorrectResultIfHotelDoesNotExist()
+        {
+            try
+            {
+                var result = await service.GetForReserveAsync(5);
+            }
+            catch(ArgumentException ex)
+            {
+                Assert.That(ex.Message, Is.EqualTo("The hotel does not exist!"));
+            }          
+        }
+
+        [Test]
+        public async Task Test_GetForVerifyReservationAsync_ShouldCorrectlyDeleteVerificationsWithOldEndDateAndReturnCorrectResult()
+        {
+            // Arrange
+            var userId = "firstUserId";
+
+            // Record the count of verifications before method call
+            var verificationsCountBefore = await repository.All<HotelReservation>()
+                .Where(hr => hr.User_Id == userId && hr.IsActive == false
+                    && hr.EndDate.Date < DateTime.Now.Date)
+                .CountAsync();
+
+            // Act
+            var model = await service.GetForVerifyReservationAsync(userId);
+
+            var verExists = await service.HotelVerificationExistsAsync("firstResFourRooms");
+
+            var verificationsCountAfter = await repository.All<HotelReservation>()
+                .Where(hr => hr.User_Id == userId && hr.IsActive == false
+                    && hr.EndDate.Date < DateTime.Now.Date)
+                .CountAsync();
+           
+            Assert.Multiple(() =>
+            {
+                Assert.That(verificationsCountBefore, Is.EqualTo(1));
+                Assert.That(verificationsCountAfter, Is.EqualTo(0));
+            });
+            Assert.Multiple(() =>
+            {
+                Assert.That(model.First().FirstName, Is.EqualTo("First"));
+                Assert.That(model.First().LastName, Is.EqualTo("User"));
+                Assert.That(model.First().StartDate, Is.EqualTo("22/04/2024"));
+                Assert.That(model.First().EndDate, Is.EqualTo("27/04/2024"));
+                Assert.That(verExists, Is.EqualTo(true));
+                Assert.That(model.First().RoomType, Is.EqualTo(RoomType.Single.ToString()));
+                Assert.That(model.First().HotelName, Is.EqualTo("Ibis Paris Gare Montparnasse Catalogne"));
+                Assert.That(model.First().HotelStarRate, Is.EqualTo(3));
+                Assert.That(model.First().HotelImageUrl, Is.EqualTo("https://cf.bstatic.com/xdata/images/hotel/max1280x900/499913403.jpg?k=d3a1f17f9ee7ce9f7340141392196e7ef4f27861d44d818d32e9da03e06ad674&o=&hp=1"));
+                Assert.That(model.First().Price, Is.EqualTo(1005m));
+                Assert.That(model.First().Nights, Is.EqualTo(5));
+            });
+        }
+        
+        [Test]
+        public async Task Test_VerifyReservationAsync_ShouldWorkCorrectly()
+        {
+            var resBefore = await repository.GetByIdAsync<HotelReservation>("firstResFourRooms");
+
+            var roomCntBefore = resBefore?.Room.Count;//4
+
+            await service.VerifyReservationAsync("firstResFourRooms", "firstUserId");
+
+            var room = await repository.GetByIdAsync<Room>(6);
+            
+            var roomCntAfter = room?.Count;//3
+
+            var resAfter = await repository.GetByIdAsync<HotelReservation>("firstResFourRooms");
+
+            Assert.Multiple(() =>
+            {
+                Assert.That(roomCntBefore, Is.EqualTo(4));
+                Assert.That(roomCntAfter, Is.EqualTo(3));
+                Assert.That(resAfter?.IsActive, Is.True);
+                Assert.That(resAfter?.Price, Is.EqualTo(1005m));
+            });
+        }
+
+        [Test]
+        public async Task Test_VerifyReservationAsync_ShouldThrowAnExceptionIfResIsNotFound()
+        {
+            try
+            {
+                await service.VerifyReservationAsync("invalidRes", "firstUserId");
+            }
+            catch(ArgumentException ex)
+            {
+                Assert.That(ex.Message, Is.EqualTo("The current hotel reservation does not exist!"));
+            }
+        }
+        
+        [Test]
+        public async Task Test_VerifyReservationAsync_ShouldThrowAnExceptionIfUserUnauthorized()
+        {
+            try
+            {
+                await service.VerifyReservationAsync("firstRes", "secondUserId");
+            }
+            catch (UnauthorizedActionException ex)
+            {
+                Assert.That(ex.Message, Is.EqualTo("The current user is not the owner of the reservation!"));
+            }
+        }
+
+        [Test]
+        public async Task Test_VerifyReservationAsync_ShouldThrowAnExceptionIfRoomIsNotFound()
+        {
+            try
+            {
+                await service.VerifyReservationAsync("secondResInvRoom", "secondUserId");
+            }
+            catch (ArgumentException ex)
+            {
+                Assert.That(ex.Message, Is.EqualTo("The current room does not exist!"));
+            }
+        }
+       
+        [Test]
+        public async Task Test_VerifyReservationAsync_ShouldThrowAnExceptionIfNoRoomsLeft()
+        {
+            try
+            {
+                await service.VerifyReservationAsync("secondResZeroRooms", "secondUserId");
+            }
+            catch (ArgumentException ex)
+            {
+                Assert.That(ex.Message, Is.EqualTo("No more rooms are available for the current time!"));
+            }
+        }
+
+        [Test]
+        public async Task Test_CancellVerificationAsync_ShouldWorkCorrectly()
+        {
+            var res = await repository.GetByIdAsync<HotelReservation>("firstResFourRooms");
+
+            var verCnt = await repository.AllReadOnly<HotelReservation>()
+                .CountAsync(hr => hr.IsActive == false && hr.StartDate.Date >= DateTime.Now.Date);
+                
+            var roomCnt = res?.Room.Count;//4
+            
+            await service.CancellVerificationAsync("firstResFourRooms", "firstUserId");
+
+            var roomAfter = await repository.AllReadOnly<Room>()
+                .FirstAsync(hr => hr.Id == 6);
+
+            var roomCntAfter = roomAfter.Count;//5
+
+            var verCntAfter = await repository.AllReadOnly<HotelReservation>()
+                .CountAsync(hr => hr.IsActive == false && hr.StartDate.Date >= DateTime.Now.Date);
+
+            Assert.Multiple(() =>
+            {
+                Assert.That(roomCnt, Is.EqualTo(4));
+                Assert.That(roomCntAfter, Is.EqualTo(5));
+                Assert.That(verCnt, Is.EqualTo(1));
+                Assert.That(verCntAfter, Is.EqualTo(0));
+            });
+        }
+
+
+        [Test]
+        public async Task Test_CancellVerificationAsync_ShouldThrowAnExceptionIfVerificationWasNotFound()
+        {
+            try
+            {
+                await service.CancellVerificationAsync("NotFound", "firstUserId");
+            }
+            catch(ArgumentException ex)
+            {
+                Assert.That(ex.Message, Is.EqualTo("The hotel reservation does not exist!"));
+            }
+        }
+
+        [Test]
+        public async Task Test_CancellVerificationAsync_ShouldThrowAnExceptionIfUserIsUnauthorized()
+        {
+            try
+            {
+                await service.CancellVerificationAsync("firstResFourRooms", "secondUserId");
+            }
+            catch (UnauthorizedActionException ex)
+            {
+                Assert.That(ex.Message, Is.EqualTo("The current user is not the owner of the reservation!"));
+            }
+        }
+
+        [Test]
+        public async Task Test_CancellVerificationAsync_ShouldThrowAnExceptionIfRoomDoesNotExists()
+        {
+            try
+            {
+                await service.CancellVerificationAsync("secondResInvRoom", "secondUserId");
+            }
+            catch (ArgumentException ex)
+            {
+                Assert.That(ex.Message, Is.EqualTo("The room does not exist!"));
+            }
         }
     }
 }
+
+//FirstUserReservation = new HotelReservation()
+//{
+//    User_Id = "firstUserId",
+//    StartDate = DateTime.ParseExact("24/04/2024", "dd/MM/yyyy", CultureInfo.InvariantCulture),
+//    EndDate = DateTime.ParseExact("26/04/2024", "dd/MM/yyyy", CultureInfo.InvariantCulture),
+//    Hotel_Id = 1,
+//    CreatedOn = DateTime.Now,
+//    FirstName = "First",
+//    LastName = "User",
+//    Id = "firstRes",
+//    Price = 604m,
+//    IsActive = true,
+//    Room_Id = 1
+//};
+
+//  IbisParis = new Hotel()
+//  {
+//    Id = 1,
+//    Name = "Ibis Paris Gare Montparnasse Catalogne",
+//    Address = "11 Rue Du Texel, 14th arr., 75014",
+//    City_Id = 1,
+//    StarRate = 3,
+//    Details = "Ibis Paris Details",
+//    ImageUrl = "https://cf.bstatic.com/xdata/images/hotel/max1280x900/499913403.jpg?k=d3a1f17f9ee7ce9f7340141392196e7ef4f27861d44d818d32e9da03e06ad674&o=&hp=1",
+//    CheckIn = DateTime.ParseExact("16:00", TimeFormat, CultureInfo.CurrentCulture, DateTimeStyles.None),
+//    CheckOut = DateTime.ParseExact("12:00", TimeFormat, CultureInfo.CurrentCulture, DateTimeStyles.None),
+//    Parking = true,
+//    Pets = true,
+//    IsActive = true
+//};
+
+//IbisParisRoomDouble = new Room()
+//{
+//    Id = 1,
+//    Type = RoomType.Double,
+//    Hotel_Id = 1,
+//    PricePerNight = 302m,
+//    WiFi = true,
+//    IsActive = true,
+//    Count = 5
+//};
