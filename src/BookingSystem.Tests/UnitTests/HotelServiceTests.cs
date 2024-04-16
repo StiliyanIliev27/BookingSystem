@@ -2124,38 +2124,21 @@ namespace BookingSystem.Tests.UnitTests
                 Assert.That(ex.Message, Is.EqualTo("The room does not exist!"));
             }
         }
+
+        [Test]
+        public async Task Test_GetAllValidRoomTypesAsync_ShouldWorkCorrectly()
+        {
+            var types = await service.GetAllValidRoomTypesAsync(1);
+
+            IEnumerable<string> validRoomTypes = new List<string>
+            {
+                "Single",
+                "Apartment"
+            };
+
+            Assert.That(types.Count(), Is.EqualTo(validRoomTypes.Count()));
+            Assert.That(types, Is.EqualTo(validRoomTypes));
+        }
     }
 }
 
-//CataloniaPuerta = new Hotel()
-//{
-//    Id = 2,
-//    Name = "Catalonia Puerta del Sol",
-//    Address = "Atocha, 23, Centro, 28012",
-//    City_Id = 2,
-//    StarRate = 4,
-//    Details = "Catalonia Puerta del Sol is set in a magnificent 18th-century building in the historic centre of Madrid, a few minutes from Puerta del Sol. It offers free Wi-Fi throughout the hotel.\r\n\r\nThe hotel is just 50 metres from Puerta del Sol, Madrid's main square and from main tapas restaurants. You can walk to Madrid's famous Art Triangle in 15 minutes. Atocha Train Station is 1 km away.\r\n\r\nThe air-conditioned rooms feature parquet floors and smart décor. ach one has flat-screen satellite smart TV with Chromecast app, a private bathroom and a minibar.\r\n\r\nThe Puerta del Sol's restaurant serves a buffet breakfast each morning, and available until 12:00 at weekends. There is also a bar with a roofed terrace, El Patio, where you can get a snack or a drink. There is also a patio with crystal domes.\r\n\r\nAll hotel rooms have smart TVs, which are equipped with Chromecast app.",
-//    ImageUrl = "https://cf.bstatic.com/xdata/images/hotel/max1280x900/159811810.jpg?k=f40061a37ae157fd42e62ece3bd402bca73e10528b6160719bb103c4ab69be25&o=&hp=1",
-//    CheckIn = DateTime.ParseExact("15:00", TimeFormat, CultureInfo.CurrentCulture, DateTimeStyles.None),
-//    CheckOut = DateTime.ParseExact("12:00", TimeFormat, CultureInfo.CurrentCulture, DateTimeStyles.None),
-//    Parking = true,
-//    Pets = true,
-//    IsActive = true
-//};
-
-
-//IbisParis = new Hotel()
-//{
-//    Id = 1,
-//    Name = "Ibis Paris Gare Montparnasse Catalogne",
-//    Address = "11 Rue Du Texel, 14th arr., 75014",
-//    City_Id = 1,
-//    StarRate = 3,
-//    Details = "Ibis Paris Details",
-//    ImageUrl = "https://cf.bstatic.com/xdata/images/hotel/max1280x900/499913403.jpg?k=d3a1f17f9ee7ce9f7340141392196e7ef4f27861d44d818d32e9da03e06ad674&o=&hp=1",
-//    CheckIn = DateTime.ParseExact("16:00", TimeFormat, CultureInfo.CurrentCulture, DateTimeStyles.None),
-//    CheckOut = DateTime.ParseExact("12:00", TimeFormat, CultureInfo.CurrentCulture, DateTimeStyles.None),
-//    Parking = true,
-//    Pets = true,
-//    IsActive = true
-//};
