@@ -91,13 +91,13 @@
 
         public async Task<int> GetNextActiveHotelIdAsync(int currentHotelId)
         {
-            int? nextHotelId = await repository.AllReadOnly<Hotel>()
+            int nextHotelId = await repository.AllReadOnly<Hotel>()
                 .Where(h => h.Id > currentHotelId && h.IsActive)
                 .OrderBy(h => h.Id)
                 .Select(h => h.Id)
                 .FirstOrDefaultAsync();
 
-            if (nextHotelId == null)
+            if (nextHotelId == 0)
             {
                 return await GetFirstActiveHotelIdAsync();
             }

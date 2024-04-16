@@ -165,7 +165,7 @@
         public async Task<IActionResult> MyReservations()
         {
             string userId = User.GetUserId();
-            var model = await flightService.MyReservations(userId);
+            var model = await flightService.MyReservationsAsync(userId);
 
             return View(model);
         }

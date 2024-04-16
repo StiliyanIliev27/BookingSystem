@@ -10,8 +10,6 @@ using BookingSystem.Infrastructure.Data.Models.Hotels;
 using BookingSystem.Infrastructure.Data.Models.Location;
 using Microsoft.EntityFrameworkCore;
 using System.Globalization;
-using System.Net;
-using System.Xml.Linq;
 using static BookingSystem.Infrastructure.Data.Constants.DataConstants.Hotel;
 
 namespace BookingSystem.Tests.UnitTests
@@ -812,7 +810,7 @@ namespace BookingSystem.Tests.UnitTests
 
         [Test]
         public async Task Test_AllAsync_FiltersByCity()
-        {
+        {          
             var firstResult = await service.AllAsync("Paris");
             var secondResult = await service.AllAsync("NotAnExistingCity");
 
@@ -1032,7 +1030,7 @@ namespace BookingSystem.Tests.UnitTests
         {
             var result = await service.GetNextActiveHotelIdAsync(5);
 
-            Assert.That(result, Is.EqualTo(0));
+            Assert.That(result, Is.EqualTo(1));
         }
 
         [Test]
@@ -1142,7 +1140,7 @@ namespace BookingSystem.Tests.UnitTests
         {
             try
             {
-                await service.DetailsAsync(5);
+                await service.DetailsAsync(999);
             }
             catch (ArgumentException ex)
             {
@@ -1232,7 +1230,7 @@ namespace BookingSystem.Tests.UnitTests
         {
             try
             {
-                var result = await service.GetForReserveAsync(5);
+                var result = await service.GetForReserveAsync(999);
             }
             catch (ArgumentException ex)
             {

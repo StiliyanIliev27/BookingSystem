@@ -47,7 +47,7 @@
             string? arrivalCity = null,
             FlightSorting sorting = FlightSorting.PriceAscending,
             int currentPage = 1,
-            int flightsPerPage = 4)
+            int flightsPerPage = 3)
         {
             var flightsToShow = repository.AllReadOnly<Flight>();
 
@@ -152,7 +152,7 @@
             };
         }
 
-        public async Task ReserveAsync(FlightReservationInputModel model, string userId, int flightId)
+        public async Task<string> ReserveAsync(FlightReservationInputModel model, string userId, int flightId)
         {
             Random random = new Random();
             int seatNumber = random.Next(1, 100);
@@ -161,7 +161,7 @@
 
             if(flight == null)
             {
-                throw new ArgumentNullException("The current flight does not exist!");
+                throw new ArgumentException("The current flight does not exist!");
             }
 
             var reservation = new FlightReservation()
@@ -179,6 +179,8 @@
 
             await repository.AddAsync(reservation);
             await repository.SaveChangesAsync();
+
+            return reservation.Id;
         }
 
         public async Task<IEnumerable<FlightReservationVerifyViewModel>> GetReservationsForVerifyAsync(string userId)
@@ -231,7 +233,7 @@
 
             if(reservation == null)
             {
-                throw new ArgumentNullException("The current reservation was not found!");
+                throw new ArgumentException("The current reservation was not found!");
             }
 
             if(reservation.User_Id != userId)
@@ -251,7 +253,7 @@
 
             if (reservation == null)
             {
-                throw new ArgumentNullException("The current reservation was not found!");
+                throw new ArgumentException("The current reservation was not found!");
             }
 
             if (reservation.User_Id != userId)
@@ -263,7 +265,7 @@
             await repository.SaveChangesAsync();
         }
 
-        public async Task<IEnumerable<FlightReservationViewModel>> MyReservations(string userId)
+        public async Task<IEnumerable<FlightReservationViewModel>> MyReservationsAsync(string userId)
         {
             var reservationsNoLongerAvailable = await repository.All<FlightReservation>()
                 .Where(fr => fr.User_Id == userId && fr.IsActive == true
@@ -315,7 +317,7 @@
 
             if(reservation == null)
             {
-                throw new ArgumentNullException("The current flight reservation was not found!");
+                throw new ArgumentException("The current flight reservation was not found!");
             }
 
             if(reservation.User_Id != userId)
@@ -343,7 +345,7 @@
 
             if(reservation == null)
             {
-                throw new ArgumentNullException("The current flight reservation was not found!");
+                throw new ArgumentException("The current flight reservation was not found!");
             }
 
             if (reservation.User_Id != userId)
@@ -373,7 +375,7 @@
 
             if (reservation == null)
             {
-                throw new ArgumentNullException("The current reservation was not found!");
+                throw new ArgumentException("The current reservation was not found!");
             }
 
             if (reservation.User_Id != userId)
