@@ -418,7 +418,8 @@
         public async Task<IEnumerable<HotelReservationViewModel>> AllReservationsAsync(string userId)
         {
             var invalidRes = await repository.All<HotelReservation>()
-                .Where(hr => hr.EndDate.Date < DateTime.Now.Date)
+                .Where(hr => hr.EndDate.Date < DateTime.Now.Date 
+                    && hr.IsActive == true && hr.User_Id == userId)
                 .Include(hr => hr.Room)
                 .ToListAsync();
 
