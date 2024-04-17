@@ -107,7 +107,7 @@
 
             if (landmark == null)
             {
-                throw new ArgumentException("The landmark does not exist or you are not able to reserve it!!");
+                throw new ArgumentException("The landmark does not exist or you are not able to reserve it!");
             }
 
             var reservation = new LandmarkReservation()
@@ -245,7 +245,7 @@
 
             if(reservation == null)
             {
-                throw new ArgumentException("The current reservation does not exists!");
+                throw new ArgumentException("The current reservation does not exist!");
             }
 
             if(reservation.User_Id != userId)
