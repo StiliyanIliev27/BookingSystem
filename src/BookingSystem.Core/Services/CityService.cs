@@ -22,7 +22,7 @@
 
             if(city == null)
             {
-                throw new Exception("City was not found!");
+                throw new ArgumentException("City was not found!");
             }
 
             string populationString = GetPopulationString(city);
@@ -44,7 +44,7 @@
             string populationStr = city.Population.ToString();
             string temp = string.Empty;
 
-            if (populationStr.Count() >= 6 && populationStr.Count() <= 7)//Milions 1 to 9
+            if (populationStr.Count() == 7)//Milions 1 to 9
             {
                 temp = populationStr.Substring(0, 3);
 

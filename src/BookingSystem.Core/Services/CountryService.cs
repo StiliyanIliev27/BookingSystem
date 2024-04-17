@@ -47,30 +47,25 @@
             string populationStr = country.Population.ToString();
             string temp = string.Empty;
 
-            if (string.IsNullOrEmpty(populationStr))
-            {
-                throw new ArgumentException($"No population was found for {country.Name}!");
-            }
-
-            if (populationStr.Count() >= 6 && populationStr.Count() <= 7)//Milions 1 to 9
+            if (populationStr.Count() == 7)//Milions 1 to 9
             {
                 temp = populationStr.Substring(0, 3);
 
                 populationStr = $"{temp[0]},{temp[1]}{temp[2]} milions";
             }
-            else if (populationStr.Count() > 7 && populationStr.Count() < 9)//Milions 10 to 100 
+            else if (populationStr.Count() == 8)//Milions 10 to 100 
             {
                 temp = populationStr.Substring(0, 4);
 
                 populationStr = $"{temp[0]}{temp[1]},{temp[2]}{temp[3]} milions";
             }
-            else if(populationStr.Count() >= 9)//Milions 100 to 999
+            else if(populationStr.Count() == 9)//Milions 100 to 999
             {
                 temp = populationStr.Substring(0, 5);
 
                 populationStr = $"{temp[0]}{temp[1]}{temp[2]},{temp[3]}{temp[4]} milions";
             }
-            else
+            else if(populationStr.Count() > 9)
             {
                 temp = populationStr.Substring(0, 4);
 
