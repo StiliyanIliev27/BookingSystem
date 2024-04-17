@@ -39,7 +39,7 @@ jQuery
 4. Manage reservations and verifications in the user dashboard.
 5. Access the admin panel to manage system settings and view user activities.
 ## 🚀 Test the app
-admin@mail.com - admin123 OR
+admin@mail.com - admin123 |
 guest@mail.com - guest123
 ## 💎 I hope you like it! 
 
