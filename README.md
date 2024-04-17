@@ -43,7 +43,7 @@ BookingSystem is an ASP.NET MVC application for managing bookings for flights, h
 4. Manage reservations and verifications in the user dashboard.
 5. Access the admin panel to manage system settings and view user activities.
 
-## Test the app 🚀
+## 🚀 Test the app
 
 You can use the following credentials to test the application:
 - Admin: admin@mail.com - admin123
