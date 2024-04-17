@@ -62,4 +62,4 @@ Contributions are welcome! Please follow these guidelines:
 
 This project is licensed under the [Apache License 2.0](LICENSE).
 
-## I hope you like it! 💎
+## 💎 I hope you like it! 
