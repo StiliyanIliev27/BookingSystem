@@ -2,7 +2,7 @@
 
 @model FlightAddInputModel
 @{
-    ViewData["Title"] = "Add Flight";
+    ViewData["Title"] = "Add a new flight";
 }
 
 <h2 class="text-center">@ViewData["Title"]</h2>
@@ -25,7 +25,7 @@
             <div class="mb-3">
                 <label asp-for="@Model.ArrivalAirport_Id" class="form-label-add-edit">Select Arrival Airport:<span style="color: red"> *</span></label>
                 <select asp-for="@Model.ArrivalAirport_Id" class="form-control" aria-required="true">
-                    <option disabled selected value="">Select Arrival Airline...</option>
+                    <option disabled selected value="">Select Arrival Airport...</option>
                     @foreach (var airport in Model.Airports)
                     {
                         <option value="@airport.Id">@airport.Name</option>
