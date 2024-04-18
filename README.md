@@ -49,6 +49,33 @@ You can use the following credentials to test the application:
 - Admin: admin@mail.com - admin123
 - Guest: guest@mail.com - guest123
 
+## 📸 Screenshots
+
+![Screenshot 1](screenshots/Screeshot1.png)
+![Screenshot 1](screenshots/Screenshot2.png)
+![Screenshot 1](screenshots/Screenshot3.png)
+![Screenshot 1](screenshots/Screenshot4.png)
+![Screenshot 1](screenshots/Screenshot5.png)
+![Screenshot 1](screenshots/Screenshot6.png)
+![Screenshot 1](screenshots/Screenshot7.png)
+![Screenshot 1](screenshots/Screenshot8.png)
+![Screenshot 1](screenshots/Screenshot9.png)
+![Screenshot 1](screenshots/Screenshot10.png)
+![Screenshot 1](screenshots/Screenshot11.png)
+![Screenshot 1](screenshots/Screenshot12.png)
+![Screenshot 1](screenshots/Screenshot13.png)
+![Screenshot 1](screenshots/Screenshot14.png)
+![Screenshot 1](screenshots/Screenshot15.png)
+![Screenshot 1](screenshots/Screenshot16.png)
+![Screenshot 1](screenshots/Screenshot17.png)
+![Screenshot 1](screenshots/Screenshot18.png)
+![Screenshot 1](screenshots/Screenshot19.png)
+![Screenshot 1](screenshots/Screenshot20.png)
+![Screenshot 1](screenshots/Screenshot21.png)
+![Screenshot 1](screenshots/Screenshot22.png)
+![Screenshot 1](screenshots/Screenshot23.png)
+![Screenshot 1](screenshots/Screenshot24.png)
+
 ## ✏️ Contributing
 
 Contributions are welcome! Please follow these guidelines:
