@@ -72,7 +72,6 @@ You can use the following credentials to test the application:
 ![Screenshot 1](screenshots/Screenshot19.png)
 ![Screenshot 1](screenshots/Screenshot20.png)
 ![Screenshot 1](screenshots/Screenshot21.png)
-![Screenshot 1](screenshots/Screenshot22.png)
 ![Screenshot 1](screenshots/Screenshot23.png)
 ![Screenshot 1](screenshots/Screenshot24.png)
 
