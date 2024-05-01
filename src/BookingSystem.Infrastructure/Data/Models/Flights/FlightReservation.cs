@@ -107,5 +107,12 @@
         [Required]
         [Comment("Flight's Reservation Active Status")]
         public bool IsActive { get; set; }
+
+        /// <summary>
+        /// FlightReservation's Verify Status
+        /// </summary>
+        [Required]
+        [Comment("FlightReservation's Verify Status")]
+        public bool IsVerified { get; set; }
     }
 }

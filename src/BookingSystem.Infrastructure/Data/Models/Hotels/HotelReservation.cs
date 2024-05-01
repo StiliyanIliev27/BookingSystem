@@ -114,5 +114,12 @@
         [Required]
         [Comment("HotelReservation's Active Status")]
         public bool IsActive { get; set; }
+
+        /// <summary>
+        /// HotelReservation's Verify Status
+        /// </summary>
+        [Required]
+        [Comment("HotelReservation's Verify Status")]
+        public bool IsVerified { get; set; }
     }
 }

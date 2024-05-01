@@ -4,6 +4,7 @@ using BookingSystem.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BookingSystem.Infrastructure.Migrations
 {
     [DbContext(typeof(BookingSystemDbContext))]
-    partial class BookingSystemDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240501104404_AddedIsVerifiedColumnToHotelReservationEntity")]
+    partial class AddedIsVerifiedColumnToHotelReservationEntity
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -101,7 +103,7 @@ namespace BookingSystem.Infrastructure.Migrations
                         {
                             Id = "ebf07620-6aa8-4fef-9170-461d816c12f6",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "d4d5d755-fa15-4e47-9cf4-b2c65b631c74",
+                            ConcurrencyStamp = "58ecee87-ad0f-4b42-a61f-31a2963f6b3f",
                             Email = "guest@mail.com",
                             EmailConfirmed = false,
                             FirstName = "Bogdan",
@@ -109,9 +111,9 @@ namespace BookingSystem.Infrastructure.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "GUEST@MAIL.COM",
                             NormalizedUserName = "GUEST@MAIL.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAELWbVk9dd+WxFA3gZdnWch708jGtBSlMvFPps3yOZp+77qobdYvs3AFTltNVvyHnnw==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEMf0CIQb4qEukj8xwdB413rauD6SyMEi1fRl03Zpn0dVeQQvsCB514Dht28nvNHNRQ==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "a519cd57-cfe7-4f04-9525-0706f39cd998",
+                            SecurityStamp = "36edbcc3-fb4a-45c2-a198-b8919185e60b",
                             TwoFactorEnabled = false,
                             UserName = "guest@mail.com"
                         },
@@ -119,7 +121,7 @@ namespace BookingSystem.Infrastructure.Migrations
                         {
                             Id = "62d28ee6-5a44-4529-bb9d-91cb7ee61ce0",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "765ae175-03c6-4a3f-9123-af834b3ec61a",
+                            ConcurrencyStamp = "b5d39e6a-3c75-43c8-88a5-934d3cb9ea61",
                             Email = "admin@mail.com",
                             EmailConfirmed = false,
                             FirstName = "Stiliyan",
@@ -127,9 +129,9 @@ namespace BookingSystem.Infrastructure.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN@MAIL.COM",
                             NormalizedUserName = "ADMIN@MAIL.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAEB7urHjnEJqQDxkpDuvhLjEQ6Fhhv4IZ54UcFHi6qzaOA+vtxuQ+vaCpyWNViFz/iQ==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEFWEG9cJSlyYG5UcnRfysVj4/jnbdTfrcGLYFvEfp2k4iMHzycmymrz41HDlynw8bw==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "2b2487d4-0504-4530-9ca4-b4192b032880",
+                            SecurityStamp = "cc78449e-d76e-4387-8721-c4dc68591323",
                             TwoFactorEnabled = false,
                             UserName = "admin@mail.com"
                         });
@@ -605,10 +607,6 @@ namespace BookingSystem.Infrastructure.Migrations
                     b.Property<bool>("IsActive")
                         .HasColumnType("bit")
                         .HasComment("Flight's Reservation Active Status");
-
-                    b.Property<bool>("IsVerified")
-                        .HasColumnType("bit")
-                        .HasComment("FlightReservation's Verify Status");
 
                     b.Property<string>("LastName")
                         .IsRequired()
