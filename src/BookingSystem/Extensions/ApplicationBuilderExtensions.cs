@@ -30,5 +30,9 @@
         {
             return app.UseMiddleware<OnlineUsersMiddleware>();
         }
+        public static IApplicationBuilder RemoveExpiredReservatios(this IApplicationBuilder app)
+        {
+            return app.UseMiddleware<ExpiredReservationsMiddleware>();
+        }
     }
 }

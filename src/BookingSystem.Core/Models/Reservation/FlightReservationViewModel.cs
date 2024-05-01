@@ -26,6 +26,8 @@
         public string CreatedOn { get; set; } = null!;
 
         public string IsActive { get; set; } = null!;
+
+        public bool IsVerfied { get; set; }
        
         public string DepartureAirport { get; set; } = null!;
        

@@ -185,21 +185,6 @@
 
         public async Task<IEnumerable<FlightReservationVerifyViewModel>> GetReservationsForVerifyAsync(string userId)
         {
-            var verificationsToRemove = await repository.All<FlightReservation>()
-                .Where(fr => fr.User_Id == userId && fr.IsActive == false
-                    && fr.ReservationDate.Date < DateTime.Now.Date)
-                .ToListAsync();
-
-            if(verificationsToRemove.Any())
-            {
-                foreach(var ver in verificationsToRemove)
-                {
-                    repository.Delete(ver);
-                }
-               
-                await repository.SaveChangesAsync();
-            }
-
             return await repository.AllReadOnly<FlightReservation>()
                 .Where(fr => fr.User_Id == userId && fr.ReservationDate >= DateTime.Now.Date && fr.IsActive == false)
                 .Include(fr => fr.Flight)
@@ -267,21 +252,6 @@
 
         public async Task<IEnumerable<FlightReservationViewModel>> MyReservationsAsync(string userId)
         {
-            var reservationsNoLongerAvailable = await repository.All<FlightReservation>()
-                .Where(fr => fr.User_Id == userId && fr.IsActive == true
-                    && fr.ReservationDate.Date < DateTime.Now.Date)
-                .ToListAsync();
-
-            if(reservationsNoLongerAvailable.Any())
-            {
-                foreach(var res in reservationsNoLongerAvailable)
-                {
-                    res.IsActive = false;
-                }
-
-                await repository.SaveChangesAsync();
-            }
-
             return await repository.AllReadOnly<FlightReservation>()
                 .Where(fr => fr.User_Id == userId && fr.ReservationDate >= DateTime.Now.Date && fr.IsActive == true)
                 .Include(fr => fr.Flight)

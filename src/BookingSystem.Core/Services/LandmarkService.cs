@@ -153,20 +153,6 @@
 
         public async Task<IEnumerable<LandmarkReservationsViewModel>> AllReservationsAsync(string userId)
         {          
-            var invalidRes = await repository.All<LandmarkReservation>()
-                .Where(r => r.ReservationDate.Date < DateTime.Now.Date)
-                .ToListAsync();
-
-            if(invalidRes.Any())
-            {
-                foreach (var res in invalidRes)
-                {
-                    res.IsActive = false;
-                }
-
-                await repository.SaveChangesAsync();
-            }
-
             return await repository.AllReadOnly<LandmarkReservation>()
                 .Where(lr => lr.User_Id == userId && lr.IsActive == true)
                 .Include(lr => lr.Landmark)

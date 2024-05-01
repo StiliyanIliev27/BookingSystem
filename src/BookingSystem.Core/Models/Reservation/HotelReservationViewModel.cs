@@ -39,6 +39,8 @@
 
         public string IsActive { get; set; } = null!;
 
+        public bool IsVerfied { get; set; }
+
         public DateTime CreatedOnDateFormat { get; set; }
     }
 }

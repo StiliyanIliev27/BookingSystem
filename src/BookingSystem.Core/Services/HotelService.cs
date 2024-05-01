@@ -275,7 +275,8 @@
                 EndDate = DateTime.ParseExact(model.EndDate, DateTimeFormat,
                                 CultureInfo.InvariantCulture, DateTimeStyles.None),
                 User_Id = userId,
-                CreatedOn = DateTime.Now
+                CreatedOn = DateTime.Now,
+                IsVerified = false
             };
 
             await repository.AddAsync(hrf);
@@ -304,23 +305,8 @@
 
         public async Task<IEnumerable<HotelReservationVerifyViewModel>> GetForVerifyReservationAsync(string userId)
         {
-            var verificationsToRemove = await repository.All<HotelReservation>()
-                .Where(hr => hr.User_Id == userId && hr.IsActive == false
-                    && hr.EndDate.Date < DateTime.Now.Date)
-                .ToListAsync();
-
-            if(verificationsToRemove.Any())
-            {
-                foreach(var ver in verificationsToRemove)
-                {
-                    repository.Delete(ver);
-                }
-
-                await repository.SaveChangesAsync();
-            }
-
             return await repository.AllReadOnly<HotelReservation>()
-                .Where(hr => hr.User_Id == userId && hr.IsActive == false && hr.StartDate.Date >= DateTime.Now.Date)
+                .Where(hr => hr.User_Id == userId && hr.StartDate.Date >= DateTime.Now.Date && hr.IsVerified == false)
                 .Select(hr => new HotelReservationVerifyViewModel()
                 {
                     Id = hr.Id,
@@ -376,6 +362,7 @@
 
             res.Price = room.PricePerNight * (int)(res.EndDate - res.StartDate).TotalDays;
             res.IsActive = true;
+            res.IsVerified = true;
 
             await repository.SaveChangesAsync();
         }
@@ -416,30 +403,9 @@
         }
 
         public async Task<IEnumerable<HotelReservationViewModel>> AllReservationsAsync(string userId)
-        {
-            var invalidRes = await repository.All<HotelReservation>()
-                .Where(hr => hr.EndDate.Date < DateTime.Now.Date 
-                    && hr.IsActive == true && hr.User_Id == userId)
-                .Include(hr => hr.Room)
-                .ToListAsync();
-
-            if(invalidRes.Any())
-            {
-                foreach (var res in invalidRes)
-                {
-                    res.IsActive = false;
-
-                    if (res.Room.Count < 5)
-                    {
-                        res.Room.Count += 1;
-                    }
-                }
-
-                await repository.SaveChangesAsync();
-            }
-
+        {          
             return await repository.AllReadOnly<HotelReservation>()
-                .Where(hr => hr.User_Id == userId && hr.IsActive == true)
+                .Where(hr => hr.User_Id == userId && hr.IsActive == true && hr.IsVerified == true)
                 .Include(hr => hr.Hotel)
                 .Include(hr => hr.Room)
                 .Select(hr => new HotelReservationViewModel()

@@ -63,11 +63,7 @@ else
                         <td>@res.UserFullName</td>
                         <td>@res.UserEmail</td>
                         <td>@res.CreatedOn</td>
-                        @if(res.IsActive == "Not active" && endDate.Date < DateTime.Now.Date)
-                        {
-                            <td>@res.IsActive</td>
-                        }
-                        else if (res.IsActive == "Not active" && endDate.Date >= DateTime.Now.Date)
+                        @if(res.IsActive == "Not active" && res.IsVerfied == false && endDate.Date >= DateTime.Now.Date)
                         {
                             <td>Not yet confirmed</td>
                         }

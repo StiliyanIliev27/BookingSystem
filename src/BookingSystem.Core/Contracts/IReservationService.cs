@@ -4,9 +4,11 @@
     public interface IReservationService
     {
         Task<IEnumerable<HotelReservationViewModel>> AllHotelReservationsAsync();
-       
+
         Task<IEnumerable<FlightReservationViewModel>> AllFlightReservationsAsync();
 
         Task<IEnumerable<LandmarkReservationViewModel>> AllLandmarkReservationsAsync();
+
+        Task RemoveExpiredReservations();
     }
 }

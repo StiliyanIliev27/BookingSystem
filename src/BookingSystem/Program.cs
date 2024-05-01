@@ -45,6 +45,7 @@ namespace BookingSystem
             app.UseAuthorization();
 
             app.EnableOnlineUsersCheck();
+            app.RemoveExpiredReservatios();
 
             app.UseEndpoints(endpoints =>
             {
