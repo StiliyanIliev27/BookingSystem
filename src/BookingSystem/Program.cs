@@ -1,10 +1,7 @@
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore;
-using BookingSystem.Infrastructure.Data;
-
 namespace BookingSystem
 {
+    using Microsoft.AspNetCore.Mvc;
+    using BookingSystem.ModelBinders;
     public class Program
     {
         public static async Task Main(string[] args)
@@ -16,6 +13,7 @@ namespace BookingSystem
 
             builder.Services.AddControllersWithViews(options =>
             {
+                options.ModelBinderProviders.Insert(0, new DecimalModelBinderProvider());
                 options.Filters.Add<AutoValidateAntiforgeryTokenAttribute>();
             });
 
