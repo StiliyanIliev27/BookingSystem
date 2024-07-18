@@ -1,4 +1,4 @@
-﻿namespace BookingSystem.Core.Constants
+﻿namespace BookingSystem.Core.Constants 
 {
     public static class GeneralApplicationConstants
     {
