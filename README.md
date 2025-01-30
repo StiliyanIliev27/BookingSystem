@@ -5,7 +5,7 @@ BookingSystem is an ASP.NET MVC application for managing bookings for flights, h
 
 
 ## Features 💡
-
+ 
 - **👩‍💻 User and Admin Layers**: BookingSystem has two layers - user and admin - each with distinct functionalities and permissions.
 - **✈️ Flight, Hotel, and Landmark Booking**: Users can make reservations for flights, hotels, and landmarks.
 - **✅ Verification Process**: Reservations undergo a verification process before becoming active, allowing users to reserve accommodations without immediate payment.
