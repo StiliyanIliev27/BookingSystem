@@ -1,7 +1,7 @@
 
 # Booking System ✈️ 
 
-BookingSystem is an ASP.NET MVC application for managing bookings for flights, hotels, and landmarks. It allows users to make reservations for various accommodations and attractions, with a focus on user verification and flexible booking options.  
+BookingSystem is an ASP.NET MVC application for managing bookings for flights, hotels, and landmarks. It allows users to make reservations for various accommodations and attractions, with a focus on user verification and flexible booking options.   
 
 
 ## Features 💡
